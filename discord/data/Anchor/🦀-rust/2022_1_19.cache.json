@@ -1,0 +1,847 @@
+{
+    "total_results": 23,
+    "messages": [
+        [
+            {
+                "id": "933385134642712616",
+                "type": 19,
+                "content": "Just to confirm - `#[repr(packed)]` still works with `AccountLoader` currently if we override it right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T15:39:17.556000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933380396299739167"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933380396299739167",
+                "type": 19,
+                "content": "we could consider using raw pointers for the `AccountLoader` instead of references. if that means we could use packed I think it's an interesting idea. It would make interacting with the `AccountLoader` more difficult but a) using zero-copy is an advanced feature for advanced users anyway and b) while accessing the struct is less user-friendly, designing the struct layout is more user-friendly and more space-efficient",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T15:20:27.847000+00:00",
+                "edited_timestamp": "2022-01-19T15:21:10.969000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933373752241176627"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933374874376884275",
+                "type": 19,
+                "content": "I was having so many deserialization issues and personally couldn't figure out the rhyme or reason to when it was \"ok\" and when it was not. Some of my structs worked and some didn't - upgrading away from packed, I think, made it easier to reach a healthy state",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "300012267829723138",
+                        "username": "tmoc",
+                        "avatar": "65016b47c6c8359997db88d02cd7d335",
+                        "discriminator": "2207",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T14:58:31.318000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933373752241176627"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933373752241176627",
+                "type": 19,
+                "content": "Gotcha - yeah that makes sense. Thanks for the update. I was able to get things working in `repr(C)` using a similar approach.\n\nIf reducing block storage costs is a top priority, then one would prefer `repr(packed)` from my understanding, since there would be no padded space for alignment. I'm wondering if anyone knows if there are drawbacks to using `repr(packed)` other than the need to create raw pointers and/or copying the field for reads?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T14:54:03.780000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933371426700947456"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933371426700947456",
+                "type": 19,
+                "content": "hey I've been meaning to update here actually. I upgraded to 0.20.1 for anchor which has changed my zero_copy structs from packed to C. I no longer get the warnings about `packed struct unaligned`. I changed all zero_copy bools to `u8`s and created two helper variables in my crate:  `TRUE: u8 = 1` and `FALSE: u8 = 0`, and then all through my code when I'm setting these bools I just do `crate::TRUE` or `crate::FALSE`. It's not ideal, but it does the job to maintain readability.\n\nFinally, I made use of `std::mem::align_of` to confirm the alignment of my structs (some are `2`, some are `4`, some are `8`) and used that knowledge to make sure I never have padding on my structs. In some cases this meant changing a `u8` to a `u16` for the sole purpose being there would have been a byte of padding after it. In others it meant literally adding a value to my struct in a certain position like `unused_val: u8` so that there isn't padding.\n\nIn the end, all of my structs appear to be working properly. Its a little concerning since it feels so...smelly? But so far I've been deserializing the data fine.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T14:44:49.328000+00:00",
+                "edited_timestamp": "2022-01-19T14:45:32.584000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933366652781854740"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933369021137584158",
+                "type": 0,
+                "content": "Also - why is using `repr(packed)` ill advised? I understand there are some warnings around using references to packed fields. From my understanding, it's possible to safely use these fields with the work-around mentioned here: https://github.com/rust-lang/rust/issues/82523\n\nlet me know if I'm misunderstanding something here. Thanks!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/rust-lang/rust/issues/82523",
+                        "title": "Tracking Issue for future-incompatibility warning `unaligned_refere...",
+                        "description": "This is a tracking issue for the future-incompatibility warning unaligned_references. This warning will fire for code like the following: #[repr(packed)] struct Foo1 { bar: u8, baz: usize } let foo...",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/3ff9f1c2c424787626329fe6beeb5af6013a671b7765d1da0dd82d2a43df7fdc/rust-lang/rust/issues/82523",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/9Wj7-a6QkKFRzK9ddJs4KXlMEBlpzRhNDmP6_ayIVM0/https/opengraph.githubassets.com/3ff9f1c2c424787626329fe6beeb5af6013a671b7765d1da0dd82d2a43df7fdc/rust-lang/rust/issues/82523",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T14:35:15.797000+00:00",
+                "edited_timestamp": "2022-01-19T14:38:35.309000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933366652781854740",
+                "type": 19,
+                "content": "Hey <@!111233596173373440> - been reading through your messages about `repr` and `zero_copy` accounts. Did you end up resolving your issue? Currently upgrading Anchor and looking into similar things.\n\nI also noticed this PR, which allows you to specify `#[repr(packed)]` to override the default `repr(C)` https://github.com/project-serum/anchor/pull/1273",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/project-serum/anchor/pull/1273",
+                        "title": "lang: repr override for zero copy by armaniferrante \u00b7 Pull Request ...",
+                        "color": 1975079,
+                        "reference_id": "933366652781854740",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/887e7f4d2baa13967bcdeeeaa349074ba9e7eb920ea724c82a05d35270f11724/project-serum/anchor/pull/1273",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/kyvz4p8bvHb6xwtw-nLpwJSdoxBOKKKELqKQ5VZvLKI/https/opengraph.githubassets.com/887e7f4d2baa13967bcdeeeaa349074ba9e7eb920ea724c82a05d35270f11724/project-serum/anchor/pull/1273",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T14:25:51.137000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931635043070271508"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933353478359765063",
+                "type": 19,
+                "content": "That worked, thanks a lot. I thought it was in bits not bytes...",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T13:33:30.110000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933352712114958347"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933352712114958347",
+                "type": 19,
+                "content": "i64 uses 8 bytes, not 64",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "757210651746762763",
+                        "username": "DAOIT",
+                        "avatar": "88fe28e80b80d7415964440f6681525e",
+                        "discriminator": "3214",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T13:30:27.423000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933348304127938631"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933348304127938631",
+                "type": 0,
+                "content": "Like this TIME.toArrayLike(Buffer, 'le', 64)?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T13:12:56.477000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933347842188267530",
+                "type": 19,
+                "content": "try using toArrayLike on the js TIME var instead of just jusing TIME as a seed",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "757210651746762763",
+                        "username": "DAOIT",
+                        "avatar": "88fe28e80b80d7415964440f6681525e",
+                        "discriminator": "3214",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T13:11:06.342000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933319188238454785"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933342110504087562",
+                "type": 0,
+                "content": "Did you use a reference?\n```rust\n&TIME.to_le_bytes()\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "391353127774846978",
+                    "username": "Ax_",
+                    "avatar": "2bb4617e636bf7adc8855b24ab7f3efb",
+                    "discriminator": "7210",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T12:48:19.802000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933341763962302524",
+                "type": 19,
+                "content": "didnt help unfortunataly, I've already tried with little endian.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "391353127774846978",
+                        "username": "Ax_",
+                        "avatar": "2bb4617e636bf7adc8855b24ab7f3efb",
+                        "discriminator": "7210",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T12:46:57.180000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933323189789012028"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933323189789012028",
+                "type": 0,
+                "content": "Maybe try this? https://doc.rust-lang.org/std/primitive.i64.html#method.to_le_bytes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "391353127774846978",
+                    "username": "Ax_",
+                    "avatar": "2bb4617e636bf7adc8855b24ab7f3efb",
+                    "discriminator": "7210",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://doc.rust-lang.org/std/primitive.i64.html",
+                        "title": "i64 - Rust",
+                        "description": "The 64-bit signed integer type."
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T11:33:08.752000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933319188238454785",
+                "type": 0,
+                "content": "If I had the following seeds for an account in my rust program:\n    ```\nseeds = [b\"vault\".as_ref(), time.to_ne_bytes().as_ref()]\n    ```\nwhere \"time\" is of type i64.\n\nHow would I derive the program address for this in javascript? I have tried this but it didnt work:\n```\nconst TIME = new anchor.BN(Date.now() / 1000);\n\nconst [_account, _accountBump] = await PublicKey.findProgramAddress(\n      [\n        utf8.encode(\"vault\"),\n        TIME,\n      ],\n      program.programId\n    );\n   ``` \n    \nI'm receiving the follow error from the program when I run my test suite: \nProgram failed to complete: Could not create program address with signer seeds: Provided seeds do not result in a valid address\n\nIf I remove the i64 from the seeds and thus excluding time when I try to find the program address everything works fine. How do I include a i64 in the seeds?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T11:17:14.708000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933219710777032715",
+                "type": 0,
+                "content": "Thank you!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "866934864917037106",
+                    "username": "Mazen",
+                    "avatar": "dbd2ffe1d868bf0ebf80adf539cccc9f",
+                    "discriminator": "3763",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T04:41:57.433000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933218693238898830",
+                "type": 19,
+                "content": "the size of the account to be initialized, data, in bytes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "886273867293802556",
+                    "username": "joebuild",
+                    "avatar": "8bd105a959e9fb8265f56a57776b3f6a",
+                    "discriminator": "8170",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "866934864917037106",
+                        "username": "Mazen",
+                        "avatar": "dbd2ffe1d868bf0ebf80adf539cccc9f",
+                        "discriminator": "3763",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T04:37:54.833000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933204799640449024"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933204799640449024",
+                "type": 0,
+                "content": "Hey guys, what does the 'space' in this account attribute means? \n\n#[account(init, payer = user, space = 1024)]",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "866934864917037106",
+                    "username": "Mazen",
+                    "avatar": "dbd2ffe1d868bf0ebf80adf539cccc9f",
+                    "discriminator": "3763",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-19T03:42:42.341000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933125545640755220",
+                "type": 19,
+                "content": "Take a look in this function: https://github.com/evanmarshall/solrand/blob/main/programs/solrand/src/lib.rs#L90",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "798837544640446494",
+                    "username": "evanm",
+                    "avatar": "8268572609d7ee79f8ddb291c1b61b88",
+                    "discriminator": "3245",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "902199345103904858",
+                        "username": "anhlt",
+                        "avatar": null,
+                        "discriminator": "1870",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-18T22:27:46.715000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933021805780795442"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933125531690483732",
+                "type": 19,
+                "content": "Got it, thank you. It seems to cost a lot transaction fee if manually mint or burn token for every account.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "925936426770636822",
+                    "username": "Hamlet",
+                    "avatar": null,
+                    "discriminator": "7207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-18T22:27:43.389000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933123942607114251"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933123942607114251",
+                "type": 19,
+                "content": "no",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "925936426770636822",
+                        "username": "Hamlet",
+                        "avatar": null,
+                        "discriminator": "7207",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-18T22:21:24.522000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "933121118234099794"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933121118234099794",
+                "type": 0,
+                "content": "Hello everyone, I'm just wondering if we could have some custom token with balanceOf() override, just like ERC20 in solidity, so that we can change balance of every tokenAccount without mint of burn? Anyone know how that works? thanks in advance.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "925936426770636822",
+                    "username": "Hamlet",
+                    "avatar": null,
+                    "discriminator": "7207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-18T22:10:11.139000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "933070407324553257",
+                "type": 19,
+                "content": "<@!134416332509675520> would you by any chance have an example + a test in javascript where you find the program address? \ud83d\ude42",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-18T18:48:40.716000+00:00",
+                "edited_timestamp": "2022-01-18T18:48:58.151000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "932689801503727647"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "580b80ecb4588183bdbb99e4a746336a"
+}

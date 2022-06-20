@@ -1,0 +1,60 @@
+{
+    "total_results": 2,
+    "messages": [
+        [
+            {
+                "id": "950946127379853312",
+                "type": 0,
+                "content": "what is an `InvalidInstructionData` error in vanilla rust w/ solana?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T02:40:24.492000+00:00",
+                "edited_timestamp": "2022-03-09T02:40:31.458000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "950922183704727564",
+                "type": 0,
+                "content": "Does anyone know how to do the reverse of `Transaction.message.serialize()` from Solana SDK? I can't seem to find a straightforward way to deserialize it anywhere, but I have to believe it exists somewhere in the code.\n\nhuzzZAAH progress! Now problem seems to be instruction no didn't make it into the instruction data. Or does it not go there? Either way, Anchor is mad at me saying \"no fallback functions enabled\", so it's definitely getting a big number like 80 or 246, as per my data below:\n```\ndata: [80, 0, 0, 0, 246, 15, 83, 108, 127, 1, 0, 0, 134, 0, 0, 0, 0, 0, 0, 0, 116, 114, 121, 3, 0, 0, 0, 121, 101, 115, 2, 0, 0, 0, 110, 111, 3, 0, 0, 0, 49, 50, 52, 106, 255, 218, 227, 179, 193, 170, 106, 167, 104, 158, 155, 106, 123, 50, 37, 166, 54, 170, 26, 192, 2, 95, 73, 12, 202, 18, 133, 206, 175, 20, 135, 5, 0, 0, 0, 116, 116, 116, 116, 116] }] }\n```\n\nFor those curious:\n```\nuse bincode::deserialize;\n\nlet message: Message = deserialize(&raw_message).unwrap();\nlet sig: Signature = deserialize(&raw_signature).unwrap();\nlet tx = Transaction {\n    signatures: [sig].to_vec(),\n    message,\n};\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "282393099618222080",
+                    "username": "HelmetFace",
+                    "avatar": null,
+                    "discriminator": "8850",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T01:05:15.875000+00:00",
+                "edited_timestamp": "2022-03-09T02:13:06.944000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "59d2d04252b4824e71c71acd9dcc3246"
+}

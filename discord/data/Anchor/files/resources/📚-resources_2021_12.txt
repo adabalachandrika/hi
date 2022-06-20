@@ -1,0 +1,164 @@
+This is so helpful <@!630375665442488339>. Answered so many of my solana questions. Appreciate the effort!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I see, thank you <@!248066053161222144>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+new vid, hu dis
+https://youtu.be/7D7fKcZond8
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+scroll up in this channel
+https://project-serum.github.io/anchor/getting-started/introduction.html
+i already got the rust and solana fundamentals down, just need to get into anchor.
+so i started with solana basics and fundamentals and implemented the escrow program on it, but it seems turning to anchor is inevitable so are there any go-to resources for someone who wants to get into programming solana smart contracts in anchor ?
+this is amazing, thank you
+updated the post, thanks again to <@!303958906881703937>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+In case anyone might find this a bit useful: https://dev.to/fndomendez/exploring-program-derive-addresses-pdas-with-solana-anchor-and-react-19bm (still much to learn!)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Anyone one here offering some form of technical adviser services for projects? If so, Id be keen to speak.
+Would be cool if you could do all that from anchor.projectserum.com
+Not that I know of. I would run `anchor build --verifiable` -> `solana program write buffer` and then save the resulting buffer address somewhere.
+Any open source examples of how to set this up?
+The latter is how I would recommend.
+Do you know if anyone is actively deploying contracts via CI? I worry about giving it any kind of access to the deploy keys. Or would be awesome if someone has a flow where it uploads a build somewhere that a multisig decides on deploying.
+Its open access now
+But I would like access to publishing. Would be nice to have strata in there.
+https://project-serum.github.io/anchor/getting-started/publishing.html
+
+Ah. Docs. Ignore me 🙂
+Ah, so if I run anchor publish it automagically lands on that site with a link to the github?
+You can run anchor publish inside your CI as well.
+anchor.projectserum.com
+Thought there was a whole UI for seeing whose builds were verified and such?
+Can just run anchor build --verifiable inside CI and upload or deploy the binary ?
+Does anyone have a github actions setup with anchor verifiable builds? Curious how others have been approaching the continuous deployment side of CI/CD
+**Anchor Custom Errors deciper**
+for <@!756604464411967561> and those who maybe haven't figured it out yet:
+I've been posting this article in a few places:
+https://www.notion.so/Debugging-Custom-Anchor-Errors-b8540dd418c44a4e939ab17c56a3fd3b
+This article is outdated. I've since encoutered errors out of the 100-300 range, so here's how decipher them now (just figured this out lol)
+
+1. Convert the hex code such as `0xbc4` to decimal, here's a good tool for that:
+https://www.rapidtables.com/convert/number/hex-to-decimal.html
+2. You will get a decimal such as `3012`. Now go to here
+https://github.com/project-serum/anchor/blob/master/lang/src/error.rs#L67
+3. Look for a line like `AccountDiscriminatorAlreadySet = 3000,`. this means that 3000 is for this error code. Now you can count upward and see that `3012` is for this error: `AccountNotInitialized`
+4. You can also go here https://github.com/project-serum/anchor/blob/08174e84a6db0e945e93a91bb1f2770365f68f4c/ts/src/error.ts#L53
+
+viola. If im incorrect someone please correct me.
+
+Edit: Developer defined errors start at Hex 0x1770 / Decimal 6000
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I heard mention of anchor cookbook entries a few times on this discord. Is there an actual plan on that side? For instance should that be done in an Anchor section of the solana cookbook, or a dedicated one would be preferable?
+Discord is good but there are a lot of questions that keep getting hit, and we might want to formalize something to avoid abysmal time waste.
+I provide poor technical services for a extremely high price
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+of course
+lol, can I pay for in over priced memecoins then?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Well in all seriousness id love to chat. Dm me if you want.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://tenor.com/view/funny-dogs-cute-smile-thank-you-thanks-to-you-gif-16529972
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Not currently—best bet by far at the moment is to just go source-diving in the anchor codebase.
+Hey Everyone! Coming with some prior Rust experience but pretty new to Anchor and development on Solana. I was wondering if there was any consolidated location for documentation of the various Rust macros provided by anchor-lang. Have been searching through the existing documentation, docs.rs, github, and youtube videos but was wondering if anyone had any other suggestions on how to get up to speed. Thanks!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+how do you debug developer defined errors?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Just wanted to call out that this has been a really useful read for me. Thanks for sharing
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+it's in the post
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hey 👋 Of course I’m happy to help! It might be better for us to discuss on a GitHub issue on the repository so others can benefit from this if they’re stuck at the same point.
+I followed this all the way through because I had an idea for a dApp using a lot of the same logic as Twitter, so thank you! Only problem is now I'm stuck on the sending part. would you be open to a DM?
+https://blog.neodyme.io/posts/lending_disclosure
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Would you mind to post as a gist perhaps
+Hey all, last week or so, <@!134416332509675520> gave me this awesome idea of how to use 1 account to store multiple serialized data structures using `Option<>` types. Here is my fully fleshed out example of that in the form of a program. You can copy-paste it and run it and it should work. Enjoy 🙂
+https://gist.github.com/milk-duds-pro/625997c4141e03df16e657aef02e3048
+
+update: special thanks to <@!303958906881703937> for getting this to parse on the client side, info is here
+https://discord.com/channels/889577356681945098/889702325231427584/919713011269271612
+https://solanacookbook.com/
+a wealth of exmaples for CLI, JS, and Rust
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://blog.soteria.dev/
+Solana smart contract self-auditing with automated tools
+so you'll probably have to develop a little something-something on the client side or grab the program logs after you log the data in a json string
+the IDL is a bitch and wont generate the proper structures
+it doesn't, sadly
+And this works with client side deserialisation? Like if you were to `fetch` the account anchor would deserialise using the correct state struct
+Thanks very much!
+fixed
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+You are 100% correct. Changing now!
+Small fix: "The mint account is an account owned by the program" is strictly speaking incorrect (hopefully not being annoyingly pedantic here, this is just something people get confused about), since the mint *account* is owned by the spl token program; the trick is just that its authority is its own program-derived address.
+Created an SPL token faucet using Anchor (https://spl-token-faucet.com) for any project to use on localnet/devnet/testnet; feel free to check it out! Code is open source. Medium article can be found here: https://medium.com/credix/building-an-spl-token-faucet-on-solana-2b8a07d364ff
+I feel like this should work though, Option and enum are supposed to be supported
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+🤷‍♂️ they dont generate in my case
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+But haven't heard anyone actually talk about it yet. I don't think there are that many actual rust developer employees out there. This stuff is so early most people are just founders or co founders
+It appears to be mostly 150k - 250k plus tokens
+You can look at the offers being made on most of the Solana job listings
+Hi, hopefully I'm asking in the right channel. Have anyone shared how much income they get working as a solana/rust developer?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

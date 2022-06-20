@@ -1,0 +1,369 @@
+{
+    "total_results": 12,
+    "messages": [
+        [
+            {
+                "id": "926165657073119262",
+                "type": 0,
+                "content": "Hey all, I am trying to understand if it is possible to transfer native SOL tokens between two accounts in anchor rust, something like:\n```\ntoken::transfer(\n    CpiContext::new(\n        PROGRAM_ACCOUNT,\n        anchor_spl::token::Transfer {\n            from: source_user_info,\n            to: destination_user_info,\n            authority: source_user_info,\n        },\n    ),\n    1,\n)?; \n```\nhttps://stackoverflow.com/questions/70528742/how-to-transfer-sol-in-anchor-smart-contract-instruction\nAny help is very appreciated. Thanks!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "769618277998919680",
+                    "username": "Kent",
+                    "avatar": null,
+                    "discriminator": "1656",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-30T17:31:39.972000+00:00",
+                "edited_timestamp": "2021-12-30T17:32:24.343000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "926161111433220187",
+                "type": 19,
+                "content": "you could forward the non migrated txns to the old program",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "837011211795038260",
+                        "username": "microwavedcola",
+                        "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                        "discriminator": "8705",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-30T17:13:36.207000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "926038991013298196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "926111644084490301",
+                "type": 0,
+                "content": "You could basically just fall back to mango's old entrypoint function.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-30T13:57:02.272000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "926111560265515058",
+                "type": 19,
+                "content": "Maybe one thing you could do is use anchor's support for a fallback function. You can use an instruction function with the usual low-level solana entrypoint signature and anchor will fall back to it if the incoming instruction's sighash (or lack thereof) didn't match any other known instruction sighashes:\n```.rs\npub fn fallback(program_id: &Pubkey, accounts: &[AccountInfo], data: &[u8]) -> ProgramResult {\n  ...\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "837011211795038260",
+                        "username": "microwavedcola",
+                        "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                        "discriminator": "8705",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-30T13:56:42.288000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "926038991013298196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "926038991013298196",
+                "type": 0,
+                "content": "has anyone here done a gradual migration to anchor? from plain solana program...thinking of how to do it with mango...gradual migration would be more sustainable than big bang rewrite",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-30T09:08:20.430000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925833728972955698",
+                "type": 0,
+                "content": "anyone knows if there is an *async* RPC client in rust?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T19:32:42.146000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819337934258187",
+                "type": 0,
+                "content": "so you will be able to have more room for computation",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:35:31.055000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819277368512593",
+                "type": 0,
+                "content": "one feature coming up is having 1mil compute budget for an instruction (assuming no more instructions in the same txn)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:35:16.615000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819166601150494",
+                "type": 0,
+                "content": "then you can decide what to do",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:34:50.206000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819145994518548",
+                "type": 0,
+                "content": "so it allows you to profile it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:34:45.293000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819130890825729",
+                "type": 0,
+                "content": "to mock the environment and allocate as much compute budget as you want",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:34:41.692000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "925819075781853215",
+                "type": 19,
+                "content": "you can try with solana-test-program",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "693486673606082580",
+                    "username": "y2kappa",
+                    "avatar": "ab62d4bfb859796ebc7e2b6ac03ef461",
+                    "discriminator": "9177",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "700173546466312202",
+                        "username": "patriciobcs",
+                        "avatar": "d115f4c2a2ca36302140f7eda6675e29",
+                        "discriminator": "8196",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-29T18:34:28.553000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "925578146584080404"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "61b47662c5abc788d6d4c5f5f37be365"
+}

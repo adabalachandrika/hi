@@ -1,0 +1,87 @@
+{
+    "total_results": 3,
+    "messages": [
+        [
+            {
+                "id": "921960220656287744",
+                "type": 0,
+                "content": "Got this working:\n```\nuse solana_sdk::pubkey::Pubkey;\nuse std::convert::TryFrom;\n\nfn main() {\n    let solana_address = str::parse::<Pubkey>(\"SOLANA-ADDRESS\").unwrap();\n    let sig_bytes = hex::decode(\"HEX-SIGNATURE\").unwrap();\n    let raw_sig = ed25519::Signature::from_bytes(&sig_bytes).unwrap();\n    let sig = salty::signature::Signature::from(raw_sig);\n\n    let key = salty::signature::PublicKey::try_from(&solana_address.to_bytes()).unwrap();\n\n    let result = key.verify(b\"MESSAGE-PLAINTEXT\", &sig);\n\n    assert!(result.is_ok());\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-19T03:00:45.797000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921934870463270942",
+                "type": 0,
+                "content": "I'm looking at the rust tweetnacl packages, but wondering if it can be done with the solana sdk",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-19T01:20:01.840000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921934271118196849",
+                "type": 0,
+                "content": "Anyone using Rust to verify signed messages? All the examples I'm seeing are JS/tweetnacl-js",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-19T01:17:38.945000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "b65c4c8b443b85b56cb3b1092ebe6f20"
+}

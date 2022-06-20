@@ -1,0 +1,1727 @@
+{
+    "total_results": 53,
+    "messages": [
+        [
+            {
+                "id": "931236645297074206",
+                "type": 19,
+                "content": "Anyone?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T17:21:57.779000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931174068567298060"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931234091704135700",
+                "type": 0,
+                "content": "Oh, I didn't see that `pub use borsh::{BorshDeserialize as AnchorDeserialize, BorshSerialize as AnchorSerialize};`. It's not your crate.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T17:11:48.955000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931230868452823090",
+                "type": 0,
+                "content": "I could add the implementation if the core team is OK with that",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T16:59:00.472000+00:00",
+                "edited_timestamp": "2022-01-13T17:00:42.300000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931230743827468328",
+                "type": 0,
+                "content": "Is it on purpose that the `std::num::NonZeroX` series do not implement the `AnchorDeserialize` and `AnchorSerialize` traits?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T16:58:30.759000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931230539569041459",
+                "type": 0,
+                "content": "```SendTransactionError: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: An account required by the instruction is missing\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T16:57:42.060000+00:00",
+                "edited_timestamp": "2022-01-13T17:21:11.755000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931230407003881542",
+                "type": 0,
+                "content": "```\n#[program]\npub mod dice {\n  use super::*;\n  pub fn send_lamports(ctx: Context<SendLamports>) -> ProgramResult {\n    let program_id = Pubkey::from_str(\"E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC\").unwrap();\n    let (pda, bump_seed) = Pubkey::find_program_address(&[b\"test\"], &program_id);\n    let user = &mut ctx.accounts.user;\n    let user_address = *user.to_account_info().key;\n    let system_program = &ctx.accounts.system_program;\n    let base_account = &ctx.accounts.base_account;\n    let ix = solana_program::system_instruction::transfer(&user_address, &pda, 10000);\n    invoke_signed(\n        &ix,\n        &[\n            base_account.to_account_info().clone(),\n            user.to_account_info().clone(),\n            system_program.to_account_info().clone(),\n        ],\n        &[&[b\"test\", &[bump_seed]]],\n    // solana_program::system_instruction::transfer(&pda, &user_address, 10000);\n    );\n    Ok(())\n  }\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T16:57:10.454000+00:00",
+                "edited_timestamp": "2022-01-13T17:21:35.287000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931230341363036171",
+                "type": 0,
+                "content": "hey <@!347689664855015424> really appreciate your help thus far. still working on sending SOL in a contract. And am trying to invoke a signed transaction, but am stuck with getting the right signatures, was hoping you could point me in the right direction again.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T16:56:54.804000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931210793960218686",
+                "type": 19,
+                "content": "You\u2019ll probably have better chances of people picking up your questions by making them specific.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "519625217098907669",
+                        "username": "Pablo27",
+                        "avatar": "8e818dccef65c33428272d6952eb558a",
+                        "discriminator": "6616",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:39:14.340000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931203062926819338"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931203667133083788",
+                "type": 19,
+                "content": "got it, how would you reccomend I actually send them?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:10:55.172000+00:00",
+                "edited_timestamp": "2022-01-13T16:02:53.971000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931128742535917589"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931203062926819338",
+                "type": 0,
+                "content": "but can anyone help me pls",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "519625217098907669",
+                    "username": "Pablo27",
+                    "avatar": "8e818dccef65c33428272d6952eb558a",
+                    "discriminator": "6616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:08:31.118000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931203027522699335",
+                "type": 0,
+                "content": "okay sorry",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "519625217098907669",
+                    "username": "Pablo27",
+                    "avatar": "8e818dccef65c33428272d6952eb558a",
+                    "discriminator": "6616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:08:22.677000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931202571824144464",
+                "type": 19,
+                "content": "Please dont cross post",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "519625217098907669",
+                        "username": "Pablo27",
+                        "avatar": "8e818dccef65c33428272d6952eb558a",
+                        "discriminator": "6616",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:06:34.030000+00:00",
+                "edited_timestamp": "2022-01-13T15:06:54.650000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931202276117344257"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931202388054913055",
+                "type": 0,
+                "content": "I get errors all the time \ud83d\ude29",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "519625217098907669",
+                    "username": "Pablo27",
+                    "avatar": "8e818dccef65c33428272d6952eb558a",
+                    "discriminator": "6616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:05:50.216000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931202276117344257",
+                "type": 0,
+                "content": "Hello can anyone help me with this pls https://github.com/evanmarshall/cross-pile",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "519625217098907669",
+                    "username": "Pablo27",
+                    "avatar": "8e818dccef65c33428272d6952eb558a",
+                    "discriminator": "6616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/evanmarshall/cross-pile",
+                        "title": "GitHub - evanmarshall/cross-pile: A simple heads or tails (cross an...",
+                        "description": "A simple heads or tails (cross and pile) on Solana - GitHub - evanmarshall/cross-pile: A simple heads or tails (cross and pile) on Solana",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/7b3630547298984920cf3b1444714ff0b1728593812f4a41563b52cb495b6637/evanmarshall/cross-pile",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/GiUdXBlXNtIgw3odTy_YLZx5TnBelpSFfFybEyIyss0/https/opengraph.githubassets.com/7b3630547298984920cf3b1444714ff0b1728593812f4a41563b52cb495b6637/evanmarshall/cross-pile",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T15:05:23.528000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931189005024899122",
+                "type": 19,
+                "content": "you said in-order to use zero copy (de)serialization my account data needs to be structured in a very specific \"way\" , can you elaborate on this way you speak of ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T14:12:39.453000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930947835912937532"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931181660496621588",
+                "type": 0,
+                "content": "also is the reason boxing an account info type is useless as when you pass in a accountinfo you  dont deserialize it anywhere on the stack or the heap so boxing it is useless ?  and boxing is only when at runtime when the account is passed you need to derserialize it and store a copy in a local variable on the stack ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T13:43:28.381000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931174068567298060",
+                "type": 0,
+                "content": "I have 2 questions:\n- What kind of account is a validator in Anchor? I want to check that an account provided as a parameter is a vote account.\n-  I need to have an instruction split, because it exceeds the maximum computation amount, and the number of instructions depends on the content of an account (so to summarize, it must be a vector of instructions). How should I do that in Anchor? In vanilla, I would just have a constructor `fn some_instruction(parameters) -> Vec<Instruction> {\u2026}`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T13:13:18.324000+00:00",
+                "edited_timestamp": "2022-01-13T17:22:09.721000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931163425671893003",
+                "type": 0,
+                "content": "for example doing Box<Account<'info,TokenAccount>>",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T12:31:00.860000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931160450488467476",
+                "type": 0,
+                "content": "<@!347689664855015424>  hey was curious to know, that when you pass accounts via the client to the solana program, the run time retreives those accounts and copies them onto the local stack right ? and if i use a box wrapper, it would still need to allocate on the stack until it gets allocated over to the heap via the box<T> concept, if so is there a way to not use the limited stack space and not copy those accounts from the runtime to our local space but use them directly without copying ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T12:19:11.521000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931128742535917589",
+                "type": 19,
+                "content": "well it cant work like that cause youre only creating system instructions but not actually sending them",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T10:13:11.756000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930968208113037362"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931127576146096128",
+                "type": 19,
+                "content": "cc: <@!347689664855015424>",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T10:08:33.667000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930968208113037362"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931125471024939008",
+                "type": 19,
+                "content": "if it's conditional, you have to do it yourself so this looks correct. you can use `try_borrow_data`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788122420765917184",
+                        "username": "inoursweetz",
+                        "avatar": "438039d5014a59611a9639eb8617f87d",
+                        "discriminator": "6273",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T10:00:11.767000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931107872593547275"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931114481172504606",
+                "type": 0,
+                "content": "It feels like I'm abusing something",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "788122420765917184",
+                    "username": "inoursweetz",
+                    "avatar": "438039d5014a59611a9639eb8617f87d",
+                    "discriminator": "6273",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T09:16:31.582000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931107872593547275",
+                "type": 0,
+                "content": "```\nlet borrow = ctx.accounts.owner_payment_wallet.data.borrow();\nlet owner_payment_wallet = TokenAccount::try_deserialize(&mut &**borrow);\n```\n\nGood day! Is there a better way to conditionally deserialize an account?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "788122420765917184",
+                    "username": "inoursweetz",
+                    "avatar": "438039d5014a59611a9639eb8617f87d",
+                    "discriminator": "6273",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T08:50:15.974000+00:00",
+                "edited_timestamp": "2022-01-13T08:51:33.763000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931104347197161492",
+                "type": 0,
+                "content": "Still some cleaning up to do!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T08:36:15.454000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931104061460193280",
+                "type": 0,
+                "content": "",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "931104059212062770",
+                        "filename": "video0.mov",
+                        "size": 21369291,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/931104059212062770/video0.mov",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/931104059212062770/video0.mov",
+                        "width": 1280,
+                        "height": 804,
+                        "content_type": "video/quicktime"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T08:35:07.329000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931103946959913020",
+                "type": 0,
+                "content": "Learned a sh*t ton along the way",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T08:34:40.030000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931103891393744946",
+                "type": 0,
+                "content": "<@347689664855015424> - got my first Solana program running largely thanks to your OG blog + help here. Thanks a ton dude!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T08:34:26.782000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930968208113037362",
+                "type": 19,
+                "content": "This seems to build and run without issue.\n\n Does this look like it would work to send SOL to a user and then send those lamports back from the PDA?\n\n```\nuse anchor_lang::prelude::*;\nuse solana_program::pubkey::Pubkey;\nuse std::str::FromStr;\n\ndeclare_id!(\"E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC\");\n\n\n#[program]\npub mod dice {\n  use super::*;\n  pub fn send_lamports(ctx: Context<SendLamports>) -> ProgramResult {\n    let program_id = Pubkey::from_str(\"E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC\").unwrap();\n    let (pda, bump_seed) = Pubkey::find_program_address(&[b\"test\"], &program_id);\n    let user = &mut ctx.accounts.user;\n    let user_address = *user.to_account_info().key;\n    solana_program::system_instruction::transfer(&user_address, &pda, 10000);\n    solana_program::system_instruction::transfer(&pda, &user_address, 10000);\n    Ok(())\n  }\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T23:35:17.367000+00:00",
+                "edited_timestamp": "2022-01-12T23:36:20.591000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930947248500637707"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930960375027994644",
+                "type": 19,
+                "content": "got it! and if i want to transfer SOL to and from a contract, how would you suggest doing so? \n\nI'm assuming I need to create a PDA in the contract and then access it and then use the transfer method to transfer SOL from the caller to the pda, but I'm not sure how to go about each of those steps",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T23:04:09.814000+00:00",
+                "edited_timestamp": "2022-01-12T23:21:15.410000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930947248500637707"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930955848073740328",
+                "type": 0,
+                "content": "\ud83e\udd1d \ud83e\udd1d",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:46:10.504000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930955603000557658",
+                "type": 0,
+                "content": "Thank you",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:45:12.074000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930955588056256533",
+                "type": 0,
+                "content": "You're a saint man!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:45:08.511000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930952701632733234",
+                "type": 0,
+                "content": "not enough space",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:33:40.334000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930952416092901436",
+                "type": 19,
+                "content": "Any thoughts on why this may be failing to deserialize?\n\n```\n#[account]\npub struct EscrowAccount {\n    pub initializer_key: Pubkey,\n    pub taker_key: Pubkey,\n    pub initializer_deposit_token_account: Pubkey,\n    pub taker_deposit_token_account: Pubkey,\n    pub initializer_amount: u64,\n    pub state: String,\n    pub taker_amount: u64,\n}\n```\nWorks fine without the 'state' field",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:32:32.256000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930950980546220062"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930951535477800990",
+                "type": 0,
+                "content": "https://docs.rs/anchor-lang/latest/anchor_lang/attr.account.html#zero-copy-deserialization",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.rs/anchor-lang/latest/anchor_lang/attr.account.html",
+                        "title": "account in anchor_lang - Rust",
+                        "description": "An attribute for a data structure representing a Solana account."
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:29:02.301000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930951513579327578",
+                "type": 0,
+                "content": "alright looking up bytemuck and the docs , to better understand this stuff.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:28:57.080000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930951351146537040",
+                "type": 19,
+                "content": "bytemuck is the library that does the cast if youre interested in that. otherwise the anchor lang docs has the docs for how to use zero-copy and which rules to follow",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:28:18.353000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930951122590498847"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930951208343056455",
+                "type": 0,
+                "content": "a bit more concrete example perhaps.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:27:44.306000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930951122590498847",
+                "type": 19,
+                "content": "any code refrence i could take a look at ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:27:23.861000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930950925168820234"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930950980546220062",
+                "type": 19,
+                "content": "no",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "616045157925650453",
+                        "username": "khalilnafis.sol",
+                        "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                        "discriminator": "1303",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:26:49.995000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930950885973061643"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930950925168820234",
+                "type": 19,
+                "content": "we dont really deserialize it. just interpret the bytes as a different data structurr",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:26:36.792000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930949641409789982"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930950885973061643",
+                "type": 0,
+                "content": "Does the #[account]  attribute for structs have any issue deserializing fields of type String?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:26:27.447000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930950829391872070",
+                "type": 19,
+                "content": "thats all thats needed to deserialize a zero copy account",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:26:13.957000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930949641409789982"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930950728632111114",
+                "type": 0,
+                "content": "in rust you can cast pointers like you can in c. so what we do in zero copy is that we cast the pointer that points to the `[u8]` to a pointer that points to our `T` type",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:25:49.934000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930949641409789982",
+                "type": 19,
+                "content": "a bit of rust noob here, what did you mean by using a pointer cast instead of borsh, if not borsh then how is it deserialized ? any explanation regarding that is appreciated or a refrence to some doc or code i could take a look at(but do explain the pointer cast part )",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:21:30.720000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930947835912937532"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930947835912937532",
+                "type": 19,
+                "content": "it makes anchor use a pointer cast instead of borsh. this is great because it's efficient. just a single cast. and importantly it doesnt use the heap. deserializing large accs with borsh can lead to heap overflows. but it requires your account data to be structured in a very specific way",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:14:20.256000+00:00",
+                "edited_timestamp": "2022-01-12T22:15:00.073000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930939734769934356"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930947248500637707",
+                "type": 19,
+                "content": "depends on what you want to do. you can wrap spl token types with  with Account, you can init them using constraints, you can do cpi calls with `anchor_spl::token::<name>`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T22:12:00.206000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930912238041182239"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930939734769934356",
+                "type": 0,
+                "content": "can anyone give a primer on the zero copy concept what it is, and how is it used via anchor ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T21:42:08.793000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930912238041182239",
+                "type": 0,
+                "content": "hi, how can i use spl token methods in a solana contract?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T19:52:53.062000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930903375032238120",
+                "type": 0,
+                "content": "In vanilla, I would just have a constructor `fn some_instruction(parameters) -> Vec<Instruction> {\u2026}`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T19:17:39.956000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930902782008000522",
+                "type": 0,
+                "content": "Other question: I need to have an instruction split, because it exceeds the maximum computation amount, and the number of instructions depends on the content of an account (so to summarize, it must be a vector of instructions). How should I do that in Anchor?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T19:15:18.568000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930897419833606194",
+                "type": 0,
+                "content": "PR just submitted",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "847130012879814668",
+                    "username": "Hunterws",
+                    "avatar": "450d7d97c8a99525d0e6c069bba6d1b1",
+                    "discriminator": "0473",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-12T18:54:00.126000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "e1a4b8538562203cac7a7292e20bb9f8"
+}

@@ -1,0 +1,1326 @@
+https://www.npmjs.com/package/prettier
+hello world example
+what's the usage of this ?
+```"pretty": "prettier --write '{,src/**/}*.js'",```
+thanks for the help so far
+I will do more investigating tomorrow
+under the hood i am doing sol_create_program address to generate the address
+I have to head to dinner, I'll check either tonight or tomorrow to see if you still have issues!
+I haven't looked too closely at your code, but it looks correct at a quick glance
+ok
+<@!345046176149536769> sorry, just saw your reply. Can you double check the authority by using `sol_create_program_address`?
+so I am confident the program address is correct
+I've verified the program address by loggin it, and I have been able to transfer SOL between accounts using program addresses
+``` SolAccountInfo *Mint = &params->ka[0];
+    SolAccountInfo *Destination = &params->ka[1];            
+    SolAccountInfo *Authority = &params->ka[2];
+    SolAccountInfo *TokenProgram = &params->ka[3];
+    SolPubkey mintAuth = getP1Mint(params);
+    uint8_t seed1[] = {'o', '1','m'};
+    const SolSignerSeed seeds1[] = { {seed1, SOL_ARRAY_SIZE(seed1)} };    
+    const SolSignerSeeds signer_seeds[] = { {seeds1, SOL_ARRAY_SIZE(seeds1)} };
+    SolAccountMeta arguments[] = {
+          {Mint->key, false, true},
+          {Destination->key,false,true},
+          {Authority->key, true, false},
+          {TokenProgram->key, false, true},
+    };
+    uint8_t data[] = {7,1,0, 0, 0, 0, 0, 0, 0};
+    const SolInstruction instruction = {TokenProgram->key,
+                      arguments, SOL_ARRAY_SIZE(arguments),
+                      data, SOL_ARRAY_SIZE(data)
+    };
+    if(Mint->is_writable){sol_log("mint is writable");}
+    if(Destination->is_writable){sol_log("destination is writable");}
+    if(Authority->is_writable){sol_log("authority is writable");}
+    if(TokenProgram->is_writable){sol_log("tokenprogram is writable");}
+    SolAccountInfo *accounts = params->ka;
+    sol_log("minting p1 tokens");   
+    sol_assert(SUCCESS == sol_invoke_signed(&instruction, accounts,4,signer_seeds,1)); 
+    sol_log("transfer complete");                
+    return SUCCESS; ```
+1 sec
+how is your program calling the CPI
+hm, that looks good, makes me think that the program address has some problem
+p1Auth is the program address
+```var instruction = new TransactionInstruction({
+            keys: [
+                {pubkey:x.publicKey, isSigner: false, isWritable:true},
+                {pubkey:associatedTokenAccountPublicKey, isSigner:false, isWritable:true},            
+                {pubkey:p1Auth, isSigner:false, isWritable:true},
+                {pubkey:TOKEN_PROGRAM_ID, isSigner:false, isWritable:true },                        
+            ],
+            programId,
+            data: Buffer.concat ([Buffer.from([7]),Buffer.from([200])])
+        });```
+got it, can you share the code from your client where you set up the instruction?
+tx simulation
+the simulation fails because of the error
+k np
+doing it locally
+do you have an explorer link handy with the tx error?
+you can check that in the program
+`AccountInfo` has `is_writable`
+I think it should be writable
+either, I created the associated token program on the client for the account signing the transaction
+in the client or in the program?
+how would I know if the account is read only?
+...
+Yes, I am sure the program address is right. I will double check the token accounts are writable
+If you're sure the program address is right, double check that all the token accounts are indeed writable
+<@!345046176149536769> yup, it's possible. I don't really like the above error because it's not clear if you're using a non-signer or if you're using a read-only account
+I have been trying to do that however get  ``` Cross-program invocation with unauthorized signer or writable account ```
+<@!466984915376799748> Is it possible for a program to use a program address to mint tokens?
+For onchain programs, yes. https://docs.solana.com/developing/deployed-programs/overview
+C and rust are only supported for programs currently?
+let's say I clone an account inside a program and then I write different data into the two accounts. How does that work, how does the vm know which data to save to the blockchain? Do they share the same data underneath?
+You do not need a phd in math to use zk-snarks if you use a tool like Zokrates but this tool does not generate Solana programs that you can you use to validate proofs. Same problem if you use the snarkjs/circom toolchain. It would be awesome if these toolchains worked with Solana.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Seems like there's probably another issue going on with the devnet nodes, it definitely shouldn't take that long.  DId you end up getting it to work by retrying?
+Can you share the command you issued?  View the Withdraw Authority of your stake account with `solana stake-account <your_stake_account_address>` and make sure the keypair you provide for the `--withdraw-authority` argument of your `withdraw-stake` command has the same pubkey.  Check your keypairs pubkey with `solana-keygen pubkey <KEYPAIR>`
+finally, got error `Error: dynamic program error: Data writes to program account failed`
+I deploy my program over devnet about 2 hours, but not finished yet!
+Hi, does anyone know how long it will take about deploy program?
+When using the `withdraw-stake` function I am getting "Error: dynamic program error: missing signature for supplied pubkey:"... Please advise if this means the <KEYPAIR> is incorrect or something else?
+<@!618889766494273557> - welcome, you might try checking out https://github.com/solana-labs/example-helloworld#hello-world-on-solana to get started
+`solana-program` provides no binaries so this looks expected.  Normally you'd add `solana-program` as a dependency in your Cargo.toml
+Hello all, I am creating a project using cargo and want to install solana-program using cargo install solana-program. Throw error     Updating crates.io index
+  Downloaded solana-program v1.5.2
+  Downloaded 1 crate (54.0 KB) in 3.93s
+error: specified package `solana-program v1.5.2` has no binaries
+https://c.tenor.com/7vR4yU47u20AAAAM/good-night-my-love.gif
+.
+.
+.
+☝️Please help me out ☝️
+
+Goodnight everyone 😝
+.
+.
+How long would it take a newbie to complete a project like that ? 
+
+I'm just doing as a side project .
+Maybe it can transform into a business or just become a learning experience which will enhance my resume 😁
+I'm basically a newbie in software development ... I'm studying in computer science 
+
+I'm thinking to take an approach of building my own wallet or exchange... 
+I don't know if it's possible to build it on-top of solona?
+
+But if it is what are the procedures of building something like that .
+Is there any tutorial on doing that ?
+Awesome
+Welcome! post your question and someone will try to help. 🙂
+I would like some help
+Hello
+<@!345046176149536769> yeah there are a few in the spl repo. Here's an example in token-swap: https://github.com/solana-labs/solana-program-library/blob/6a294f47f211149a09dfc2eb47f26ff4c025333b/token-swap/program/src/processor.rs#L97
+I'm guessing i am missing something on the client side
+is there an example of a mintTo CPI
+what are these
+Zokrates is easier to program. Circom has nice support for universal set up. Zokrates is written in rust and Circom in javascript. It depends on what you like and what you want to do. Start with Zokrates if you are new to the technology.
+which of those two is better do you think?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This is really cool, nice job!
+<@!750257486975467582> Were you running localnet via docker?
+Awesome! Thank you
+another question , do we pay sol yearly for the size of the program when deployed ? (like storage) . and is there like documentation for pricing of different stuff (similar to ethereum yellow paper)
+<@!750257486975467582> What program are you deploying?  What is its size?
+Hi <@!750257486975467582> thanks for the reproduction steps, I'll work on this this morning
+https://docs.solana.com/cluster/synchronization
+is there a good article for explanation?
+Set up a Ledger Nano using your Trust Wallet seed phrase as the recovery/seed phrase for the Nano when setting up the new device.  This will make one of the keys on the Ledger the same as your Trust Wallet key.  You can sign with this key in one of two ways:
+ - Log in to SolFlare.com using your Nano and select "Account 0" when logging in
+ - If you want to use the command line tool, provide the path `usb://ledger?key=0`  in place of any `<KEYPAIR>` variable to sign with the same key on your transaction commands.
+
+Links:
+Set up a Ledger Nano to use with Solana: https://docs.solana.com/wallet-guide/ledger-live
+Using SolFlare: https://docs.solana.com/wallet-guide/solflare
+Using the command line tools: https://docs.solana.com/cli
+It’s slotted like tdma. With a deterministic schedule for slotting the leaders
+I mean in bitcoin blocks are created when miner finds a certain nonce , what about solana <@!439210198142550016>
+Which part? Transactions are recorded into poh and the data is transmitted to the network
+Wanted to drop some example code for program_test if others are looking. This is an updated version of mcf-rock's simple vote tutorial (reject dups) that uses program_test. Thanks to the various help I received here getting it working: https://github.com/wilwade/simple-vote-tutorial/blob/master/src/rejectdups-rust/src/lib.rs
+how are blocks made in solana ? I read articles but still couldn't figure
+Hi, my local solana version is `1.4.23`, dose anyone know how should i roll back to older version?
+Should be fine, we’ll announce the 1.4.23 upgrade tomorrow most likely
+Is that all right?
+But why the `solana cluster-version` is `1.4.23`?
+<@!445425471027544095> Hi, i download from https://github.com/solana-labs/solana/releases/tag/v1.4.22
+Thanks, and, loving the parallel processing.    
+One thread is just lonely.
+Thank you, that seems pretty straightforward.  Will take a look tomorrow.
+5. deploy program
+4.select Account -> Add account  use `let bs58 = require('bs58');
+let str = bs58.encode(Buffer.from([keypair_data]));
+console.log(str);` to past private key; over https://www.sollet.io/
+1.start local cluster about version 1.4.23
+2.use command solana-keygen new to generate a keypair file
+3. airdrop some sol
+The detail step is :
+yes
+You’re just running a local cluster and trying to deploy?
+I don't find the problem in 1.4.22
+If you have nice steps to reproduce, that would help.  We can take a look in 8 hours after 🛏️
+It's new in 1.4.23
+Oh, no, sorry
+Ok, good I guess :).  Not a new bug
+Yeah
+Did you see this in older versions
+new what?
+<@750257486975467582> - is this new in 1.4.23?  There have been some program deploy changes recently, it’s possible there’s a new bug
+Mostly transactions/blocks.  PoH generation pegs a single CPU core at 100%.  Validation of blocks also requires PoH verification, but that is parallelized across the remaining available cores
+The local cluster version and solana version are all  `1.4.23`
+Does someone know why?
+`=========================================================================
+To resume a failed deploy, recover the ephemeral keypair file with
+`solana-keygen recover` and the following 12-word seed phrase,
+then pass it as the [BUFFER_SIGNER] argument to `solana upgrade ...`
+=========================================================================
+rail item forward person advice final kite despair hair spray flash funny
+=========================================================================
+Error: Data writes to account failed: Transactions failed
+`
+Hi, while i deploy program ,got error said :
+Solana asked for a wallet after its private sale and without understanding its tech at that time fully a TrustWallet Solana wallet was created and given to them thinking tokens would be sent to it upon distribution. 
+
+What options are available now to access SOL in the staking account as TrustWallet cant support it?
+I have a quick question, when we think of the  memory and processor requirements of the validator nodes, how much of that is processing transactions/blocks, and how much of that is SHA256 PoH?    
+I am assuming it is almost entirely transactions/blocks, I could be way off though
+<@!445425471027544095> thank you!
+Yes, actually you must generate it before sending.  The transaction signature is just the first signature in the transaction.  It's actually a little silly that that RPC method returns it, since you already have it!
+Can I generate it before sending?
+the result is "Transaction Signature, as base-58 encoded string"
+I mean the RPC result https://docs.solana.com/developing/clients/jsonrpc-api#sendtransaction
+Can I get the transaction hash before send it ?
+It's because my solana CLI version is to old.It's ok after update.Thanks anyway!
+<@!472537211884011530> - do we have an official set of Solana brand guidelines?   ^
+is it against the rules to name a project (that is solana related) with solana word in it ? "solana something" for example ?
+Thanks <@!213083996689661953> !  Fixed my comment above.
+The Ledger analog for the TW key is `usb://ledger?key=0`
+Trust wallet does not support stake accounts.  You'll need to use a Ledger Nano to sign for any stake account related transactions.  Get a Nano S or Nano X and use your Trust Wallet seed phrase as the recovery phrase when setting up the Nano.  This will give you the same private key at path `usb://ledger?key=0` as you have on Trust Wallet.  So anywhere in the command line where it asks for `<KEYPAIR>` you provide `usb://ledger?key=0` to sign the transaction on the Ledger
+where did you get a trust wallet address set as the stake/withdraw authority?
+`solana withdraw-stake <STAKE_ACCOUNT_ADDRESS> <RECIPIENT_ADDRESS> <AMOUNT> --withdraw-authority <KEYPAIR>`
+
+Stake account address = not delegated
+Receipient address = A new Solflare wallet
+Keypair = A trustwallet Solana wallet that is set as the stake and withdraw authority address to the stake account
+
+When I ran `solana-keygen pubkey <KEYPAIR>` I got the error:  `Error: missing signature for supplied pubkey:`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks
+okay got it
+`cargo build-bpf` provides a convenient redirect to the Solana BPF rust backend (cleaning up what do.sh did).  `cargo build` (upstream, supported by the main Rust community) doesn't support cross-compiling to Solana BPF
+also , what's the difference between running this and running ``cargo build ``
+so they are basically the same thing ?
+`cargo-build-bpf` is the executable.  `cargo build-bpf` will cause the `cargo` command to run the `cargo-build-bpf` executable
+is it cargo build-bpf or cargo-build-bpf <@!724654555584921653>
+It's installed by the solana installer, you can locate it on your system by running `$ which cargo-build-bpf`
+like where is ``cargo build-bpd`` located
+<@!466984915376799748> what's the difference between do.sh and now ? wasn't the old one also using cargo to build ?
+sweet, np
+yes just tried! working now thanks
+<@!347689664855015424> fyi I'm signing off, hope 1.5.2 fixes your issue
+sorry not yet, want to add one? we can help 🙂
+yeah, helloworld uses it here: https://github.com/solana-labs/example-helloworld/blob/c2c8eb65b9a6c5a491b74177d51189ebefc5a4b9/package.json#L22
+yeah 1.5.2 has the fix, but the log message will still report the wrong program id fyi
+<@!466984915376799748> is there a project that uses this ?
+dont see it in release notes
+does 1.5.2 also have the fix or do I need to go back to 1.4.23? <@!466984915376799748>
+new command is `cargo build-bpf`
+I mean I heard newest templates don't use them anymore
+should I still use do.sh ? or it's updated
+ah
+bump for this
+cant go to a different one
+ah cool, yeah just update then
+solana-test-validator
+<@!347689664855015424> which cluster are you using?
+fix is in v1.4.23
+ok yes I am
+but I'm pretty sure you're using the upgradeable loader. ~~I just hit this issue a few days ago: https://github.com/solana-labs/solana/issues/14484.~~ Edit: You're probably hitting a related issue here: https://github.com/solana-labs/solana/issues/14412
+yup
+can just check in the explorer too
+ah right obvious
+but that will return what the account owner is
+warning there's no way to filter out the account data 😛
+you can run `solana account <PROGRAM_ID> --output json` against whichever node you're using
+how do I check?
+<@!347689664855015424> are you using the upgradeable bpf loader?
+if u want I can DM u some links to the UI and the code
+thanks that is indeed the case. But the reason is...weird. In the client Im logging the programId that I use in the ix but inside the program the programId, when logged, is different.
+<@!208527206966755329> ah, yes it means it's either a `Cluster` or `undefined`
+is that like saying the return is either Cluster of undefined ?
+<@!466984915376799748> sorry if It's dumb question but I was talking about the syntaxe
+`Cluster` is an enum of the different clusters. Here is the definition:
+```
+export type Cluster = 'devnet' | 'testnet' | 'mainnet-beta';
+```
+The `chooseCluster()` method uses environment variables to determine if you want to connect to devnet, testnet, or mainnet beta. If none of those are chosen, it returns `undefined` and the chosen url will fall back to a custom cluster / local node
+<@!347689664855015424> hmm, is there a chance that `pda != pda_account.key`?
+what's the usage of it ? ( Custer | undefined)
+```function chooseCluster(): Cluster | undefined {
+``` I found this in url.js in the hello example
+Im trying to send tokens locally (`solana-test-validator`) and I get the following error:
+```
+Program log: Calling the token program to transfer tokens to the taker...
+Program G5xAS5TwZjZRdEf2idpGvFSQ297EgQerwcTKVuhZ24n1 consumed 16383 of 200000 compute units
+Program G5xAS5TwZjZRdEf2idpGvFSQ297EgQerwcTKVuhZ24n1 BPF VM error: An account required by the instruction is missing
+Program G5xAS5TwZjZRdEf2idpGvFSQ297EgQerwcTKVuhZ24n1 failed: An account required by the instruction is missing
+```
+and this is the code. I cannot figure out what's wrong. I'm building the ix using the spl token transfer instruction builder function after all so if I was missing an account it shouldn't even compile.
+```
+let pda_account = next_account_info(account_info_iter)?;
+
+let transfer_to_taker_ix = spl_token::instruction::transfer(
+    token_program.key,
+    pdas_temp_token_account.key,
+    takers_received_token_account.key,
+    &pda,
+    &[&pda],
+    pdas_temp_token_account_info.amount,
+)?;
+msg!("Calling the token program to transfer tokens to the taker...");
+invoke_signed(
+    &transfer_to_taker_ix,
+    &[
+        pdas_temp_token_account.clone(), // source
+        takers_received_token_account.clone(), // destination
+        pda_account.clone(), // authority - program derived address
+        token_program.clone(), // called program
+    ],
+    &[&[&b"escrow"[..], &[nonce]]],
+)?;
+```
+Hi, hope you are all doing good! Does somebody have an example on how to use the memo program with "Solana/web3.js"?
+Thank you <@!585868308419444749> 👍
+<@!602509144557092865> 
+commitment: https://solana-labs.github.io/solana-web3.js/typedef/index.html#static-typedef-Commitment
+send options: https://solana-labs.github.io/solana-web3.js/typedef/index.html#static-typedef-SendOptions
+https://github.com/solana-labs/solana/blob/master/web3.js/test/connection.test.js#L2110
+and "skipPreFlight"?
+what does "singleGossip" commitment do
+https://github.com/solana-labs/solana/blob/master/web3.js/test/connection.test.js#L164
+Sure, `solana-test-validator` is just a binary that is included in the v1.5 releases.   Easiest way to use it is to just install the v1.5.2 release and run `solana-test-validator`.   It'll automatically give test tokens to your default `solana` keypair so there's no need to airdrop to get started.  Then just `solana deploy`.  Basically it's like `run.sh` and `solana-localnet` but easier
+<@!445425471027544095> How to use `solana-test-validator` in v1.5?Could you provide detailed steps?
+<@!445425471027544095> Share our program to you for reproduce?
+So need better info
+We tried to reproduce today based on what you shared last night, it worked
+Maybe file a githhub issue with exactly everything that you did
+I think we just need clear steps to reproduce
+<@!445425471027544095>
+Deploy serum-dex.so is ok, but while deploy our program in this version, it's failed.Do we need to provide binary files to reproduce the problem?
+So not sure why you're having a problem
+Everything seemed fine when we tried to reproduce here
+Oh, have not found where the problem is?
+na, that doesn't do anything for you.  I misunderstood what you were doing 🙂
+Does the `package-lock.json`?
+ah, thanks.  hmm, the docker deploy issue shouldn't matter here then.  hmm
+Ah, no, start with `NDEBUG=1 ./run.sh`
+start what though?  `solana-validator`?
+Download from https://github.com/solana-labs/solana/releases/tag/v1.4.22 to build and start
+But maybe I misunderstand how you're starting your local cluster?
+edit your package.json
+How to upgrade solana-web3.js to the latest?
+No, download from https://github.com/solana-labs/solana/releases/tag/v1.4.22 and build by my self.
+Use `solana deploy serum-amm/amm/target/bpfel-unknown-unknown/release/serum_amm.so` to deploy program. And the size is almost 700k.
+This solved my problem. Thank you very much!!!
+okay thanks
+It makes Xargo work.  Just a ugly relic that I wish we didn't have, but not worth forking Xargo over it
+is it to choose the output format of rust ?
+```[target.bpfel-unknown-unknown.dependencies.std]
+features = []``` what does this do ?
+Solana is PoS, not PoW
+Can I mine solana ?
+Thanks for your answer
+still playing with solana but just asking
+does that make sense? what is it you're building and thinking about naming?
+and even then it's probably advisable to develop your own brand, and use Solana in the tagline.
+if it's an end-user application, I'd recommend against using the Solana name. I'd generally ask "will my target user DEFINITELY know what Solana is?" before using the word Solana in your brand
+so it's kind of complicated. if you're making something at the core protocol level or tooling for developers that's only useful for building or interacting with the solana network, I think it's okay and I wouldn't discourage it
+hey <@!208527206966755329> !
+who to ask ?
+Not my call to be honest
+<@!445425471027544095> so is it allowed to use solana in the name ?
+<@750257486975467582> - I think we just got to the bottom of your issue.  Please either upgrade your solana-web3.js to the latest (I suspect you’re using a version from last October or earlier), or consider trying out the new `solana-test-validator` program that ships in the v1.5 release line and is intended to be the replacement for `solana-localnet` going forward
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+```silly lifecycle solanaplay@1.0.0~bpf-sdk:update: Returned: code: 2  signal: null
+12 info lifecycle solanaplay@1.0.0~bpf-sdk:update: Failed to exec bpf-sdk:update script
+13 verbose stack Error: solanaplay@1.0.0 bpf-sdk:update: `solana-bpf-sdk-install node_modules/@solana/web3.js && npm run clean`
+13 verbose stack Exit status 2
+13 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:332:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)``` additional info
+when running npm install , when it's running postinstall it's saying undefined BPF
+```Installing undefined BPF SDK into node_modules/@solana/web3.js
++ cd node_modules/@solana/web3.js/
++ curl -L --retry 5 --retry-delay 2 -o bpf-sdk.tar.bz2 http://solana-sdk.s3.amazonaws.com/undefined/bpf-sdk.tar.bz2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   243    0   243    0     0    394      0 --:--:-- --:--:-- --:--:--   393
++ rm -rf bpf-sdk
++ mkdir -p bpf-sdk
++ tar jxf bpf-sdk.tar.bz2
+bzip2: (stdin) is not a bzip2 file.
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now```
+e. g.  having some paging configs.  return part of it instead of all accounts.
+using get program account rpc always returns timeout.  anyway to workaround this?
+it's in cargo.toml
+in Cargo.toml
+oh yeah nvm , I see it now
+is the output name chosen?
+it's outputing program_rust.so , but it's written hello_world.so
+I think I understood the problem
+try running the commands outside of npm
+```0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'build:program-rust' ]
+2 info using npm@6.14.8
+3 info using node@v10.19.0
+4 verbose run-script [ 'prebuild:program-rust',
+4 verbose run-script   'build:program-rust',
+4 verbose run-script   'postbuild:program-rust' ]
+5 info lifecycle solanaplay@1.0.0~prebuild:program-rust: solanaplay@1.0.0
+6 info lifecycle solanaplay@1.0.0~build:program-rust: solanaplay@1.0.0
+7 verbose lifecycle solanaplay@1.0.0~build:program-rust: unsafe-perm in lifecycle true
+8 verbose lifecycle solanaplay@1.0.0~build:program-rust: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/nader/solanaplay/node_modules/.bin:/home/nader/anaconda3/condabin:/home/nader/.local/share/solana/install/active_release/bin:/home/nader/.cargo/bin:/home/nader/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+9 verbose lifecycle solanaplay@1.0.0~build:program-rust: CWD: /home/nader/solanaplay```
+```
+10 silly lifecycle solanaplay@1.0.0~build:program-rust: Args: [ '-c',
+10 silly lifecycle   'cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store' ]
+11 silly lifecycle solanaplay@1.0.0~build:program-rust: Returned: code: 1  signal: null
+12 info lifecycle solanaplay@1.0.0~build:program-rust: Failed to exec build:program-rust script
+13 verbose stack Error: solanaplay@1.0.0 build:program-rust: `cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:332:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid solanaplay@1.0.0
+15 verbose cwd /home/nader/solanaplay
+16 verbose Linux 5.4.0-58-generic
+17 verbose argv "/usr/bin/node" "/usr/local/bin/npm" "run" "build:program-rust"
+18 verbose node v10.19.0
+19 verbose npm  v6.14.8
+20 error code ELIFECYCLE```
+More useful error output might be higher up in your log too
+try simplifying that `build:program-rust` command to isolate the command that's causing the issue.  It could be any of these: `cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+```verbose stack Error: solanaplay@1.0.0 build:program-rust: `cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/index.js:332:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid solanaplay@1.0.0
+15 verbose cwd /home/nader/solanaplay
+16 verbose Linux 5.4.0-58-generic
+17 verbose argv "/usr/bin/node" "/usr/local/bin/npm" "run" "build:program-rust"
+18 verbose node v10.19.0
+19 verbose npm  v6.14.8
+20 error code ELIFECYCLE
+21 error errno 1
+22 error solanaplay@1.0.0 build:program-rust: `cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+22 error Exit status 1
+23 error Failed at the solanaplay@1.0.0 build:program-rust script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]```
+I mean it's not exactly the same as that repo
+I am testing it in my own repo
+Have you made any changes to the repo?
+Building works fine for me with the latest commit.  Was anything generated in `dist/program`?
+<@!208527206966755329> Can you provide the entire log?
+why am I getting this error ?
+```mv: cannot stat 'dist/program/solana_bpf_helloworld.so': No such file or directory
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! solanaplay@1.0.0 build:program-rust: `cargo build-bpf --manifest-path=./program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the solanaplay@1.0.0 build:program-rust script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+any service allowing priv key import and this way accessing staking?
+I'm looking to stake solana via exodus
+Hi
+is it because other costs are gonna be tracked in the future ?
+hmm , why don't we have a yellowpaper?
+Certain ops have an increased instruction  cost
+And the instruction limit
+Right now we only track signatures and memory allocations
+I am integrating ledger and i am looking for a js library for signing and getting ledger app version. Only thing i found is an example of sign but is not a js library.  Is there any?
+got it <@!347689664855015424>  i wil look into this. Thanks
+<@!620933109545959424> there's `solana-test-validator` that runs a local 1-node blockchain
+Hy guys,
+We are trying to integrate staking features into our wallet and we need a way to minimise the times for activating deactivating stakes. Is there a way to simulate locally a blockchain instance or something similar? 
+Thanks
+and storing etc... also is the program size considered in the storage ? or we only pay for the memory account storage
+is there like a yellowpaper for the cost of each transaction ?
+<@!147971603156828160> - those programs are pretty complex to just dive into if you're just ramping up.  These are more bite sized: https://github.com/solana-labs/solana-program-library/tree/master/examples/rust
+But to answer your question, the docs for those programs are currently the code itself
+the respective documentation pages on spl.solana.com just say that "the project is under construction"
+is there any detailed docs/readme for the `token-swap` and `token-lending` programs? trying to familiarize myself w/solana and rust
+<@!616304377791119410> something like this https://github.com/mcf-rocks/simple-vote-tutorial/blob/c52478d21c3955814f131de1b0b3a33f36ec2734/src/frontend-wallet/index.html#L53 ?
+thanks <@!445425471027544095>  <@!311962918511968256>
+ah ! okay
+I'd remove "npm run bpf-sdk:update", you shouldn't need it anymore.   That's legacy from `do.sh` days
+but no file there
+it's trying to get a file from that location
+it's running this command
+```> npm run bpf-sdk:update && cargo update --manifest-path=./src/program-rust/Cargo.toml```
+no idea
+cat bpf-sdk.tar.bz2
+file bpf-sdk.tar.bz2
+<@!208527206966755329> what is http://solana-sdk.s3.amazonaws.com/undefined/bpf-sdk.tar.bz2
+I am trying out https://solana-labs.github.io/solana-web3.js/. I am experimenting with the browser bundle. This seems to work. 
+
+However, I am not able to get a balance. How can I - using the browser bundle (with global namespace 'solanaWeb3' - get the balance of an account (using the function getBalance() )?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+why do we have this kind of limitation ?
+.
+cc/ <@!466984915376799748>
+Yeah I'm not sure if it's been optimized yet
+Interesting. I wonder if that would be limiting for oyster-lending. Since I clicked liquidate and got that. Although I understand oyster-lending is in early stage and on the down low.
+It's a cluster parameter.  I _think_ you can change it on a localnet, but you'd need to optimize before deploying
+```
+Instruction: Liquidate
+Program 2KfJP7pZ6QSpXa26RmsN6kKVQteDEdQmizLSvuyryeiW consumed 200000 of 200000 compute units
+Program 2KfJP7pZ6QSpXa26RmsN6kKVQteDEdQmizLSvuyryeiW BPF VM error: Computational budget exceeded
+Program 2KfJP7pZ6QSpXa26RmsN6kKVQteDEdQmizLSvuyryeiW failed: Computational budget exceeded
+```
+I got this while messing around with oyster-lending today. What determines the computation budget? Is it configurable?
+and what's the reason behind it
+what's the max computation that a transaction can have ?
+I could access the balance using this. Anyone a hint on how to adjust to get the token balance?
+
+            const connection = await new solanaWeb3.Connection(url, 'recent')
+            const balance = await connection.getBalance(PublicKey)
+
+This works perfectly, thank you!
+
+I am now onto the next step: getTokenAccountBalance (https://solana-labs.github.io/solana-web3.js/class/src/connection.js~Connection.html#instance-method-getTokenAccountBalance). How can I access this function? I am using the browser bundle. It seems not to be availabe, see photo (getBalance is there, getTokenAccountBalance I can't seem to access):
+We recommend ours as secondary
+Cool, we are currently working to improve the efficiency of the api service to improve capacity btw
+I see, thanks, btw https://solana-api.projectserum.com seems fine
+It's not down, but in certain regions we are dropping requests due to high load
+hi, don't know if this is the right place to ask, but is https://api.mainnet-beta.solana.com/ down for everybody else?
+yeah that makes sense, thanks!
+Actually I think you need two epochs plus, in the case that you create the account near the end of an epoch, then get charged very early in the next and that time can be less than your desired account TTL
+It possible you can even get away with something like one epoch + one lamport, but that would be a <@!353897596366094337> detail for sure 🙂
+<@!347689664855015424> two epochs sounds right.  You'll be charged for the current epoch immediately upon account creation, then again sometime during the next epoch
+all right it can wait 🙂
+<@!347689664855015424> - I don't think there's a great answer here right now.   rent collection is not that well documented at the moment.  <@!353897596366094337> is probably the best person to respond, I expect he's 💤 right now or otherwise enjoying the weekend though at the moment though
+If I want to create an account that is supposed to clean itself up on its own but stay alive at least for ~ 5 minutes, how much rent does it need? Im guessing 2 epochs in case rent is immediately collected for the current epoch after account creation?
+Thanks, that’s one step further
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://solana-labs.github.io/solana-web3.js/class/src/connection.js~Connection.html#instance-method-getTokenAccountBalance
+Anyone that can help me? 🙂
+<@!295113176570396672> there are micro JS vms that would work as well, or lua
+It has since been optimized <@!122531133190701057> but haven't deployed the latest version yet
+Wondering how crazy it is to make a smart contract that run embedded scripting interpreter like Rhai ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+On mainnet you should monitor logs from your own node probably.  The public RPC endpoint is pretty overloaded right now.  It's a continual work in progress to improve it but consider it to be best effort
+some one have issues when solana mainnet node  skiped socket notification about transaction log msgs? When on localnet all wokring fine
+<@!453347985628200960> thx it's help
+<@!323088295422853120> Hey, programs must export the `custom_panic` symbol.  You can either implement and export your own or use the default implementation bundled with the `entrypoint` macro.
+Default implementation: https://github.com/solana-labs/solana/blob/d63b2baf0ea9ae2022c7653cbcb8e5fa9d04cceb/sdk/program/src/entrypoint.rs#L82
+And the docs talk about panicking and custom panics in Rust here: https://docs.solana.com/developing/deployed-programs/developing-rust#panicking
+Best to ask in the Kin dev discord: https://discord.gg/d3x2dNg
+<@!453347985628200960> might be able to help with ^ when he gets online
+From transaction log (getConfirmedTransaction) i can see only:
+
+VM error: ELF error: Unresolved symbol (custom_panic) at instruction #125830 (ELF file offset 0xf5b48)
+Program failed to complete: ELFError(UnresolvedSymbol(\"custom_panic\", 125830, 1006408))
+failed: Program failed to complete
+Do the details not show up in the transaction log?  `solana logs` can be helpful to run against your local `solaan-test-valdiator` to monitor logs
+I've directed you question to some folks who might be able to help.  I'll let you know when I get a response
+Hi,  which logging severity and for what solana component i need set to catch trace for error like this
+```VM error: ELF error: Unresolved symbol (custom_panic) at instruction #125830 (ELF file offset 0xf5b48)```
+
+Current RUST_LOG 
+solana_runtime::system_instruction_processor=trace,solana_runtime::message_processor=info,solana_bpf_loader=debug,solana_rbpf=debug
+<@!466984915376799748> Question please,
+We're migrating deposit/withdraw of KIN tokens on Stellar to KIN tokens on Solana.
+How to convert old KIN addresses on Stellar to KIN-associated token accounts on Solana?
+Thanks
+Thank you very much! I will try it when I am off from work later today
+<@!616304377791119410> follow the instructions I gave you ^ to get the bundle, then this html file will  get the token balance of a token account, i know it works because I just ran it.
+try mine if you like solana slot --url http://91.193.116.35:8899
+thx
+lol, what an idiot, i passed the mint instead of a token account
+https://explorer.solana.com/address/CUvesjFJpydjPvRYH5uuZbkFYrB4xEY5fVxAaRS7Uvj2
+I got a random holder from explorer, maybe try this
+```
+curl https://api.mainnet-beta.solana.com -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0", "id":1, "method":"getTokenAccountBalance", "params": ["CUvesjFJpydjPvRYH5uuZbkFYrB4xEY5fVxAaRS7Uvj2"]}'
+```
+<@!311962918511968256> I think the api "getTokenAccountBalance"  need to pass a token holder, not a token
+what's up with this?
+```
+:~/TMP# curl https://api.mainnet-beta.solana.com -X POST -H "Content-Type: application/json" -d '
+  {"jsonrpc":"2.0", "id":1, "method":"getTokenAccountBalance", "params": ["SRMuApVNdxXokk5GT7XD5cUUgXMBCoAz2LHeuAoKWRt"]}'
+{"jsonrpc":"2.0","error":{"code":-32602,"message":"Invalid param: not a v2.0 Token account"},"id":1}
+```
+I use the tool, solana-cli 1.5.3 (src:aae51925; feat:1441058695)
+I try to deploy program to testnet, but I got error "Error: error sending request for url (https://testnet.solana.com/): operation timed out" several times.
+Any ways can avoid this situation Q_Q
+<@!616304377791119410> it's been a few months, but you can try like from this article https://smith-mcf.medium.com/a-simple-solana-dapp-tutorial-6dedbdf65444
+```
+git clone https://github.com/solana-labs/solana-web3.js 
+npm install
+# then just keep the lib directory
+```
+then in your html file: 
+```
+<script src="./solana-web3.js/lib/index.iife.js"></script> 
+```
+<@!616304377791119410> are you using this -> https://solana-labs.github.io/solana-web3.js/
+```
+wget https://github.com/solana-labs/solana-web3.js/releases/download/v0.0.6/solanaWeb3.min.js
+grep getTokenAccountBalance solanaWeb3.min.js
+```
+it's out of date, maybe it's always out of date, but why? <@!466984915376799748>
+really, let me look
+It seems this function is not available when using the browser bundle?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks a lot
+<@!445425471027544095> Thanks!
+Oh, I see.  It's https://explorer.solana.com/address/TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+<@!445425471027544095> No, it's not SOL transfer.
+It is about transfers of SPL tokens
+A simple SOL transfer?  You'd use the system program for this, all `111111......`
+Hi <@!288358193892032512> ,
+Here is the Transaction structure (sequence of bytes) that I was able to submit,  (Please note that this is how I publish data using "spl-memo" program and it serves my purpose, this might not be the best way to explain it though but I hope it helps
+<@!445425471027544095> What is the "programId" for transferring tokens on mainnet?
+My bad, should have stylized my message to make it clearer.
+lol ok :).   Discord confused me
+<@!445425471027544095> sorry, I meant to answer to <@!766785505475297320> 's affirmation that he was able to use the spl-memo, as I'm struggling to use the program with web3js.
+<@!288358193892032512> - can you point out a transaction that you see this occurring for?
+
+Might be due to this though: https://github.com/solana-labs/solana/blob/2eb19fa5e563c9065b126463ef9073cc8cdc8eb2/storage-bigtable/src/lib.rs#L501-L512
+But with your transaction it'll be easy to confirm
+__"I published my transactions using spl-memo program with data attached onto the instructions. Not sure why memo field is being returned as null in the response when using above method??"__ <<<<
+
+Hi, do you happen to have an example of how you accomplished this? I'm trying to use the spl-memo program since a couple of days and found out nothing. Thanks in advance.
+<@!756165658546536588> best to ask in the <#742230900380795020> channel
+Hi, does anyone know how to use `solana upgrade ...`?
+I think the sollet bridge is the only way, rn. However that affects your usage of "best" 🙂
+I guess am a bit confused about the wormhole implementation generally, what is the best way to go from ETH -> solana rn?
+the official wormhole implementation
+Hey, is this: https://github.com/certusone/wormhole
+BPF Instruction set and thus VM is 64-bit
+64 bit, right <@453347985628200960> ?
+Ah Ok, Thank you!
+I updated the github link; I had accidentally linked the JS side of that work.
+Alright, Thanks <@!213083996689661953>
+Exactly right
+Here's the PR for that addition, if you want a preview: https://github.com/solana-labs/solana/pull/14430
+`processed`: Transaction  submitted successfully?
+`confirmed:` Tx has received at least 1 confirmation?
+`finalized` Tx has reached MAX confirmation?
+is that correct?
+Thanks <@!213083996689661953> ,
+What are these  confirmation statuses that you mentioned that are going to be in next release?
+> 4. What's the current average MAX confirmation time on Mainnet-beta? and Does it increase over time? 
+We have confirmation-time data included in our metrics here: https://metrics.solana.com:3000/d/monitor/cluster-telemetry?refresh=60s&orgId=2 
+
+> 5. ... How would  you ensure that transaction was submitted successfully? 
+There is a difference between a transaction that was processed and a totally random sig. `value` will be non-null in the former case. However, in our next software releases, the `value` object will include an explicit `confirmationStatus` field that will distinguish between `processed`, `confirmed`, and `finalized`.
+You're right that there isn't a way to determine if a transaction has been submitted to an RPC node but not yet processed. The RPC service retries each transaction until it is processed or the recent-blockhash expires.
+
+> 6. Is there any endpoint or RPC method to view all pending transactions in Solana 
+No, there isn't. Solana doesn't have the concept of a common mempool.
+> 1. What is the memo field in results returned from RPC  method: "getConfirmedSignaturesForAddress2", 
+>  is this the  "data" published using spl-memo program? 
+Yes, that is the intended use in the future. However, at this time it is not being populated by the RPC service, so that's why you're not seeing your memo there. However, if you `getConfirmedTransaction` with `jsonParsed` encoding, you should see your memo text.
+
+> 2. What's the Difficulty threshold(number of confirmations) for considering a tx locked in successfully so that it can't be rolled back? 
+It depends on your needs. You may find this section of the docs useful: https://docs.solana.com/developing/clients/jsonrpc-api#configuring-state-commitment
+For most purposes, `singleGossip` commitment will be sufficient, but `max` commitment (that is, max lockout of 32 confirmations) should give you complete safety.
+
+> 3. What is "simulateTransaction"(RPC) method used for?
+This allows you to simulate a transaction against the current cluster state without actually submitting it.
+Hi everyone, 
+have few questions:
+  1. What is the memo field in results returned from RPC  method: "getConfirmedSignaturesForAddress2", 
+ is this the  "data" published using spl-memo program? 
+
+I published my transactions using spl-memo program with data attached onto the instructions. Not sure why memo field is being returned as null in the response when using above method??
+
+ 2. What's the Difficulty threshold(number of confirmations) for considering a tx locked in successfully so that it can't be rolled back? 
+
+ 3. What is "simulateTransaction"(RPC) method used for?
+
+ 4. What's the current average MAX confirmation time on Mainnet-beta? and Does it increase over time? 
+
+ 5. If we request the status of a signature using RPC method "getSignatureStatuses", there is no difference between the response of Tx just submitted(that has < 0 confirmations) and response for submitting totally random sig 
+      Response in both cases would be something like:  
+```{id:1 jsonrpc:2.0 result:{context:{slot:3.0970039e+07} value:{null}}}```
+      How would  you ensure that transaction was submitted successfully? (this leads to my 6th question) 
+
+ 6. Is there any endpoint or RPC method to view all pending transactions in Solana (All transactions that have been submitted, but not  yet been mined into any block) ?
+<@!445425471027544095>    Thanks kindly, I'll try that out
+Yep
+Starting to think I should be more in the Javascript SDK?    Is that considered suitable for exchange implementations?
+<@!585868308419444749>  Yes, it refers users to the Wallet Tools section (https://docs.solana.com/wallet-guide/cli).
+Which defaults to using file system wallets, which is...
+Absolutely,
+And completely,
+Not secure.  At all.  Very poor practice.  No exchange should Ever do this.
+Yet as I read it this is where the exchange docs lead to.     
+So you see there is an apparent price to pay for the perceived security of not handling this in an RPC call and that's what I'm trying to work around.
+Have you seen the exchange integration guide? https://docs.solana.com/integrations/exchange
+the SVM, (BPF machine) is it 32 bit or 64 bit... what is usize?
+Thanks, I appreciate it and agreed.   For an exchange if they're doing Any RPC commands over the network that's probably bad, these would only be executed locally.    Advantage of doing this in other blockchains is that you can immediately encrypt the private key and lock it up (say it hashimo vault for example) so that the raw key is never actually stored anywhere at any point in time.   But I can see there's other ways of doing this yes.
+
+So I'm just familiarizing myself with Solana behavior but I suppose what I'm really after isn't so much the keypair generation but the import of that address into the wallet (if such a thing is sensible in Solana) or even more specifically:
+The act of identifying a deposit on a user-specific address, and moving that to a main account ("hot wallet" per se).
+I get the identification part.   
+.
+It's the subsequent transaction part that I'm not sure about.   And this goes back to not wanting to involve keypairs over the network with RPC, as you pointed out.  Or...  is that pretty much going to have to happen?
+Any ed25519 keypair works, there's support for virtually all languages.   Generating a keypair over the network seems really bad.
+Is there a way to generate a keypair via rpc?   I'm just looking at the best way to do address generation for an exchange
+Works perfectly, exactly what I was looking for. Thanks
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+<@!720492966204145695> A good place to start are the Solana development docs: https://docs.solana.com/developing/programming-model/overview
+The main thing I try to do is that, at first create the keypair file and then wire it with an account. After that, I need to input the secret key to an app to do token transfer.
+Could you have some advice?
+up
+never share your sk or write software that compromises someones sk, for example by sending it over the internet.
+probably tho, i suspect you shouldn't be doing whatever you are doing.
+https://github.com/mcf-rocks/simple-vote-tutorial/blob/c52478d21c3955814f131de1b0b3a33f36ec2734/src/client/keypair.js#L22
+<@!720492966204145695> just cat the keyfile, first 32 numbers are your sk (bytes as decimals)
+<@!720492966204145695> Yes, you can only get the public key from the keypair file.  The keypair file contains the secret key, what larger thing are you trying to accomplish?
+<@!453347985628200960> Could you help with the above question?
+What cmd line to get the secret key from the keypair file?
+I can only see this cmd to get the public key
+solana-keygen pubkey
+Can i change account address size or i need to create migration instructions from old address to new? For moving from v1 state to v2 state structure
+I'm not fully aware of the KIN specifics. IIRC they're just normal SPL Token accounts, which yes require rent exemption and a small amount of SOL be deposited at account creation as such
+<@!585868308419444749> Another question pls
+
+Solana based Kin wallets require a minimum balance of SOL to be “rent exempt”, meaning they will never be deleted (“garbage collected”) or have rent collected.
+Do we need to send SOL each time new account is created?
+Sounds good!  Let me know when you have more details and I can probably help further 🙂
+<@!585868308419444749> Thanks! I'll forward to him your statement
+That could be a mnemonic or a keypair file or a Ledger wallet or a keystore from some third party wallet, etc
+<@!585868308419444749> He said  that "I have only the secret key of one account"
+Is it a  file that was created with `solana-keygen new`, for instance?
+Can he describe it better?
+I do not know what your boss does and doesn't have
+<@!585868308419444749> So, is it true when my boss said that he has only the secret key of some account? I don't really believe this. But wanted to get confirmation from you?
+No, that's a one-way operation
+<@!585868308419444749> My boss told me that, he has only the secret key of a certain account while my on-going implementation is based on the mnemonic (like the English 12 words). Is it possible to export secret key of some account belonging to the mnemonic?
+What are you trying to do?
+I don't understand the question. Ethereum uses a different curve, different serializations, etc.
+<@!585868308419444749> <@!445425471027544095> Pls provide me some example of the secret key on devnet that looks like the private key in Ethereum. Thanks
+We should  store globals in PDAs
+Yes, global read-write data is not supported, we need to report this error better 🙂
+to help with sanitizing input
+I guess I jump around languages too much. I was attempting to initialize and use a global uint8_t[32] array
+interesting link <@!439210198142550016>, I won't lie. My warnings come from incomplete tests
+C is the lesser of 2 evils 😁
+My man!  I love C. https://github.com/aeyakovenko/toaster
+will let you know when I find it
+`-Wall -Werror` your way to victory 🙂
+I'm interested in seeing what bad code that builds is causing a malformed elf
+I am using c, now that I realize it has bad code I can work with that
+I always get warnings 🙂
+Do you get any warnings during the build stage?
+and there is bad code somewhere. Interestingly enough it still built fine
+i just did some back tracking
+...
+Sounds like a bad ELF, have you made any changes to the hellworld stuff?
+Does anyone know what it means?
+``` ELF error: Relocation failed, unknown type 1 ```
+suddenly seeing this error when running the hello world example
+as <@!311962918511968256>  said, you cant go back to the mnemonic phrase but you can encode the secrey key array with bs58. e.g. with this js package: https://www.npmjs.com/package/bs58 it takes your secret key array and converts it to a string
+that's so weird...
+<@!602509144557092865> Seems to work here
+```
+$ curl -s https://devnet.solana.com -X POST -H "Content-Type: application/json" -d '
+  {"jsonrpc": "2.0","id":1,"method":"getConfirmedBlock","params":[31229552, "json"]}
+' | jq .result.transactions[].transaction.signatures[0]
+"45rCjB3ec7S7CZpYfw8kjDHhtQSinJ7uwdAAiQ65DcjgESzmNqkBdejcLfnLtACFkaB5WS5gfTCi9FtjDWSWa4Ww"
+"2pUDqNy3xb9q7aGbnfcUSFDStPtFiez5AsU1XhPpyHZNeySs2dHKdHj9RcqLRA4PYcLou1YVkAprsrzsJUtdPFB4"
+```
+only the transaction starting with `45rCj` comes up:
+```
+{
+  meta: {
+    err: null,
+    fee: 5000,
+    innerInstructions: [],
+    logMessages: [
+      'Program Vote111111111111111111111111111111111111111 invoke [1]',
+      'Program Vote111111111111111111111111111111111111111 success'
+    ],
+    postBalances: [ 435041751449, 1641936174468, 1, 1, 1 ],
+    preBalances: [ 435041756449, 1641936174468, 1, 1, 1 ],
+    status: { Ok: null }
+  },
+  transaction: {
+    message: {
+      accountKeys: [Array],
+      header: [Object],
+      instructions: [Array],
+      recentBlockhash: '84ZddM78z71UvVymkZpzAXuvUpqrjx5WywVfKXD773Qm'
+    },
+    signatures: [
+      '45rCjB3ec7S7CZpYfw8kjDHhtQSinJ7uwdAAiQ65DcjgESzmNqkBdejcLfnLtACFkaB5WS5gfTCi9FtjDWSWa4Ww'
+    ]
+  }
+}
+```
+not sure if I'm doing this wrong, but:
+When I check the transactions for this block (31229552) on the explorer, I can see all transactions made (`2pUDqNy3xb9q7aGbnfcUSFDStPtFiez5AsU1XhPpyHZNeySs2dHKdHj9RcqLRA4PYcLou1YVkAprsrzsJUtdPFB4` being the one I did)
+https://explorer.solana.com/block/31229552?cluster=devnet
+
+But when I run:
+```
+curl https://devnet.solana.com -X POST -H "Content-Type: application/json" -d '
+  {"jsonrpc": "2.0","id":1,"method":"getConfirmedBlock","params":[31229552, "json"]}
+'
+```
+ah I see 😄
+Here's an example of one that is 32 characters long: https://explorer.solana.com/address/11111111111111111111111111111111
+but I've only seen 44 length
+I remember reading 32-44 somewhere
+are Solana addresses always 44 chars long?
+<@!720492966204145695> you mean the 12 words, you can't, sk is output of hash function.
+<@!445425471027544095> secretKey is Uint8Array. How to convert it to some text-based secret key?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Check out https://twitter.com/Decentology/status/1352315332732575744 though!
+Not yet unfortunately.  It's still early days for DX here
+Sorry for the noob questions folks. I'm just getting up to speed on a few basics. Does the solana community have anything like https://remix.ethereum.org yet?
+<@!445425471027544095> Thanks a lot! I'll try it out
+You can just read the JSON array from the file and pass it into `Account::new()`.  Here's an example from one of our tests: https://github.com/solana-labs/solana-web3.js/blob/master/test/account.test.js#L76
+<@!445425471027544095> Then, in NodeJS code, how to fetch the secret key from the keypair file?
+You'd run `solana-keygen new` to generate the keypair file?  If so, the format of the keypair file is a JSON array of 64 bytes as documented here: https://docs.rs/ed25519-dalek/0.8.1/ed25519_dalek/struct.Keypair.html#inputs
+I will run the cmd line to generate the keypair file.
+The in the code, I will just need to read this keypair file as a normal file? And then how to fetch the secret key?
+It should be possible, yes.  Where did the keypair file come from?  The user provided it to you?
+The current code works fine based on the mnemonic as English 12 words
+<@!445425471027544095> Yes, in the current code, I need to input the secret key that should be read from the keypair file. Is it possible?
+<@!720492966204145695> - Sorry, I'm having a little difficulty understanding what you are asking.   The secret key for the account is something the wallet holds I'd think.   It's in the keypair file that was created
+<@!445425471027544095> <@!453347985628200960> 
+Regarding my question and your reply, pls understand that I've completed developing an app for deposit/withdraw tokens on Solana devnet. 
+It works fine with the input to the system that is a mnemonic.
+Now, my boss want to change to use only the secret key of the account.
+That's why I asked
+The program should have an upgrade instruction to handle that move
+Need to have a tx in the program that moves it
+You can’t change the address
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I haven't tried yet.  Have you tried `--Werror`?
+Can i turn compilation bpf target to strict mode somehow to make this as error instead of warning
+ _ZN101_$LT$solana_sdk..instruction..InstructionError$u20$as$u20$solana_sdk..abi_example..AbiEnumVisitor$GT$13visit_for_abi17ha500de50fb8577b5E Stack offset of -4240 exceeded max offset of -4096 by 144 bytes, please minimize large stack variables
+Fix the requested issue dev
+I have changed it on my server as a security and privacy measure to ensure that my discord server is a lil safe. I appreciate your reply but putting it back on me to do is pretty irresponsible considering it would have take the same amount of time to do but let it be known you wasted time being a smart ass
+Let it be known that this request was made.
+<@529506988623790101> you can change this in your own profile settings as well
+DO IT NOW
+Hey can you please change your server settings so users cannot message other users unless they are friends. I am daily messaged for invites to scam scum sites and it is only because the admins allow this.
+thanks <@!453347985628200960> for correcting my bad info
+I don't see anything yet.  Dev's still moving pretty fast there.  I'm sure we'll write some up once it settles down
+any docs for solana-test-validator?
+Just however far back you care to be able to query
+There's really no min for a local cluster
+is 100gb  min requirement for ledger?
+thx
+See:
+Limit ledger size: https://docs.solana.com/running-validator/validator-start#limiting-ledger-size-to-conserve-disk-space
+Log tuning: https://docs.solana.com/running-validator/validator-start#logging
+rocksdb is my pain)
+Probably also a good idea to enable log rotation and/or reduce the log level
+Ah, in that case you probably just need to tune down the ledger with  `--limit-ledger-size`
+isolated
+You intend to connect this node to a public cluster, or run it totally isolated?
+<@!445425471027544095> <@!585868308419444749> ^^
+<@!453347985628200960> Does solana have any public doc about best config for running long term local node? Often have trouble with free space on disk(
+What you can do is zero the account's data and then make a cross-program invocation to `SystemProgram::Assign`
+<@!748249199606497502> The correct, `AccountInfo`'s owner member is immutable, we have an issue tracking that: https://github.com/solana-labs/solana/issues/14692
+Do you have any examples?
+<@!445425471027544095> still not sure how to directly modify owner using AccountInfo because I don't get a mutable reference in the program
+true
+Yes it is.  Otherwise you could attack other programs
+ok but having to zero out defeats the purpose for me. Is that a condition of solana that the account data must be zeroed out at ownership transfer
+Yep
+oh you can directly edit it?
+<@!748249199606497502> - yes, first you need to zero out the account data and then modify the owner field to the target program
+Is there a way to change the owner of an account from inside a program?
+sounds great, ty
+Correct.
+Yep, the code went into master before we cut v1.5
+I'll take care of the docs
+so it's in 1.5, just needs to go to 1.4?
+Strange. Seems like I added the documentation. I'll see if it exists in a branch locally
+Maybe add the docs at the same time (getConfirmedTransaction and getConfirmedBlock are affected right?)
+Sweet, sure!  I think we're also missing documentation about it in https://docs.solana.com/developing/clients/jsonrpc-api too
+I think it can be. Seems to be working nicely on v1.5
+should this have been backported? https://github.com/solana-labs/solana/pull/13673
+Issue (and link to PR) are here https://github.com/solana-labs/solana/issues/12318
+It should be exposed. Let verify
+ah, ok it's being stored but not exposed through RPC yet?
+But yes, it lives in the transaction meta
+<@!445425471027544095> we do have that in place. Not completely reflected in Explorer yet.
+Following an issue would be useful
+I just came up with that one
+<@!613054002778865675> - for sure.  for some reason I thought we already had an issue for this, but I can't find it.  <@!383348505491668993> / <@!213083996689661953> - does adding pre/post balances for SPL Tokens in the transaction meta sound familiar?
+A result of some brainstorming I think it might be useful to include the pre and post balance of spl token accounts on a transfer instruction similarly to how we have them at specific places for SOL movements. This would allow much easier bookkeeping actions on such a high throughput blockchain and allow only tracking the instructions and not needing to sync all the inactive accounts. Any thoughts?
+Yup, totally understand. Just trying to get a baseline of where things stand.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+USDC stablecoin is beside Solana developed for ETH blockchain. Making stablecoin on SOLANA makes fees much lower and transaction faster?
+Yep.  If the deployed code runs as fast as x86 there is no reason to add a precompile
+if i am understanding you correctly, you are saying just deploy the code and see, which is fine.
+in terms of their (ethereum's) 'discount' on the call? no idea.
+bpf is a register machine, so its faster already then any stack based vm
+native x86 is much faster then interpreted code
+its just interpreter vs native cost
+which allows zk-snarks to happen, basically
+ok. i don't know it, but i can look into it --> spirV 🙂
+^ the reason btw they are "onchain primitives" is because the 'computation units' in gas would be huge, but it's subsidized basically, that is my understanding anyway, to allow these curve ops to happen.
+which is what everyone is running on
+right now its just x86
+spirV is my end goal 🙂
+BPF is designed for JIT to native, x86, mips, arm, etc...
+thisi s purely runtime optimizations
+<@!311962918511968256> no changes on the client side
+i guess there are other reasons apart from performance... but ok... 
+maybe i missed something, but what is the whole JIT thing about?
+so we used to compile rust/c program to an eBPF file that the validator ran, but now?
+must have not been paying attention... so now how does it work and why the change?
+This Rust function is available to create token accounts. Is this function also available in JavaScript (the web3.js sdk)?
+huge!!
+once it's battletested we can bump the instruction limit by 20x
+<@!311962918511968256> we have a few, but bpf JIT basically makes it pointless
+You know how ethereum has some "pre-compiled contracts" (really chain primitives) like alt_bn128 curve ops, possibly I might have missed announcements, but do you / are you gonna implement things like that?
+Does it make stablecoin transactions and swaps cheaper in fees?
+Yep.   USDC is live, for example.   Some references to get you started:
+* https://spl.solana.com/token
+* https://explorer.solana.com/address/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v
+Is it possible to develop a stablecoin on Solana network?
+<@!323088295422853120> I'll have a chance to try this out in a few hours 🤞
+<@!453347985628200960>
+--deny warnings i try to add but it did not help
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I have a question about that rosetta implementation bounty, are all instructions are required to be implemented?
+ok great thanks
+main account address is recommended, some details at https://spl.solana.com/token#wallet-integration-guide
+what's the user experience expectation when sending tokens: do you ask for the account address or token address?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+The message is what gets signed.  A transaction is just a message and list of signatures
+<@!490872022251995146> try `transaction.compileMessage().serialize()`
+Hello everyone, tell me can I create a transaction (I need 2 accounts to sign it), partially sign it in one script(let's say on the backend), send it to the second script (let's say on the front) and sign it there with the second account (well, let's say from solong / math wallet)?
+
+It doesn't work yet, because  `transaction.serialize()` throws an error that the transaction is undersigned
+How does Solana achieve the cheap transaction costs between block-chain ecosystem (ex Eth -> Sol)?
+Thank u
+we are making grid bot for Solana, so we need place orders to buy/sell from Solana Program without account signature
+<@!800643634990678066> - what kind of buy/sell orders?  If you are referring to Serum, I don't believe that runs on devnet.   Yep, what <@!585868308419444749> suggested.  Serum folks might be able to suggest alternatives
+That's probably a better questions for the Serum folks, https://discord.com/invite/zxPsXcB
+Guis, still the same i dont understand how to test Orders to buy/sell in devnet! Is there somewhere instruction or example?
+thx!
+`git filter-repo` is a pretty powerful command 🙂
+https://github.com/solana-labs/solana/blob/master/.travis/export-github-repo.sh
+i thought mirror works on whole repo not a just one folder
+It's on the list to clean up one day
+sure, it's yucky.   
+The source is https://github.com/solana-labs/solana/tree/master/web3.js, we folded it into the monorepo for convenience.  However as commits land there, it's mirrored into https://github.com/solana-labs/solana/tree/master/web3.js for release purposes since that's where all the existing release tags live
+<@!445425471027544095>  could u tell how is working mirror of web3.js folder to solana-web3 repo?
+Thanks! It works again now
+<@!720492966204145695> - the latest package is 0.90.4: https://www.npmjs.com/package/@solana/web3.js
+It used to work, then it was broken, then I went here and was suggested to upgrade, then it was working fine, but now broken again and have to upgrade again
+0.30.8 ???
+the problem is that the older version was not tolerant of new JSON RPC fields
+yeah, please upgrade
+<@!445425471027544095> 
+The method "getConfirmedSignaturesForAddress2" used to work fine. But now, it throws error
+
+  type: '{jsonrpc,id,error} | {jsonrpc,id,error,result}',
+  value: {
+    jsonrpc: '2.0',
+    result: [ [Object] ],
+    id: 'de5872b0-5980-44e0-b609-6ef636b186a9'
+  },
+  path: [],
+  branch: [
+    {
+      jsonrpc: '2.0',
+      result: [Array],
+      id: 'de5872b0-5980-44e0-b609-6ef636b186a9'
+    }
+  ],
+  failures: [
+    {
+      value: [Object],
+      branch: [Array],
+      path: [],
+      type: '{jsonrpc,id,error} | {jsonrpc,id,error,result}'
+    }
+  ]
+"@solana/web3.js": "^0.88.0"
+Okay, that explains it!
+One of the backends for the MB RPC load balancer _is_ running 1.5
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+yeah, older solana-web3 are not tolerant of the "blockTime: null" field.  Upgrading to the latest will pacify it
+There was some recent hardening against new field additions.  Maybe upgrade solana-web3?
+The result it gives is correct, but it expected another response?
+Thanks! That is the one I needed. 
+It seems this works but I am also getting an error:
+https://solana-labs.github.io/solana-web3.js/class/src/connection.js~Connection.html#instance-method-getConfirmedSignaturesForAddress2 should do this for you (https://docs.solana.com/developing/clients/jsonrpc-api#getconfirmedsignaturesforaddress2)
+Is there a way to prove that the website is running open source code?
+thanks! I`ll try it
+I can’t query history on the blockchain can I, using the web3.js SDK? For example get the last 10 token transactions of an token address?
+I am really enjoying learning programming on Solana. Especially the integration with magic.link is nice
+👍
+Team is on it 🙂
+They're coming back up now
+it seems the serum endpoints are...unsteady as well
+Our api nodes were struggling hard there for a bit, but have mostly stabilized.
+Also another endpoint to try is ``` "wss://solana-api.projectserum.com" ```
+you need to maintain a hearbeat like ```             
+let heartbeat = setInterval( ()=>ws.send(JSON.stringify({"jsonrpc":"2.0","method":"ping","params":null})
+),4998);
+```
+the above one seems not quite stable. or is it just me? I got connection closed sometimes just 6 seconds after connection.
+hi, is there any other endpoint for websocket? wss://api.mainnet-beta.solana.com
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+the vm was not lying. I was indeed missing an account I was trying to call
+you may want to try using the underlying methods of sending raw transactions and see if that makes a difference
+tbh I usually have problems signing tx in the browser and partialsign never "worked" for me(probably using it incorrectly).
+
+
+I think something is wrong with the arguments but the error message is a bit vague to me
+attempting a CPI and getting this error ``` 
+Program 82JQTTsUdoYsP1A1TEBMuQNaNqQcKr8zjQHyB72tV1gW BPF VM error: Access violation in unknown section at address 0x0 of size 32 by instruction #0
+Program failed to complete: AccessViolation(0, Load, 0, 32, "unknown")
+ ```
+you should post the error
+any one =/?
+
+tx verification keep failing =[
+log : Signature verification failed
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+so I don't need both?
+oh, I see.  idk, seems slightly redundant 🙂
+https://github.com/solana-labs/example-helloworld/tree/master/src/client/util
+got a link?  where are you at?
+
+<@!445425471027544095>  why is there 2 javascript with almost same functionality ( 1 with account and airdrop and other but with retrying if failed)
+It’s a little stale in some areas, on my list to update it soon
+Not just you or that transaction, <@!778604450453520384> . The block timestamps on testnet have been off since the last cluster reboot. There is a fix https://github.com/solana-labs/solana/pull/14210, and it will be activated on testnet as soon as enough validators have upgraded to v1.5.1
+hello , is the hello world example still good to use as template?
+We have integrated kin2 in OPOLO Cosmos Hardware Wallet. It will be released in upcoming version.
+^ ok, this isn't just on the create nonce account... transaction created today (6th Jan 2021) "3dzagvSiKnYVMDPxPZuUdZChQ73DNDDBmTFD6u9xGFydBz25piBQ3A4fhi5un8qKLpHVLYtnmwxojXXCEmV5msXJ" showing timestamp as 3rd Nov. 2020!   Is it that as it's using a nonce account that it's throwing this off?
+
+(again this is on testnet)
+Hi folks,
+
+I created nonce account yesterday (5th Jan 2021) on testnet but oddly the timestamp for the block/slot/transaction is showing as 2nd Nov 2020 - is this something "we" should be worried about?
+
+For reference:
+
+solana create-nonce-account nonce-keypair.json 1 --keypair keypair.json
+Signature: 4DhkihnRWbWfAEBHZ8qxpMwLSvu5BWWJRPxgdLaMiH9LMG3MCbdEUPezBk4JycD3sWKnKjHaD7vL7tK7jEFTJvUf
+
+solana --version
+solana-cli 1.4.14 (src:eb0a448b; feat:569138916)
+
+solana config get
+Config File: <path>/.config/solana/cli/config.yml
+RPC URL: https://testnet.solana.com 
+WebSocket URL: wss://testnet.solana.com/ (computed)
+Keypair Path: <path>/.config/solana/id.json
+hi there, why devnet seems not produce new blocks now
+Also how can my smart contracy can make arguments of strings and such lets say how in solidity
+What are all the rust libs for solana and what are their use cases
+There's also a helper that combines those if you don't need the tx signature in advance, https://solana-labs.github.io/solana-web3.js/function/index.html#static-function-sendAndConfirmTransaction
+love the mandarin seed
+This is has a send/confirm (using mocks) https://github.com/solana-labs/solana/blob/master/web3.js/test/connection.test.js#L2280-L2297
+ohh amazing thank you!
+Here's a SOL transfer transaction construction, https://github.com/solana-labs/solana/blob/master/web3.js/test/system-program.test.js#L43
+The web3.js tests have some decent examples
+and not trying to use the CLI
+I saw the SDK but no concrete examples
+JS
+create/sign is done locally? (makes sense)
+Using Rust or JS?
+Only sending is done via RPC
+Is there a good example of creating, signing, and sending a transaction (for SOL transfer as well as SPL transfer) via the RPC API?
+got it, thank you
+<@!602509144557092865> the team runs some RPC endpoints for each cluster on a best effort basis.  You can find the URLs in the cluster docs https://docs.solana.com/clusters
+or do all developers have to run a node?
+Is there a free to use, public API endpoint?
+Got the pubkey out to the terminal in Solana colors. thanks trent!
+
+ah great. thanks!
+`solana-client` will give your RPC, `solana-sdk` will give you keygen, TX construction, etc
+Thinking solana-client. I see solana-keygen but that seems to be more of a cli implementation.
+Which crate or crates should I use for building a simple wallet? For the time being I just need like keygen, and to be able to broadcast transactions and make network calls.
+Woulda crashed
+Happy i didnt click it on mobile
+Take a look at the VoteState struct.  It included a couple Vec<>s.  We just chose a reasonable upperbound and then use some helpers for calculating the size of the data field required, https://github.com/solana-labs/solana/blob/master/programs/vote/src/vote_state/mod.rs#L215-L220
+<:trollface:552227154390286376>
+Always adding more to the list
+Vec<MySlaves>
+yup
+So just a `Vec<Pubkey>` ?
+i'd like to have an array i can push and pop account addresses off of
+Oh... maybe I misunderstood what you were asking.  I thought you wanted a variable sized array in your account data.  Can you elaborate?
+u just concatenate the addresses?
+<@!277128497057497090> we pre-determine a max size and allocate for that (vote and stake programs)
+how can a dynamically sized account array be created?
+Do we have an eta?
+Thanks!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks
+Short term: I was able to successfully make that call [1]  to https://solana-api.projectserum.com; they may have more forgiving timeouts. You may have better luck with that endpoint for that request. Currently that's the only other published public rpc endpoint, but we will keep this updated: https://docs.solana.com/cluster/rpc-endpoints
+
+[1] `{"jsonrpc":"2.0", "id":1, "method":"getProgramAccounts", "params": ["TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",{"filters":[{"dataSize":82}]}]}`
+
+Long term: Running your own non-voting node may be the solution. We are looking at exposing a runtime hook to account state so that users can build whatever indexing best suits their use-case.
+once a day. Any other to get them?
+Ah, you're trying to get all Mints. Unfortunately, the current account indexes won't help with this query. How often will you need this data?
+<@!213083996689661953> I'm trying to get the list of all token account. using the filter `DataSize: 82,`
+Hi there. I don't think there's a problem with that endpoint. That's a very expensive call. There are currently more than 6M accounts owned by the `Tokenkeg` program, and more as Kin continues it's migration. We do have several account indexes in place on our api nodes that may help. What are you trying to do?
+Is there an any problem with that endpoint?
+Hi, I'm getting `504 Gateway Time-out` when calling `{"jsonrpc":"2.0", "id":1, "method":"getProgramAccounts", "params":["TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"]}` on https://api.mainnet-beta.solana.com
+Cool, I'll have a look after the stand up.
+<@!445425471027544095>   I'm all over that, yes thank  you very much 🙂
+We have this documentation in as well, in case you haven't found it yet: https://docs.solana.com/integrations/exchange
+ah thank, you, very helpful.    exchange deposits are relevant to me so this is good info.   And yes I see the blocks would be needed.
+> are rollbacks (reorgs) possible  (#3)?
+yeah rollbacks are possible until max confirmation, which is ~12 seconds.  However after 1 confirmation a rollback is very unlikely.  I forget the exact probability offhand, but if essentially if you aren't doing a whale transfer or an exchange doing deposits/withdrawals then waiting for max confirmation is likely overkill. Some details at https://docs.solana.com/proposals/optimistic_confirmation though
+possibly a mempool mechanism, or..may it doesn't need to "confirm" at all, maybe the wallet simply only displays transactions as confirmed that are more than 1 second old
+> couldn't a transaction automatically confirm after 1 second without a vote?
+How could it automatically confirm without a vote though?
+ok, thank you.   I'm going off the assumption of ~1s finallity.    In such a case, couldn't a transaction automatically confirm after 1 second without a vote?
+or....
+are rollbacks (reorgs) possible  (#3)?   Because, if they are, then, yes, you need blocks.   But if that is possible can 1s finallity really be claimed?
+3. define what to "rollback" to when consensus is not reached
+Blocks:
+1. define when a leader change occurs
+2. define what to vote on
+Otherwise it's just a continual stream of transactions
+or can different validators disagree on the timestamps for a tx
+new question haha.....   If Solana can timestamp transactions....   Why does it need blocks at all?  What do they do?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+BTW the Solong Wallet team has put out some good contextual content if you're new to Solana. https://solongwallet.medium.com/
+Thanks!
+Welcome to the community! Excited to see what you build.
+Yeah updating that fixed it. Thanks folks!
+Ah I did have it installed from a while ago. 1.0.5. Updating now.
+https://docs.solana.com/cli/install-solana-cli-tools
+Let me find that
+Ah no
+Do you have the Solana command-line tools installed?
+```bash
+➜  example-helloworld git:(master) ✗ npm run build:program-rust
+
+> helloworld@0.0.1 build:program-rust /Volumes/Storage/DEV_LOCAL/Crypto/Solana/example-helloworld
+> cargo build-bpf --manifest-path=./src/program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store
+
+error: no such subcommand: `build-bpf`
+npm ERR! code ELIFECYCLE
+npm ERR! errno 101
+npm ERR! helloworld@0.0.1 build:program-rust: `cargo build-bpf --manifest-path=./src/program-rust/Cargo.toml --bpf-out-dir=dist/program && mv dist/program/solana_bpf_helloworld.so dist/program/helloworld.so && npm run clean:store`
+npm ERR! Exit status 101
+npm ERR!
+npm ERR! Failed at the helloworld@0.0.1 build:program-rust script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/gene/.npm/_logs/2021-01-08T16_59_10_813Z-debug.log
+➜  example-helloworld git:(master) ✗
+```
+noob questions welcome! I'm on v12 also, so that should be fine.  what command is failing?  It could be that you're running `npm run start` without a running node `npm run localnet:up` or without the program built.  if the rust program is an issue, you can try the c program
+Ah that makes sense. Confirmed that adding a lamport solves the problem!
+Thanks for providing a great reproducible example!  I believe this is working as designed.  Since the account you're adding has 0 lamports, it's getting cleaned up immediately.  You can see that any data passed in the account won't be in the instruction either.  If you add some lamports then the owner and data are assigned as expected.
+Incoming noob questions: What version of node is required for the hello-world example? I'm on `v12.16.2` atm. The rust example throws errors immediately but js debug output is shite and tells me nothing.
+I'm attempting to use ProgramTest and create an account that is owned by the program, but when I execute and test, the account owner is showing up as the system account. Any ideas?
+```rust
+// In test
+program_test.add_account(program_data_key, Account {
+            lamports: 0,
+            data: vec![],
+            owner: program_id,
+            executable: false,
+            rent_epoch: 0
+        });
+// In program
+if program_data_account.owner != program_id {
+        msg!("program_data_account ({}) not owned by program, actual: {}, expected: {}", program_data_account.key, program_data_account.owner, program_id);
+        return Err(ProgramError::InvalidAccountData);
+    }
+// Log
+// Program log: program_data_account (8opHzTAnfzRpPEx21XtnrVTX28YQuCpAjcn1PczScKh) not owned by program, actual: 11111111111111111111111111111111, expected: 4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM program_id: 4uQeVj5tqViQh7yWWGStvkEG1Zmhx6uasJtWCJziofM
+```
+More full Code: https://gist.github.com/wilwade/48cc78b7f7c38589f9fb941a2fe2ca3b#file-lib-rs-L73
+Or even a count of results returned by a query and not returning all data
+There are some mints that have a big amount of holders and there is no easy way to sync them over a RPC because RPC doesn't support pagination. Any suggestion how to do something like that?
+was wondering why it wasn't in my file
+ha thats new
+yeah but you'll need to roll your own based on `sol_try_find_program_address()` in `solana_sdk.h`
+can I do this in c as well?
+awesome thanks
+https://docs.rs/spl-associated-token-account/1.0.2/spl_associated_token_account/fn.get_associated_token_address.html will do it, you can invoke this from within a program context
+can someone help
+I am looking for docs on discovering the associated_token_account for a user address within a program
+hi
+Hi, <@213083996689661953>  I have a question about settlefunds. After I placed an order through api and get the transaction hash, when should I call settlefunds function, immediately or after checking what status? Thanks.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+We run BPF programs in a userspace VM within the `solana-validator` process, totally different than the VM used by the Linux kernel.  The GitHub project for the Solana BPF VM is https://github.com/solana-labs/rbpf#solana_rbpf
+Unrelated: still getting my head around BPF. So when I deploy a program is that program now just running in every validators kernel? Or is there some intermediate state it’s sitting in waiting instructions?
+You could just dump the keyfile. There might be a Solana command but I didn’t see one when I had a quick look of the docs.
+how can I export my private key on cli ?
+Ah ok, thank you!
+Perf still matters as there is a limit to the number of BPF instructions a program may execute.  But also faster programs are good for the blockchain overall.    C is way easier to support so we reached that way first
+I’m still learning at this low level. From my understanding perf isn’t really a concern for on chain programs (pre-compilation) since they’re compiled down to BPF, right? Am I mistaken? If that’s true I would wonder why support c at all? Is it just because of the amount of experienced systems level c developers and you kind of get it for free with BPF?
+I'd say pretty much the same reason for choosing Rust over C for any other mission critical software.  You could use a language that happily lets you overrun buffers and generate undefined behaviour, or not.  The performance between the two are really close, C programs are likely smaller but also more likely to have bugs.    But also C is a great proving ground for any VM, if you can run C then that's your base system and you can now start building up nicer things for devs to use
+Just out of curiosity what are the advantages of writing programs in c vs rust? Is there functionality parity between the two? And you should just choose what you’re most familiar with?
+has anyone done anything with zk-snarks; you encode a program as a polynomial or something, seems really complicated -- is this stuff difficult or plain impossible unless you have a phd in maths?
+^ ofc tyera is correct, but for growth dapp developers shouldn't need to run validators... but yea, we had this discussion in mb-validators already.
+Ah ok, Thanks <@!213083996689661953> , <@!585868308419444749> , <@!178068735054053376> & <@!445425471027544095> ,
+ Will check out the links provided and ask if any question comes up along the journey 🙂
+No, you don't need to run a validator to do this. But you may want to run a non-voting api node to ensure reliable RPC access
+and Do I need to run my app as one of the participating node in the network in order to achieve this, in other words, Do I need to be a validator or something... for this?
+You could copy and modify the spl-memo program: https://github.com/solana-labs/solana-program-library/blob/7a2ef3561ed72624783a4c15f788174bd3e820c0/memo/program/src/entrypoint.rs#L15
+and deploy
+Thanks <@!213083996689661953> , And what if I have data in lets say UTF-16 or UTF-32?
+You have some options, but if it would be sufficient for users to be able to read/confirm the data within a transaction, you probably don't need to mess with accounts (or the Config program) at all.
+If it's UTF-8 data, you could use the spl-memo program that Trent mentioned. All that program does is verify the data as UTF-8 on processing.
+[Pushed data shouldn't be deletable either]
+eventually data size pushed by my app would grow...(over the entire lifetime of my app's key)
+so basically pushing data. onto blockchain to  make it  immutable...
+but shouldn't be editable..
+it should be readable by all(that my app has published it there)
+It going to be  less than hundred bytes, but planning to. send data onto blockchain  2-3 times/second
+Does the data need to be readable in an account (in memory)? Does it need to be editable?
+How much data is it?  Could use the spl-memo program
+https://github.com/dfuse-io/solana-go cool
+is there any other way?
+I am confused whether I should really use config prorgram to  publish my data..
+https://dfuse.io/en/announcing-solana-library-for-go/
+Thanks <@!178068735054053376> & <@!585868308419444749>, 
+Will see If I could use those..
+Picking up from your message in the other channel... You probably want to use an SDK.  I think there's a third party Go wrapper, though I can't recall the name
+When I try sending above created Tx, I get the following error:
+    ``` code:-32602, message:io error: failed to fill whole buffer] ```
+
+Obviously, I'm doing something wrong, but don't know what..
+Hi Everyone,
+I've been struggling with sending out my first transaction to Solana. I would like to publish the data on Solana Blockchain to render it immutable. How should I do so?
+I know I need to send serialized Wire Transaction through RPC method "sendTransaction" but I can't quite figure out the exact ordering and content of a transaction
+I've read through https://docs.solana.com/developing/programming-model/transactions and collected tiny bits from wherever I could and 
+ Here is what I've done so  far:
+   1) Generated Key Pair
+   2) Requested Airdrops on the address i.e. base58.encode(myPubKey) //Devnet
+   3) Created a Serialized wire Transaction:
+        Tx fields order that I'm using to serialize:
+
+        
+```a) numRequiredSignatures,//using value "1" here (As there will  be  only me signing the tx)
+       b) numReadOnlySignedAccounts,//using 0 here
+       c) numReadOnlyUnsignedAccounts,//I think Config account is ReadOnly Unsigned account so using 1 here
+       d) accountAddressesCount,//using "2" here, ( myPubKey and Config1111111111111111111111111111111111111)
+       e) myPubKey,
+       f) base58.Decode("Config1111111111111111111111111111111111111"), 
+       g) base58.Decode(recentBlockHash), 
+       h) instructionsCount,//using 1 here because sending only 1 instruction
+       i) programIdIndex,// Using 1 here(Config account PK is at Index 1 above)
+       j) accountAddressesIndexesCount,//using 1 here, Count of Account Addresses Indexes for addresses  being passed to program
+       k) accountAddressIndex,//using 0(Index of myPubKey in addresses above)
+       l) dataLength,
+       m) data//data has byte "0" prepended onto it```
+
+
+   4) Sign the above created Tx 
+   5) Prepend the Signature to Tx 
+   6) prepend number of signatures to Tx (i.e. 1)
+   7) Encode tx to base64 string (Using optional param 'base64' when sending the request)
+Great, that was what I was looking for. Thank you
+thats how you connect an application to a wallet. If you want to build a wallet yourself, this is the code for the sollet.io wallet: https://github.com/project-serum/spl-token-wallet <@!616304377791119410>
+Ah, I see they have a wallet-adapter on their GitHub. Will look into it, thanks
+sollet.io
+I would like to create a webwallet for spl token. Is there specific sample code for this available?
+Only if you reset the account data fully back to zeros
+Hopefully simple question, but I cannot find it yet:
+Is it possible to transfer ownership of an account owned by program A to program B?
+ok got it thanks
+absolutely!  There isn't a special "oracle" account unfortunately, so you would need to reconstruct the swap curve based on its info, but it's totally doable
+Hi, is there anyone with experience with the Solana integration in Magic.link?
+is it possible to calculate the "price" of an asset within a program using the swap as an oracle?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

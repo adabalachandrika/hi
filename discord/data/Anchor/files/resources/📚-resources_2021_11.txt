@@ -1,0 +1,143 @@
+Not sure if this exists already, but I made a website that lets you find PDAs https://www.pdafinder.com/. Can be helpful if you're trying to understand how some code works and want a closer look at the PDAs
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Bug bounty is up for anybody interested! https://docs.drift.trade/bug-bounty
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks <@!327282414118240257>. Hey <@!888716665947312148>
+https://www.notion.so/Debugging-Custom-Anchor-Errors-b8540dd418c44a4e939ab17c56a3fd3b
+found this, very helpful >:)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Cooool! Thanks a lot <@!637707515328725002>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+little thingy i put together
+
+`init`
+doc here: https://github.com/project-serum/anchor/blob/master/lang/derive/accounts/src/lib.rs#L42
+parsed here: https://github.com/project-serum/anchor/blob/58c00770cbf39bc7676a43d79791d06c88637a59/lang/syn/src/parser/accounts/constraints.rs#L63
+The `init` attribute will throw a program error in the program logs if the account has already been created before, like such:
+`'Allocate: account Address { address: EwFGaaBvD7hT7afNxdfNcWZdFH14PAL9aBgAdnVBvebM, base: None } already in use'`
+
+`init_if_needed`
+doc here: https://github.com/project-serum/anchor/blob/master/lang/derive/accounts/src/lib.rs#L43
+parses here: https://github.com/project-serum/anchor/blob/58c00770cbf39bc7676a43d79791d06c88637a59/lang/syn/src/parser/accounts/constraints.rs#L67
+PR to document: https://github.com/project-serum/anchor/pull/1023
+The `init_if_needed` attribute will NOT throw a program error in the program logs if the account has already been created before, it will simply skip creating it.
+beautiful
+took me a long time to find this info since it's in a whole different crate and such, but this doc describes all the account constraints like `init`, `space`, `payer`, etc
+https://docs.rs/anchor-derive-accounts/0.18.2/anchor_derive_accounts/derive.Accounts.html
+source:
+https://github.com/project-serum/anchor/blob/master/lang/derive/accounts/src/lib.rs
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Oh sorry that’s where I thought I was lol
+Nice!
+Mine as well https://youtu.be/cvW8EwGHw8U
+Please move this to another channel. #development or <#889702325231427584> would be appropriate.
+Error 162: 8 byte discriminator did not match what was expected
+
+Have any of you good gents seen this error before?
+My talk on toxic anchor maximalism is up!
+https://youtu.be/725ddOvfWjk
+Hey guys I am working on a project, where I have to  decompile Magiceden transactions so I could try and execute them on chain . Do you guys have any pointers about how I could make my decompiling of their code easier? Right now I am stuck using solscan and comparing code and I am a bit stuck as to how to make the process more efficient. Any help would be appreciated
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+this was always recommended as best practice but i guess maybe people have forgotten this somehow
+https://twitter.com/Henry_E__/status/1461821861701074946?s=20
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hi 👋 I've just released a series of article on how to create a Solana dApp from scratch using Anchor. I hope this helps someone. 🍀 
+https://lorisleiva.com/create-a-solana-dapp-from-scratch
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Resources on how to solve the problem of refactoring
+Best to discuss in another channel though
+The cranker runs settle as well as consume events. It's a solution particular to serum, I don't know if it applies to your design
+Great talk! Curious about the settle button at the end. I am also developing something like a DEX, and I am also to planing the users to "claim" their funds on closed offers. You said you developed a way to avoid that? If I can ask, how do you do it?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Any resources on creating a single-sided farming pool program with anchor?
+Great. I'll go through it. Nice Effort Man 👏🏻
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://github.com/QuarryProtocol/quarry
+check out quarry protocol
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+It can happen to token accounts as well
+It's as simple as that
+Otherwise someone can steal your account
+Don't create accounts and assign them to programs without also initializing the data on them
+It's an issue with Solana as a whole
+No
+so this issue he's talking about isn't really about Solana as a whole, but more about interacting with Serum
+A program has full control over all accounts it owns. It's just a matter of what functions in the program are designed to do
+Because that's how serum open orders accounts work
+why does initializing the data give one the authority to shut it down?
+You initialize the account with data and then shut it down
+how does not having data in an account allow them to withdraw the rent?
+serum users were doing a lot of the first step and very little of the second step. So there was a bunch of empty accounts laying around that anyone could take over and withdraw the rent from
+there are two steps to setting up an program account
+- creating the account using system program
+- initializing the account by putting data in it
+can you explain this maybe? Not sure what he means by "also running an init function for that program"?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+i believe you i just dont understand why
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hi <@!630375665442488339> nice write-up 👍🏻
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thx
+Whoops, here's another one: https://discord.gg/z9aYK7aa
+is the study group still on? the invitation expired
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://www.youtube.com/watch?v=oD1umX_DnUw
+Programming Solana Smart Contracts | Hello World Anchor Tutorial
+
+https://www.youtube.com/watch?v=i6Ycr5nhjH8
+Programming Solana Smart Contracts | Intermediate Anchor Tutorial
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+We're going to be releasing a bug bounty soon as well
+Hey drift just released it's anchor program. We built an on-chain perpetual swap program. Sharing here for people who might find it a useful example: https://github.com/drift-labs/protocol-v1/tree/master/programs/clearing_house/src
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

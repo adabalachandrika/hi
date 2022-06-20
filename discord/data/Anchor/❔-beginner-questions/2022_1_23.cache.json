@@ -1,0 +1,2723 @@
+{
+    "total_results": 81,
+    "messages": [
+        [
+            {
+                "id": "934874241998938153",
+                "type": 0,
+                "content": "the multi-account approach seems potentially obnoxious because you have to pass all of them into the invocations; or know which are going to be read",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "528010426362101771",
+                    "username": "gdoteofeof",
+                    "avatar": "181b133237d596b95e1534e5d437d3b4",
+                    "discriminator": "4206",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T18:16:28.416000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934873694466093117",
+                "type": 0,
+                "content": "ohh.. nm i wasn't quite groking what David what saying.  My example works if your data can fit in a single account; but I hadn't considered that multi account approach.  that's pretty interesting",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "528010426362101771",
+                    "username": "gdoteofeof",
+                    "avatar": "181b133237d596b95e1534e5d437d3b4",
+                    "discriminator": "4206",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T18:14:17.874000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934873112275738747",
+                "type": 19,
+                "content": "Whether or not it is a PDA isn't really relevant.  For a FIFO or any variable length data; you can use a fixed length buffer.  https://github.com/gdoteof/solana-gamba/blob/master/programs/gamba/src/state/epoch.rs#L16\n\nYour application logic needs to ensure you don't let more stuff get written to the buffer than space you've allocated for it",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "528010426362101771",
+                    "username": "gdoteofeof",
+                    "avatar": "181b133237d596b95e1534e5d437d3b4",
+                    "discriminator": "4206",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "832140329301311488",
+                        "username": "zule",
+                        "avatar": null,
+                        "discriminator": "4581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T18:11:59.069000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934862498052571196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934865085057347636",
+                "type": 0,
+                "content": "so you can have the datastructure here, in the list you can e.g. track state with a \"head\" and \"tail\" variable, and append to the tail, and pop from the head (or vice versa)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:40:05.231000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934864941616349205",
+                "type": 19,
+                "content": "i mean a FIFO is a more specific version of a list, right?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "832140329301311488",
+                        "username": "zule",
+                        "avatar": null,
+                        "discriminator": "4581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:39:31.032000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934862498052571196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934862498052571196",
+                "type": 19,
+                "content": "It does makes sense to me but how can I implement a queue (fifo) using this ? A single PDA account which keeps track of head and n PDAs accounts which contains the main properties ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "832140329301311488",
+                    "username": "zule",
+                    "avatar": null,
+                    "discriminator": "4581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:29:48.441000+00:00",
+                "edited_timestamp": "2022-01-23T17:30:29.946000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934860766283173888"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934860818510659715",
+                "type": 0,
+                "content": "if you know the size, just use an array, much easier haha",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:23:08.007000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934860766283173888",
+                "type": 19,
+                "content": "if it's something like a vector (i.e. length is not know), often ppl do this:\n``` \n#[account]\npub struct List {\n    pub head: u32,\n}\n``` \nwhich keeps track of the length of the list and then each element has it's own account\n```\n#[account]\npub struct ListElement {\n    pub property1: Pubkey,\n    pub property2: Pubkey,\n    ...\n}\n``` \n\n\nthen you would create a PDA in such a way to include this head, for example like this:\n```\nconst [listElementAddres, listElementBump] = await PublicKey.findProgramAddress(\n[SOME_GENERIC_SEED, listPosition],\n    programId\n) \n```\n\ndoes that make sense?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "832140329301311488",
+                        "username": "zule",
+                        "avatar": null,
+                        "discriminator": "4581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:22:55.555000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934855885518413895"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934856413975564350",
+                "type": 19,
+                "content": "allright, thanks for looking into it anyway! If I find the problem I will post it here",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "932935427491524608",
+                    "username": "carlijnvandeweijer",
+                    "avatar": "33f2f49534ca4df7b611448684de32ef",
+                    "discriminator": "1581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:05:37.884000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934856216755208252"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934856216755208252",
+                "type": 19,
+                "content": "only guess is that your local and deployed frontend are not the same. other than that, idk myself",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "932935427491524608",
+                        "username": "carlijnvandeweijer",
+                        "avatar": "33f2f49534ca4df7b611448684de32ef",
+                        "discriminator": "1581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:04:50.863000+00:00",
+                "edited_timestamp": "2022-01-23T17:04:56.597000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934850681863565352"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934855885518413895",
+                "type": 19,
+                "content": "No I haven't do you have any repo link that I should look at ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "832140329301311488",
+                    "username": "zule",
+                    "avatar": null,
+                    "discriminator": "4581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "350632015852208140",
+                        "username": "David | qPools",
+                        "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                        "discriminator": "3335",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T17:03:31.890000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934122284241780857"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934850681863565352",
+                "type": 19,
+                "content": "local is also targetting devnet",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "932935427491524608",
+                    "username": "carlijnvandeweijer",
+                    "avatar": "33f2f49534ca4df7b611448684de32ef",
+                    "discriminator": "1581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T16:42:51.242000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934850619313885194"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934850619313885194",
+                "type": 19,
+                "content": "when you say local, are you saying that it works fine on localnet or is your local frontend version also targeting devnet?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T16:42:36.329000+00:00",
+                "edited_timestamp": "2022-01-23T16:42:50.351000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934850496341090304"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934850496341090304",
+                "type": 19,
+                "content": "oke... can you give me a little bit of guidance on how to fix it? locally it works fine.. just the deployed version is the problem",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "932935427491524608",
+                    "username": "carlijnvandeweijer",
+                    "avatar": "33f2f49534ca4df7b611448684de32ef",
+                    "discriminator": "1581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T16:42:07.010000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934849079974957096"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934849079974957096",
+                "type": 19,
+                "content": "This means youre trying to call a function which does not exist in the program",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "932935427491524608",
+                        "username": "carlijnvandeweijer",
+                        "avatar": "33f2f49534ca4df7b611448684de32ef",
+                        "discriminator": "1581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T16:36:29.322000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934844396883558451"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934844396883558451",
+                "type": 0,
+                "content": "I looked through old questions like mine but I can't figure out a solution based on answers that were given, so I'm sorry if this is a double question.. \n\nI'm running into this error when I try to \"add a goal\":\n```Transaction simulation failed: Error processing Instruction 0: custom program error: 0x65 \n    Program BYhgFTXaWGh2oxYRtQ7Xc4CzT7PWgZNwhe3us73HwRDz invoke [1]\n    Program log: Custom program error: 0x65\n    Program BYhgFTXaWGh2oxYRtQ7Xc4CzT7PWgZNwhe3us73HwRDz consumed 2150 of 200000 compute units\n    Program BYhgFTXaWGh2oxYRtQ7Xc4CzT7PWgZNwhe3us73HwRDz failed: custom program error: 0x65```\n```Error: 101: Fallback functions are not supported\n    at Function.parse```\n\nI have an Anchor project deployed to devnet. \nOn my **local frontend everything is working perfectly fine**, but on my deployed frontend (netlify) I get these errors.. both my local frontend and my deployed frontend target \"devnet\"\nIf you want to check out the code my anchor project is at https://github.com/carlijnweijer/buildspace-solana-web3\nand my frontend is at https://github.com/carlijnweijer/buildspace-solana-web3-frontend",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "932935427491524608",
+                    "username": "carlijnvandeweijer",
+                    "avatar": "33f2f49534ca4df7b611448684de32ef",
+                    "discriminator": "1581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T16:17:52.786000+00:00",
+                "edited_timestamp": "2022-01-23T18:02:11.246000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934822957308579910",
+                "type": 0,
+                "content": "D:\\Worksapce>anchor init myepicproject2 --javascript\nError: yarn install failed: program not found\nsomeone have meet this error ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "918434966247964673",
+                    "username": "bingo",
+                    "avatar": "45454c9543376b1e123851d37d8170a1",
+                    "discriminator": "5822",
+                    "public_flags": 1048576
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:52:41.193000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934822665007542352",
+                "type": 19,
+                "content": "Really good tutorial here that goes into all the details: https://lorisleiva.com/create-a-solana-dapp-from-scratch",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "732815411808174111",
+                    "username": "Magnum6",
+                    "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                    "discriminator": "6523",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://lorisleiva.com/create-a-solana-dapp-from-scratch",
+                        "title": "Create a Solana dApp from scratch",
+                        "description": "In this series, we'll implement a simplified version of Twitter as a Solana dApp (decentralised application). We'll write our own program and use it in a custom VueJS app.",
+                        "color": 16777215,
+                        "reference_id": "934822665007542352",
+                        "provider": {
+                            "name": "Loris"
+                        },
+                        "thumbnail": {
+                            "url": "https://lorisleiva.com/img/asset/YXNzZXRzL2FydGljbGVzLzIwMjEvMTExNi1zb2xhbmEtc2VyaWVzL2NvdmVyLTAuanBn?p=seo_pro_og&s=bc4d1ec21fe0bc2e40078ef33f77191f",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/wLlM-ex0BRe0X1dXpUl9iN_c9K33nuoO6EZzC1RDpNw/%3Fp%3Dseo_pro_og%26s%3Dbc4d1ec21fe0bc2e40078ef33f77191f/https/lorisleiva.com/img/asset/YXNzZXRzL2FydGljbGVzLzIwMjEvMTExNi1zb2xhbmEtc2VyaWVzL2NvdmVyLTAuanBn",
+                            "width": 1200,
+                            "height": 630
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:51:31.503000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934822553942372412"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934822553942372412",
+                "type": 19,
+                "content": "```program.rpc.initialize(yourObject.name, yourObject.age, contextAccounts)```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "732815411808174111",
+                    "username": "Magnum6",
+                    "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                    "discriminator": "6523",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "660482999917346868",
+                        "username": "reedgf2",
+                        "avatar": null,
+                        "discriminator": "9922",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:51:05.023000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934821930920472643"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934821930920472643",
+                "type": 19,
+                "content": "Got it , thank you. IF we are talking about JS part, how can I pass to initialize function? as {name : \"test\", age : 20}?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "660482999917346868",
+                    "username": "reedgf2",
+                    "avatar": null,
+                    "discriminator": "9922",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "732815411808174111",
+                        "username": "Magnum6",
+                        "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                        "discriminator": "6523",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:48:36.483000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934821503562813510"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934821503562813510",
+                "type": 19,
+                "content": "You'd have to pass them as separate variables as anchor doesn't support objects (yet). ```pub fn initialize(ctx: Context<Initialize>, name: String, age: i64)```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "732815411808174111",
+                    "username": "Magnum6",
+                    "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                    "discriminator": "6523",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "660482999917346868",
+                        "username": "reedgf2",
+                        "avatar": null,
+                        "discriminator": "9922",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:46:54.593000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934805358231293962"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934820111410397214",
+                "type": 0,
+                "content": "also any places where i can read more on the space part? I don't now how much space I should gives to the program",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "934820110886117406",
+                        "filename": "unknown.png",
+                        "size": 20939,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934820110886117406/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934820110886117406/unknown.png",
+                        "width": 408,
+                        "height": 102,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:41:22.678000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934819934486269992",
+                "type": 19,
+                "content": "Thank you.. is Vector of Tuple something that is supported in Solana Program but just not with Anchor?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "350632015852208140",
+                        "username": "David | qPools",
+                        "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                        "discriminator": "3335",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:40:40.496000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934816656302166048"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934819676750499910",
+                "type": 0,
+                "content": "someone have meet this error ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "918434966247964673",
+                    "username": "bingo",
+                    "avatar": "45454c9543376b1e123851d37d8170a1",
+                    "discriminator": "5822",
+                    "public_flags": 1048576
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:39:39.047000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934819394343813210",
+                "type": 0,
+                "content": "D:\\Worksapce>anchor init myepicproject2 --javascript\nError: yarn install failed: program not found\nwhat can i do for this ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "918434966247964673",
+                    "username": "bingo",
+                    "avatar": "45454c9543376b1e123851d37d8170a1",
+                    "discriminator": "5822",
+                    "public_flags": 1048576
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:38:31.716000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934819263447973928",
+                "type": 19,
+                "content": "anyone?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "660482999917346868",
+                    "username": "reedgf2",
+                    "avatar": null,
+                    "discriminator": "9922",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:38:00.508000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934805358231293962"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934816656302166048",
+                "type": 19,
+                "content": "I am not sure anymore if Vector works actually. there's been some questions before, im not sure if it worked in the end. Generally, I would try to write it in a different way as anchor is quite fragile when it comes to more complex data-types",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "490581421778534400",
+                        "username": "aburi karei",
+                        "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                        "discriminator": "1526",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:27:38.916000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934816412646653972"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934816412646653972",
+                "type": 19,
+                "content": "i followed the anchor tutorial and installed solana-cli 1.9.4 and anchor-cli 0.20.1, which version would support vector of tuple?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "350632015852208140",
+                        "username": "David | qPools",
+                        "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                        "discriminator": "3335",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:26:40.824000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934815625191231538"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934815625191231538",
+                "type": 19,
+                "content": "hmm depends on the version, i would definitely go with array if thats an option",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "490581421778534400",
+                        "username": "aburi karei",
+                        "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                        "discriminator": "1526",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:23:33.080000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934814616381436014"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934814616381436014",
+                "type": 0,
+                "content": "status is giving `IdlError: Type not found: {\"type\":{\"defined\":\"(String, u16)\"}}` when i `anchor test`... i guess Vector of tuple isn't supported?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "934814612442992701",
+                        "filename": "unknown.png",
+                        "size": 6146,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934814612442992701/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934814612442992701/unknown.png",
+                        "width": 295,
+                        "height": 29,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:19:32.561000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934812596350103562",
+                "type": 0,
+                "content": "or perhaps from a different angle, assuming I have a bunch of liquidity-providing positions, how would you calculate TVL?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:11:30.948000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934810360026910800",
+                "type": 0,
+                "content": "I guess basically my question boils down to: is there a way to fetch a data-account, without providing it to the Account-context?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:02:37.767000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934810158901641257",
+                "type": 0,
+                "content": "is there a way to traverse a list on-chain? \n\ni.e. a list that is implemented in a \"anchor\"'y way, i.e. you have one struct that is the positionList which records how many elements there are in total, and another struct, that contains the actual list-element information?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T14:01:49.815000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934808151998476298",
+                "type": 0,
+                "content": "\ud83d\ude4f",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T13:53:51.332000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934807989385330718",
+                "type": 0,
+                "content": "Hi all, I have 2 questions I am trying to run `anchor test` but it gave a `IdlError: Type not found: {\"type\":{\"defined\":\"Address\"}}`..... this is because I created the type alias `type Address = String;` and i suspect the IDL didn't map Address back to String... \n\n1. is it possible to use type alias when writing solana program? \n2. is it possible to use HashMap as I am having the same issue with HashMap... many people recommend using PDA but I am basically building a round-based game and so would simply like to store the result of the game like HashMap<RoundNumber, Winner>...",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "490581421778534400",
+                    "username": "aburi karei",
+                    "avatar": "963f8ed9727bc9b1cbbf912dcae2aaac",
+                    "discriminator": "1526",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T13:53:12.562000+00:00",
+                "edited_timestamp": "2022-01-23T13:53:24.490000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934805513328287784",
+                "type": 0,
+                "content": "For example \"Human {name: String, age: integer}\"",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "660482999917346868",
+                    "username": "reedgf2",
+                    "avatar": null,
+                    "discriminator": "9922",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T13:43:22.224000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934805358231293962",
+                "type": 0,
+                "content": "Can I pass here some \"complex\" types - `pub fn initialize(ctx: Context<Initialize>, data: String)` instead of String?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "660482999917346868",
+                    "username": "reedgf2",
+                    "avatar": null,
+                    "discriminator": "9922",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T13:42:45.246000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934805187959341147",
+                "type": 0,
+                "content": "Hey, folks. Currently trying to save simple object (several field) using anchor, but can't rly understand how I can pass this object",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "660482999917346868",
+                    "username": "reedgf2",
+                    "avatar": null,
+                    "discriminator": "9922",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T13:42:04.650000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934783237287444510",
+                "type": 19,
+                "content": "oh so that is default in the ctx . Thanks",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "919838214783635546",
+                    "username": "kgohil",
+                    "avatar": null,
+                    "discriminator": "1622",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "486637175820124201",
+                        "username": "fitzmode",
+                        "avatar": "59fdee0696d864084f764d31f329d4b5",
+                        "discriminator": "6531",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T12:14:51.202000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934783063806853151"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934783063806853151",
+                "type": 19,
+                "content": "Use `ctx.program_id`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "486637175820124201",
+                    "username": "fitzmode",
+                    "avatar": "59fdee0696d864084f764d31f329d4b5",
+                    "discriminator": "6531",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "919838214783635546",
+                        "username": "kgohil",
+                        "avatar": null,
+                        "discriminator": "1622",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T12:14:09.841000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934782177361682493"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934782177361682493",
+                "type": 0,
+                "content": "How can  use program id of Current program in my rust code? I am creating account from my initialize method and I need to provide program id which is from current program. One option is I can pass from client as parameter but I thought program id we already defined by declareid macro so somehow we can refer.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "919838214783635546",
+                    "username": "kgohil",
+                    "avatar": null,
+                    "discriminator": "1622",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T12:10:38.496000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934751293543706675",
+                "type": 0,
+                "content": "Ubuntu 20.04.\nWhat is could  be the problem? I installed everything i should have installed",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "699311357308174416",
+                    "username": "Programming and Hacking",
+                    "avatar": "db0c10ce990c09a13d333fcb22d035db",
+                    "discriminator": "3586",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "934751292914556938",
+                        "filename": "Kepernyofelvetel_100.png",
+                        "size": 139561,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934751292914556938/Kepernyofelvetel_100.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934751292914556938/Kepernyofelvetel_100.png",
+                        "width": 1920,
+                        "height": 1080,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T10:07:55.220000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934740370921779210",
+                "type": 19,
+                "content": "found it ty",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "171442868190314497",
+                    "username": "poprer656sad",
+                    "avatar": null,
+                    "discriminator": "4566",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "194280119710253068",
+                        "username": "MinatoTW",
+                        "avatar": "558459eb7c113a70373eb53b0218d687",
+                        "discriminator": "9698",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T09:24:31.064000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934719371828396062"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934728601826377779",
+                "type": 0,
+                "content": "Hi, <@!831450660146642974>, Are you enjoying a good weekend? Please help me!\ud83d\ude4f  I am facing same error now. https://discord.com/channels/889577356681945098/889702325231427584/934596708631973899",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "916187801115037728",
+                    "username": "blockchaincrazy95",
+                    "avatar": "09eb27778b7201fec890e3a3e2c35d7d",
+                    "discriminator": "7316",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T08:37:45.093000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934728501561532437",
+                "type": 19,
+                "content": "https://github.com/Kriptikz/anchor-pda-transfer-sol",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "175770682599276544",
+                    "username": "Kriptikz",
+                    "avatar": "f99a6b232f5b1255846cae6580a24ada",
+                    "discriminator": "4490",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/Kriptikz/anchor-pda-transfer-sol",
+                        "title": "GitHub - Kriptikz/anchor-pda-transfer-sol",
+                        "description": "Contribute to Kriptikz/anchor-pda-transfer-sol development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "934728501561532437",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/e7247072d168ceb792a9971fae49150b1434a4db98c32b9a581053b9d09955e2/Kriptikz/anchor-pda-transfer-sol",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/z5x7mXg4jp4d27NrL1cxTQKDHxzd-IjyUdPTtTK1lGM/https/opengraph.githubassets.com/e7247072d168ceb792a9971fae49150b1434a4db98c32b9a581053b9d09955e2/Kriptikz/anchor-pda-transfer-sol",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "737915190045311067",
+                        "username": "Hi_I'mJohn",
+                        "avatar": "ae9c37d449836e55aead84d00c4633aa",
+                        "discriminator": "2906",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T08:37:21.188000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934586725848711289"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934719371828396062",
+                "type": 19,
+                "content": "they should be in the transaction logs I think",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "194280119710253068",
+                    "username": "MinatoTW",
+                    "avatar": "558459eb7c113a70373eb53b0218d687",
+                    "discriminator": "9698",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "171442868190314497",
+                        "username": "poprer656sad",
+                        "avatar": null,
+                        "discriminator": "4566",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T08:01:04.490000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934705297782616074"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934705297782616074",
+                "type": 0,
+                "content": "is there a way to access the bpf logs from frontend/react?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "171442868190314497",
+                    "username": "poprer656sad",
+                    "avatar": null,
+                    "discriminator": "4566",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T07:05:08.976000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934696997586370600",
+                "type": 0,
+                "content": "Looking for some help. I have the base of a very basic voting program. I want to require SPL tokens to be used for voting. Anyone willing to guide me a bit or point me in the right direction. ( I'm used to solidity and coming to solana is a bit of a system shock \ud83d\ude42 )",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "351043148685770752",
+                    "username": "OCybress.x",
+                    "avatar": "b076f053de7bb8e65d9f2e2eb6f9a912",
+                    "discriminator": "0358",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T06:32:10.055000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934673100224753674",
+                "type": 0,
+                "content": "",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "150033239493312512",
+                    "username": "GageBachik",
+                    "avatar": "4d2351261eab249daf5ef8b93fc4f1c5",
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "934673099704635472",
+                        "filename": "unknown.png",
+                        "size": 26498,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934673099704635472/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934673099704635472/unknown.png",
+                        "width": 1066,
+                        "height": 170,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T04:57:12.480000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934673096953200640",
+                "type": 0,
+                "content": "anyone else getting this trying to deploy on mainnet right now?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "150033239493312512",
+                    "username": "GageBachik",
+                    "avatar": "4d2351261eab249daf5ef8b93fc4f1c5",
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T04:57:11.700000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934660604709449758",
+                "type": 0,
+                "content": "I am facing this problem",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "789893696627671050",
+                    "username": "sohom",
+                    "avatar": "895237d8bd082d188b58c30d2b44fcb3",
+                    "discriminator": "8314",
+                    "public_flags": 128
+                },
+                "attachments": [
+                    {
+                        "id": "934660603962855504",
+                        "filename": "Screenshot_from_2022-01-23_09-37-01.png",
+                        "size": 148808,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934660603962855504/Screenshot_from_2022-01-23_09-37-01.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934660603962855504/Screenshot_from_2022-01-23_09-37-01.png",
+                        "width": 1917,
+                        "height": 772,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T04:07:33.317000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934655974210420747",
+                "type": 0,
+                "content": "running `anchor init [name]` is recently returning `Error: File exists (os error 17)` , anyone run into this before?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "851910655334023168",
+                    "username": "0xMert",
+                    "avatar": "d4e5ea42ec7b943c229827e35c4b482d",
+                    "discriminator": "1807",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T03:49:09.320000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934655845009076274",
+                "type": 0,
+                "content": "gm",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "851910655334023168",
+                    "username": "0xMert",
+                    "avatar": "d4e5ea42ec7b943c229827e35c4b482d",
+                    "discriminator": "1807",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T03:48:38.516000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934604260040146984",
+                "type": 19,
+                "content": "Wow the explanations on the tutorial are really good, and the diagrams are great. Thanks!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "737915190045311067",
+                    "username": "Hi_I'mJohn",
+                    "avatar": "ae9c37d449836e55aead84d00c4633aa",
+                    "discriminator": "2906",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "732815411808174111",
+                        "username": "Magnum6",
+                        "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                        "discriminator": "6523",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T00:23:39.701000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934463631402369034"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934603925389185064",
+                "type": 0,
+                "content": "How do I run tests in Dev Net using Dev Net's USDC?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-23T00:22:19.914000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934596911816659025",
+                "type": 0,
+                "content": "Do I need to pass in the mint_authority account or something?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "293578924901007361",
+                    "username": "bluemoose",
+                    "avatar": "d6e8953a464cbe02f412a639fa1bf2b5",
+                    "discriminator": "9396",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T23:54:27.748000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934596803301613659",
+                "type": 0,
+                "content": "this is my struct\n```\n\n#[derive(Accounts)]\npub struct Deposit<'info> {\n    #[account(mut)]\n    pub mint: Account<'info, token::Mint>,\n\n    #[account(mut)]\n    pub wallet: Signer<'info>,\n\n    #[account(init_if_needed, payer = wallet, associated_token::mint = mint, associated_token::authority = wallet)]\n    pub vault: Account<'info, token::TokenAccount>,\n\n    pub token_program: Program<'info, token::Token>,\n    pub system_program: Program<'info, System>,\n    pub associated_token_program: Program<'info, associated_token::AssociatedToken>,\n    pub rent: Sysvar<'info, Rent>,\n}\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "293578924901007361",
+                    "username": "bluemoose",
+                    "avatar": "d6e8953a464cbe02f412a639fa1bf2b5",
+                    "discriminator": "9396",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T23:54:01.876000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934596708631973899",
+                "type": 0,
+                "content": "Im trying to create an ATA for wSOL, I keep getting this err and im not sure why\n\n```\nProgram ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL invoke [2]\n    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 1953 of 190391 compute units\n    Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL failed: insufficient account keys for instruction\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "293578924901007361",
+                    "username": "bluemoose",
+                    "avatar": "d6e8953a464cbe02f412a639fa1bf2b5",
+                    "discriminator": "9396",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T23:53:39.305000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934586725848711289",
+                "type": 0,
+                "content": "Can anyone link any additional references to anchor programs that transfer native SOL in the instructions?\nI've only been able to find one, the todo list with rewards",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "737915190045311067",
+                    "username": "Hi_I'mJohn",
+                    "avatar": "ae9c37d449836e55aead84d00c4633aa",
+                    "discriminator": "2906",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T23:13:59.224000+00:00",
+                "edited_timestamp": "2022-01-22T23:14:19.752000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934580216997761074",
+                "type": 0,
+                "content": "Great to know; thanks guys!!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912046857000194158",
+                    "username": "yeetle",
+                    "avatar": "12968c45dd881dcb7c1307fa84411926",
+                    "discriminator": "2204",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:48:07.393000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934580068695539802",
+                "type": 19,
+                "content": "No, only the first deploy actually costs that much\u2014although I think annoyingly you need to have that amount in your account at the start of subsequent deploys, even though it won't really get spent",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "912046857000194158",
+                        "username": "yeetle",
+                        "avatar": "12968c45dd881dcb7c1307fa84411926",
+                        "discriminator": "2204",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:47:32.035000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934573206663233656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934578111352275014",
+                "type": 0,
+                "content": "But also you don\u2019t pay that cost when upgrading a program",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:39:45.368000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934577056317050930",
+                "type": 19,
+                "content": "It gets cheaper every minute!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "912046857000194158",
+                        "username": "yeetle",
+                        "avatar": "12968c45dd881dcb7c1307fa84411926",
+                        "discriminator": "2204",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:35:33.828000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934573206663233656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934573359667216474",
+                "type": 19,
+                "content": "Yeah i kept airdropping but it wasnt working. Didnt realize i needed like 5 sol to deploy",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912046857000194158",
+                    "username": "yeetle",
+                    "avatar": "12968c45dd881dcb7c1307fa84411926",
+                    "discriminator": "2204",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:20:52.478000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934565948025880666"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934573206663233656",
+                "type": 19,
+                "content": "Every time I call \u201canchor deploy\u201d, will it cost 5-6 SOL on mainnet? Sounds very expensive",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912046857000194158",
+                    "username": "yeetle",
+                    "avatar": "12968c45dd881dcb7c1307fa84411926",
+                    "discriminator": "2204",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:20:15.999000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934565937825316904"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934570804367208468",
+                "type": 19,
+                "content": "`struct_one` is intended to exist in a 'one to many' relationship with `struct_two`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "164924128065748993",
+                    "username": "griis",
+                    "avatar": "75962711658482f1cc7e4dd29b8f94f6",
+                    "discriminator": "7837",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:10:43.247000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934570632111345765"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934570632111345765",
+                "type": 0,
+                "content": "is it possible to initialize multiple accounts in one program, and then change data between them?\nI have `FooProgram` that has methods `initialize_struct_one` and `initialize_struct_two`\n `struct_one` stands alone, and `struct_two` is seeded with `struct_one`.\n`initialize_struct_one` initializes and integer to `0`, and `initialize_struct_two` increments the integer in `struct_one`. \n\nEven though these are both in the same program, it seems the compiler is treating it as a CPI, and I am getting the error `Cross-program invocation with unauthorized signer or writable account`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "164924128065748993",
+                    "username": "griis",
+                    "avatar": "75962711658482f1cc7e4dd29b8f94f6",
+                    "discriminator": "7837",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T22:10:02.178000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934565948025880666",
+                "type": 19,
+                "content": "it says in the error message\n`Error: Account PUBLIC_KEY has insufficient funds for spend (1.84766424 SOL) + fee (0.00133 SOL)`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "925167601590616174",
+                        "username": "apollo",
+                        "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                        "discriminator": "2312",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:51:25.405000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934560240228266004"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934565937825316904",
+                "type": 19,
+                "content": "Something like 1.4 sol / 100kb of deployed code",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "925167601590616174",
+                        "username": "apollo",
+                        "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                        "discriminator": "2312",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:51:22.973000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934560240228266004"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934560580130471947",
+                "type": 0,
+                "content": "I think depends on the size of your contract. So maybe airdrop 5 or 6 SOL",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "486637175820124201",
+                    "username": "fitzmode",
+                    "avatar": "59fdee0696d864084f764d31f329d4b5",
+                    "discriminator": "6531",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:30:05.599000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934560240228266004",
+                "type": 19,
+                "content": "howmuch SOL do i need to just deploy a txn?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "486637175820124201",
+                        "username": "fitzmode",
+                        "avatar": "59fdee0696d864084f764d31f329d4b5",
+                        "discriminator": "6531",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:28:44.560000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934559008759631892"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934559008759631892",
+                "type": 0,
+                "content": "Use `solana airdrop 1`. Max airdrop is 1 SOL at a time so might need to do it a few times.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "486637175820124201",
+                    "username": "fitzmode",
+                    "avatar": "59fdee0696d864084f764d31f329d4b5",
+                    "discriminator": "6531",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:23:50.955000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934558490930843658",
+                "type": 19,
+                "content": "Are you deploying to `devnet` ? You'll need to airdrop more `SOL` into your wallet.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "486637175820124201",
+                    "username": "fitzmode",
+                    "avatar": "59fdee0696d864084f764d31f329d4b5",
+                    "discriminator": "6531",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "925167601590616174",
+                        "username": "apollo",
+                        "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                        "discriminator": "2312",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:21:47.495000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934547296597729352"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934553459380867103",
+                "type": 0,
+                "content": "Based on a simple counter program below, is it correct that one `user/authority` will have only one `BaseAccount`  account? \n\nIf the same `authority` initializes a second account, can you still reference the first account? If so how? Would I need to keep a reference of the account off-chain somehow and pass it in to an instruction to find that account?\n\n\n```\nuse anchor_lang::prelude::*;\n\ndeclare_id!(\"Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS\");\n\n#[program]\npub mod p0001 {\n    use super::*;\n    pub fn create(ctx: Context<Create>) -> ProgramResult {\n        let base_account = &mut ctx.accounts.base_account;\n        base_account.count = 0;\n        Ok(())\n    }\n\n    pub fn increment(ctx: Context<Increment>) -> ProgramResult {\n        let base_account = &mut ctx.accounts.base_account;\n        base_account.count += 1;\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\npub struct Create<'info> {\n    #[account(init, payer=user, space= 8 + 8)]\n    pub base_account: Account<'info, BaseAccount>,\n    #[account(mut)]\n    pub user: Signer<'info>,\n    pub system_program: Program<'info, System>,\n}\n\n#[derive(Accounts)]\npub struct Increment<'info> {\n    #[account(mut)]\n    pub base_account: Account<'info, BaseAccount>,\n}\n\n#[account]\npub struct BaseAccount {\n    pub count: u64,\n}\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "486637175820124201",
+                    "username": "fitzmode",
+                    "avatar": "59fdee0696d864084f764d31f329d4b5",
+                    "discriminator": "6531",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T21:01:47.880000+00:00",
+                "edited_timestamp": "2022-01-22T21:03:14.705000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934547296597729352",
+                "type": 0,
+                "content": "plz help \ud83d\ude4f\ud83d\ude4f\ud83d\ude4f",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T20:37:18.558000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934545075902500864",
+                "type": 0,
+                "content": "I don't have enough funds? huh?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T20:28:29.103000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934544805638320258",
+                "type": 0,
+                "content": "I am trying to run `anchor deploy` but get the following error:\n\n```\n\u279c  solend-cpi git:(main) \u2717 anchor deploy\nDeploying workspace: https://api.devnet.solana.com\nUpgrade authority: ~/.config/solana/id.json\nDeploying program \"solendcpi\"...\nProgram path: ~/Desktop/solend-cpi/target/deploy/solendcpi.so...\n=====================================================================\nRecover the intermediate account's ephemeral keypair file with\n`solana-keygen recover` and the following 12-word seed phrase:\n=====================================================================\nXXXXXXXXXXXX seed phrase here\n=====================================================================\nTo resume a deploy, pass the recovered keypair as the\n[BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer'.\nOr to recover the account's lamports, pass it as the\n[BUFFER_ACCOUNT_ADDRESS] argument to `solana program close`.\n=====================================================================\nError: Account PUBLIC_KEY has insufficient funds for spend (1.84766424 SOL) + fee (0.00133 SOL)\nThere was a problem deploying: Output { status: ExitStatus(ExitStatus(256)), stdout: \"\", stderr: \"\" }.\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T20:27:24.667000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934533596373454938",
+                "type": 0,
+                "content": "Does anchor generate javascript schema for deserializing your accounts, or do you just have to copy it to your javascript?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "715115058027560993",
+                    "username": "whysoserious",
+                    "avatar": null,
+                    "discriminator": "6003",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T19:42:52.170000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934528472439734363",
+                "type": 19,
+                "content": "Solution: Add lifetimes",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "925167601590616174",
+                    "username": "apollo",
+                    "avatar": "7dd24539d59b3b71a2ba144b7f7dc349",
+                    "discriminator": "2312",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T19:22:30.529000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934514307872485396"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934522148603691028",
+                "type": 0,
+                "content": "",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "150033239493312512",
+                    "username": "GageBachik",
+                    "avatar": "4d2351261eab249daf5ef8b93fc4f1c5",
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "934522148071030814",
+                        "filename": "unknown.png",
+                        "size": 58483,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/934522148071030814/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/934522148071030814/unknown.png",
+                        "width": 1206,
+                        "height": 242,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T18:57:22.809000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934522145768362125",
+                "type": 0,
+                "content": "In the latest version of anchor how do I do this:",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "150033239493312512",
+                    "username": "GageBachik",
+                    "avatar": "4d2351261eab249daf5ef8b93fc4f1c5",
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-22T18:57:22.133000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "5e488362684b7d7d3e4b452edbd7a296"
+}

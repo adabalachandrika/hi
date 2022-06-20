@@ -1,0 +1,65 @@
+{
+    "total_results": 2,
+    "messages": [
+        [
+            {
+                "id": "934124747556552736",
+                "type": 19,
+                "content": "If `Rc` was used so that the types could be `Clone` in the case `Signer` can't be, I think something similar can just be accomplished by changing the constraint to `S: Borrow<Signer>`, and then doing an `impl<S> Clone for Config<S> where S: Borrow<Signer> + Clone`? Although this might be overkill, all instances of `Signer` I've seen have `Clone` derived anyways",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "172882728025325569",
+                    "username": "Skipper",
+                    "avatar": "501fba40d1bc245faac5f0cb451ad859",
+                    "discriminator": "4527",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-21T16:38:15.016000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "934119368512647189"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "934119368512647189",
+                "type": 0,
+                "content": "Any reason `anchor_client::Config` stores the signer as a `Rc<dyn Signer>`, instead of doing `anchor_client::Config<S: Signer>` and storing it as `S`? The problem is w/ `Rc<...>` the traits `Send` nor `Sync` can't be implemented for `Client` nor `Program`, whereas I think for `S: Signer + Send + Sync` they should automatically be implemented",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "172882728025325569",
+                    "username": "Skipper",
+                    "avatar": "501fba40d1bc245faac5f0cb451ad859",
+                    "discriminator": "4527",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-21T16:16:52.552000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "42f67cd42fce946e042d7cbae3faf6b4"
+}

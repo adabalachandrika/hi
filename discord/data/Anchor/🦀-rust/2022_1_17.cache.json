@@ -1,0 +1,321 @@
+{
+    "total_results": 9,
+    "messages": [
+        [
+            {
+                "id": "932689801503727647",
+                "type": 0,
+                "content": "I have an issue with including a timestamp (i64) in the seeds for an account. If I remove the i64 from the seeds it works. Are there any examples on how this should be done?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "757210651746762763",
+                    "username": "DAOIT",
+                    "avatar": "88fe28e80b80d7415964440f6681525e",
+                    "discriminator": "3214",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-17T17:36:17.217000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932598705423540225",
+                "type": 19,
+                "content": "yes also i believe apart from doing this, you need ur struct to use pod types, and <@!134416332509675520>  if am not wrong the struct should not have padding for zero copy to work right ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "916187801115037728",
+                        "username": "blockchaincrazy95",
+                        "avatar": "09eb27778b7201fec890e3a3e2c35d7d",
+                        "discriminator": "7316",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-17T11:34:18.219000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "932513241417007124"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932513241417007124",
+                "type": 0,
+                "content": "```\n#[assert_size(aligns, 64)]\n#[repr(C)]\n#[derive(Pod, Zeroable, Clone, Copy, AnchorDeserialize, AnchorSerialize)]\npub struct ReserveConfig {\n...\n}\n#[assert_size(2048)]\n#[account(zero_copy)]\npub struct Reserve {\n```\n\nHi, I am analyzing jet-v1 code on github.\nBut I think ```#[account(zero_copy)]``` is same as \n```\n#[repr(C)]\n#[derive(Pod, Zeroable)]\n```\nAm I right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "916187801115037728",
+                    "username": "blockchaincrazy95",
+                    "avatar": "09eb27778b7201fec890e3a3e2c35d7d",
+                    "discriminator": "7316",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-17T05:54:42.012000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932418740618944553",
+                "type": 19,
+                "content": "Much appreciated, thank you",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T23:39:11.266000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "932410734640525322"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932413163763269672",
+                "type": 19,
+                "content": "forgive me if this is actually a terrible idea, i've only just started looking into zero_copy + PODs myself.\n\nbut could you not define your own struct `PodBool` which implements  `to_bool(Self) -> bool` and `from_bool(bool) -> Self`, storing the actual bool value as a u8?\n\nwould be a bit more elegant maybe, and if it just has one u8 field then it should be a POD right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "419518866041995265",
+                    "username": "$wagmoneyblazeit",
+                    "avatar": "2abf35c164f618d26e22ac4866b325a5",
+                    "discriminator": "0420",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T23:17:01.640000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931385061113225327"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932412189350969434",
+                "type": 19,
+                "content": "[u8; 32] is POD compatible so should be fine",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "419518866041995265",
+                    "username": "$wagmoneyblazeit",
+                    "avatar": "2abf35c164f618d26e22ac4866b325a5",
+                    "discriminator": "0420",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T23:13:09.322000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931637207536652379"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932410734640525322",
+                "type": 0,
+                "content": "You can check this by the way by just manually looking at a serialization:\n```.rs\n#[test]\nfn hmm() {\n  let d = Data {\n    ...\n  };\n  println!(\"{:?}\", d.try_to_vec());\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T23:07:22.492000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932410496324370522",
+                "type": 19,
+                "content": "Borsh uses 1 extra byte to serialize options, so you'd need `32 + 1 + 32 + 1 + 32 + 1 + 32` (plus 8 for the discriminator bytes)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "392371614542725121",
+                        "username": "ronanyeah",
+                        "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                        "discriminator": "3307",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T23:06:25.673000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "932379712800571464"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "932379712800571464",
+                "type": 0,
+                "content": "What would be the 'equation' to calculate the rent for a struct like this? (manually or automatically)\n```\n#[account]\npub struct Data {\n    pub a: Pubkey,\n    pub b: Option<Pubkey>,\n    pub c: Option<[u8; 32]>,\n    pub d: Option<[u8; 32]>,\n}\n```\nDeriving `default` and using `init` doesn't seem to work because of the Options 'expanding' in size I think when data gets added to them (Error: 163?)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T21:04:06.309000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "1af45e7e3fc04136b9629f506d915e43"
+}

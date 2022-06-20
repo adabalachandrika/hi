@@ -1,0 +1,1488 @@
+{
+    "total_results": 52,
+    "messages": [
+        [
+            {
+                "id": "952919174244614194",
+                "type": 0,
+                "content": "How can i wrap or unwrap sol in Anchor ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "607628761063489561",
+                    "username": "b\u201dburak\u201d",
+                    "avatar": null,
+                    "discriminator": "3537",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:20:35.522000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952918274172129311",
+                "type": 0,
+                "content": "fascinating",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:17:00.928000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952917546061926420",
+                "type": 0,
+                "content": "E.g.\n```.rs\n#[test]\nfn wtf() {\n    #[derive(Debug)]\n    struct Foo<T> {\n        thing: T,\n    }\n\n    impl<T> std::ops::Deref for Foo<T> {\n        type Target = T;\n\n        fn deref(&self) -> &Self::Target {\n            &self.thing\n        }\n    }\n    let foo = Foo { thing: 123 };\n    // This type-annotation triggers a deref()\n    let x: &u32 = &foo;\n\n    eprintln!(\"{:?}\", x);\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:14:07.333000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952917235075260527",
+                "type": 0,
+                "content": "Ah, ok, that's probably some `Deref` shenanigans going on",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:12:53.188000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952916711424819210",
+                "type": 19,
+                "content": "interesting, this trick gives me `&mut Account<MarketMetadata>` with a lifetime annotation, and I still need to change it to `&mut MarketMetadata` for rust-analyzer to understand the field types",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:10:48.340000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952916005057859635"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952916005057859635",
+                "type": 0,
+                "content": "A silly trick you can use is to do `let mysterious_value: () = ...;` and just go out of your way to give an incorrect type annotation\u2014rust-analyzer will then wake up and realize the right type \ud83d\ude1b",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:07:59.929000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952915782466166826",
+                "type": 0,
+                "content": "Yeah, this is just rust-analyzer being dumb unfortunately (not sure why it struggles sometimes)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:07:06.859000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952915241442873374",
+                "type": 0,
+                "content": "idk if this is a Rust thing or purely a VS Code thing",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:04:57.869000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952915015403438080",
+                "type": 0,
+                "content": "when you do something like `let market_metadata = &mut *ctx.accounts.market_metadata;`, VS Code infers the type of `market_metadata` to be `&mut Account<MarketMetadata>`, and will infer the fields to be `{unknown}` (but only sometimes).\n\nHowever you can explicitly give it a slightly different type: `let market_metadata: &mut MarketMetadata = &mut *ctx.accounts.market_metadata;` and then VS Code seems to always know the field types. And the program compiles and runs fine with the slightly different type",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:04:03.977000+00:00",
+                "edited_timestamp": "2022-03-14T13:05:09.765000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952914922193440808",
+                "type": 0,
+                "content": "experimented a bit further",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T13:03:41.754000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952895753766993970",
+                "type": 0,
+                "content": "does anyone else get a lot of `{unknown}` types when they hover over account fields in vs code?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T11:47:31.645000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952874851784359946",
+                "type": 0,
+                "content": "Got it. Ok I'm out of hypotheses then. Will think more on that later. Thanks man \ud83d\udc4c",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:24:28.224000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952874671768993832",
+                "type": 0,
+                "content": "That's why it's possible to have like a 10mb account in there",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:23:45.305000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952874646590586950",
+                "type": 0,
+                "content": "\ud83d\ude04",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:23:39.302000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952874580698103808",
+                "type": 0,
+                "content": "You just kind of squint at the AccountInfo's data region and say \"I hope that's a T \ud83e\udd1e\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:23:23.592000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952874459327512607",
+                "type": 19,
+                "content": "Nope, that's actually the point of bytemuck/AccountLoader: no stack stuff whatsoever",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:22:54.655000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952873943491027014"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873943491027014",
+                "type": 0,
+                "content": "Hmm. Wouldn't it have to actually deserialize the data into a stack variable at that point in time? I'm not certain if `.load()` just reinterpret casts or duplicates",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:20:51.670000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873520306749461",
+                "type": 19,
+                "content": "No, I think `.load()?` just does some bytemuck stuff, I wouldn't expect it to add a lot to the stack",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:19:10.775000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952873041560502332"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873281864761384",
+                "type": 0,
+                "content": "the mystery thickens",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:18:13.926000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873190147887134",
+                "type": 0,
+                "content": "Ok fwiw I tried checking the std::mem size of a ctx struct, adding an AccountInfo increased it by 48 bytes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:17:52.059000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873138784452639",
+                "type": 0,
+                "content": "I do have a couple of those, so I'm thinking that might be where the substantial stack use comes from",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:17:39.813000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952873041560502332",
+                "type": 0,
+                "content": "btw do you know what the impact of `load`-ing a zero copy account in the constraint macro is?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:17:16.633000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872809418354718",
+                "type": 0,
+                "content": "Ah, but yeah, I guess this is part of the diff between doing `pub my_account: AccountInfo<'info>` and just using remaining_accounts, since the former really does have to copy an AccountInfo into the current ctx struct (like, it's an actual AccountInfo, not a &AccountInfo)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:16:21.286000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872621417046026",
+                "type": 0,
+                "content": "I'll iterate over that a bit later I think, this 144 bytes is tickling me",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:15:36.463000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872527896662056",
+                "type": 0,
+                "content": "Yep",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:15:14.166000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872497567629333",
+                "type": 0,
+                "content": "got it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:15:06.935000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872491389427713",
+                "type": 0,
+                "content": "or argument, forgot the name",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:15:05.462000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872424939094046",
+                "type": 0,
+                "content": "the \"program instruction\" memory",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:14:49.619000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872347218624522",
+                "type": 0,
+                "content": "But remaining_accounts is a slice, so those AccountInfos in there live someplace else (neither stack nor heap in fact)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:14:31.089000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872169497579561",
+                "type": 0,
+                "content": "It has a fixed size on the stack (48 bytes, as far as I know, unless maybe solana's bpf-fork of rust decides to do something different I guess)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:13:48.717000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952872043861381141",
+                "type": 0,
+                "content": "Yeah",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:13:18.763000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871963410440214",
+                "type": 0,
+                "content": "Just so that I understand, an `AccountInfo`'s size is not dependent on the underlying type because it just packs a reference to its data, rather than the whole data?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:12:59.582000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871672065687563",
+                "type": 0,
+                "content": "Especially if they're just AccountInfo's anyway",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:11:50.120000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871637341048852",
+                "type": 0,
+                "content": "Well, one thing you could try doing is just banishing some of them to remaining_accounts",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:11:41.841000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871551273934869",
+                "type": 0,
+                "content": "Mm, ok",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:11:21.321000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871482629972018",
+                "type": 0,
+                "content": "I actually didn't check but I think this was all before entering the function",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:11:04.955000+00:00",
+                "edited_timestamp": "2022-03-14T10:11:19.110000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871276836433950",
+                "type": 0,
+                "content": "But wait, do you manage to get into your instruction function? Or is that failing even in anchor-land",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:10:15.890000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871204975423529",
+                "type": 0,
+                "content": "The struct itself I think is only 48 (or at least that's what std::mem says), but maybe some other stuff is happening behind the scenes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:09:58.757000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952871089745313792",
+                "type": 0,
+                "content": "Interesting...",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:09:31.284000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870941392764948",
+                "type": 19,
+                "content": "hmm when I tried commenting some of those until the stack was in check, I observed 144 bytes per",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:08:55.914000+00:00",
+                "edited_timestamp": "2022-03-14T10:09:06.826000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952870694562168882"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870901140062258",
+                "type": 0,
+                "content": "I would have guessed enough space in the 4kb stack frame",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:08:46.317000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870815987269632",
+                "type": 0,
+                "content": "But still, even if you had 30 of them, that's 1500 bytes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:08:26.015000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870739684491375",
+                "type": 0,
+                "content": "apart from those `AccountInfo`s, I only have 2 zero copy accounts, a signer, and a couple `Program`s. But maybe I'm missing something",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:08:07.823000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870694562168882",
+                "type": 0,
+                "content": "Well, I guess they're bigger than I thought, 48 bytes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:07:57.065000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870449199587348",
+                "type": 19,
+                "content": "Hmm, yeah. Those do get allocated on the stack, but they aren't very big struct-wise, so I'm slightly surprised that would be the direct issue (but I guess it could be)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:06:58.566000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952869685408460820"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952870283310661793",
+                "type": 0,
+                "content": "e.g. allocate `AccountInfo`s on the heap",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:06:19.015000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952869986404278272",
+                "type": 0,
+                "content": "I guess I'm still wondering if there is a way to get around the stack limitation without having to do that, somehow",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:05:08.227000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952869812420362290",
+                "type": 0,
+                "content": "I actually worked around it by specifying the account type for a few that I knew (token accounts), allowing me to `Box` them.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:04:26.746000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952869685408460820",
+                "type": 0,
+                "content": "basically all accounts passed as `AccountInfo` get allocated on the stack. And I have a lot. Even with a dummy function body (`Ok()`) the stack is blown just by allocating the accounts.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:03:56.464000+00:00",
+                "edited_timestamp": "2022-03-14T10:05:43.621000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952869492621451264",
+                "type": 0,
+                "content": "Are you doing a bunch of `some_account.clone()` too?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:03:10.500000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952869254921879632",
+                "type": 19,
+                "content": "So you're saying that you're able to get into your instruction function, but the CPI part fails?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T10:02:13.828000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "952844259910897674"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "952844259910897674",
+                "type": 0,
+                "content": "Assuming that a large number of accounts passed as AccountInfo for CPI purposes blows the stack frame, what are the options?\nIf I had the struct of the accounts I pass, I imagine I could declare them as Account and Box them, but presently I don't. Not sure if I'm missing something basic, like a way to instantiate AccountInfo accounts on the heap.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-14T08:22:54.553000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "7cdc4f3b8f9bdafe3f66338e19ca11d1"
+}

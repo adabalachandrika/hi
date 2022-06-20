@@ -1,0 +1,357 @@
+{
+    "total_results": 12,
+    "messages": [
+        [
+            {
+                "id": "917809153282568262",
+                "type": 0,
+                "content": "is your  `payer` account declared as mutable?\n```rust\n#[account(mut)]\npub payer: Signer<'info>,\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-07T16:05:54.212000+00:00",
+                "edited_timestamp": "2021-12-07T16:07:26.845000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917778169241665557",
+                "type": 0,
+                "content": "How to initialize an account in a CPI call? I'm trying to call `my_function()` on program B from program A\n\n```rs\nlet cpi_accounts = MyFunction {\n    payer: ctx.accounts.minter.to_account_info(),\n    my_state: ctx.accounts.my_state.to_account_info(),\n    system_program: ctx.accounts.system_program.to_account_info()\n};\nprogram_b::cpi::my_function(\n    CpiContext::new_with_signer(\n        ctx.accounts.program_b.to_account_info(),\n        cpi_accounts,\n        &[&seeds[..]]\n    ), bump\n)?;\n```\n\n`program_b#my_function()` initializes an account:\n\n```rs\n#[account(\n    init,\n    seeds = [\n    ],\n    bump = bump,\n    payer = payer\n)]\npub my_state: Loader<'info, MyState>,\n```\n\nThis gives `Cross-program invocation with unauthorized signer or writable account` error. I believe a `SystemProgram` call to transfer lamports to `my_state` is failing. Error goes away if I transfer lamports beforehand by appending a javascript instruction:\n\n```ts\n  const lamportsIx = SystemProgram.transfer({\n    fromPubkey: owner,\n    toPubkey: myState,\n    lamports: web3.LAMPORTS_PER_SOL\n  })\n```\n\nHow do I init `my_account` without the lamport transfer step?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-07T14:02:47.041000+00:00",
+                "edited_timestamp": "2021-12-07T14:04:30.643000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917653764926754816",
+                "type": 0,
+                "content": "If crate have features which allow exclude it then yes, it's possible",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "448034961652449283",
+                    "username": "fanatid",
+                    "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                    "discriminator": "8814",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-07T05:48:26.741000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917605455839252511",
+                "type": 0,
+                "content": "Is it possible to ignore sub-dependencies when compiling? I'm trying to use the ZCash ECC library (https://crates.io/crates/bn/0.4.3), but it depends on `rand = \"0.3.14\"` (https://crates.io/crates/rand/0.3.14). I just want to use the ECC arithmetic operations (add, mul, pairings), and I don't need any of the functions that use randomness. Is it possible to prune these functions that depend on rand, or do I have to fork the repo and remove them myself?\n\nI tried to use the `getrandom` trick from the Solana docs (https://docs.solana.com/developing/on-chain-programs/developing-rust#depending-on-rand), but the version of `rand` that the ZCash library uses is very old, it doesn't depend on `getrandom`, it uses `libc` directly",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "595117326349631497",
+                    "username": "ChrisBender",
+                    "avatar": "8939276783587626c1aecd90edca2759",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.solana.com/developing/on-chain-programs/developing-rust",
+                        "title": "Developing with Rust | Solana Docs",
+                        "description": "Solana supports writing on-chain programs using the"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-07T02:36:28.957000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535683638337537",
+                "type": 0,
+                "content": "gotcha yeah that makes sense",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "389481272030003210",
+                    "username": "nantux",
+                    "avatar": "4cc81612e492f0e7218f77fb92f6605a",
+                    "discriminator": "2790",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:59:13.968000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535591107813376",
+                "type": 0,
+                "content": "If you have the IDL, you can create a dummy rust contract that will give you the same API.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:58:51.907000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535467409399829",
+                "type": 0,
+                "content": "usuaally projects will at least open source the interface",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:58:22.415000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535458618134578",
+                "type": 0,
+                "content": "looking at a bunch of closed source programs - the NFT marketplaces",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "389481272030003210",
+                    "username": "nantux",
+                    "avatar": "4cc81612e492f0e7218f77fb92f6605a",
+                    "discriminator": "2790",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:58:20.319000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535383087120436",
+                "type": 0,
+                "content": "Are you using a closed source program or something?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:58:02.311000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535290707550269",
+                "type": 0,
+                "content": "If you wanted such a thing, we'd have to create a new client generator that reads the IDL and re-does with the macro does, but spitting out a .rs file.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:57:40.286000+00:00",
+                "edited_timestamp": "2021-12-06T21:57:52.331000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917535200068644904",
+                "type": 19,
+                "content": "No. Currently the macros generate all the types needed for CPI/client eneration.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "389481272030003210",
+                        "username": "nantux",
+                        "avatar": "4cc81612e492f0e7218f77fb92f6605a",
+                        "discriminator": "2790",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:57:18.676000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "917533066967269386"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "917533066967269386",
+                "type": 0,
+                "content": "https://project-serum.github.io/anchor/tutorials/tutorial-3.html#defining-a-puppet-program \nlooking through the CPI examples, it looks like the underlying program is required for CPI calls. Is there any documentation to be able to run CPI calls with just an IDL/entrypoint?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "389481272030003210",
+                    "username": "nantux",
+                    "avatar": "4cc81612e492f0e7218f77fb92f6605a",
+                    "discriminator": "2790",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://project-serum.github.io/anchor/tutorials/tutorial-3.html",
+                        "title": "Cross Program Invocations (CPI) | \u2693 Anchor",
+                        "color": 4108156
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-06T21:48:50.105000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "b4c5a6ccca84cd73790ae8891a358720"
+}

@@ -1,0 +1,1004 @@
+understood, thanks! 😃
+Solana Pay describes a standard protocol for wallets and merchants to interact with each other. It comes with a spec, reference implementation of that spec, and a proof of concept point of sale app.
+Ah that was it, thankyou! 🙂
+Looks like you want to be passing 8Vj2VZLa71SwiYJ7pbTPJFwjpzmMQ2HA7d7FpMxTbobK
+Check out the spec. The `spl-token` param must be a mint account, and you're passing a token account
+I'm getting an error `TokenInvalidAccountSizeError` when I pass in an SPL token to the `CreateTransactionParams` in `createTransaction`. the address I'm passing in is `HzQNdmcp1wFX3EyNaAZGmQbeDKWLm27wRxhDfXfattjg` which I can see in solscan is a token account for my token with some balance: https://solscan.io/account/HzQNdmcp1wFX3EyNaAZGmQbeDKWLm27wRxhDfXfattjg?cluster=devnet
+
+From the error trace I can see that it's being thrown by a call that does:
+
+`const info = await connection.getAccountInfo(payerTokenAddress)` and then checks `info.data.length`. In my case I can see that this is returning 165. And it throws because this differs from `splToken.MINT_SIZE` which is 82.
+
+I'm a bit confused what I should be passing in if not this `HzQNdmcp1wFX3EyNaAZGmQbeDKWLm27wRxhDfXfattjg` address!
+take a look at https://solanapay.com
+Is solana pay just a specification or something more?
+Cool! Please reach out on Twitter and I can connect you with bizdev/PM (this is all devs)
+Removed link anyone can contact me on Twitter for link sorry about that.
+Hi <@!150787664553967616> ! I’m Jenny, part of the innovation team at Banxa, a direct fiat<>crypto on ramp. Our team is very interested in what Solana is doing with P2P payments and would like to share our thoughts between teams to see how we can help collaborate. 
+Would you or someone in your team be happy to do a 30 minute chat over the next few weeks as part of our industry research ?
+no promo
+In the next week or two we will start pushing code to the GitHub and in 2-3 we will make it public for review.
+This is a chat for devs working with Solana Pay
+I need funds how do I get funded?
+Welcome back :) sounds good
+Hey <@!150787664553967616> guess I was already in here before. Just popping in to say hello to all. Have to wrap up a paper tonight ill be back later to kick some convo off.
+I will share my discord for the project here asap, today or tomorrow. Thank you!
+<@!647493715270828072> I posted the WooCommerce plugin on your GitHub issue. Looking forward to future possibilities
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I tried to follow the design spec as much as possible btw
+it's just a button, in a "serious" website it would also have to check if the transaction was actually made
+This might help you: https://github.com/marc2332/solana-pay-button-demo , I made it really quick, just to test it with my wallet
+Riptide Workshop: Solana Pay!
+https://www.youtube.com/watch?v=DfvKFpbsimw&ab_channel=SolanaLabs
+<@393352704644087811> -- Not sure if you've had any contact with FTX Africa before (I think I remember you making a trip a few months ago to Sierra Leone) -- do you know if they're easily reachable?
+
+<@803316832491798578> mentioned "@7Layer I’m considering this but I’m looking to build a team and create this platform and present it to the finance minster and my uncle who is a current MP in parliament" in <#938448589615689729>
+If someone wants to connect for some further information can shoot me a message
+Hello everyone i’m  looking to build a team for a fin tech cross border payment system in Somalia have already had some interest with government officials
+There's https://www.figma.com/community/file/1070341985720702755 but no implementation yet
+Are there any examples of a "pay" button on a website using solana pay?
+
+Something like the "Send Transaction (devnet)" button from the wallet adapter demo, but using the solana pay URL format to create messages/label/memo
+https://solana-labs.github.io/wallet-adapter/example/
+Great!
+Latest version of this. Will PR as soon as the reference implementation is done
+https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md#specification-transaction-request
+Yeah definitely, I’m from NYC, Washington heights. Most merchants are Dominican and aren’t really tech savvy, but they shouldn’t moss out on the wave that is solana because something so trivial
+That would be pretty cool to start a little movement to get it translated in various languages and curated in a more central area, have some good walk-through docs, with some practical/low overhead examples of how it could be deployed. I'm trying to figure out if it would be useful to have in Myanmar since I have some old ties there. There was also someone in <#938448589615689729> that was interested in something related to payments in Somalia. Could make a Solana Pay guerilla kit lol (not sure if that's politically correct to say... but common knowledge the people in those countries are going through a lot of shit). I have no idea what the crypto onramps are in those places though.
+Doesn’t seem like a difficult task
+<@785612634514915338>
+Nice job on the new "link" spec. This does everything I was looking for!
+Hi
+Yeah, if someone wants to localize the app that's great! Just not something the Solana Pay team is likely to undertake
+I dont understand how github is organized well but maybe there could be a nicely located Solana Pay alt-languages folder that the community can contribute translations to? Otherwise thr translations might end up randomly located and disorganized and not aesthetically pleasing?
+Officially, most likely not -- the Point of Sale app is a proof of concept for others to take and iterate on
+Will do
+If you have any questions about that, dont hesitate to ping me 🙂
+Oh ok, thanks
+You'd just have to change the language in the Code
+I think its pretty easy to translate everything as there are only a couple elements on the page.
+Yes
+do you mean the Storefront ?
+A lot of these business owners are much older (40’s, 50’s) and are limited to Spanish + not too tech savvy.
+Is Solana Pay going to be released in Spanish? I want to help merchants/retail shops/grocery stores  in my neighborhood add this to their POS systems
+I opened this issue, hope I described everything right 🙂 https://github.com/solana-labs/solana-pay/issues/70
+We could have a solana pay section in the cookbook so that more stuff lives in the same place. <@!492411676889710592> open an issue there and we can see if we can get it added
+Yeah, I think it could be there, or on the Solana Cookbook if that's a better fit for the structure and we can link to it from the Solana Pay repo. <@!489206164270350337> <@!785084693023424542> wdyt?
+Should the Github issue for requesting an example for this be opened in the solana-labs/solana-pay repo? I'd be open to contributing this too if it's not already being worked on internally because I'm going to be building out a tutorial using Solana Pay and it'd be a win/win to get validation/feedback on my code and to have the example available to the wider community
+not at the moment. I'll tag you when theres anything public 🙏🏾
+That sounds great! Any pointer to which repo I should be following? 🙂
+I think it's okay that it's basic CSS, we/community can build out a few variations of it
+Practically finished. I was experimenting with vitebook, but its a bit feature starved. so will replicate in storybook, possibly by the weekend. It's not using tailwind, just plain CSS, but now that you mention it, I might do a tailwind version
+Yes, you are correct. It's not part of the protocol. There will be an extension to the protocol soon ™️ that will allow this in the same transaction, but it's for any transaction (which may include NFTs). The protocol is intended to be agnostic to how you use it
+Is this actually part of solana pay already, or would the example be about validating a transaction and then sending an NFT using existing non-solana pay APIs? I was under the impression that the sending NFTs was a future expansion of the protocol, but would be awesome if it's already in place!
+https://github.com/WalletConnect/walletconnect-docs/blob/main/docs/json-rpc/solana.md is the latest. But this isn't related to Solana Pay, so talk to WalletConnect!
+<@!393352704644087811> what's the state of the buttons you were working on?
+Yeah, this was all I've seen of the work so far but it doesn't look like it's gone anywhere yet.
+
+https://hackmd.io/@pedrouid/S1xn0JFVP
+I agree, please open a Github issue to request an example
+Already asked Trust Wallet, but no commitments yet. 😉
+Has anyone made Solana Pay buttons in Tailwind respecting the branding guidelines yet?
+WalletConnect doesn't support Solana yet. There's a spec being worked on, but no implementation AFAIK
+Ask the TrustWallet team!
+I'm not sure if it's possible to extend Wallet Connect to work with Solana in the future, but I like that I can keep my wallet on one device. Would be cool if there was a Wallet Connect equivalent for Solana that worked with Solana Pay for signing.
+I really like Trust Wallet, so with would be cool to see that working.
+I had some trouble with the FTX app crashing on my Pixel 4, but I'll give Slope a try and see how that goes.
+There are a few more working on it that haven't announced
+If you're looking to try Solana Pay on Android, FTX's app works, and I think Slope does as well
+https://help.phantom.app/hc/en-us/articles/4406705592339-Is-Phantom-available-on-mobile-iOS-or-Android-
+Thanks for the direction though
+I get it <@!585868308419444749>. What can I say #lazyweb feels today 😉
+ha ha
+I don't work there
+Probably go to their website and look for a support link or something?
+Do you know the best way to reach them <@!585868308419444749>? I tried the Discord invite on their site and that they shared on Twitter but both say the invite is invalid. 😛
+Sounds like a question for Phantom support
+just watched the workshop on twitch by the way. it was really great 🙂
+Hey, it would be really great to have a documentation on sending back an nft to a customer after a purchase.
+Has anyone heard if Phantom Wallet is coming to Android anytime soon? I don't have an iPhone but was really hoping to use Phantom for my Solana Pay demos just because it looks so slick (no offense to FTX or others!)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I hit this issue too - I think the reason not to put it in Solana Pay is because the `payer` would have to pay the fee. So the first person to transact would have to pay for the account to be created for the recipient, and wouldn't be obvious to them why. The way I'm doing it is creating the ATA for my recipient when I create the token
+<@!150787664553967616> Was just taking a look at `createTransaction` in Solana Pay. This line seems a little confusing: https://github.com/solana-labs/solana-pay/blob/3ff5f81f87d8b0e7f26e0b08638983035aacef06/core/src/createTransaction.ts#L108. Does this mean that the recepient account needs to have the ATA already for the SPL-token? What if the address never had the given SPL-token and thus does not have the ATA? Shouldn't there be an instruction first to generate the given ATA in the recepient address?
+Is this what you're looking for?
+https://github.com/solana-labs/solana-pay/blob/master/SPEC.md
+Could you post a link to the Solana Pay spec on the youtube
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+We need a way to test the implementation before wallets supported Solana Pay, but this is left in as a convenience if you're building something based on the app
+The connectWallet variable is just an internal testing mechanism in the PoS app to present a "Connect Wallet" button to stimulate the QR parsing without scanning, using a normal browser extension wallet
+The spec says it _should_ be displayed to the user but this is up to the wallet. Phantom is going to add this AFAIK, just didn't before launch. You could check if the other supporting wallets do so.
+I think it will be a fair amount in a month or two when we get the woocommerce and other integrations launched and marketing. Good idea!
+This is what we are working on! If there is anyone who would like join our team, we are still looking for teammates! 🙂
+Yeah, I saw that too and wondered if that was the case.
+The spec says wallets should show it to the user, in my testing Phantom doesn’t but hopefully that’ll change!
+Free idea for the hackathon: build a categorized platform showing all the websites/stores that accept solana pay
+I see it being used to encode URLs when a wallet is connected, but I don't see an option to  connect a wallet in the app. I've toggled the connectWallet boolean in the RootRoute and didn't see any changes either 🤔
+Apart from being used as a conditional check for rendering routes in the POS app, is the `label` parameter used for anything? I don't see it being displayed anywhere in the app.
+Hey Jordan, really good job with this pr. I really like the idea of making all of that possible in a single payment request(especially holding the funds in escrow). However I don't understand something, does the merchant need an endpoint for the url in the request paramter? What should this endpoint look like?
+One of the intents for the design is that applications should prefer short links and avoid extraneous query params. This allows for less dense QR codes that are more easily scanned
+So a type parameter could be given in the body, but could also be added later, with the default type being a transaction request
+4 remains to be specified and may not be part of the protocol at all. There are various ways that apps can communicate that don't really have anything to do with a request to create at tx
+Different kinds of requests and responses could use https URLs. But they would be differentiated by request bodies at that point, not the presence of a link
+The first two should be straightforward to handle, it's really up to wallets to interpret .sol names if they wish to. The protocol should not allow them for now (low utility to supporting them), but this could change
+We could foresee a few possibilities --
+
+1. Transfer request using a base58 pubkey
+2. Transfer request using a .sol nameservice name
+3. Transaction request using an https: URL
+4. A request using some other scheme (perhaps communicating with a mobile app)
+Check the `parseURL` implementation in the PR
+I might be missing  something about the new transaction request spec, but, how do you actually differentiate between a transfer request  and a transaction request uri?
+
+for example, this is a transaction request uri
+
+`solana:https%3A%2F%2Fmvines.sol%2Fsolana-pay%3Forder%3D12345?label=Michael&message=Thanks%20for%20all%20the%20fish` 
+
+What would be the proper way to  identify it as a transaction request and not a transfer request? There isn't any difference compared to a transfer request except the  recipient is not an address but a http link. I imagine wallets could differentiate them by looking if they got "https" at the beginning hehe, but, what if another spec is added in the future, which also uses a link but is not a transaction request? Maybe something like a `type` parameter would help with scaling (also, if an uri didn't have this param it could identify it as a transfer request by default)
+
+Again, I might be missing something, I am still learning about all the terminology around Solana, sorry
+
+<@!150787664553967616>
+Thanks so much!
+Looks awesome man!
+Left a few comments 🙂 new spec looks great though!!
+Same! Please review and provide feedback if you have any
+Nice! I've subscribed to that PR, really looking forward to seeing that land 🙂
+Proof of concept app will be done in a few days then will be working with wallets on integration
+Yes, this is the spec and implementation of that idea
+This looks awesome! Does this enable the bidirectional token exchange mentioned in the linked https://github.com/solana-labs/solana-pay/issues/26 too? I didn't realise that was in a PR yet
+We expect this new format to become the dominant way to use Solana Pay
+https://github.com/solana-labs/solana-pay/pull/77 gives requesters the ability to construct arbitrary transactions. If they want to, they could initialize a token account atomically this way, and fund it themselves (or expect a user to)
+Makes sense!
+This is also relevant for centralized exchange recipient wallets, for example -- as a user, you can't make the exchange accept SPL tokens they don't accept, and ideally the protocol errors rather than blackholes the sender's tokens
+In simple terms, as a merchant you get to say what token you want, so it's up to you to make sure you can accept it
+This is correct. The recipient is responsible for creating an associated token account for the tokens they expect to receive. It shouldn't be up to the sender to perform this operation and pay rent for them (at least within the specification of protocol or its reference implementation -- wallets may choose to create transactions that do this)
+I’m doing so as well. I understand the reasoning, your argument makes sense!
+Could Solana Pay work with the new tap to pay api Apple just announced?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Just stumbled upon all this a few days ago! Excited for Solana Pay and currently developing a business/website to offer storefronts a very cheap way to contract me to make them a customer reward token, train their employees, and set up Point of Sale monitors and smart devices. I’m out of Montgomery, AL so hopefully this area will be surprisingly welcoming to this amazing new tech!
+Solana pay related of course
+Any develoeper here free for a call to discuss about an idea I got in mind? I have no time to develop It so I will also let the developer take lead as long as I get involved a bit with the project (If you like It)
+I was able to toggle the connectWallet and can see the "Select Wallet" button.  Phantom Wallet detected and am able to connect. However, I only see 3 drop-down options (Copy address, Change wallet, Disconnect). However, it does nothing further and no (devnet test) solana is transferred between the 2 wallets. I don't have an iPhone (only Android) so cannot test the QR code using the iPhone Phantom app.  Does scanning the QR code with the iPhone Phantom app result in test solana transfers between the 2 wallets? I did try to send solana on mainnet from FTX wallet (android version) but after scanning the POS QR code, it gave me "Invalid Address" so wasn't able to make progress there.
+Ah ok, thanks for the clarification
+Spec SHALL use BCP14
+Spec needs a BCP14 treatment
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+In the short term, you could send a transfer to an account and then have an off-chain system that distributed the SOL / tokens from that account.
+Solana Pay only supports simple transfers now. There's some discussion in this thread and an open Github PR to support transaction requests, which will allow any transaction on Solana.
+might an escrow program work for that matter? 
+Each recipient will need its own txn to send the amount requested, yet with the last one you can trigger the program to send the total to you, that program can even check the funds sent are the right one.
+Hi there, I'm new to Solana dev (and Rust for that matter) but excited to learn!
+
+I'd like to split a Solana Pay transaction of amount Z = X + Y, and I want to send X to one recipient and Y to another recipient. I suppose that the brute force way to do this is to create two separate transactions X and Y, but I imagine there should be a much more elegant way to do this on-chain in a single transaction with maybe a PDA?
+
+Can anyone give me high-level feedback on how I might accomplish this or point me to a tutorial/similar source code that might help?
+thanks buddy
+Use this https://www.figma.com/community/file/1070341985720702755
+is there any one else who face the same issue
+https://www.figma.com/file/QOwutIMlllTqqX6gE6Pl7W/Solana-Pay-Brand?node-id=3%3A2229 this is also not working today
+right ??
+must be equal to it's logo
+space on very left of solana pay logo
+
+
+is this following the solana pay guidelines ? pls lemme know
+I know you mean well but it's policy because others don't :)
+No promo on the Solana Discord please. This applies to all channels
+Thanks.
+Would also be interested.
+I'm working on something like this that does recurring subscriptions. DM me if you're interested.
+I imagine you might want something like Streamflow but no idea really
+Thanks - 'appreciate the clarification!
+Totally. Knew they weren't the same. It being payments-related, wasn't sure where to post. Thanks! I'll ask in those channels
+sollpay is not solana-pay.  You probably want <#428295358100013069> if not <#462813738245029888>
+Maybe not the right place for this question, and if not, apologies. What's the best comp in the Solana ecosystem for what the Drips protocol brings to Polygon? I found Sollpay, but that hasn't had a ton of developer activity in the past 6 months
+For sure! Excited to see what you build
+Nice work, that was like 4 days !
+Thanks for discussion and help, im gonna dig in and see where I get to with this new spec
+Yeah, never considered that specific use case
+But you saved me
+In my case it is so I was trying to somehow wrap the QR code
+Good point
+The mint may be a PDA
+Yeah
+The issue with Transfer is that you had to specify the SPL mint address when you generate the QR code.
+Ah I see
+(Transaction solves this)
+I don't follow, can you explain more about the use case?
+One thing I ran into - what if the SPL address is calculated at POS, my contract does that, so it was difficult to know it to generate QR before the user exists
+So a "template transaction" approach given to the wallet is not viable
+PDAs can be created from arbitrary logic and other PDAs
+Yeah that was really the thing that necessitated this design
+Yeah as long as PDAs are supported, most things are possible
+And creating PDAs including it should be no problem
+that's why I was asking about accounts before
+so passing in the token account should be enough, check amount = 1
+Yes they would need to have it in the wallet
+This should be possible still. The user that's signing owns the NFT right? Or owns some claim to it that they can sign for
+This is all v cool
+But in a web2 merchant / ecommerce context, I expect relational DBs to be used widely
+Depends on the app for sure. A lot of dapps avoid having a persistence backend
+unless you have some really good events, then maybe you can
+especially like accounting features things like that
+but you cant store all user info in solana
+depends I guess
+Yeah true, though I think in practice any real product will eventually need a db
+ah I see
+Yeah it's just nice if you can do it without a DB
+I think it makes sense to push everything to backend, you can calc all the accounts you need there too
+I might just change the Next PoC API to do this and see if it works out, because it's a convenient paradigm for serverless apps
+My current plan is to create most of the account setup, inits, etc. as separate web-based flow. Then the one txn done at PoS can be as simple as possible. You still need to encode some PDAs into the transaction. I was thinking of using NFTs as an authority, but Im not sure it would be possible given the only realy input is the user signing
+However this might be too much data to encode in a URL, so may only work for some uses
+Then the backend just decodes and verifies the sig, and uses the URL to pass the state instead of persisting it
+My idea is that the backend could come up with some inputs and JWT them and sign that, then pass it to the frontend, which could encode it in the URL
+https://jwt.io/
+Yeah, exactly. The PoS app design assumes that the client cannot be tampered with
+JWT?
+You could potentially use JWTs or something like this to avoid persistence
+Makes sense, these are similar to the design flows you have for Transfer, seems to be the same high level concept
+The backend should be the thing that creates, finds, and validates the tx so the client isn't trusted in any way except to show it to the user
+The client then encodes a URL like `solana:https://api.whatever.com/pay/xiqwrenasd`
+Ideally you have some persistence mechanism, so the client initiates something like a "purchase" which the backend has an amount and business logic for, generates a randomized ID, and gives that to the client
+The comments on the code in 5 talks about how you'd actually want to design this
+I was already going down the path of doing some weird stuff to use the transfer, this should make it much cleaner ux
+Super helpful, thank you. I will dig in
+❤️
+How they do that is up to you
+Your frontend will do 1 and 2 and your backend will do 5
+Once a wallet supports this, it will do 3, 4, and 6
+1. Within the PR branch, the PoS now has a base `link`: https://github.com/solana-labs/solana-pay/blob/d4e11fc8396d490ed0dd1dda5192187811837eaf/point-of-sale/client/src/components/routes/RootRoute.tsx#L44
+
+2. This is used by the PoS to encode a URL to a backend in the QR: https://github.com/solana-labs/solana-pay/blob/d4e11fc8396d490ed0dd1dda5192187811837eaf/point-of-sale/client/src/components/contexts/PaymentProvider.tsx#L62
+
+3. However, because no wallet supports this yet, we do what a wallet _would_ do if it did, which is to parse the QR, and then fetch a transaction from the link: https://github.com/solana-labs/solana-pay/blob/d4e11fc8396d490ed0dd1dda5192187811837eaf/point-of-sale/client/src/components/contexts/PaymentProvider.tsx#L105-L108
+
+4. The implementation of this is probably what you'd expect: https://github.com/solana-labs/solana-pay/blob/link-request/core/src/fetchTransaction.ts
+
+5. This request hits this serverless function: https://github.com/solana-labs/solana-pay/blob/link-request/point-of-sale/server/src/pages/api/index.ts
+
+6. Then we just pass it to the browser wallet for signing and sending: https://github.com/solana-labs/solana-pay/blob/d4e11fc8396d490ed0dd1dda5192187811837eaf/point-of-sale/client/src/components/contexts/PaymentProvider.tsx#L122
+And I guess I can decode the URL myself and sign for it as you're saying for now
+point-of-sale/server/src/pages/api/index.ts -> pos server?
+The best way to explain this is probably to link to the implementation --
+Can you explain that last bit? You mean simulate using the mobile web phantom stuff
+You can use the same `connectWallet` type of functionality to simulate this for now. From a wallet's perspective, this is just like signing any transaction.
+Implementation is complete, proof of concept was added to that PR last night. The PoS app in that PR has a Next.js backend that creates transactions. However, the blocker is wallet support, which is what we are working with wallets on now.
+Unfortunately I can't help with issues with FTX (or any wallet). But if you can provide some simple, reproducible steps, I can forward it to them.
+This is moving much faster than I thought, might just wait for it
+whats the eta on transaction support sir?
+Enabling `connectWallet` causes this button to be shown, and if a wallet is connected using it, causes transactions to be sent to that connected wallet. This is only intended to be used for testing if you aren't using a Solana Pay-enabled mobile wallet (like Phantom on iOS). It works by passing the transaction directly to a browser wallet instead of using the QR code scan. There are other wallets on Android such as Crypto Please, Slope, and FTX that support Solana Pay.
+I see that makes sense
+The account that is provided is the signer account of the wallet. The API that receives this as input can create a transaction based on anything that account could sign for. For example, associated token accounts, NFTs, positions in DeFi programs, etc.
+https://github.com/solana-labs/solana-pay/blob/master/core/src/validateTransactionSignature.ts
+I see there is a change to the spec to add transaction support. Looking at the spec, it seems you can't pass in accounts beyond the signer? Or am I misunderstanding
+Who is checking that the correct amount of usdc is being sent? Looking at the merchant flow, they only seem to check for reference.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Scam no one do this please <@!150787664553967616> fyi
+Oh yeah, the spec definitely supports it, tested it out 💯 👌 
+I was only asking about the Shopify App - maybe there's an input field that you can plug in. 
+TBH I haven't spun up the Shopify Plugin to see how it looks like so I haven't done my homework 🙂
+<@835122720944947220> <@785612634514915338> maybe yall could do some brainstorming together.
+This isn't a design goal of Solana Pay. Can you say more about what use cases you envision a web based wallet being used for, or what the user interaction would look like?
+So much trust involved but we are daily using this method, and probably with crypto will be different, just asking younopinion, pls tag me if answering
+Do you guys think that in a future will be accepted to pay with crypto using a card where you basically trust the device not stealing your numbers cause It's a device provided by a trusted payment system?
+https://web.dev/url-protocol-handler/#enabling-via-chrome:flags
+sorry, my fault. It does not have "//"
+edited my previous comment. 
+I mean if we could have URL protocol handler support for PWA or web based wallet
+Ohhh got it. Thanks!
+This is indeed out of our hands for the time being. I don't have any sense of the timeline, but we'll be sure to announce when it happens. Payment apps on Shopify have a pretty involved approval process
+(for example, I have no idea if wallets even use the reference code, and they don't need to)
+Everything else is just a reference implementation or proof of concept of that
+The best way to think of Solana Pay is that the spec is the only official thing
+Unlikely. Not unless someone in the community chooses to work on it, in which case it wouldn't be "official"
+Not sure what this is. Solana Pay URLs don't use // in the URL either. What's the use case you need this for and what does it accomplish?
+Hi, will there be an official python SDK in the future?
+You'll need to test with Phantom to see if they follow this aspect of the spec, FTX does to my knowledge
+The spec does support multiple reference fields. I believe there's an example in the tests
+we could have schema like web+solana:
+or request to put solana: into safelist schema 😁
+Is there any solanapay's web support for web wallet?
+I note that we can only use from safelist schema  https://html.spec.whatwg.org/multipage/system-state.html#safelisted-scheme for web/pwa
+I don't think the spec supports a 2nd "reference" parameter unless you construct a custom transaction (which is part of the planned spec, but not supported yet).
+Awesome! 
+I know it's probably out of your hands and depending on how fast Shopify moves, but do you have a feel for whether this will be available before the Riptide hackathon deadline (March 17)? Do you recommend us to take it on as a dependency?
+Second question, will there be an easy way to plug in an additional custom "reference" parameter? We want to index on-chain transactions based on a  campaign_id.
+It's coming soon™
+Hi all! We're building Phoria - Customer rewards on top of Solana Pay. Good to meet you 👋 
+
+Is the Solana Pay Shopify app already deployed to the app store?  We'd like to keep the merchant flow inside Shopify
+Got it, makes sense. Thanks!
+Transfers are not encoded in transaction request URLs. A single `link` URL to fetch a single transaction is. That fetched transaction may contain multiple transfers or anything else that's possible on Solana.
+If that's what he means, I encourage him to read the spec he linked again 🙂
+I think he means  how could you encode 2 transfers in the same transaction uri
+As a merchant who is crafting the transaction, you can compose it in any way you want
+You could just have a single transaction with `[transfer to account0, transfer to account1]`
+A transaction on Solana is composed of instructions: https://docs.solana.com/developing/programming-model/transactions#instructions
+Hmm how would one include multiple transfers in a single transaction?
+
+It's not clear to me from reading the transaction request spec (https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md#specification-transaction-request), but apologies if I'm missing something obvious.
+Basically, try to do things with composition of instructions before you turn to composition of programs
+I don't think anyone can say what the "best" way would be but a simple way to do it is to just have the tx contain two transfer instructions and have it be signed by the merchant so it can't be changed.
+What that sounds like is referral payments
+Got it thanks! And to clarify, once transaction requests are enabled would an escrow system be the best way to implement the case described above (taking an incoming Solana Pay transaction from a consumer and splitting it between a merchant and another party)?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+As autonomous dot io is the only live e-commerce integration, any idea how they used Solana Pay? Like a technical breakdown? I assume web3js, Solana pay, and sol wallet adapter (or maybe not wallet adapter as Solana pay only supports some wallets)
+Playing with it rn and that's super cool! Where is the seed phrase for the wallet? And does Torus have access to the seed phrase/ private key that is associated with a login?
+I'll check it out. Thanks!
+Actually, we are planning to build PWA version for https://solana.tor.us
+for ethereum example, there is MEW pwa wallet
+https://help.myetherwallet.com/en/articles/5449278-using-mew-as-a-progressive-web-app-pwa
+OK - thanks for the tip.
+Hmm this sounds pretty theoretical as a use case. What's an example of a "PWA wallet"?
+The point of sale app is only intended to be a reference implementation to demonstrate in person payments. But you are free to customize it however you like! You could read an `amount` query param from React Router and populate the state.
+2 use cases I could think of
+1 - merchant page could have generated protocol link button/hyperlink. User click on the button, PWA wallet will be launched if user had PWA installed.
+2 - for mobile phone that installed PWA wallet, scanning the generated qrcode can prompt to launch PWA wallet.
+
+`bitcoin:`schema is already in the safelisted schema, could we have `solana:`  in the safelisted schema
+Have conducted some tests using the POS demo to transfer both SOL and USDC on the Mainnet between my 2 wallets on the Firefox Phantom wallet extension and it works great. I've noticed that setting the amount value in the payment request link does not work and one must manually enter the amount by clicking on the number keypad. Is there a way to have the amount value in the payment request link pre-populate the "Total" field so I could simply click on the "Generate QR Code"? This will make it easier for the customer.
+For sure. This is why I recommend learning the spec and core, since it's small. Then you can build the stuff that really moves the needle
+Ok, understood thank
+Not within Solana Labs, no. The goal for our team is to create standards, primitives, and reference implementations that the greater Solana / web3 ecosystem can take and build user facing products with (and sometimes your users are merchants)
+Thanks for the reply. Is it a goal to create plug and play integration for store owners who are not at all tech-savvy?
+Please check out the merchant integration guide on docs.solanapay.com for a general outline of what's involved and best practices. I would also try to read the code in the point of sale app, since that's the proof of concept for how all this works in a simplified context 
+
+We aren't able to give specific advise for custom integrations, but if you publish or find something like this I'd be happy to link to community resources.
+Is there a comprehensive guide for how I can begin to create a merchant web shop that accepts solana. I'm very familiar with Python (which I know doesn't apply here) so I was wondering where noobs can start.
+
+Are there any video walkthroughs of how to setup a payment button?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Perhaps enviro or one of the other projects using unreal engine can help with this. I know metaversol has in-unity minting and looking at the same type of thing, but in unity not unreal. No idea if any of them are open sourcing their integrations but they should. It would be awesome for Grants for those integrations but with a caveat to open source them for all to use.
+sry about that! Will edit the message
+toeing the line on promo in here...
+Hi Jacob, happy to connect. Sent you a DM request! Would love to chat about how you guys work with Shopify, since we want to distribute our product as a Shopify app.
+I am looking for ways to integrate a wallet with Unreal Engine, perhaps pairing Epic online services with a wallet account, and then adding a payment solution inside the game to allow both sending and receiving transactions.
+hi  guys ,  i also build the solana mobile pay ,  http://www.kikenn.com
+We are also a Partner from Shopify and seeking chance to integrate Solana Pay with Shopify, happy to connect with you
+Merchants are encouraged to use the Solana Pay branding to represent the ability to pay for purchases using Solana, even if the request URL protocol isn't used. To an end user, there's no difference, and creating a great experience matters more than the nuts and bolts we use to do it
+I think that Solana Pay right now ~= QR codes, but it's going to develop into a larger vision around web3 commerce on Solana, which includes NFCs, ecommerce, browser wallets, etc.
+Totally okay, examples of Solana Pay in the wild are awesome to see
+Is it okay to post things like this or is this channel only for dev questions
+https://twitter.com/tj_littlejohn/status/1494465488218255364
+No QR code so I assume urls. I wish they had something affordable to test the full transaction, but good call I'll reach out. Would be weird if they only use the buttons and not actually Solana Pay.
+https://docs.web3auth.io/key-infrastructure/overview
+These are really questions for them 🙂  The team working on Solana Pay wasn't involved. But my guess is that it's most Wallet Adapter + web3.js, and I don't know if they are actually using Solana Pay URLs / QR codes (maybe just the buttons).
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
++1
+Hi frens
+I would like to connect to Solana Pay for a discussion regarding widespread adoption of Solana Pay in Japan.
+Came to know about Solana Pay quite recently, and I believe its a game changer to the traditional payment solutions.
+Please let me know appropriate person to talk to. Cheers!
+To answer a broader question, there is nothing that absolutely identifies a Solana Pay transaction. Fundamentally it's just a transaction containing a `SystemProgram.transfer` or `TokenProgram.transfer` / `TokenProgram.transferChecked` instruction. And soon, it will support almost any transaction on Solana, and `reference` keys won't be needed for some use cases.
+
+I wouldn't recommend building a lot of architecture based on the assumption that you will be able to identify Solana Pay merchants from these transactions alone. To even the limited extent this is true now, it won't be for long.
+`reference` is an optional parameter, but that's true of every parameter except `recipient`. In practice, `reference` is always used by point of sale transactions because it's the way you can find a transaction that was sent on chain without knowing who sent it. See https://github.com/solana-labs/solana-pay/blob/master/core/src/findTransactionSignature.ts and https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/point-of-sale/src/components/contexts/PaymentProvider.tsx#L105-L134 for how this is done.
+This channel is for Solana Pay, please ask general questions in the <#517163444747894795> channel.
+Check out the spec. `label` and `message` are not recorded on chain. They are only optionally displayed by the wallet.
+I am getting error while sendAndConfirmTrnasaction
+it's load  balanced.  Looks like you're getting multiple backends and at least one lost its archive connection
+there's something weird going on with the recent transactions data coming from the mainnet RPC. this happens sporadically at random, anyone else seeing the same?
+My intention is to find merchants that use Solana pay. I understand that if you have a transaction, you can identify if it's a Solana Pay transaction by checking if it contains ephemeral public key. But I can't really understand how we could find a transaction by using ephemeral pk. I mean we don't know what ephemeral pk would be to begin with. I checked the how "reference" is utilized but it's an optional parameter and if I were going to use getSignaturesForAddress to identify Solana Pay transactions, what account address would I be passing?
+https://twitter.com/wisebarbecue/status/1494734068004519936
+Hi <@!150787664553967616>, I finally started looking into this  https://twitter.com/jordaaash/status/1493414383300616197
+
+If the optional "label" query parameter is not sent, there wouldn't be a way to identify the merchant info right? (assuming they don't have a .sol address either)
+https://twitter.com/jordaaash/status/1494833488087896070
+Hey Marius, we are building a directory of merchants that use Solana Pay to provide more visibility for them. I would like to connect with you to discuss couple things. Just sent you a FR.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I am getting this error on adding these lines of code. pls help
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+What's the best way to airdrop a wallet USDC on testnet?  https://spl-token-faucet.com/ seems to give unknown tokens
+I know this may be not the best spot to ask, but I'm trying the label, memo and reference parameter while generating the QR Code, and trying with the Phantom iOS wallet and Crypto Please wallet - but none of these params appear there, by any chance do you know if they have implemented this already?
+maybe memo or  lastest transcation
+What metrics do merchants track via Solana Pay?
+Thank you
+I will try this
+This isn't a problem with the Solana Pay SDK. The general issue is that your build tool/configuration isn't set up to handle imports of ES modules. I would recommend using Parcel or Next.js which will handle this automatically. https://github.com/solana-dev-adv/solana-dapp-next should also work if you add Solana Pay to it.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+You can swap USDC-spl for wrapped versions of Eth (and maybe btc) with https://jup.ag/swap/ . They have a SDK
+This may not be the right place to ask this so if I need to checkout a different channel please feel free to point me in the right direction....
+I'd like to use solanapay to allow users to purchase ETH, Bitcoin or any other coin? 
+
+I guess what I'm really asking is .... are there any examples on how I could use USDC to buy and wrap tokens so they can live in my users solana wallet?
+Ohhh I see thank you!
+FWIW I used DUMMY tokens in testing Solana Pay before launch. USDC wasn't available on devnet, and I'm not sure this has changed.
+I believe Phantom is working on supporting this. I'll reach out to them and the other wallets soon and see where things are at.
+`reference` is not intended to be shown at all. It's just random pubkey(s) that have no meaning to an end user. `label`, `message`, and `memo` should be shown to users, but this is up to the wallet (the spec suggests but does not require it).
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+The way I'm doing it rn is just using the Vercel deployment and copy pasting into browser on my phone. 
+
+Is there a better way?
+
+```https://<YOUR DEPLOYMENT URL>?recipient=<YOUR WALLET ADDRESS>&label=Your+Store+Name```
+Does anyone have recommendation on how to get the Solana Pay numpad set up on an iPad or mobile device, where they user can just set their own public key as recipient?
+
+Like the localhost URL
+```
+http://localhost:1234?recipient=Your+Merchant+Address&label=Your+Store+Name
+```
+You can try contacting the mtnpay team to ask how they integrated with square. 
+https://twitter.com/mtnPay
+Here's how to change to Mainnet and  request USDC 
+https://github.com/solana-labs/solana-pay/issues/55
+
+Here's a youtube video I made following the steps (sorry no sound)
+https://www.youtube.com/watch?v=eD0PgmilML4&ab_channel=OhFun
+
+Here's a youtube video demoing sending USDC on mainnet (1min video)
+https://www.youtube.com/watch?v=XVGtoIXdSvU&ab_channel=OhFun
+<@899695080904994907> please share them if you see others they could be of use to
+<@!899695080904994907> I cannot send you a friend request, could you send me one?
+<@!848551904547569664> joined them too, thanks a lot for those resources!
+Thank you!! Much Appreciated!
+Most of the Solana Pay activity is probably here but here are some other developer discords if youre interested.
+
+https://discord.gg/bPwnmR4H
+https://discord.gg/e4YupcsQ
+
+Also, a lot of good dev resources on https://soldev.app/ and https://solanacookbook.com/
+Are the developers of Solana Pay active in this discord? Or I guess a better question, is this the correct place to ask questions about Solana Pay, or is there a better forum/website way to get answers.
+Excellent! Thank you!
+But to be completely honest, I'm super new to Solana development and been thinking about what I can build for fun and just really want to know what is possible, what has already been done, and what I can build with what is available now. I have about 3 project ideas but I'm still gathering information on where I should focus on and have fun developing.
+Awesome!
+
+Could I dm you to chat a bit about the code? I cannot understand everything so far aha.
+
+Btw, here's my source claiming USDc tokens are accepted: https://www.pymnts.com/cryptocurrency/2022/solana-pay-launches-low-cost-instant-crypto-payment-everyday-purchases/
+Lol Developer with many store owner clients
+The articles in which I saw that it accepted was in French, I'm trying to find resources in english and will get back to you.
+
+Are you a developer or a store owner? (or none)!
+Or maybe Solana Pay can be configured so when receiving Sol, it automatically converts the Sol to USDC . This would probably be the most ideal.
+Really? I hope this is true because I was very concerned with the idea of receiving Sol for a product that is being sold for a price and then 5 minutes later the price of Sol dropping. Which I don't understand how this can work for any business.
+If I understood correctly, merchants using solana pay can be paid in any crypto on the Solana network (including USDc, Sol & others)
+I have some basic questions regarding Solana Pay. If I'm a merchant and use this service, I'm assuming payments will be via Sol. Not a stable coin like USDC correct?
+A whole business can be built to do that, so it is possible
+That's great. If a physical store receives payments using SolanaPay to a wallet they set up would it be possible to automatically turn the incoming tokens into USD and deposit into a bank account? I've seen some services that are able to do this but I'm wondering if it would be possible using SolanaPay
+No, you can use any spl
+From the website I get the impression that solana pay only accepts stablecoins, is this really the case?
+Hello
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Any pointers on how to properly configure and implement these deep links is much appreciated
+For example, using an “a” tag with the href pointing to “solana:<address>?amount=…” isn’t doing much
+Looking for some resources on how to implement SPay deep links on web apps (in desktop environments). I read the wallet integration section of the official spay docs but it wasn’t clear enough.
+The current master https://github.com/solana-labs/solana-pay/tree/master/point-of-sale works well (but does not implement the link methodology). Is the new client/server https://github.com/solana-labs/solana-pay/tree/d4e11fc8396d490ed0dd1dda5192187811837eaf/point-of-sale stable? Does it fully implement the link methodology PR #77 and are we simply waiting for Phantom wallet to implement it as well? Will this new client/server version  eventually be designated the master so that the current link-less master will disappear? Or will both versions continue to work and be supported?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+OK, it can handle multiple payment with "reference" filed.
+at Demo page, I create 2 QR code with same amount SOL (0.002) , and scan/pay the right one only.  And the right one was completed. On the other hand, the left one was NOT completed.
+(it was desired result)
+can solana pay receive multile payment for the one account simultaneously ?
+or need to use temporaly account each time ?  (Keypair.generate())
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Actually, are you encoding the memo as a param in the transfer request URL? If you're not, it isn't expected to work (Phantom needs to know you want to include a memo).
+This sounds like an issue with Phantom. The spec requires that the memo instruction be added by the wallet. If they don't do this, it won't be there when you look at the tx.
+Great feedback.
+
+I had a question regarding logging memo field in the solana blockchain as in the following example:
+
+https://explorer.solana.com/tx/5RePdio6eKHSJjPmhVrPscrtG4w4eoa68PgKF1TksotT7yLmNvvf9ocuXbTtdvmnUcd1FtWZfCAdgeeq79E7boyJ?cluster=devnet
+
+I did a search for "memo" in the Developer Support channel and based on the collective feedback from multiple developers, I have gone ahead and made the following changes to this file:
+
+https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L139-L141
+
+Original (lines 139-141):
+programId: MEMO_PROGRAM_ID,
+keys: [],
+data: Buffer.from(memo, 'utf8'),
+
+My changes (lines 139-141):
+programId: new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"),
+keys: [],
+data: Buffer.from('applepie', 'utf-8'),
+
+I've done multiple live transfers between my 2 phantom wallets with USDC on the mainnet, so the  standard transaction works well. 
+
+No memo data gets recorded with the transaction.
+
+I used cargo to successfully execute the tests/functional.rs file in https://github.com/solana-labs/solana-program-library/tree/master/memo/program (all OK) so
+it appears that rust is working properly on our server with latest version.
+
+Just puzzled that the memo data is not getting appended to the transaction and recorded on the solana blockchain.
+There are several questions here.
+
+The client/server point of sale app in that branch is intended to act as a quick proof of concept to allow wallets to test the feature as they implement it. We are waiting on wallets to do that, a few are already working on it.
+
+If you're using transfer requests (the current way of using Solana Pay), you can use just the `client` directory there. Don't set the `link` config param, and it should work just like it does in master. Both versions should continue to be supported.
+
+However, I'll be working on a more full featured version of the point of sale backend that will sign the tx as fee payer, and involve an NFT for a discount. This is outside the scope of that PR (but depends on it) and will be used in a future launch event for Solana Pay transaction requests.
+
+I expect transaction requests to quickly become the dominant way of using Solana Pay. Even though it adds complexity to have a server, it adds a ton of power and flexibility, and makes it possible to use Solana Pay atomically for many use cases, even without the notion of a "payment".
+However, the point of sale and the `findTransactionSignature` function is just designed to find the first use of a unique reference to act as a client ID. You could use `getSignaturesForAddress` to find them if you had categorized them, or you could use `findTransactionSignature` and then iterate through the keys to check the categories.
+The purpose of allowing multiple `reference` keys in the spec is to allow emergent use cases. For example, you could use one reference to categorize purchases, and one to unique identify them.
+Team - according to the official spec we are allowed to use multiple public keys for reference, and indeed the `encodeURL` API from Solana Pay allows us to pass an array of public keys for this.
+
+However, while trying to find the transaction signature - we use the `getSignaturesForAddress` API from Solana which expects this field to be a single public key. 
+
+Due to this, the `findTransactionSignature` API from Solana pay only accepts a single public key. This means that we can't effectively use multiple public keys for the reference field 😦
+
+What am I missing?
+Hello everyone,
+
+If you are a physical or digital store owner that uses Solana Pay or are in the process of implementing it, let us know!
+
+We would like to add your store to our directory and provide you with more visibility! 
+
+https://aten.app/
+do you mean different solana public key (i.e. different address)?
+The reference public key should be unique for each customer session to prevent something like this
+that's a problem i guess? If you run a shop and at the same time you need to accept $25 USDC
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yes
+It was just my iPad. Updated and now it works
+Link works fine on my iphone browser. Don't have an iPad.
+That is my understanding.
+I set up a vercel Solana Pay URL set to request USDC on Mainnet. 
+The link works on my Samsung phone, but loads a blank white page on my iPad. I tried the official demo from the Solana Pay github my iPad too, and it also loads a blank page. Any ideas why not working on iOS? Is it likely something with vercel or just maybe my device?
+
+I was hoping to use this as an simple way to get people going with using Solana Pay (request payments using Solana Pay from browser on mobile device)
+https://www.youtube.com/watch?v=sJ6J78fFp4k
+Is the optional "label" part of the URL just there right now waiting for wallet providers to implement? 
+
+```https://<YOUR DEPLOYMENT URL>?recipient=<YOUR WALLET ADDRESS>&label=Your+Store+Name```
+Does the current POS demo use this createTransaction.ts file: https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L137-L143 ? So that if a memo instruction is added to this file, the POS demo will send it to the wallet for signing?
+I've been doing these live transactions (USDC on mainnet) using the POS demo with my 2 phantom wallets (firefox browser extension) on our own server (after getting it to work initially on the vercel app). By wallet-adapter starter project, do you mean another project and not the working POS demo?
+I would recommend just using one of the wallet-adapter starter projects and sending a transaction with a browser extension wallet. This way it's easy to compose it and include a memo.
+Yeah - it is a little confusing to me. I'm not worrying about the new #77 link transfer spec for now. Just wanted to focus on modifying https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L139-L141 (lines 139-141) so that the memo data gets appended to the transaction and recorded on the blockchain. Thanks for the clarifications - 'will do some more tests on my end.
+No, I understood what you're trying to do. I think you may be misunderstanding how Solana Pay works. You do not have control over how the transaction is created by the wallet.
+Just to be sure I understand correctly, when you say that they are adding the memo using the current createTransaction.ts file: https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L137-L143 the memo does get added to the transaction and is not dependent on the phantom wallet.
+I modified that exact same createTransaction file as follows:  Original (lines 139-141):
+programId: MEMO_PROGRAM_ID,
+keys: [],
+data: Buffer.from(memo, 'utf8'),
+
+My changes (lines 139-141):
+programId: new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"),
+keys: [],
+data: Buffer.from('applepie', 'utf-8'),  but for some reason the memo data is not added/passed along with the transaction.
+That is exactly what I'm trying to do by modifying lines 137-143. And the memo is not getting passed. Sorry - I think I confused you by giving you the impression that I was trying to do this using the new link request spec. I'm just adding the memo to the initial portion of the transaction.add - don't understand why it adds the lamport transfer code but not the memo.
+If you include a Memo instruction in a transaction you create and send to a wallet for signing, it will work. But this isn't what Solana Pay is doing with its transfer requests.
+I can't tell you when Phantom will implement this though. The spec requires it, but I don't run the wallet teams, and all I can do is help coordinate their efforts.
+They are doing it just like this: https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L137-L143
+I appreciate the clarification because there is not much else I can think of doing test-wise. Any updated word on when you think the phantom wallet will implement passing the memo data field? How are people passing the memo field currently in transactions such as this one: https://explorer.solana.com/tx/5RePdio6eKHSJjPmhVrPscrtG4w4eoa68PgKF1TksotT7yLmNvvf9ocuXbTtdvmnUcd1FtWZfCAdgeeq79E7boyJ?cluster=devnet where the memo data is "hi sangeet"? I'd just like to be able to replicate this for learning purposes independent of the wallet.
+I pinged the Phantom team that works on their Solana Pay implementation about it 🙂
+The entire transaction is constructed by the wallet from the transfer request alone. So if you've tried passing in the `memo` parameter, that suggests the wallet isn't implementing this part of the spec correctly. This is an issue to raise with the wallet.
+Mobile wallets are written in Swift, Java, Kotlin, ObjC, Flutter, React Native, etc. They don't use that code directly, and even if they did, changing your copy of it wouldn't work. Does that make sense?
+That's a reference implementation -- it describes in code what a wallet conforming to the spec ought to implement natively.
+The wallet doesn't use that `createTransaction` function at all.
+Yes - I've tried it a few times with the memo param in the transfer request url. I've also commented out the "if" statement brackets so that the memo is added even if the memo param is not present. Nothing works. What I don't understand - the wallet is sending the transaction successfully to the blockchain. But the memo being added to the beginning of the transaction (before the lamport transfter) - this is done by the wallet? Any way to modify the current createTransaction.ts file so that adding the memo to the beginning of the transaction is done inside the file and not dependent on the wallet?
+It wasn't a problem in the end, as I was able to uniquely identify the each payment using the reference.
+thank you 👍
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Phantom is working on implementation on their end now, so I've kind of been waiting to merge until tx requests are supported. But until then, all the todos would help prepare us for devs using it
+Yes, could definitely use help, thanks for offering!
+<@!150787664553967616> is there anything I can help with to get https://github.com/solana-labs/solana-pay/pull/77 across the line? I noticed there's some tasks in the PR, would you be open to help with anything there?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Might help to move Dev support/resources, Solana Pay, and core technology to the top of the channel group since it can be a tad more confusing to spot when behind the different dev support language channels. Maybe the most commonly used languages can be moved closer to top? Anyway, idk maybe it's not a problem. I always just thought core technology channel was a bit hidden
+👋
+is this going to be a channel for developer support I assume, I can move to other category if not
+<@!372561113365086218>
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+For sure. Any SPL token will work
+Perfect thank you, learning something new every hour now lol
+So on devnet, you can't use USDC, but you can use this DUMMY token, which is what I used for testing: https://spl-token-faucet.com/
+One last question for today, and very much appreciate your help, how can I test it using the devnet? As in can I swap devnet aidropped SOL to USDC somehow like mentioned here https://zetamarkets.medium.com/how-to-airdrop-yourself-dev-net-solana-tokens-using-the-phantom-wallet-and-spl-token-ui-9711d029fb19 ?
+They were working on accepting payments before the announcement and are integrating Solana Pay now, I believe (but I haven't spoken with them)
+ohhh
+It wasn't actually a Shopify store AFAIK, that was widely misreported. It was a custom store (autonomous.ai)
+I remember seeing a shopify store with it live, <@!150787664553967616> do you recall what the store was?
+Yes that sounds like a solid goal.
+One more caveat -- if the user is using FTX's wallet app which supports Solana Pay, it's processed as a withdrawal, and FTX pays the gas
+When this feature becomes part of the spec, the merchant can use Octane and return the co-signed tx to the user's wallet seamlessly
+The reason is that Octane must receive a signed tx from a user and then sign and send it, but with Solana Pay right now, the wallet is signing and sending the tx themselves
+Yes. And for Octane to work with Solana Pay out of the box, we also need to come to consensus on https://github.com/solana-labs/solana-pay/issues/26
+Until octane is production ready, for USDC purchase via Solana Pay the buyer will need a small amount of SOL in their wallet for tx fee correct?
+True that makes sense.
+However, setting up an FTX account may take longer than setting up a noncustodial wallet because of KYC requirements. So one way to do this for your merchants would be to have them create a wallet and an FTX account, and they could sweep the funds to the FTX account periodically, or just use the wallet temporarily while they wait.
+Yeah this is a really logical flow for the average merchant. Especially because FTX.us gives you 1:1 USDC:USD withdrawal
+hey party people, any example stores out there using shopify ( https://github.com/solana-labs/solana-pay/tree/shopify/shopify ) ?
+I "fixed" it. _See topic_
+There's also Solana Octane -- could be cool if someone utilizes that https://twitter.com/jacobvcreech/status/1488922292373622784?t=mDDKSrTMpADnWeAKPEYt2A&s=19
+Thinking this through as I approach merchants and my own use cases, most merchants will want funds to end up in their bank for biz/accounting reasons, that's where we might get hit with fees. Lowest fees and best scenario is probably something like this?
+
+1. Pay via Solana Pay
+2. USDC goes to Wallet address on FTX
+3. FTX daily withdrawal from USDC to USD via ACH
+Ah, developer's good I think! Just didn't know. Thanks for setting this up
+Developer role, or do you want community role too?
+I think maybe because I didn't have developer role before
+Fixed! Woocommerce Solana Pay team here! Plugin should be done in less than 2 weeks, maybe end of next week 🙂
+<@804350183105363980>  I'm hearing this channel is read only to some users, what role do they need to have?
+Does this functionality exist or would that be something that would be developed in implementing the point of sale app?
+👋
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+No, but if you create some I'd be happy to link to them. The reference implementation for Solana Pay is in TypeScript
+The wallet integration docs aren't for merchants that are looking to put a Solana Pay button on a site. They are for wallets that are implementing the protocol to scan QR codes and send transactions. Check out the links here for buttons and brand guidelines: https://github.com/solana-labs/solana-pay/tree/master/core#getting-started
+Hard to tell what's going on without more context. Instead of code snippets, please post a link to a Github repo with your fork that reproduces the issue.
+Are there any instructions or walkthrough on how to create a "solana pay" button on website?
+I'm just learning how to use react, and not sure how to do it based on the wallet integration doc
+https://github.com/solana-labs/solana-pay/blob/shopify/core/WALLET_INTEGRATION.md
+Hey everyone 👋 are there any supporting docs for Python / Flask?
+```
+export const TESTNET_ENDPOINT = clusterApiUrl('testnet');
+export const TESTNET_USDC_MINT = new PublicKey('CpMah17kQEL2wqyMKt3mZBdTnZbkbfx4nqmQMFDP5vwp');
+```
+
+```
+    return (
+        <ThemeProvider>
+            <FullscreenProvider>
+                {recipient && label ? (
+                        <ConnectionProvider endpoint={TESTNET_ENDPOINT}> 
+                        <WalletProvider wallets={wallets} autoConnect={connectWallet}> 
+                            <WalletModalProvider> 
+                                <ConfigProvider 
+                                    recipient={recipient} 
+                                    label={label} 
+                                    splToken={TESTNET_USDC_MINT} 
+                                    symbol="USDC" 
+                                    icon={<USDCIcon />} 
+                                    decimals={6} 
+                                    minDecimals={2} 
+                                    requiredConfirmations={9} 
+                                    connectWallet={connectWallet} 
+> 
+                                    <TransactionsProvider> 
+                                        <PaymentProvider> 
+                                            <Outlet /> 
+                                        </PaymentProvider> 
+                                    </TransactionsProvider> 
+                                </ConfigProvider> 
+                            </WalletModalProvider> 
+                        </WalletProvider> 
+                    </ConnectionProvider> 
+                ) : (
+                    <div className={css.logo}>
+                        <SolanaPayLogo width={240} height={88} />
+                    </div>
+                )}
+            </FullscreenProvider>
+        </ThemeProvider>
+    );
+```
+trying to play with sending USDC on testnet using point-of-sale, getting error on iPad I'm sending from that says "failed to send transaction: Transaction similation failed: Attempt to load a program that does not exist"  
+
+any pointers on where I went wrong?
+👋 I'm working on a POS interface extending on the solana pay demo. Trying to really nail the experience of getting a store front up and running for non technical/crypto users.
+
+If anyone is interested in working with me, lmk! Could use some design help
+Hello! We are planning to use Solana Pay for our hackathon project!
+i'm very interested in solana pay for building a decentralized ecommerce platform
+hello
+I think you could but would have to dive deeper into https://manual.bubble.io/account-and-marketplace/building-plugins
+Is anyone familiar with the "nocode" tool Bubble? I'm building a marketplace with it and would be great to know if a Solana Pay plugin could be built for it.
+Did you mean a lot of work for a merchant or a developer to create the interfaces?
+Do you think that is a big enough idea? The creation of the collections and issuance/transfers seems like it would mostly be ui. Some lifting to do to get the integration with pos so the discount is accounted for correctly. Seems like as a general use case, though, that there would be lots of merchants interested in offering purchase incentives and that if an easy higher level api existed that could have broad appeal. That is just an intuition, but the mvp of this seems doable in hackathon time to have something to get feedback on.
+<@!533682398903402497> something we've talked about for sure. You likely could do this on your own today but it would require a lot of work
+I was thinking of doing this for the Hackathon if it didn't already exist and somebody else thought it would be useful. I was thinking of a generic nft coupon standard that merchants would transfer to potential customers on their websites and then work out the integration with the pos app to reflect the discount in the qualifying purchase tx. You would offer merchants a higher level api that they could use to create collections with fixed supplies and keep track of issuance and use in purchase txs.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hi! Is it possible to use FTX android app for Devnet? i'm trying to play around with the Point-of-Sale app. couldn't use the Phantom mobile app (for customer interface) as I don't have an iOS device. was hoping I could use FTX app on my android device instead
+Any pointers on how to run the shopify frontend to play with?
+I ran 
+
+npm install
+npm install @project-serum/anchor @solana/web3.js
+npm install @solana/wallet-adapter-react \
+@solana/wallet-adapter-react-ui @solana/wallet-adapter-wallets \
+@solana/wallet-adapter-base
+npm start 
+
+tried yarn install and yarn start too
+
+but http://localhost:1234/ loads up as a blank white page
+What are optional "reference"  parameters supposed to be used for?
+solana-pay is awesome, and I'm so excited 😄 amazing
+Simple steps to deploy the point of sale app just added: https://github.com/solana-labs/solana-pay/tree/master/point-of-sale#deploying-to-vercel
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://twitter.com/robbmcm/status/1490739973426921474
+
+This is an amazing offer! Rob worked on the hackathon design kits for Solana Pay
+Also, combining "swap + payment" into one transaction.
+I wouldn't suggest this if it wasn't something I think is super useful, the main purpose for me is to encode the "subscribe" transactions so they can be scanned like Solana Pay. They have a lot of inputs, but most could be preset.
+I think encoding 200-300 chars is pretty reliable, which would likely be plenty.
+The URL is just the template values, tho. Not the template itself.
+Yep
+Sounds good. Keep in mind that encoding more chars in the QR makes it more dense / prone to scanning issues. But if you can find a way to compress your template it might work.
+The current Solana Pay URLs do this, it's just a very specific and kind of limited template.
+I think the concept is sound and it could be very useful, because any whole complex transaction could be shorted to just a URL.
+I'll try to actually build it so it's not amorphous... then do an RFC like you said.
+For PDAs there would need to be more details in the "param" fields about which ones to combine (wallet + mint for example) to generate the PDA.
+Right. The idea is to make a template format that is general purpose.
+If you come up with an implementation that solves those two problems, please open an issue as an RFC!
+Plus you're making the wallet do all this decoding of a totally custom format, when it already knows how to encode and decode wire-format transactions
+You can't encode a pubkey you don't know in the QR code. So if you followed this approach, you would need to have a placeholder for it.
+
+This falls apart when you need a PDA. Then when you need a PDA of that PDA...
+You need two things
+
+1. The users pubkey, and the ability to make PDAs from it
+2. Authentication of transaction requests
+This doesn't seem to solve the issues that the request link spec solves
+With this any transaction can be encoded into a JSON template and "solana:" URLs with parameters that are filled in right at the end.
+`[{'programId': 'AGNTo5SLwpnyi5Yz9YFP7Qd3jGpW2ZTMbM6xrBWyfBrv', 'keys': [
+    {pubkey: 'CXXEKjiJtp9z7GrM926WEit217iFcpDichV9fQQJCQY1', isSigner: true, isWritable: false, isTemplate: false},
+    {pubkey: 'AYynDCmwM568oCWYBoM3vUb43yXBSmmH42v5eK6Nr5dJ', isSigner: false, isWritable: true, isTemplate: false},
+    {pubkey: 'param', isSigner: false, isWritable: true, isTemplate: true},
+    {pubkey: 'wallet', isSigner: false, isWritable: true, isTemplate: true},
+    {pubkey: '2cxhShPFPqqPyZngmLEoujX173J6JT1gSHd9wvpATV5r', isSigner: false, isWritable: true, isTemplate: false},
+    {pubkey: 'param', isSigner: false, isWritable: true, isTemplate: true},
+],
+    'data': [
+        'U29tZSBEYXRhCg==',
+        {'type': 'u64'},
+        'TG90cyBNb3JlIERhdGEgRGF0YQo=',
+        {'type': 'String'},
+    ],
+}]
+
+solana:template:51QemUCVSi8tT4zSZR7Zkh1ijFr7dGXPFyiQ3ZBZrmAp:D8uVCQpbCU7Jutu2Jd63AR7zoTxrCDPmrmfg9HTnrEMP:1230000:TXkgc3RyaW5nCg==:EkaRyGYXr4pHJtzJPFyGNyDHNoncZPBdKHWqUrhUiQbR
+
+OR:
+
+solana:template:51QemUCVSi8tT4zSZR7Zkh1ijFr7dGXPFyiQ3ZBZrmAp:D8uVCQpbCU7Jutu2Jd63AR7zoTxrCDPmrmfg9HTnrEMP:1230000:TXkgc3RyaW5nCg==:https://my.site.com/some/file.json`
+This is both of those put together:
+This is the "data:" buffer... This can easily be templated as well.
+The instruction data needs to be encoded at a binary level too. That's something else it would require.
+I may try building a proof-of-concept of this in the next few weeks.
+Template URL Pattern: `"solana:template:<param 1>:<param 2>:<param n>:<template definiton Solana address or URL>?more=options&label=Subscribe"`
+`solana:template:51QemUCVSi8tT4zSZR7Zkh1ijFr7dGXPFyiQ3ZBZrmAp:D8uVCQpbCU7Jutu2Jd63AR7zoTxrCDPmrmfg9HTnrEMP:EkaRyGYXr4pHJtzJPFyGNyDHNoncZPBdKHWqUrhUiQbR
+
+OR:
+
+solana:template:51QemUCVSi8tT4zSZR7Zkh1ijFr7dGXPFyiQ3ZBZrmAp:D8uVCQpbCU7Jutu2Jd63AR7zoTxrCDPmrmfg9HTnrEMP:https://my.site.com/some/file.json`
+Then the URL would look like this:
+`[{'programId': 'AGNTo5SLwpnyi5Yz9YFP7Qd3jGpW2ZTMbM6xrBWyfBrv', 'keys': [
+    {pubkey: 'CXXEKjiJtp9z7GrM926WEit217iFcpDichV9fQQJCQY1', isSigner: true, isWritable: false, isTemplate: false},
+    {pubkey: 'AYynDCmwM568oCWYBoM3vUb43yXBSmmH42v5eK6Nr5dJ', isSigner: false, isWritable: true, isTemplate: false},
+    {pubkey: 'param', isSigner: false, isWritable: true, isTemplate: true},
+    {pubkey: 'wallet', isSigner: false, isWritable: true, isTemplate: true},
+    {pubkey: '2cxhShPFPqqPyZngmLEoujX173J6JT1gSHd9wvpATV5r', isSigner: false, isWritable: true, isTemplate: false},
+    {pubkey: 'param', isSigner: false, isWritable: true, isTemplate: true},
+]}]`
+It's just a JSON construction of an array of " TransactionInstruction" classes, with minor changes for templating.
+So... here's a potential idea for transaction templating:
+Hello, Hoping to connect with someone who can help bring my fashion store to life with phantom wallet integration + solana pay
+The current mechanism has the advantage of simplicity... Definitely an interesting problem to make it more fancy.
+That's why it would need to be a kind of template, which the wallet would interpret. It could easily just be a JSON definition that is stored on chain.
+You really don't want another smart contract in front of what you're trying to run, though.
+Where the final 2 accounts get filled in based on an integer index parameter that gets sent with the TX.
+I'm pretty sure that could be repurposed to do custom transactions via Solana Pay.
+Then everybody signs it and then they run.
+Because there's multisig wallets that load other transactions on-chain first.
+I really think this could be done.
+Gotcha. I'll check that out in more detail.
+Basically if there was a way to post a transaction ahead of time but leave a few accounts to be templated in later. Then the simplified Solana Pay wallet interaction would trigger this.
+Yeah. An alternate way forward could be WalletConnect 2.0, but this is more complex and currently lacks an implementation and complete spec.
+Local networking is very much not fun.
+Cramming them into a QR code isn't that great.
+Otherwise transmitted in real-time.
+If that place is not on the Solana blockchain itself it becomes kind of an awkward standard for Solana.
+So they have to be posted somewhere while they're being prepared.
+That's how I know that
+I hit the limit actually...
+For sure... (make them longer! haha!)
+(currently)
+They're only like 1300 bytes long.
+Sending the transaction directly, in real-time is preferred.
+It needs to be thought through pretty well of course.
+Ya, and clunky.
+There's a lot of potential solutions.
+Yeah. That gets really tricky with PDAs though
+Or some kind of on-chain transaction templates.
+Ya.
+Obviously they do support any transaction once they load a website.
+The main challenge with preparing a transaction in advance is that you don't know the customer's pubkey. The best way around this (that I've thought of is) the request link proposal. But there may be other ways to do this with different tradeoffs.
+Getting there...
+Honestly I haven't played with the mobile wallets enough to really understand all the modes and features.
+It would be great to be able to prepare any transaction and then activate it with just a QR code and a simplified interface.
+Yeah, definitely. Wallets are in prime position to help them swap ad hoc, but there are a lot of ways service providers can innovate, including crafting txs for merchants.
+a.k.a. streaming payments... I have code for this.
+Just FYI, the recurring subscription system that I built also support automatic swapping.
+I think the customers will appreciate spending the crypto though. That's why I think swapping is pretty important.
+Completely agree.
+We expect initial merchants will mostly be interested in USD-equivalent stablecoins, but this may change as more are exposed to crypto.
+Yeah. In the near term, I see two things happening --
+
+1. Wallet scans, sees you have insufficient funds. Right now, they just tell you no dice. Soon, they'll offer to swap for you. May even do it atomically in the same transaction. This is a minor extension to their existing functionality.
+2. Arbitrary transaction support with Solana Pay. Merchant receives your wallet address, sees what tokens you have, denominates in any of them (or suggests swaps), proposes a transaction.
+Ideally the user would select the token right on their wallet itself. This would require changes to the Solana Pay spec as it exists today, which I try to avoid if there's any possible way 🙂
+Also, I'm looking into ways that Solana Pay could use more customized transactions besides just a simple "transfer." This would enable swapping immediately all in one transaction, with a couple of other simple features too (like tagging a TX with an identifier).
+There's several ways to do the swap: Serum, other DEXs, also my thing Atellix Network has a swapping system too.
+Finally a backend "crank" system notices the transfer and then swaps from the payment tokens to the one the merchant wants to receive.
+Second the user pays via Solana Pay to actually transfer the tokens they're paying with.
+First the user selects a token and the price is converted from one token to another on the screen.
+For Solana Pay it's a three-step process:
+interesting, just took a look at the code. So how does it work if i was buying something for $100 and i wanted to use Solana Pay and pay in SOL. it swaps my SOL for something? How does it calculate how much SOL is needed for the $100 payment?
+There are minor issues which have come up, like slippage, but overall it seems to work fine.
+Atellix Network is doing this and it supports Solana Pay too.
+great idea! If your POS requires the ability to convert from a USD value of an item to the correct SOL or SPL BTC/ETH  etc amount to be used in the solana pay generated URL, you can easily lookup the correct field for the amount value using  price feed data on Solana, as opposed to relying on a potentially unreliable API call https://twitter.com/pappas9999/status/1490466239658876929
+It's right in your screenshot:
+
+> Because Solana validators index transactions by these public keys, `reference` values can be used as client IDs (IDs usable before knowing the eventual payment transaction). The `getSignaturesForAddress` RPC method can be used locate transactions this way.
+
+See https://github.com/solana-labs/solana-pay/blob/master/core/src/findTransactionSignature.ts for the reference implementation.
+
+In short, `reference` params allow you to identify, categorize, and locate the transaction when it lands on chain.
+Oops, I thought you meant the point of sale app. The Shopify integration is in development, but I'm not sure it can be run yet.
+Slope Wallet (https://play.google.com/store/apps/details?id=com.wd.wallet) also supports Solana Pay. I think you can configure that to use devnet, but I haven't done it myself
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+iPhone-to-iPhone contactless payments. Stripe/Shopify already integrated. Open-ish platform. Can't wait to see the first Solana Pay payment made this way!
+https://www.apple.com/newsroom/2022/02/apple-unveils-contactless-payments-via-tap-to-pay-on-iphone/
+The Phantom Mobile App is not responding to Solana Pay  deep-links yet, is this in works?  Any pointers on this?
+Hi guys, could someone tell me how to insert qrCode.append in a React Jsx element?(To show it as an image in the page). I can get it to work when using HTML (document.getElementById=root) but not in React 😦
+
+Thanks in advance 🙂
+About this, I am trying to set up a system for using NFC tags instead of QR
+Any developer interested in the payments track willing to jump on a call to see if an idea i got in mind is possible to implement? If positive will also allow the developer to help me building It
+Darn... thank you for checking. I'm going to have to jog my memory.. there's definitely someone in the NFT community that has a line in their twitter about being Burmese
+Have check with the team. No one remembers anyone mentioning Myanmar 😔
+Thank you!
+I will check with the OG’s and see!
+Have absolutely no idea. 😅
+<@726384382964662413> do you know is there someone in MonkeDao from Myanmar? I could have sworn I saw one on twitter...
+So I'm trying to message some contacts in Myanmar and see if some Solana pay infra would be helpful there -- the docs would have to be translated to Burmese I suppose with maybe an instructional video made 🤔. This came to mind this morning when I had some Burmese coffee brand and I remembered how the Burmese resistance government made Tether an official currency recently.
+
+https://www.google.com/amp/s/cointelegraph.com/news/tether-lauds-myanmar-shadow-government-for-making-usdt-an-official-currency/amp
+Haha yeah Im not sure
+I am about to mess around with this. lol.
+is it on git?
+oh snap I saw this I think
+Someone did already :) https://twitter.com/mattdeco/status/1490495661149540353?t=XNOFZ1CCPLTYC0zvZci_Wg&s=19
+Is it possible to merge Sol Pay and Minting? It would be so cool to integrate NFTs with Sol Pay. That way you can set up NFT galleries where people can come into see your work, use their phone to instant mint a NFT of a collection you are displaying.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Not exactly, just a QR with the specified address in the point of sale
+Oh, got it now, so that could be one time generator for the Solana Pay button or QR code and they can embed it anywhere
+Thats not what I thought of, but, yeah, I guess they could add the option for solana pay
+something like ko-fi? Many creators use that services for small donations. I see that they integrate with PayPal and other services, maybe Solana Pay can integrate with the project?
+yep
+Tipping is an excellent use case for Solana Pay
+just had an idea for the point-of-sale web: a  button or something to generate a QR without any amount specified, for those who want to give a tip :)
+This is super cool
+yes ill put this in the doc
+yeah im gonna use next and tailwind
+oh nice, thank you
+<@!785084693023424542> can talk about how it uses tailwind (I just saw the config there)
+https://github.com/solana-dev-adv/solana-dapp-next
+Gn
+Another thing on the horizon is confidential payments on Solana (SPL zk-token)
+This is solvable in a few ways. Companies can offer services to merchants to help them enable this. One of those may be wallet/key management. They receive funds on behalf of merchants and can sweep the funds to a wallet and pay merchants out of it.
+Am not so confident this is a good marketing strategy for them
+Another q: what about merchants having publicly displayed all of their sales?
+This is awesome and thank you for bringing to my attention we could use another dev or two to push out asap.
+This describes requesting transactions from a link (which could be extremely short)
+See this
+And I hope at some point domains will be useful
+Well... If you need to specify spl token address, and also destination address that takes 64 bytes without anything else. Short domains could allow reducing memory size
+Can you say what you mean?
+?
+ok ty
+Not that I know of but I don't use tailwind so I wouldn't know 🙂
+last random q if you dont mind: is there any examples of wallet adapter with tailwind
+Say more?
+The overarching goal should be simplicity of implementation
+ill give it a read and suggest anything. I have a few use cases in mind
+The best way to help right now is to think about what's in https://github.com/solana-labs/solana-pay/issues/26 and see if you can think of use cases that it's not suited to or ways we should consider changing it
+god bless your soul
+ah I see you also maintain wallet adapter
+Scan qr, mint nft of a place youve been
+I hope we'll have it within a few weeks but we'll see!
+im building assuming this is coming haha
+I mean, domains would reduce qr code size
+ill figure some weird hack for now that can pretend
+will check it out, thanks for your help
+Is something done with domains?
+Check this out, which is a WIP version of the spec with this feature added
+https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md
+100p
+It's the key to unlock most of the really cool use cases
+Support of any txn is something id be happy to help with if needed
+Once we support any transaction, you can do things in band before and after (doesn't even need to be a "payment" in there)
+They watch the chain with RPC, then make a privileged call to some program
+Yep!
+I see, the merchant issues the txn after being paid
+If you don't require atomicity, there are ways to do things after a tx. See https://twitter.com/mattdeco/status/1490495661149540353 for an example
+That's the short answer
+There is no way to do it atomically yet through the QR codes
+Yes I saw that proposal, so I came here to see what hack I could do to at least "pretend" this is possible
+Yet. https://github.com/solana-labs/solana-pay/issues/26
+Nope, giving a look rn thanks
+The spec doesn't allow you to place anything else in the transaction (yet)
+At a very basic level, Solana Pay is just a SystemProgram.transfer or SPLToken.transfer/transferChecked call
+Have you read the Solana Pay spec yet? https://docs.solanapay.com/spec
+
+I think it's important to understand what it's capable of currently to frame your use case in context
+The first txn borrows
+Basically I need to put a txn in front of the solana pay call
+I'm not sure I understand how this intends to use Solana Pay
+Maybe even some server that does the txn on your behalf I guess
+<@!150787664553967616> Thanks for your reply. Im trying to build a proof of concept for riptide, ideally I could get a general txn signed and confirmed via a mobile app. Is it possible to do offline signing using a local keypair? Just thinking what the easiest way to simulate this would be. Realize you may not be an expert on mobile (I def am not), appreciate the help.
+Is this you? https://github.com/solana-labs/solana-pay/issues/57
+Want to comment here? https://github.com/solana-labs/solana-pay/issues/62
+wallet-adapter will need a mobile package soon to abstract the interface for mobile wallets. In the short term, wallets need to implement some interface for communication with a browser or other apps directly
+Support for general transactions is planned but not part of the initial spec
+Solana pay does not support more general transactions yet right? Just transfers? Is it possible to use wallet adapter or something similar to build an ios app?
+Request with the Phantom team! Think they have this planned, but this is up to wallets to implement
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

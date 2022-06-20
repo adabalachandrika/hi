@@ -1,0 +1,314 @@
+{
+    "total_results": 8,
+    "messages": [
+        [
+            {
+                "id": "971882066310492180",
+                "type": 19,
+                "content": "incredible, really appreciate the followup & pointers. I will check it out.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "874031789314826251",
+                    "username": "ktb",
+                    "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                    "avatar_decoration": null,
+                    "discriminator": "8609",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "492411676889710592",
+                        "username": "callum.m",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8089",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T21:12:21.304000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971881780233764915"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971881780233764915",
+                "type": 19,
+                "content": "Yep! The QR code encodes the URL of that API, and the transaction request spec describes how the wallet calls the API (it sends a GET request, and then a POST request with the `{account: public-key}` body)\n\nThe page in my app that displays the QR code for this API is https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon-v2/pages/shop/checkout.tsx and you can see the flow at https://solana-pay-tutorial.vercel.app/shop (you'll need to airdrop some tokens from https://spl-token-faucet.com which it treats as USDC to make the payments, and use devnet)\n\nThe page of my tutorial that covers this specifically is https://www.pointer.gg/tutorials/solana-pay-irl-payments/42175888-6330-4e5b-adef-c76ce490f903",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "874031789314826251",
+                        "username": "ktb",
+                        "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                        "avatar_decoration": null,
+                        "discriminator": "8609",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T21:11:13.098000+00:00",
+                "edited_timestamp": "2022-05-05T21:11:37.366000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971880541378969681"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971880541378969681",
+                "type": 19,
+                "content": "is this still compatible with the QR code flow?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "874031789314826251",
+                    "username": "ktb",
+                    "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                    "avatar_decoration": null,
+                    "discriminator": "8609",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "492411676889710592",
+                        "username": "callum.m",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8089",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T21:06:17.732000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971880015870427166"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971880015870427166",
+                "type": 19,
+                "content": "You probably don't want to separate the token transfer and the prior transaction, and would be better off using the new transaction requests spec. That lets you write an API that takes as input `{account: \"public-key\"}` and then outputs a serialized transaction, which can be anything. So you can include eg. them paying you as one instruction, and then you sending your token/nft/whatever as another instruction. Then it's all presented as one single transaction that they can sign and it either all succeeds or it all reverts \n\nI have an example of this here: https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon-v2/pages/api/makeTransaction.ts",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "874031789314826251",
+                        "username": "ktb",
+                        "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                        "avatar_decoration": null,
+                        "discriminator": "8609",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T21:04:12.441000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971864351344566363"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971864351344566363",
+                "type": 0,
+                "content": "I have a question regarding best practices when coupling solana pay with a token transfer: is it best practice to use the fee payer's wallet address from the resulting transaction in lieu of grabbing manually, e.g. from a Phantom connect flow? i.e. should I always use the fee payer's address from the solana pay txn when determining the wallet address to which to transfer a token/nft/whatever?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "874031789314826251",
+                    "username": "ktb",
+                    "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                    "avatar_decoration": null,
+                    "discriminator": "8609",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T20:01:57.727000+00:00",
+                "edited_timestamp": "2022-05-05T20:04:00.730000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971789932123267103",
+                "type": 0,
+                "content": "Hi, I am new to crypto and Solana pay. Would anyone be able to advise how I might be able to create a payment flow that settled in GBP rather than USD? I have looked at the stablecoins but they are all USD based.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "115238884387979271",
+                    "username": "Rofl_Lobster",
+                    "avatar": "a_629757f099b803135b148fd3198a0b86",
+                    "avatar_decoration": null,
+                    "discriminator": "9108",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T15:06:14.802000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971711219851460618",
+                "type": 19,
+                "content": "Thanks!",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "874031789314826251",
+                    "username": "ktb",
+                    "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                    "avatar_decoration": null,
+                    "discriminator": "8609",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "492411676889710592",
+                        "username": "callum.m",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8089",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T09:53:28.334000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971689903438065714"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971689903438065714",
+                "type": 19,
+                "content": "From the cookbook https://solanacookbook.com/core-concepts/transactions.html#fees: \"All transactions require at least one writable account to sign the transaction. Once submitted, the writable signer account that is serialized first will be the fee payer.\" - so the fee payer is the first signature if you have the transaction. I think that'd be `transaction.message.accountKeys[0]` \n\nIf you only have a reference you can use `findReference` from `@solana/pay` to get a transaction signature, and then `connection.getTransaction` to get the transaction with that signature",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "874031789314826251",
+                        "username": "ktb",
+                        "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                        "avatar_decoration": null,
+                        "discriminator": "8609",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-05T08:28:46.105000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "971512357161422948"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "ea2533147849294c34ebdd804281f2de"
+}

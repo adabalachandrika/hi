@@ -1,0 +1,87 @@
+Any more details on who you're targeting? The value proposition will differ from merchant to merchant; You can find some good material here: https://solanapay.com/
+Trying to purchase a lambo but keeps saying decline, should I leave it for tomorrow?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yes there is, you can hold the Sol tokens until they give you the required amount from yield
+Hi developers! I would like to know if there is a way in solana pay to enable collateral payment? Like the customer deposits and generates interest till the payment amount and then the original amount is returned back to the customer?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+no links without context.  Especially shady looking ones
+Hi, I'm trying to use Solana pay on a webflow front end where I can only add code to the head and body tag. Is there a way to use the solana pay api to carry out transactions?
+<@751739342866612284>  you can look at this
+Any docs?
+How to implement this in solana pay integrated ecommerce platform <@858792989182525481> ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Is there a straightforward way with the SDK to get the wallet address of the payor from a Solana Pay transaction/reference?
+Copying in my reply to ^ from the pointer discord in case it's helpful :)
+
+You need a transaction with multiple transfer instructions, eg. something like:
+
+```
+const transaction = new Transaction({
+  recentBlockhash: blockhash,
+  // The buyer pays the transaction fee
+  feePayer: buyerPublicKey,
+})
+
+const payShopInstruction = SystemProgram.transfer({
+  fromPubkey: buyerPublicKey,
+  lamports: amount.multipliedBy(0.9).multipliedBy(LAMPORTS_PER_SOL).toNumber(),
+  toPubkey: shopPublicKey
+})
+
+const payTreasuryInstruction = SystemProgram.transfer({
+  fromPubkey: buyerPublicKey,
+  lamports: amount.multipliedBy(0.1).multipliedBy(LAMPORTS_PER_SOL).toNumber(),
+  toPubkey: treasuryPublicKey
+})
+
+transaction.add(payShopInstruction, payTreasuryInstruction)
+
+// serialize transaction + return
+```
+
+I'm assuming the instruction here in makeTransaction would need to be modified?
+Any help would be appreciated. I've been googling and not finding a quick answer.
+I need it to be 90% mykey, and 10% another key
+Does anyone have a good example of splitting payments as they're deposited on Solana pay? I built a web app and got solana pay working as the payment system for the frontend, but currently its set like `import { PublicKey } from "@solana/web3.js"
+
+// Your shop wallet address
+export const shopAddress = new PublicKey('mykey..')`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+incredible, really appreciate the followup & pointers. I will check it out.
+Yep! The QR code encodes the URL of that API, and the transaction request spec describes how the wallet calls the API (it sends a GET request, and then a POST request with the `{account: public-key}` body)
+
+The page in my app that displays the QR code for this API is https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon-v2/pages/shop/checkout.tsx and you can see the flow at https://solana-pay-tutorial.vercel.app/shop (you'll need to airdrop some tokens from https://spl-token-faucet.com which it treats as USDC to make the payments, and use devnet)
+
+The page of my tutorial that covers this specifically is https://www.pointer.gg/tutorials/solana-pay-irl-payments/42175888-6330-4e5b-adef-c76ce490f903
+is this still compatible with the QR code flow?
+You probably don't want to separate the token transfer and the prior transaction, and would be better off using the new transaction requests spec. That lets you write an API that takes as input `{account: "public-key"}` and then outputs a serialized transaction, which can be anything. So you can include eg. them paying you as one instruction, and then you sending your token/nft/whatever as another instruction. Then it's all presented as one single transaction that they can sign and it either all succeeds or it all reverts 
+
+I have an example of this here: https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon-v2/pages/api/makeTransaction.ts
+I have a question regarding best practices when coupling solana pay with a token transfer: is it best practice to use the fee payer's wallet address from the resulting transaction in lieu of grabbing manually, e.g. from a Phantom connect flow? i.e. should I always use the fee payer's address from the solana pay txn when determining the wallet address to which to transfer a token/nft/whatever?
+Hi, I am new to crypto and Solana pay. Would anyone be able to advise how I might be able to create a payment flow that settled in GBP rather than USD? I have looked at the stablecoins but they are all USD based.
+Thanks!
+From the cookbook https://solanacookbook.com/core-concepts/transactions.html#fees: "All transactions require at least one writable account to sign the transaction. Once submitted, the writable signer account that is serialized first will be the fee payer." - so the fee payer is the first signature if you have the transaction. I think that'd be `transaction.message.accountKeys[0]` 
+
+If you only have a reference you can use `findReference` from `@solana/pay` to get a transaction signature, and then `connection.getTransaction` to get the transaction with that signature
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Can you please tell me why this pull request has been ignored for so long about solana-pay doc?
+https://github.com/solana-labs/solana-pay/pull/110
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

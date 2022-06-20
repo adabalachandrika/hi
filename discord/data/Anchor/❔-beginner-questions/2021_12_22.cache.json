@@ -1,0 +1,1836 @@
+{
+    "total_results": 56,
+    "messages": [
+        [
+            {
+                "id": "923278232520917003",
+                "type": 19,
+                "content": "can you also check `is_signer` when executing a CPI from one Program to another?\n\nFor example\n\n\n```\nlet example_pda = ctx.accounts.example_pda.to_account_info();\n    let seeds: &[&[u8]] = &[b\"example\"];\n    let signer_seeds = &[&seeds[..]];\n    let cpi_accounts = SetDataAuth {\n      example_account: ctx.accounts.example_account.to_account_info(),\n      authority: example_pda,\n    };\n\n\n    let cpi_ctx = CpiContext::new_with_signer(\n      cpi_program,\n      cpi_accounts,\n      signer_seeds\n    );\n    \n    programA::cpi::set_data_auth(cpi_ctx, data)\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "113267696933535744",
+                    "username": "ppoliani",
+                    "avatar": "b6d380e7e55e659cd967a86f4bd689cb",
+                    "discriminator": "1098",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T18:18:04.313000+00:00",
+                "edited_timestamp": "2021-12-22T18:20:35.308000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923241511443918928"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923255708353462362",
+                "type": 0,
+                "content": "`CpiAccount` was replaced with `Account`, which also covers the old `ProgramAccount` use case, right?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "141059180969721856",
+                    "username": "rohan.kapur",
+                    "avatar": "08a30a05974c8fdf3b6bf647971daef8",
+                    "discriminator": "0616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T16:48:34.133000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923241511443918928",
+                "type": 19,
+                "content": "Yep. You can then check programmatically with the `is_signer` property (solana itself sets it to true or false depending on whether the account signed)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T15:52:09.326000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923241320204615701"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923241320204615701",
+                "type": 0,
+                "content": "so that is the only mechanism solana uses to ensure this account signed this transaction right ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T15:51:23.731000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923241224750633010",
+                "type": 19,
+                "content": "Yep. Solana will verify that that account really did sign.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T15:51:00.973000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923240605583310918"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923240605583310918",
+                "type": 0,
+                "content": "<@!134416332509675520>  have a solana theory question sort of, in solana when you require a account be a signer is it because that account \"is_signer\" property is going to be checked on chain ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T15:48:33.352000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923226728418136104",
+                "type": 0,
+                "content": "thanks",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "832140329301311488",
+                    "username": "zule",
+                    "avatar": null,
+                    "discriminator": "4581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:53:24.778000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923226428403757116",
+                "type": 19,
+                "content": "Don't think there's any built-in command to do it, no. Not sure if it's literally impossible though",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "832140329301311488",
+                        "username": "zule",
+                        "avatar": null,
+                        "discriminator": "4581",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:52:13.249000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923226324435353611"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923226324435353611",
+                "type": 0,
+                "content": "Is it possible ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "832140329301311488",
+                    "username": "zule",
+                    "avatar": null,
+                    "discriminator": "4581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:51:48.461000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923223823875186699",
+                "type": 0,
+                "content": "How can I close IDL account of a program ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "832140329301311488",
+                    "username": "zule",
+                    "avatar": null,
+                    "discriminator": "4581",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:41:52.281000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923223575643709510",
+                "type": 19,
+                "content": "In general, yes.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "817286219909038121",
+                        "username": "Bunny2468",
+                        "avatar": null,
+                        "discriminator": "6300",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:40:53.098000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923217726175084595"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923217726175084595",
+                "type": 0,
+                "content": "so I have to save the address?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:17:38.476000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923217620528934912",
+                "type": 0,
+                "content": "When you created the account you had to decide on which address to use (so don't forget it, lol)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:17:13.288000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923217545765474394",
+                "type": 0,
+                "content": "So you just need to know the right address",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:16:55.463000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923217522872963113",
+                "type": 0,
+                "content": "There isn't necessarily just one address for the account (there could be an arbitrary number of  ClientData accounts)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:16:50.005000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923217440362618931",
+                "type": 19,
+                "content": "here the \"theAddressOfTheAccount\" is the publicKey of client account right? what if I want to get that?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:16:30.333000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923216950308511794"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923216950308511794",
+                "type": 19,
+                "content": "You would do `await program.account.clientData.fetch(theAddressOfTheAccount)`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "817286219909038121",
+                        "username": "Bunny2468",
+                        "avatar": null,
+                        "discriminator": "6300",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T14:14:33.495000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923211984424538142"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923211984424538142",
+                "type": 19,
+                "content": "#[derive(Accounts)]\npub struct Client<'info> {\n    client: Account<'info, ClientData>,\n}\n\n#[account]\npub struct ClientData {\n    active: bool,\n    amount_raised: u64\n}\n\nI have this I want to get the PublicKey of the client account",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:54:49.536000+00:00",
+                "edited_timestamp": "2021-12-22T13:56:44.601000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923210629471412284"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923210629471412284",
+                "type": 19,
+                "content": "What do you mean by a program account? I'm going to need way more information to help",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "817286219909038121",
+                        "username": "Bunny2468",
+                        "avatar": null,
+                        "discriminator": "6300",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:49:26.490000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923210570772144148"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923210570772144148",
+                "type": 19,
+                "content": "I want to get the data of program account. how can I get that?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:49:12.495000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923208186926858301"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923208186926858301",
+                "type": 19,
+                "content": "If it's one of your own account types then you can do `program.account.yourAccountTypeName.fetch(itsAddress)`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "817286219909038121",
+                        "username": "Bunny2468",
+                        "avatar": null,
+                        "discriminator": "6300",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:39:44.142000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923207545756188703"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923207545756188703",
+                "type": 19,
+                "content": "Yes",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:37:11.275000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923207449564029038"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923207449564029038",
+                "type": 19,
+                "content": "What do you mean by read? Do you mean parse/deserialize?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "817286219909038121",
+                        "username": "Bunny2468",
+                        "avatar": null,
+                        "discriminator": "6300",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:36:48.341000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923199379798626374"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923199379798626374",
+                "type": 0,
+                "content": "how can I read buffer data returned from getAccountInfo?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "817286219909038121",
+                    "username": "Bunny2468",
+                    "avatar": null,
+                    "discriminator": "6300",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T13:04:44.359000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923185784109006868",
+                "type": 19,
+                "content": "I think you might be mistaken, `my_account_info.lamports` gives you that refcell stuff, `.lamports()` gives you a u64",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917870235497938974",
+                        "username": "Dragonfly",
+                        "avatar": null,
+                        "discriminator": "0302",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T12:10:42.894000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923113524673277952"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923185628257079337",
+                "type": 19,
+                "content": "What does your `Anchor.toml` say?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "912720112828690483",
+                        "username": "coolperson101",
+                        "avatar": null,
+                        "discriminator": "0341",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T12:10:05.736000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923171321926549504"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923180834230501406",
+                "type": 0,
+                "content": "otherwise you have to run BROWSER= everytime",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T11:51:02.751000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923180766261833768",
+                "type": 19,
+                "content": "`export BROWSER=` is more correct",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "451399583583436801",
+                        "username": "clmnt",
+                        "avatar": "ca44e3b5c45f6826cf38df25b2ce6a83",
+                        "discriminator": "7178",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T11:50:46.546000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "920008932271992923"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923171379287830558",
+                "type": 0,
+                "content": "Wht to do?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912720112828690483",
+                    "username": "coolperson101",
+                    "avatar": null,
+                    "discriminator": "0341",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T11:13:28.517000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923171321926549504",
+                "type": 0,
+                "content": "anchor test not switching to localnet even after doing config set localhost",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912720112828690483",
+                    "username": "coolperson101",
+                    "avatar": null,
+                    "discriminator": "0341",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T11:13:14.841000+00:00",
+                "edited_timestamp": "2021-12-22T11:13:21.607000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923118564746096682",
+                "type": 0,
+                "content": "With rust I find it's trial and error until the compiler stops complaining and gives me what I want",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T07:43:36.549000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923118443677491260",
+                "type": 19,
+                "content": "Probably need to Google how to use deref mut",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917870235497938974",
+                        "username": "Dragonfly",
+                        "avatar": null,
+                        "discriminator": "0302",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T07:43:07.684000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923113524673277952"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923118225506598923",
+                "type": 19,
+                "content": "It does, at least for CPI, not in the client",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "912046857000194158",
+                        "username": "yeetle",
+                        "avatar": "12968c45dd881dcb7c1307fa84411926",
+                        "discriminator": "2204",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T07:42:15.668000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923023631817273354"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923113524673277952",
+                "type": 0,
+                "content": "If I have AccountInfo how can i get the number of lamports in it as a u64? \nIf example_acc_inf is an AccountInfo then \nexample_acc_inf.lamports() returns a  Rc<RefCell<&'a mut u64>>.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T07:23:34.902000+00:00",
+                "edited_timestamp": "2021-12-22T07:25:08.468000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923077271470882846",
+                "type": 0,
+                "content": "Is there a good way to turn an address that is formated as a string into a PublicKey?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T04:59:31.465000+00:00",
+                "edited_timestamp": "2021-12-22T05:07:14.325000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923031733358698558",
+                "type": 19,
+                "content": "Serum was written in the before times",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "912046857000194158",
+                        "username": "yeetle",
+                        "avatar": "12968c45dd881dcb7c1307fa84411926",
+                        "discriminator": "2204",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T01:58:34.333000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "923023631817273354"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "923023631817273354",
+                "type": 0,
+                "content": "Anchor doesn't seem to have helper functions to interface with serum, but it was made by the serum team it seems like ?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "912046857000194158",
+                    "username": "yeetle",
+                    "avatar": "12968c45dd881dcb7c1307fa84411926",
+                    "discriminator": "2204",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-22T01:26:22.775000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922999249636057129",
+                "type": 0,
+                "content": "ty!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "282567322605060097",
+                    "username": "Famozin",
+                    "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                    "discriminator": "1167",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:49:29.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922999140009521162",
+                "type": 19,
+                "content": "Use `.lamports()` rather than `.lamports`",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "282567322605060097",
+                        "username": "Famozin",
+                        "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                        "discriminator": "1167",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:49:03.473000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "922996739336728627"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922996739336728627",
+                "type": 0,
+                "content": "Good evening guys. Anyone knows how to fix this issue or another way to do this constraint? I want compare user sol balance with a pre-fixed amount",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "282567322605060097",
+                    "username": "Famozin",
+                    "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                    "discriminator": "1167",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "922996738795659284",
+                        "filename": "unknown.png",
+                        "size": 27616,
+                        "url": "https://cdn.discordapp.com/attachments/889702325231427584/922996738795659284/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889702325231427584/922996738795659284/unknown.png",
+                        "width": 854,
+                        "height": 228,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:39:31.108000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922993453728694312",
+                "type": 19,
+                "content": "Yeah",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "383167725339541504",
+                        "username": "guitarheroua",
+                        "avatar": "1e772928dec811e34be1354d2ae59239",
+                        "discriminator": "4432",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:26:27.758000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "922992086175875092"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922992086175875092",
+                "type": 0,
+                "content": "Hey guys, quick question, does `Rent::minimum_balance` on Rust side does the same as `anchor.program.provider.connection.getMinimumBalanceForRentExemption` on TypeScrypt side? Just could not figure out from sources. Thanks in advance!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "383167725339541504",
+                    "username": "guitarheroua",
+                    "avatar": "1e772928dec811e34be1354d2ae59239",
+                    "discriminator": "4432",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:21:01.708000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922988341614510090",
+                "type": 0,
+                "content": "Assuming the source is owned by your program, you'd do something like this:\n```.rs\nfn transfer_from_account_we_own(\n    src: &mut AccountInfo, // we better own this account though\n    dst: &mut AccountInfo,\n    amount: u64,\n) -> ProgramResult {\n    **src.try_borrow_mut_lamports()? = src\n        .lamports()\n        .checked_sub(amount)\n        .ok_or(ProgramError::InvalidArgument)?;\n    **dst.try_borrow_mut_lamports()? = dst\n        .lamports()\n        .checked_add(amount)\n        .ok_or(ProgramError::InvalidArgument)?;\n    Ok(())\n}\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:06:08.935000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922987151963082772",
+                "type": 19,
+                "content": "So just to double check, the source account here is owned by your program? How you do a transfer depends on which program owns the source account",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917870235497938974",
+                        "username": "Dragonfly",
+                        "avatar": null,
+                        "discriminator": "0302",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T23:01:25.300000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "922975981101285386"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922978045806116884",
+                "type": 0,
+                "content": "The idea is making a simple donation matching contract (Alice can put X lamports into the declaration and when Bob donates Y lamports in the future if Y<X then Y of the declaration's lamports and Y of Bob's lamports are sent on. Then the declaration has X-Y lamports. If Carol comes along and donates Z<X-Y lamports then Z of Carol's lamports and Z of the declaration's lamports are sent on)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:25:14.223000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922977417696542791",
+                "type": 0,
+                "content": "My goal in the end is to have a function which creates a declaration account. I want the `author' who is calling the function to have their lamports decreased and the declaration account's lamports increased by the same amount. Then I want to make another function that allows someone else, Bob, to send lamports then both Bob and the declaration accounts lamports get dedecuted and sent off to a final unrelated public address",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:22:44.470000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922976282667528202",
+                "type": 0,
+                "content": "I just want to read it so I can decrement it as much as I am adding to the declaration account",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:18:13.858000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922976148114268210",
+                "type": 0,
+                "content": "author_account_info.lamports",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:17:41.778000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922976110361313301",
+                "type": 0,
+                "content": "but I am not sure how to access the the u64 inside of",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:17:32.777000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922976059249537064",
+                "type": 0,
+                "content": "but I am getting the error that unwrap isn't defined",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:17:20.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922975981101285386",
+                "type": 0,
+                "content": "and I am doing this: \n\n        let dest_starting_lamports = declaration_account_info.lamports();\n        **declaration_account_info.lamports.borrow_mut() = \n            dest_starting_lamports.checked_add(donation_amount).ok_or(ErrorCode::InsufficientFunds)?;\n\n        **author_account_info.lamports.borrow_mut() = author_account_info.lamports.unwrap()-donation_amount;",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:17:01.959000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922975953519509544",
+                "type": 0,
+                "content": "I am trying to move funds from one account to another",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T22:16:55.383000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922958697607618611",
+                "type": 0,
+                "content": "Easier to help too if you tell us what struggles you're having",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T21:08:21.253000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922958650929188884",
+                "type": 19,
+                "content": "Have you tried searching the discord? Lots of past discussions of this, not sure how easy they are to find though",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917870235497938974",
+                        "username": "Dragonfly",
+                        "avatar": null,
+                        "discriminator": "0302",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T21:08:10.124000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "922956566238494841"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922956696979136603",
+                "type": 0,
+                "content": "I want to transfer lamports from one account to another and I am struggling.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T21:00:24.266000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "922956566238494841",
+                "type": 0,
+                "content": "Does anyone have examples of of the system program transfer function in use?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "917870235497938974",
+                    "username": "Dragonfly",
+                    "avatar": null,
+                    "discriminator": "0302",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-21T20:59:53.095000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "49bac59a3b85a1aa2fe70ac32d01ae7b"
+}

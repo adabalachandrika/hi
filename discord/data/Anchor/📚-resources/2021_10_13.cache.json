@@ -1,0 +1,98 @@
+{
+    "total_results": 2,
+    "messages": [
+        [
+            {
+                "id": "897813740538429470",
+                "type": 19,
+                "content": "This is cool, and the answers are 1) No, you don\u2019t have to transfer lamports manually,  every time an account is created it\u2019s allocated with rent exempt amount\n2) The governance types differ by the type of authority transferred or verified at creation time (upgrade, mint, owner for program, mint and token account accordingly) . They are provided as convenience for the most common use cases  and then the UI displays them differently (different icons, info and pre-canned instructions)  but other than that there is no difference and you could just use  governance account for everything. In fact I want to make that distinction UI side only in future versions\n3) You could use a treasury of SOL, but the UI doesn\u2019t help with this use case yet, and you would have to manually create the relevant instructions without wrapping\n4) Yes, a governance can manage any number of authorities. You can have a single governance which manages program upgrades, tokens mints etc\u2026 The governance account PDA becomes the relevant authority which can sign transactions\nRegarding the tutorial:\n1) You can build just governance by running cargo build from /governance/program directory\n2) Any solana instruction can be used with governance. The instruction generator form displayed with (+)  shows some pre-canned instructions frequently used with the given governed asset as convenience. ex mint instruction for mints and upgrade for programs, but in general case any instruction could be used. \n3) As best practise the governance program instance should be put under governance of the realm\n4) After realm is created the wallet which created it has the authority over it. This authority should be transferred to one of the governances using the \u2018Set Realm Authority option\u2019\n5) The oyster UI is MVP and we are working with MNGO on the new UI, the live version of it: https://dao-beta.mango.markets/realms  and github https://github.com/blockworks-foundation/governance-ui",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "712412210814779454",
+                    "username": "SebastianBor",
+                    "avatar": "e69514f2d439ece4b2c57068f283d642",
+                    "avatar_decoration": null,
+                    "discriminator": "8494",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "341385711548628993",
+                        "username": "spakhm",
+                        "avatar": "0d209b95897ede21ce3bf05df73171fe",
+                        "avatar_decoration": null,
+                        "discriminator": "2083",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-13T11:51:16.317000+00:00",
+                "edited_timestamp": "2021-10-13T11:52:42.424000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889606719829835816",
+                    "guild_id": "889577356681945098",
+                    "message_id": "897295809689845780"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "897812602460192778",
+                "type": 19,
+                "content": "maybe <@!712412210814779454> could answer these",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "avatar_decoration": null,
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "341385711548628993",
+                        "username": "spakhm",
+                        "avatar": "0d209b95897ede21ce3bf05df73171fe",
+                        "avatar_decoration": null,
+                        "discriminator": "2083",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "712412210814779454",
+                        "username": "SebastianBor",
+                        "avatar": "e69514f2d439ece4b2c57068f283d642",
+                        "avatar_decoration": null,
+                        "discriminator": "8494",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-13T11:46:44.978000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889606719829835816",
+                    "guild_id": "889577356681945098",
+                    "message_id": "897295733135392768"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "91aaea7ed8ffdb35aaf7f858b4a0a384"
+}

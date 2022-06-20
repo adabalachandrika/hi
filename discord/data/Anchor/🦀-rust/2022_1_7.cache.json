@@ -1,0 +1,340 @@
+{
+    "total_results": 10,
+    "messages": [
+        [
+            {
+                "id": "929036691006689381",
+                "type": 19,
+                "content": "Im not sure what you mean by \"for my program\". but if you want to check that `bank.authority = authority.key()` then using `has_one` is the way to go",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "441608058515357697",
+                        "username": "Flexagon",
+                        "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                        "discriminator": "9696",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T15:40:07.803000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "928817694671794196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928965856275341312",
+                "type": 19,
+                "content": "Fairly sure that this is a job for `#[account(has_one = <target>)]`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "127860289570865155",
+                    "username": "sudb",
+                    "avatar": null,
+                    "discriminator": "8969",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "441608058515357697",
+                        "username": "Flexagon",
+                        "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                        "discriminator": "9696",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T10:58:39.487000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "928817694671794196"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928965392712491008",
+                "type": 19,
+                "content": "I'm not sure I fully understand their implementation of a whitelist \ud83d\ude1e \na naive implementation of being able to remove someone from a whitelist would be to iterate through the array until you find the one you want to remove, and set it back to `Pubkey::default()`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "127860289570865155",
+                    "username": "sudb",
+                    "avatar": null,
+                    "discriminator": "8969",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "441608058515357697",
+                        "username": "Flexagon",
+                        "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                        "discriminator": "9696",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T10:56:48.965000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "928806949858988093"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928847664475422740",
+                "type": 0,
+                "content": "Hello, what's the best way to transfer authority or delegate with anchor?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "194280119710253068",
+                    "username": "MinatoTW",
+                    "avatar": "558459eb7c113a70373eb53b0218d687",
+                    "discriminator": "9698",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T03:09:00.366000+00:00",
+                "edited_timestamp": "2022-01-07T03:11:19.145000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928817694671794196",
+                "type": 0,
+                "content": "also, how does anchor check that the authority signer is also the authority for my program? For example\n```rust\n#[derive(Accounts)]\npub struct AddAuthorizedAccount<'info> {\n    #[account(mut)]\n    pub bank: AccountLoader<'info, Bank>,\n    #[account(mut)]\n    pub authority: Signer<'info>\n}\n```\nis a method I have, on \n```rust\n#[account(zero_copy)]\npub struct Bank {\n    authority: Pubkey,\n    authorized_accounts: [Pubkey; 500],\n    count: usize,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T01:09:55.008000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928807160681496616",
+                "type": 0,
+                "content": "tho my program shouldnt even have over 10 people on the whitelist lol",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T00:28:03.509000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928807117207506996",
+                "type": 0,
+                "content": "but this doesnt allow u to remove people from the whitelist, guess i have to go with the 500 pubkey method",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T00:27:53.144000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928807057052811305",
+                "type": 0,
+                "content": "<@!127860289570865155>",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127860289570865155",
+                        "username": "sudb",
+                        "avatar": null,
+                        "discriminator": "8969",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T00:27:38.802000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928806949858988093",
+                "type": 0,
+                "content": "looking at this, i assume that how cmv2 does whitelist is that they give a token to an address, instead of holding a list?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T00:27:13.245000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "928806838252732466",
+                "type": 0,
+                "content": "https://github.com/metaplex-foundation/metaplex/blob/master/rust/nft-candy-machine-v2/src/lib.rs",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "441608058515357697",
+                    "username": "Flexagon",
+                    "avatar": "2cc90cf486e8fa9ee225cf35ef85f55a",
+                    "discriminator": "9696",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/metaplex-foundation/metaplex/blob/master/rust/nft-candy-machine-v2/src/lib.rs",
+                        "title": "metaplex/lib.rs at master \u00b7 metaplex-foundation/metaplex",
+                        "description": "Protocol and application framework for decentralized NFT minting, storefronts, and sales. - metaplex/lib.rs at master \u00b7 metaplex-foundation/metaplex",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/21b755f13881373e3cca63a29169f921c71964f1c1ef137fb468776be6300fd4/metaplex-foundation/metaplex",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/218OfPDZlv-TDB6IV4MlVkbje8XTo-cdveGzheqKDfk/https/opengraph.githubassets.com/21b755f13881373e3cca63a29169f921c71964f1c1ef137fb468776be6300fd4/metaplex-foundation/metaplex",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-07T00:26:46.636000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "827cf189a10bb0e43e949e4c46bd9b26"
+}

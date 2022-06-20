@@ -1,0 +1,454 @@
+{
+    "total_results": 11,
+    "messages": [
+        [
+            {
+                "id": "947262534031925298",
+                "type": 0,
+                "content": "Actually, are you encoding the memo as a param in the transfer request URL? If you're not, it isn't expected to work (Phantom needs to know you want to include a memo).",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T22:43:07.400000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947261908216582144",
+                "type": 19,
+                "content": "This sounds like an issue with Phantom. The spec requires that the memo instruction be added by the wallet. If they don't do this, it won't be there when you look at the tx.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "946956257749790720",
+                        "username": "semlor",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1207",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T22:40:38.194000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "947258137025609748"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947258137025609748",
+                "type": 19,
+                "content": "Great feedback.\n\nI had a question regarding logging memo field in the solana blockchain as in the following example:\n\nhttps://explorer.solana.com/tx/5RePdio6eKHSJjPmhVrPscrtG4w4eoa68PgKF1TksotT7yLmNvvf9ocuXbTtdvmnUcd1FtWZfCAdgeeq79E7boyJ?cluster=devnet\n\nI did a search for \"memo\" in the Developer Support channel and based on the collective feedback from multiple developers, I have gone ahead and made the following changes to this file:\n\nhttps://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts#L139-L141\n\nOriginal (lines 139-141):\nprogramId: MEMO_PROGRAM_ID,\nkeys: [],\ndata: Buffer.from(memo, 'utf8'),\n\nMy changes (lines 139-141):\nprogramId: new PublicKey(\"MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr\"),\nkeys: [],\ndata: Buffer.from('applepie', 'utf-8'),\n\nI've done multiple live transfers between my 2 phantom wallets with USDC on the mainnet, so the  standard transaction works well. \n\nNo memo data gets recorded with the transaction.\n\nI used cargo to successfully execute the tests/functional.rs file in https://github.com/solana-labs/solana-program-library/tree/master/memo/program (all OK) so\nit appears that rust is working properly on our server with latest version.\n\nJust puzzled that the memo data is not getting appended to the transaction and recorded on the solana blockchain.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "946956257749790720",
+                    "username": "semlor",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/tx/5RePdio6eKHSJjPmhVrPscrtG4w4eoa68PgKF1TksotT7yLmNvvf9ocuXbTtdvmnUcd1FtWZfCAdgeeq79E7boyJ?cluster=devnet",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters",
+                        "reference_id": "947258137025609748"
+                    },
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-program-library/tree/master/memo/program",
+                        "title": "solana-program-library/memo/program at master \u00b7 solana-labs/solana-...",
+                        "description": "A collection of Solana-maintained on-chain programs - solana-program-library/memo/program at master \u00b7 solana-labs/solana-program-library",
+                        "color": 1975079,
+                        "reference_id": "947258137025609748",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/1419bce641360d9d88bdf0c3d3ebd2e21f33e2df47222006a7ca3a807c42f56b/solana-labs/solana-program-library",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/e05W1-1lRt2nGl_vCRPVxwMgW9w5DJOJZfCDXsBQhMU/https/opengraph.githubassets.com/1419bce641360d9d88bdf0c3d3ebd2e21f33e2df47222006a7ca3a807c42f56b/solana-labs/solana-program-library",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    },
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-pay/blob/d6563f9c5d57ff13b981157a39100000a03c2ca6/core/src/createTransaction.ts",
+                        "title": "solana-pay/createTransaction.ts at d6563f9c5d57ff13b981157a39100000...",
+                        "description": "A new standard for decentralized payments. Contribute to solana-labs/solana-pay development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "947258137025609748",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/0ae4ca6be07ce85eb3b2f84a1ea54666acc71ed84e633eaa8f2c984d431e8888/solana-labs/solana-pay",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/y4LmKKBbYk8iArDZTReAvHY13maCZV2oxTuqhQfGt64/https/opengraph.githubassets.com/0ae4ca6be07ce85eb3b2f84a1ea54666acc71ed84e633eaa8f2c984d431e8888/solana-labs/solana-pay",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T22:25:39.072000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "947230906920353842"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947230906920353842",
+                "type": 19,
+                "content": "There are several questions here.\n\nThe client/server point of sale app in that branch is intended to act as a quick proof of concept to allow wallets to test the feature as they implement it. We are waiting on wallets to do that, a few are already working on it.\n\nIf you're using transfer requests (the current way of using Solana Pay), you can use just the `client` directory there. Don't set the `link` config param, and it should work just like it does in master. Both versions should continue to be supported.\n\nHowever, I'll be working on a more full featured version of the point of sale backend that will sign the tx as fee payer, and involve an NFT for a discount. This is outside the scope of that PR (but depends on it) and will be used in a future launch event for Solana Pay transaction requests.\n\nI expect transaction requests to quickly become the dominant way of using Solana Pay. Even though it adds complexity to have a server, it adds a ton of power and flexibility, and makes it possible to use Solana Pay atomically for many use cases, even without the notion of a \"payment\".",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T20:37:26.909000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "946211247018369054"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947228994871361577",
+                "type": 0,
+                "content": "However, the point of sale and the `findTransactionSignature` function is just designed to find the first use of a unique reference to act as a client ID. You could use `getSignaturesForAddress` to find them if you had categorized them, or you could use `findTransactionSignature` and then iterate through the keys to check the categories.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T20:29:51.041000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947228569677992027",
+                "type": 19,
+                "content": "The purpose of allowing multiple `reference` keys in the spec is to allow emergent use cases. For example, you could use one reference to categorize purchases, and one to unique identify them.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "777010585103106069",
+                        "username": "awesomeAB",
+                        "avatar": "d8c602dff7185f727c86500b119b82e4",
+                        "avatar_decoration": null,
+                        "discriminator": "0370",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T20:28:09.667000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "947215101478457424"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947215101478457424",
+                "type": 0,
+                "content": "Team - according to the official spec we are allowed to use multiple public keys for reference, and indeed the `encodeURL` API from Solana Pay allows us to pass an array of public keys for this.\n\nHowever, while trying to find the transaction signature - we use the `getSignaturesForAddress` API from Solana which expects this field to be a single public key. \n\nDue to this, the `findTransactionSignature` API from Solana pay only accepts a single public key. This means that we can't effectively use multiple public keys for the reference field \ud83d\ude26\n\nWhat am I missing?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "777010585103106069",
+                    "username": "awesomeAB",
+                    "avatar": "d8c602dff7185f727c86500b119b82e4",
+                    "avatar_decoration": null,
+                    "discriminator": "0370",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T19:34:38.598000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947143991328124978",
+                "type": 0,
+                "content": "Hello everyone,\n\nIf you are a physical or digital store owner that uses Solana Pay or are in the process of implementing it, let us know!\n\nWe would like to add your store to our directory and provide you with more visibility! \n\nhttps://aten.app/",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "399962598260342785",
+                    "username": "Ben Lydian",
+                    "avatar": "b32cd33746bfce000ac61d0f6652b67a",
+                    "avatar_decoration": null,
+                    "discriminator": "0001",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T14:52:04.617000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947078374680043590",
+                "type": 19,
+                "content": "do you mean different solana public key (i.e. different address)?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "507412989029122049",
+                        "username": "Windswept",
+                        "avatar": "c1fc17c9f31ccd053267dece519f10ab",
+                        "avatar_decoration": null,
+                        "discriminator": "1134",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T10:31:20.389000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "947063111289012244"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "947063111289012244",
+                "type": 19,
+                "content": "The reference public key should be unique for each customer session to prevent something like this",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "507412989029122049",
+                    "username": "Windswept",
+                    "avatar": "c1fc17c9f31ccd053267dece519f10ab",
+                    "avatar_decoration": null,
+                    "discriminator": "1134",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T09:30:41.313000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "946994414256005150"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "946994414256005150",
+                "type": 19,
+                "content": "that's a problem i guess? If you run a shop and at the same time you need to accept $25 USDC",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "753309415347716107",
+                        "username": "yugure",
+                        "avatar": "dfad7fe9439974891516f5601e5e08c8",
+                        "avatar_decoration": null,
+                        "discriminator": "3291",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-26T04:57:42.664000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "946781567995502642"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "6de8d2da48d60c2d916a775a6ca83653"
+}

@@ -1,0 +1,230 @@
+{
+    "total_results": 5,
+    "messages": [
+        [
+            {
+                "id": "965757933394726934",
+                "type": 19,
+                "content": "It's completely program specific. That function I linked only covers the SPL Token program. The System program has some decoding functions but they are in web3.js",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "695715716309057586",
+                        "username": "formosa",
+                        "avatar": "995231482268448a6d3dbc84cfc8b82a",
+                        "avatar_decoration": null,
+                        "discriminator": "9365",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-18T23:37:14.236000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "965754743702052904"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "965754743702052904",
+                "type": 19,
+                "content": "Seems like it would be great to have some utils for that--at least for some common transaction types. Would the recommendation at least for SOL and SPL Token transfers be to import that function?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "695715716309057586",
+                    "username": "formosa",
+                    "avatar": "995231482268448a6d3dbc84cfc8b82a",
+                    "avatar_decoration": null,
+                    "discriminator": "9365",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-18T23:24:33.754000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "965753823505301534"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "965753823505301534",
+                "type": 19,
+                "content": "The transaction you deserialize will contain instructions. Those instructions are specific to each program. You would need to look at the instruction's `programId` and then parse the data for each one.\n\nHere's an example of how SPL Token program instructions can be decoded: https://github.com/solana-labs/solana-program-library/blob/9123a80a6a5b5f8a378a56c4501f99df7debda55/token/js/src/instructions/decode.ts#L51\n\nHowever, this is specific to each program, and there's no general solution. This is a nontrivial thing that every wallet has to do to make sense of arbitrary transactions shown to the user.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "695715716309057586",
+                        "username": "formosa",
+                        "avatar": "995231482268448a6d3dbc84cfc8b82a",
+                        "avatar_decoration": null,
+                        "discriminator": "9365",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-18T23:20:54.362000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "965687372136202330"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "965719599687549069",
+                "type": 19,
+                "content": "Since the transaction could be anything you would need to simulate it to see what (if any) SPL token or SOL transfers take place.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "844070629484527646",
+                    "username": "mfrager",
+                    "avatar": "73603c806358e89389d87fdd3caf4305",
+                    "avatar_decoration": null,
+                    "discriminator": "3430",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "695715716309057586",
+                        "username": "formosa",
+                        "avatar": "995231482268448a6d3dbc84cfc8b82a",
+                        "avatar_decoration": null,
+                        "discriminator": "9365",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-18T21:04:54.768000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "965687372136202330"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "965687372136202330",
+                "type": 0,
+                "content": "I'm trying to implement the wallet side of the transaction request spec (https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md#specification-transaction-request). I'm getting the transaction back, decoding it from base64 and then deserializing it with `Transaction.from()`, but the resulting JSON still doesn't seem to contain human-readable information to verify and present to the user. How can I derive what's going on in the transaction (to, from, amount, anything else)? Thanks",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "695715716309057586",
+                    "username": "formosa",
+                    "avatar": "995231482268448a6d3dbc84cfc8b82a",
+                    "avatar_decoration": null,
+                    "discriminator": "9365",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "965687372207517747",
+                        "filename": "unknown.png",
+                        "size": 239229,
+                        "url": "https://cdn.discordapp.com/attachments/938828592232693820/965687372207517747/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/938828592232693820/965687372207517747/unknown.png",
+                        "width": 1688,
+                        "height": 630,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md",
+                        "title": "solana-pay/SPEC.md at link-request \u00b7 solana-labs/solana-pay",
+                        "description": "A new standard for decentralized payments. Contribute to solana-labs/solana-pay development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/71985b300b20015fe87331a0655c166a4d026e766c5b903af92c3e48aa9e2a73/solana-labs/solana-pay",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/Uerark5f2cQTSGBjb8o8Wv57Y9VQ2b5LyrBANRmxc0E/https/opengraph.githubassets.com/71985b300b20015fe87331a0655c166a4d026e766c5b903af92c3e48aa9e2a73/solana-labs/solana-pay",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-18T18:56:51.121000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "a69ef50b91326ec867870c34ee9a077c"
+}

@@ -1,0 +1,213 @@
+{
+    "total_results": 7,
+    "messages": [
+        [
+            {
+                "id": "971512357161422948",
+                "type": 0,
+                "content": "Is there a straightforward way with the SDK to get the wallet address of the payor from a Solana Pay transaction/reference?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "874031789314826251",
+                    "username": "ktb",
+                    "avatar": "ca4f8c0af9f4f5153c6e6905b2c38466",
+                    "avatar_decoration": null,
+                    "discriminator": "8609",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T20:43:15.774000+00:00",
+                "edited_timestamp": "2022-05-04T20:49:30.414000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971444911293472788",
+                "type": 0,
+                "content": "Copying in my reply to ^ from the pointer discord in case it's helpful :)\n\nYou need a transaction with multiple transfer instructions, eg. something like:\n\n```\nconst transaction = new Transaction({\n  recentBlockhash: blockhash,\n  // The buyer pays the transaction fee\n  feePayer: buyerPublicKey,\n})\n\nconst payShopInstruction = SystemProgram.transfer({\n  fromPubkey: buyerPublicKey,\n  lamports: amount.multipliedBy(0.9).multipliedBy(LAMPORTS_PER_SOL).toNumber(),\n  toPubkey: shopPublicKey\n})\n\nconst payTreasuryInstruction = SystemProgram.transfer({\n  fromPubkey: buyerPublicKey,\n  lamports: amount.multipliedBy(0.1).multipliedBy(LAMPORTS_PER_SOL).toNumber(),\n  toPubkey: treasuryPublicKey\n})\n\ntransaction.add(payShopInstruction, payTreasuryInstruction)\n\n// serialize transaction + return\n```",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T16:15:15.426000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971415028018319400",
+                "type": 0,
+                "content": "",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "205111846582091777",
+                    "username": "KICHEN",
+                    "avatar": "44ded12a4ec4aff7eccb692bde65611a",
+                    "avatar_decoration": null,
+                    "discriminator": "2323",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "971415027254980678",
+                        "filename": "unknown.png",
+                        "size": 15136,
+                        "url": "https://cdn.discordapp.com/attachments/938828592232693820/971415027254980678/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/938828592232693820/971415027254980678/unknown.png",
+                        "width": 693,
+                        "height": 172,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T14:16:30.698000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971415025568866394",
+                "type": 0,
+                "content": "I'm assuming the instruction here in makeTransaction would need to be modified?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "205111846582091777",
+                    "username": "KICHEN",
+                    "avatar": "44ded12a4ec4aff7eccb692bde65611a",
+                    "avatar_decoration": null,
+                    "discriminator": "2323",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T14:16:30.114000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971406097242013786",
+                "type": 0,
+                "content": "Any help would be appreciated. I've been googling and not finding a quick answer.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "205111846582091777",
+                    "username": "KICHEN",
+                    "avatar": "44ded12a4ec4aff7eccb692bde65611a",
+                    "avatar_decoration": null,
+                    "discriminator": "2323",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T13:41:01.435000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971405984838877205",
+                "type": 0,
+                "content": "I need it to be 90% mykey, and 10% another key",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "205111846582091777",
+                    "username": "KICHEN",
+                    "avatar": "44ded12a4ec4aff7eccb692bde65611a",
+                    "avatar_decoration": null,
+                    "discriminator": "2323",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T13:40:34.636000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "971405937187364904",
+                "type": 0,
+                "content": "Does anyone have a good example of splitting payments as they're deposited on Solana pay? I built a web app and got solana pay working as the payment system for the frontend, but currently its set like `import { PublicKey } from \"@solana/web3.js\"\n\n// Your shop wallet address\nexport const shopAddress = new PublicKey('mykey..')`",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "205111846582091777",
+                    "username": "KICHEN",
+                    "avatar": "44ded12a4ec4aff7eccb692bde65611a",
+                    "avatar_decoration": null,
+                    "discriminator": "2323",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-05-04T13:40:23.275000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "ac4cbce2a5e545d8d48225f5d8b3e69d"
+}

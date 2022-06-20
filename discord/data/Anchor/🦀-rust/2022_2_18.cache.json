@@ -1,0 +1,765 @@
+{
+    "total_results": 21,
+    "messages": [
+        [
+            {
+                "id": "944287839674310696",
+                "type": 0,
+                "content": "having pondered this a bit more - I've come up with this slightly more elegant-looking solution:\n```\nuse mpl_token_metadata::state::Metadata as MetaplexMetadata;\n\nimpl anchor_lang::AccountDeserialize for MetaplexMetadata {\n    fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self, ProgramError> {\n        MetaplexMetadata::deserialize(buf)\n            .map(MetaplexMetadata)\n            .map_err(|e| ProgramError::BorshIoError(e.to_string())\n    }\n}\n\nimpl anchor_lang::AccountSerialize for MetaplexMetadata {}\n\nimpl anchor_lang::Owner for MetaplexMetadata {\n    fn owner() -> Pubkey {\n        mpl_token_metadata::ID\n    }\n}\n```\n\nSadly though it's still giving me a bunch of errors to do with mismatched types and the wrong number of generic arguments for `Result<>` and I am very much stuck",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "127860289570865155",
+                    "username": "sudb",
+                    "avatar": null,
+                    "discriminator": "8969",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-18T17:42:44.998000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "944278358601138237",
+                "type": 19,
+                "content": "digging this up from ages ago - I can't get this to work \ud83d\ude26 for the `try_deserialize_unchecked` function, I'm getting \n```mismatched types\n\nexpected enum `Error`, found enum `anchor_lang::prelude::ProgramError`\n\nnote: expected enum `std::result::Result<_, Error>`\n         found enum `std::result::Result<_, anchor_lang::prelude::ProgramError>`rustc(E0308)```\n\nand for both the `try_serialize`function and the `try_deserialize_unchecked` function, I'm getting for the Result<(), ProgramError> return type:\n```\nthis type alias takes 1 generic argument but 2 generic arguments were supplied\n\nexpected 1 generic argumentrustc(E0107)\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "127860289570865155",
+                    "username": "sudb",
+                    "avatar": null,
+                    "discriminator": "8969",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "392371614542725121",
+                        "username": "ronanyeah",
+                        "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                        "discriminator": "3307",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-18T17:05:04.534000+00:00",
+                "edited_timestamp": "2022-02-18T17:08:58.761000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936781877543592006"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "944235818808119296",
+                "type": 19,
+                "content": "Do\n```.toml\npyth-client = { version = \"0.3.0\", features = [\"no-entrypoint\"] }\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "916187801115037728",
+                        "username": "blockchaincrazy95",
+                        "avatar": "09eb27778b7201fec890e3a3e2c35d7d",
+                        "discriminator": "7316",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-18T14:16:02.257000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "944214329778143282"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "944214329778143282",
+                "type": 0,
+                "content": "Hi, guys. I am suffering from this error. Please help me.\n```error: the `#[global_allocator]` in this crate conflicts with global allocator in: pyth_client```\nI imported pyth by writing \n```pyth-client = \"0.3.0\"```\n in cargo.toml\n<@!831450660146642974>, can you help me?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "916187801115037728",
+                    "username": "blockchaincrazy95",
+                    "avatar": "09eb27778b7201fec890e3a3e2c35d7d",
+                    "discriminator": "7316",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-18T12:50:38.873000+00:00",
+                "edited_timestamp": "2022-02-18T12:50:48.795000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "944182149991510046",
+                "type": 0,
+                "content": "https://stackoverflow.com/questions/68997169/solana-anchor-rust-how-to-convert-a-public-key-into-an-accountinfo-type so, it is not possible to get account info from pubkey, right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "295862671155396609",
+                    "username": "Sushant",
+                    "avatar": null,
+                    "discriminator": "8681",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-18T10:42:46.614000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943987718101286912",
+                "type": 0,
+                "content": "How do I transfer SPL token from one account to another in a rust function? I see there is a transfer function for generating instruction but not sure what to do with it after.\n```pub fn transfer(\n    token_program_id: &Pubkey, \n    source_pubkey: &Pubkey, \n    destination_pubkey: &Pubkey, \n    authority_pubkey: &Pubkey, \n    signer_pubkeys: &[&Pubkey], \n    amount: u64\n) -> Result<Instruction, ProgramError>```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:50:10.439000+00:00",
+                "edited_timestamp": "2022-02-17T21:52:20.623000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943981198319976468",
+                "type": 19,
+                "content": "Getting same error after pulling in latest from github, I'll jsut wait for a stable release",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:24:16.002000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976853364940811"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943977346900312085",
+                "type": 19,
+                "content": "looks like a known issue https://github.com/project-serum/anchor/pull/1343",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "326107472098099201",
+                    "username": "Tom Linton",
+                    "avatar": "3073b6377f58d2a64e83b0cb82f445c3",
+                    "discriminator": "2464",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "703647911770062878",
+                        "username": "nashsando",
+                        "avatar": "aa7686ffb0133dd289d9b9f390cfc748",
+                        "discriminator": "1005",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:08:57.752000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943941917224361984"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943977012152905789",
+                "type": 19,
+                "content": "basically clone the latest anchor cli from github into my packages, then sounds like I need to update anchor js too",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:07:37.942000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976853364940811"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976867214557185",
+                "type": 19,
+                "content": "this looks like a collision on the names, if you rename data.rs in package2 to data_two.rs and adjust the references to it then it works as expected",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "326107472098099201",
+                    "username": "Tom Linton",
+                    "avatar": "3073b6377f58d2a64e83b0cb82f445c3",
+                    "discriminator": "2464",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "703647911770062878",
+                        "username": "nashsando",
+                        "avatar": "aa7686ffb0133dd289d9b9f390cfc748",
+                        "discriminator": "1005",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:07:03.386000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943941917224361984"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976853364940811",
+                "type": 0,
+                "content": "Probably also need a new anchor js version too I guess",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:07:00.084000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976814815105024",
+                "type": 19,
+                "content": "Ah okay I understand now",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:06:50.893000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976765414572052"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976765414572052",
+                "type": 0,
+                "content": "You need to reinstall the anchor cli, from a github checkout",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:06:39.115000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976647630131243",
+                "type": 19,
+                "content": "So i need to rebuild my anchor projet",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:06:11.033000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976538527911997"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976590663094363",
+                "type": 0,
+                "content": "It's only been merged into master",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:05:57.451000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976538527911997",
+                "type": 19,
+                "content": "`anchor --version`, but you would need to build directly from source (that new version wouldn't have been actually released yet)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "824282671269675068",
+                        "username": "PureSlurp",
+                        "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                        "discriminator": "2832",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:05:45.021000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976367660355605"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976367660355605",
+                "type": 19,
+                "content": "I reinstalled anchor, how do I check version (nvm I have anchor-cli 0.20.1)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:05:04.283000+00:00",
+                "edited_timestamp": "2022-02-17T21:05:37.309000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943976187028443236"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943976187028443236",
+                "type": 19,
+                "content": "This was merged like two hours ago, are you running off the latest master?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "824282671269675068",
+                        "username": "PureSlurp",
+                        "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                        "discriminator": "2832",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:04:21.217000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943975800254918656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943975800254918656",
+                "type": 0,
+                "content": "I saw there was an update to support float (https://github.com/project-serum/anchor/pull/1425) in anchor but I am still having the same issue\n```IdlError: Type not found: {\"name\":\"wager\",\"type\":{\"defined\":\"f32\"}}```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "824282671269675068",
+                    "username": "PureSlurp",
+                    "avatar": "1ab530efe310a2cf33fd27301b502cb5",
+                    "discriminator": "2832",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/pull/1425",
+                        "title": "Float types support by pashpashkin \u00b7 Pull Request #1425 \u00b7 project-s...",
+                        "description": "Closes #1353",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/fdbac2c1b7134545e81b5b085948f888859ee4ed31677acf782c6e202812822a/project-serum/anchor/pull/1425",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/237DaDhpRcPNtOmO9Ct3kiOf2LrqWACg9xeqPwweTiw/https/opengraph.githubassets.com/fdbac2c1b7134545e81b5b085948f888859ee4ed31677acf782c6e202812822a/project-serum/anchor/pull/1425",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T21:02:49.003000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943941917224361984",
+                "type": 0,
+                "content": "appreciate the link to source though, I'll start digging through there as well",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "703647911770062878",
+                    "username": "nashsando",
+                    "avatar": "aa7686ffb0133dd289d9b9f390cfc748",
+                    "discriminator": "1005",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T18:48:10.659000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "943941641448865852",
+                "type": 19,
+                "content": "This should be a minimal repro of the issue: https://github.com/emdoyle/anchor-idl-repro\nWhen I build/test it generates the IDL in the screenshot (no accounts)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "703647911770062878",
+                    "username": "nashsando",
+                    "avatar": "aa7686ffb0133dd289d9b9f390cfc748",
+                    "discriminator": "1005",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "943941641528569876",
+                        "filename": "unknown.png",
+                        "size": 65211,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/943941641528569876/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/943941641528569876/unknown.png",
+                        "width": 507,
+                        "height": 794,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "326107472098099201",
+                        "username": "Tom Linton",
+                        "avatar": "3073b6377f58d2a64e83b0cb82f445c3",
+                        "discriminator": "2464",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-17T18:47:04.909000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "943765495235084298"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "fb49d16b1c2fe3ee61bca8128feaf0de"
+}

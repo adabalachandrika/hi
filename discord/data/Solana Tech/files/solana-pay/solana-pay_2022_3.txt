@@ -1,0 +1,888 @@
+This is 100% on Shopify to allow. They need to hear the demand, and they probably aren't looking at crypto Twitter or Discord. Reach out to them and let them know it matters!
+If you are building a dapp, you would likely focus on using wallet-adapter to connect with in-browser wallets.
+
+Once transaction requests (PR #77) land in Solana Pay, it will be possible to use a serverless backend API with a dapp to connect to mobile wallets from a computer as well.
+
+Solana Pay (probably not the core SDK, but another library) could eventually include something that makes both these flows easier to build.
+Currently, the core SDK / reference implementation for Solana Pay is mostly to enable the new paradigm of in-person payments using a mobile wallet that supports the protocol like Phantom.
+Friendly nudge on the progress of Solana Pay getting approved on Shopify. Any recent news?
+We'd love to build an integrated experience for merchants on top of Shopify!
+thanks so much!!
+I guess another way to what extent you need to integrate the wallet adapter if you are using the solana pay SDK? I'm assuming you do but curious if it's convention have some kind of "light" wallet wrapper
+Is this an example of the dApp <--> Wallet <--> Solana Blockchain and if so how would it connect to the wallet-adapter on the client? Apologies if this is a dumb question, still wrapping my head around the spec
+Curious what the right way to read this reference implementation is: https://github.com/solana-labs/solana-pay/tree/master/core/example
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I would suggest interacting with this from a Node.js script instead of in a browser at first. It's probably going to be easier to code, debug, and learn about how Octane works this way.
+https://github.com/mohan00710/solana-test/blob/8af9ad48765129596733185e8164d343f187cbd3/octane.js#L38-L43
+
+The code here is incorrect. To interact with Octane, your first instruction must be a transfer instruction to the Octane fee payer address you retrieved. The amount of this transfer is in the config you retrieve as well.
+
+Then you would have your own transfer (between the `from` and `to` keypairs you create) after that.
+
+Additionally, you cannot call `transaction.sign` because the transaction has not been signed by Octane and still requires its signature. You must call `transaction.partialSign` with your `from` keypair, then serialize it without requiring all signatures (because you are missing the fee payer's), then send it to Octane.
+Have you checked out MoonPay, Ramp, and other fiat onramps?
+Awesome! Very glad to hear that, and congrats on the grant.
+We'll be pushing our woocommerce plugin to a public repo asap and ask solana pay to link to it when live 🙂 appreciate everyone's patience and input! Our beta is working well with Phantom and woocommerce so might as well allow builders to help build! We also got approved for solana grant so I can pay contributors in some manner depending on their input. Things are accelerating quickly!
+Hi <@!291592981520318466> we have a working beta and would love your input! jump into our woolana twitter dms and I'll get you in the discord
+Hello Jordan, I’m looking to allow customers to acquire sol in a user friendly way. They will be using the sol to pay for things in my app. Ideally I would like to have an api that can embed into my wallet that will act as a payment gateway. If they can insert their card details and get sol delivered into their wallet, then that would an amazing solution
+full code can be found in this repo  https://github.com/mohan00710/solana-test.git ,have a look when you have time and see if you could help, Thanks👍
+for you assistance and time
+Thanks
+It doesn't solve your Android/devnet problem, but it could solve your devnet problem
+This exists so you can test from your desktop browser with a wallet browser extension
+https://github.com/solana-labs/solana-pay/blob/fb40bfc0a3a43824a4657b3d2a0ba67d3867c09f/point-of-sale/src/components/routes/RootRoute.tsx#L19-L20 may be of use for your testing in the short term
+Yeh
+Gotcha. And are you in a place where a lot of people would be using an Android device?
+Yeh we are thinking to integrating it for our clients but bcoz of confirmation issue haven't.
+What's your issue, are you just looking for a way to test an app right now?
+I'll probably mention it here once they tell me
+How can I know that slope has resolved the issue? Do I have to join there discord or some announce here?
+Yeh that's why I am searching for other options..
+Hmm I believe Slope Android is broken right now too
+Is There any other wallet for android which supports solana pay and devnet ? I have tried solflare, solareum but no success..
+I haven't been able to get a transaction thru in over 30 minutes. Anyone else?
+For now I've DM'd it to you
+Nice! I'm not sure what that looks like, but if you have a Github repo I'd be happy to look
+I just wanna help 🙂 I come from an ecom and SEO background and literally closed my ecom brand to go all in on the solana community. Ill check out the link tysm ❤️
+my man
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+You might wanna check out https://github.com/solana-labs/solana-pay/blob/atlas/core/src/createTransfer.ts which is the same function with some alterations, including removing checks for preexisting accounts
+Totally, I will let you know if I will discover smth else. But as you said seems like I should rely on my own create transaction method.
+So I can see your config here, but I can't tell how you're actually interacting with the Octane instance you've configured
+I'm afraid the "It" in "It did not work" is insufficiently specific 🙂
+Hmm. strangely It did not work for some reason until I manually send a separate SOL transaction to target wallet using phantom
+Shouldn't be anything required except SOL in the sender's account and a public key for the recipient
+<@!150787664553967616> I see. Thank you for breaking this down for me. What is required for normal SOL to be transfered to the first time customer? I'm trying to fix it for my regular P2P send implementation
+Relatedly, this is really up to wallets, but as a customer, you probably don't want to be paying the fees to create a token account for a merchant, so this is actually expected behavior. `getOrCreateAssociatedTokenAddress` also expects a `Signer` argument, which wallets would never expose this way.
+Yes, but it's important to note that the `createTransaction` function is just a reference implementation for wallets to look at. It's not something they use directly, so the checks they perform are up to them. In a recent branch, I've actually removed some of these checks because they aren't all required.
+<@!150787664553967616> similar problem exist for SPL tokens too. Only works if recipient have SPL token already. Looks like you are using "getAssociatedTokenAddress" and I wonder if using "getOrCreateAssociatedTokenAddress" will fix it. Let me know what do you think
+<@!150787664553967616> I've noticed that Solana Pay sdk "createTransaction" won't work if recipient is fresh wallet without Solana balance. Is that expected?
+https://github.com/jdaniel96/octane this is the repo.
+Yeah! Excited to see this launch, I believe it has Solana Pay support but I haven't tested yet
+Just noticed that I missed the Phantom android beta too, not sure if they're at feature parity with iOS but that'll be sweet! https://twitter.com/phantom/status/1501603860766334979
+You love to see it
+Anyone else looking: I've just built reactor-wallet (https://github.com/marc2332/reactor-wallet) from source and it seems to be the most functional so far! QR code scan, send transaction, UI update all work 🙂 downside is that it's not released yet!
+Unfortunately not to my knowledge
+Hard to say without seeing code! Please post a link to a repo (not code snippets in the chat) and I'll take a look
+I am trying to set up Octane to pay for the fees when someone makes a transaction with my custom token, everything seems to work fine (no errors) but It keeps saying "YOU DON'T HAVE ENOUGH SOL" when I try to make a transaction, (the feePayer wallet has SOL).
+Hello there! does anyone knows where I can ask questions about the gasless relayer for solana, Octane?
+Are there any Android wallets with Solana Pay support + devnet yet? It looks like neither Crypto Please nor FTX have support for devnet
+so i have to pass two transaction instruction in a single transaction,  the first instruction will be the SPL token transfer to octane and second will the transaction for which octane is going to pay fees am i right?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+That probably won't help. I'd suggest making sure you can run and interact with Octane locally first, and that you follow the guide to deploying on Vercel only after that. If it works locally and doesn't work on Vercel, it's probably due to missing environment variables or other config issues that are covered in the guide.
+I need help on Solana Pay ! 😖
+It only happens when invoking the transfer.js serverless function, the rest: index.js and blockhash.js work fine.
+Is it ok to send a pic of the error here?
+Actually I checked the logs on Vercel and: I was receiving an error when invoking a serverless function.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks, I’ll have a look
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+sent a friend request
+Sure 🙂
+can i dm you ?
+So why do you think that `router.post("/verif", async (req: Request, res: Response) => {` is throwing the error? It's happening after that log line, and the code after that log line doesn't seem to call the `/verif` route at all. I don't really understand how the pieces of code you've sent fit together
+<@!492411676889710592>
+```const getUserTokenInfo = async (
+  connection: Connection,
+  tokenSymbol: string,
+  userAddress: string
+) => {
+  let splTokenList = await initTokenList();
+  const accounts = await connection.getParsedProgramAccounts(TOKEN_PROGRAM_ID, {
+    filters: [
+      {
+        dataSize: 165,
+      },
+      {
+        memcmp: {
+          offset: 32,
+          bytes: userAddress,
+        },
+      },
+    ],
+  });
+  console.log(
+    `Found ${accounts.length} token account(s) for wallet ${userAddress}: `
+  );
+  let userTokens = accounts.map((account) => {
+    let selectedToken = splTokenList.find(
+      (token) => token.address == account.account.data["parsed"]["info"]["mint"]
+    );
+    if (selectedToken) {
+      return {
+        userAddress: account.pubkey.toString(),
+        mintAddress: account.account.data["parsed"]["info"]["mint"],
+        tokenAmount:
+          account.account.data["parsed"]["info"]["tokenAmount"]["uiAmount"],
+        tokenSymbol: selectedToken.symbol,
+        tokenName: selectedToken.name,
+        tokenDecimals: selectedToken.decimals,
+        tokenImage: selectedToken.logoURI,
+        extensions: selectedToken.extensions,
+      };
+    } else {
+      return null;
+    }
+  });
+  return userTokens
+    .filter((elm) => elm != null)
+    .find((elm) => elm.tokenSymbol == tokenSymbol);
+};```
+The wallet
+Yeah give me a min that's a piece of code that i wrote to retrieve
+Hmm, do you know where that "Found 133 token wallet(s)..." is coming from? Can't see it in your code you posted
+
+Ah okay that's way different to the sample, which just uses something like `const signatures = await connection.getSignaturesForAddress(reference, {}, 'confirmed')` in an interval 
+
+Do you know which RPC function is throwing the error?
+https://solscan.io/tx/2KqnbGYxUFw5kntsf8nLWnBMrYH1FoT4QbjsDCDmQLhzCymSJA32LhwvqSt7Fbc5BrHUHgrCpSAPApCdgkYkThTZ
+```router.post("/verif", async (req: Request, res: Response) => {
+  let { senderAddress, amountToVerif, tokenSymbol } = req.body;
+  let tokenList = await initTokenList();
+  let merchantAccount = await getUserTokenInfo(
+    connection,
+    tokenSymbol,
+    "4B7iB4z7RpAW7b66isYSKVm9qmNiRXgVLuvH5tu1oZ6h"
+  );
+  console.log("Merchant Account", merchantAccount);
+  try {
+    let selectedToken = tokenList.find(
+      (token: TokenInfo) => token.symbol == tokenSymbol
+    );
+    if (!selectedToken) {
+      res
+        .status(500)
+        .json({ success: false, message: "Invalide Token Address" });
+    } else {
+      let reference = new PublicKey(senderAddress);
+      let associatedToken = await getUserTokenInfo(
+        connection,
+        tokenSymbol,
+        senderAddress
+      );
+      const signatureInfo = await findTransactionSignature(
+        connection,
+        reference,
+        undefined,
+        "confirmed"
+      );
+      let amountToSend = new BigNumber(amountToVerif);
+      const amountInLamports = amountToSend
+        .times(LAMPORTS_PER_SOL)
+        .integerValue(BigNumber.ROUND_FLOOR);
+      let result = await validateTransactionSignature(
+        connection,
+        signatureInfo.signature,
+        new PublicKey(merchantAccount.userAddress),
+        amountInLamports,
+        new PublicKey(selectedToken.address),
+        reference
+      );
+
+      if (result) {
+        res.status(200).json({
+          success: true,
+          message: "Payment Validated",
+        });
+      } else {
+        res.status(500).json({
+          success: true,
+          message: "Payment Not valid",
+          result: result,
+        });
+      }
+    }
+  } catch (error) {
+    console.log("Error", error);
+    res.status(500).json({
+      success: false,
+      message: "Payment Failed",
+      error: error.message,
+    });
+  }
+});```
+Can you show your verify code + a sample transaction in solscan? AFAIK it shouldn't matter what the transaction is doing as long as the reference is there
+yes following the same , but used an SPL TOKEN , so at first i had an issue with recipient not found and then i found out that i need the Associated Token account of the merchant , which i did and now i have this issue
+How are you trying to verify? Are you using the same approach as the sample app of checking for transactions with the reference?
+hey i'm trying to implement solana pay to my api , when trying to verify a transaction , i get the error 
+TokenOwnerOffCurveError
+Hey <@!150787664553967616>  is mobile-app to mobile wallet(https://docs.solanapay.com/core/overview#mobile-app-to-mobile-wallet) Currenty possible with slope wallet(https://docs.slope.finance/development-resources/integrate-with-slope-wallet-mobile#establishing-a-connection) ??
+ I mean the redirecting to the app after the transaction is done in wallet and I was also reading messages of slope is not working. 
+
+Asking because of integrating it here https://twitter.com/kytpay
+Sounds good. Thank you
+Hi <@!775472708984766474> you are absolutely right, accepting payments should be easier for both low-code and no-code users without needing to understand the low level Solana Pay specification. We are working on this at https://solpay.so
+ty ❤️ (I made it)
+:))))))))))))))))))
+I think a good feature that Solana Pay could implement is a ready to use payment gateway that provides APIs. This way it could be containerized and added to any existing software without the trouble of reimplementing all such functionalities in our software code and it would also be compatible with python or any other programming languages.
+This will allow you to always locate the order on chain later
+Just persist the random one in your DB
+If you want to associate a pubkey with an order ID that's fine
+Np!
+Haha you're right I was on the wrong path. Reasonable enough 🙂 thank you!
+You should not generate pubkeys from product IDs or any other such information
+So the chance of using the same one again is the chance of coming up with the same private key as someone else
+You're really generating a random keypair and then using the derived pubkey and throwing away the private key
+I'm just thinking of a situation if multiple merchants use the same random seed to generate those pubkeys from their product IDs. This might cause issues with the payment flow.
+No. Just generate a random one, it's overwhelmingly unlikely it's non unique
+So does that mean we should check the uniqueness of that public key on the chain before proceeding on using it as a reference?
+You should generate a unique pubkey such that you know it is the first one.
+<@!150787664553967616> May I ask why  `findTransactionSignature()` tries to return the oldest transaction signature? What if our transaction is not the first one with that specific reference key?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yeah. But with the caveat that `Transaction.populate` has some known issues: https://github.com/solana-labs/solana/issues/21722#issuecomment-1067397222
+
+If you want to get the fee payer, you could just do `message.accountKeys[0]` I think
+The thing I missed here was how easily you can go from the return from `getTransaction` to an actual transaction. Just to make sure I'm understanding right, you'd call `Transaction.populate(message, signatures)` on this from that `TransactionResponse`?  
+
+```
+  transaction: {
+    /** The transaction message */
+    message: Message;
+    /** The transaction signatures */
+    signatures: string[];
+  };
+```
+`Transaction.feePayer`, or just the first pubkey of the serialized message, is the fee payer
+Hmm this doesn't sound like a Solana Pay question 🙂 I'd maybe try <#517163444747894795> for more general DeFi stuff
+i found a way how to automate spl token conversion into lp and farm tokens, now i have problem that user should  deposit this tokens into some "vault" with method for owner to use deposited by user tokens only to claim rewards, can u put me into direction how i can do that or which libraries i can use for that (like some vault lib which i can extend ) ?
+I'm not sure, sorry! I was expecting it to be in the `Message` data structure but I can't see how fee payer specifically is encoded. I think what you could do (if you know only the fee payer is a signer, which is the case for transfer requests) is call `isMessageSigner` from https://github.com/solana-labs/solana/blob/master/web3.js/src/message.ts#L86 on each of the account keys
+
+Though looking at the implementation of that function `return index < this.header.numRequiredSignatures;` signers must come first, so if there's only one it should be the first in `message.accountKeys` here: https://github.com/solana-labs/solana/blob/master/web3.js/src/message.ts#L64
+
+This is almost certainly documented somewhere properly though so you should probably find a better source than me rambling while reading source code 🙂
+<#812122623654887444>
+ah, another one of these scams
+Hey, thanks alot for your quick response. Would you know by any chance how I could pull the fee payer/sender from getTransaction ?
+Thanks in advance!
+alright thank you guys
+<@!698223554768011294> just think of the reference like a random ID you ask the user to put alongside every transaction. Then, when the user has made the transaction and you get notified, you verify it. But to do so, you need to know which transaction it was, for this you can search by the reference you created at the beginning, which has only be used for that specific transaction.
+The code you pasted implies a fundamental misunderstanding of how the `reference` key works. You basically want to do `reference=Keypair.generate().publicKey`, persist that value, include it in the URL or add it to the transfer instruction, and then find the transaction with that persisted value.
+
+Looking at the point of sale app code may help to see how this is done in a simple application, but you'll have the figure out the persistence if you want to verify it on the server.
+Yes, what I'm saying is that this is incorrect. You cannot use the payer's address as the reference. And you cannot generate a reference from the server while verifying the transaction either. It needs to have been generated uniquely prior to the transaction, included in the transaction, and then verified using the same value afterward.
+as following the code , the reference is used is the payer address , i'm trying to build a rest api from it to integrate it into an existing website
+This looks like a problem?
+
+`let reference = new PublicKey(senderAddress);`
+
+You need to use unique references. You can't use the sender's address as a reference key because there will be other transactions that reference it.
+You can get the signature from the response
+
+Then do `await connection.getTransaction(signature)` and then read whatever you need from the transaction
+thanks in advance
+hey, how could i find the sender of a transaction with FindTransactionSignature ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+all right thank you
+The spec says for recipient "The value must be the base58-encoded public key of a native SOL account." so I wouldn't count on wallets being able to parse it if you encode something else manually
+just a quick question. want to encode a PayURL to a sol domain. isn't this possible, with the encodeURL method? 2. way would be to manually create the QR code string i think. right?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+As dev  or merchant ?
+https://twitter.com/UnstoppableDeFi/status/1504393509129920516?s=20&t=cG22Ug5d-Ig3_bVJaBNLEw
+do you know anybody who does Solana Pay near berlin or germany?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+No, you can use the url specification as we have on the woocommerce Solana pay plug-in (WooLana) We may implement option for QR code, but thought it was too much friction for many regular e-commerce users.
+this channel is for the Solana Pay SDK. not here
+totally off topic for this channel
+Hello everyone, I am trying to use Octane but I found out that the instructions to set it up and have it running correctly are outdated, is there anyone here who has successfully set up Octane and have it working?
+Yo anyone else having long confirmation times using Solana Pay? Is this just a network/validator issue? Some are verified in less than 2 minutes, but some are often over 5 minutes 😦
+Can you only pay by QR code?
+I'm trying to build a side project with solana pay but have some Qs
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+If it works on devnet and not on mainnet, that error seems to indicate the token mint you're configuring the app with exists on mainnet and perhaps doesn't exist on devnet, or the wallet you're scanning with doesn't have it. What wallet are you using, and what's the token mint address?
+I think slowdown might be because we are using public rpc too, swapping it out with GenesysGo rpc before launch. They said no problem including their endpoint in open source plug-in 🚀
+Yes I believe we are using this method I’ll verify later thank you
+But if you're using `sendAndConfirmRawTransaction` with `confirmed` (rather than `finalized`) in web3.js directly, it should just be 1 confirmation anyway
+In the point of sale app, this is a configurable setting (defaulting to 1, but at launch this defaulted to 9)
+Well, I'm not sure how you're confirming the transaction
+Hmm not sure but will check, we can modify that in web3.js?
+Something that will probably change soon is that we'll invert the order of some operations. Right now, you 
+
+1. Create a transaction
+2. Send it to a wallet
+3. Wallet signs and returns it
+4. Send it to Octane
+5. Octane signs and sends it
+
+We want to
+
+1. Create a transaction
+2. Send it to Octane
+3. Octane signs and returns it
+4. Send it to a wallet
+5. Wallet signs and sends it
+Yeah, that's correct. You need to have something (like a dapp) that's set up to send signed transactions to the API
+Never mind, it was actually working. I just thought octane deploy was enough to have it paying the fees, but it seems like you need to build something to use it from the api.
+Can you describe what's not working? The only thing that I can think of that's currently out of date is the `config.json` file which you'll need to modify the placeholder values in for your deployment
+Hmm, how many confirmations are you waiting for? You only need to wait for 1. But if it's taking minutes, that's definitely some kind of network/RPC issue
+There's also https://docs.solanapay.com which is where the `docs` folder gets built 🙂
+We just rolled out our Solana Pay integration, purchase giftcards from 1200+ brands in over 100 countries using SOL, USDT, USDC💥
+
+You can check out our site w/ Solana Pay integration here on Desktop: https://giftcards.bidali.com 
+
+Would love any and all feedback. Shoutout to the Solana team for a slick SDK!
+What does this error means, this only happens when i change clusterApiUrl to `mainnet-beta` otherwise in `devnet` its fine when it comes to production this happens someone please help me
+(they have a "docs" folder in that github)
+Here is a good start - https://github.com/solana-labs/solana-pay , not much as far as docs right now, but next week we'll have our beta public and open source so you can review code of how we did it.
+Sweet, thanks! Can you point me to some tutorials or specific docs on how to use the url specification? I can't seem to find it in the Pay docs?(Sorry, all this is very new to me)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Its possible the PoC gets removed due to their rules but you actually can.
+No you actually can - ive already tested and have PoC working on Shopify. (I should clarify, its very basic and only allows to confirm a user has paid for an item.)
+Well, not necessarily. You could still use the Solana Pay SDK, and maybe extract part of the point of sale app, to add the ability to scan a QR code from your site.
+Yeah, I think that's the issue we ran into
+Probably not a Payments app, right? https://shopify.dev/apps/payments
+ah gotcha! So if you're building a dapp to accept payments via wallet integration, you should probably hold off on calling the solana pay sdk until pr #77?
+^ Heads up you can actually have an unapproved shopify app on the app store - it is down to vendors to enable experimental plugins. Working on this for https://yamipay.xyz
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Ok cool, will investigate a bit more. Thanks for the help 🙂 👍
+You can think about it just like building a dapp, but one where you deliver goods or services somewhere after payment
+(in the context of a browser extension wallet)
+So that means it pops up to connect and sign
+You can do this. But you still need to interact with a wallet
+Have a quote with "pay now" button, click it, merchant gets paid, merchant webhook gets called to activate product/sub/whatever
+What kind of UX are you thinking of?
+Solana Pay is (mostly) for interactions with mobile wallets right now
+Desktop
+Ah ok, thought so. Damn, was hoping the get as smooth an experience on DR
+Very different use cases! If you're looking for how to support desktop browser wallets, please check out https://github.com/solana-labs/wallet-adapter
+Ok, then one more Q - is Pay only working  through mobile apps? No way to use it with a desktop browser wallet?
+Deep linking is not covered by the spec. The spec and SDK are only concerned with how to encode and decode the URLs and what to do with them. How you register to handle deep links is up to mobile apps and OSs.
+Yeah, found that, but I'm looking for examples of deeplinking specifically
+in documentation it says Optional so i ignored it, since i need to get paid with Solana only rather than other SPL tokens
+Please check here - https://gist.github.com/joeljerushan/6b6947312c8c72467658aedf03b0487d
+Is it okay to share the part where solana pay comes ? Via gist ??
+Can you provide a link to your repo that you can reproduce the issue from? I can take a look but I'll need to see the full code
+No 😞
+You're not including an spl-token param in the Solana Pay URL?
+I haven't included token mint address or key on my code just merchant address (phantom wallet)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Agree
+Also no promo
+definitely the wrong channel (and server, tbh) for this squabble
+Exactly
+Okay I see, sorry. Well my comment still applies to that wallet which you said you used the code from - both are just marc's work
+not mine,
+this is just a open source project
+cryptoSyndrome001 is not my account
+You weren't really building a wallet in that repo before you found marc's work though.
+
+Your entire repo at commit b0bbba260ae4df814fa061fbad918963ade89939 is just a README with a bunch of lines saying things like "Contribution: 2021-07-10 20:00": https://github.com/cryptoSyndrome001/solana-mobile-wallet-NovaCity/tree/b0bbba260ae4df814fa061fbad918963ade89939
+
+In the next commit https://github.com/cryptoSyndrome001/solana-mobile-wallet-NovaCity/commit/9595d24ebd3da0911a5666f17fed4ce349edc363 which you called "wallet connect issue solved." you copied in marc's entire repo with whatever changes you've made, including license.md with the line "Copyright (c) Marc Espín Sanz"
+
+In the commit immediately after that (the last one) https://github.com/cryptoSyndrome001/solana-mobile-wallet-NovaCity/commit/f50d592ce7f2a0cb75f6be6fb3a0615d2a8de7bb called "update readme" you added "by cryptoSyndrome" to the title and removed the line "MIT license"
+
+And you still have marc's MIT license in the repo: https://github.com/cryptoSyndrome001/solana-mobile-wallet-NovaCity/blob/main/LICENSE.md
+https://twitter.com/mkenzo_8/status/1505875041917022211?s=20&t=Dilv0T94k5-BZPY8ArQW7A
+It's a fork.
+https://github.com/cryptoSyndrome001/solana-mobile-wallet-NovaCity
+Hey <@!234389741854785537> ,
+This is not a fork of your wallet with style changes, I was building a wallet so searched to see some implementation, then found your project and another project(Link below). So I replicate some of that, I thought this is Open Sourced, but If you want I can delete all those functionalities.
+You shouldn't be showcasing this on Solana Riptide
+I am reporting this. I made my wallet open source so others can benefit, you are free to fork and do whatever you want, but this, this is not fair
+Wtf
+https://github.com/marc2332/reactor-wallet
+You literally forked my wallet
+WTF
+Check out my new payments project "Kitepay🪁", it uses solana pay protocol.
+It let's you: 
+- Pay SOL by scanning QR
+- Pay SOL manually to other addresses 
+- Create QR to receive Payments
+- See your Transaction history
+- Manage and switch between accounts seamlessly
+
+With easy one tap sign-up process!
+
+Future plans: 
+- NFT Billing
+- NFC payment
+- Natively communicating with other wallets on Mobile
+- Buy now pay later on-chain program 
+- Cross-platform Mobile SDK for SOL and USDC payments with UI components
+- Solana UPI Bridge
+- Payment & Financial service Marketplace for Users and 3rd-party SmartContracts to natively interact.
+
+I'm sharing this here to get feedback about the project, any feedback will be helpful about 🙌
+https://twitter.com/HeySunit/status/1505811142966321160?s=20&t=50jyTS6d7fUWuRbFiZ73YQ
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I am looking to add two more functionalities to my solana payment system for Merchants:
+
+At the "Generate Payment Code" screen; Filter or search for a specific item or category (tag/memo?) to identify the transaction to later place in the proper "bucket".
+
+Create smart contract functionality that searches each transaction for a specific tag/memo. The contract will re-distribute funds to the appropriate wallet when a match is found.
+
+Question 1: Is adding a tag even possible utilizing the solana-pay POS?
+
+Question 2: Can tags be searched and discovered at deposit automatically?
+
+For example. Let's say I have 5 stores where I sell goods and 1 solana-pay POS system for all stores. Stores are tagged/memo'd as "Store 1", "Store 2", etc. The cashier is required to select a store and enter the total amount before the "Generate Payment Code" becomes highlighted.
+
+The ultimate goal is to avoid a POS build for each store to keep my deployment cost down.
+Thanks for the heads up guys. We're working on a update that should address this
+Thanks for reporting to them! I asked in Slack too, I'll follow up here when I have something
+We are experiencing this issue too.
+I can repro on phantom iOS and the demo point of sale app
+Reported on the phantom beta group + linked this comment too - someone else had reported it there too
+Hmm. Is there a way to raise this issue with Phantom, maybe on Twitter? Likely that they have a better explanation. cc <@!363246496210092035>
+It’s working! Thanks
+This is the way
+I am wondering if this is a bug on phantom's end or expected behavior. It definitely seems like it would throw off and confuse most app users
+you need to click "Send" -> Choose tokln type -> Scan QR Code in the address input for phantom to allow sending
+Wonder if anyone else experiences this: If you scan a solana pay QR code from the phantom home screen, it recognizes everything, but actually has the "SEND" button disabled and slightly dark
+I would rather setup the official poc on my machine, create a wallet on devnet, mint myself 1 usd and scan a QR createdf from my poc, if you ask me
+You would need 1 dollar to make the transaction, that's what the QR's transaction includes
+You don't have yet created an associated account for the USD token, aka, you can't send something you don't have
+Look what it says
+https://docs.solanapay.com/#accept-payments-in-person
+That looks like you might be missing something to do / have, like for example, not having enough funds
+Same error for me someone help 🙏🤔
+https://docs.solanapay.com/#accept-payments-in-person
+Where is the QR from?
+Why are we getting this error?
+
+hey guys sorry can someone help me out. i have cloned the solana pay pos app from github and everything is running fine until i generated the qr code. when i scan the qr code on my phantom wallet, the prompt shows up but the "send" button is greyed out and i cant send the txn through. does anyone know whats the issue?
+this is why we made our repo private until the end
+you should let the Solana devs for the hackton know this is kinda of f#^* up
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+> How do I enable these fields so that I can see and complete them at the time of transaction?
+
+It's up to wallets to display these fields. But if you're including them in the link/QR, they should be displayed, and added to the transaction by the wallet.
+
+> I would like to use the solana POS system as is *and *be able to enter a message, memo, or reference before generating a QR code.
+
+This is up to you to implement. You'll need to add form fields to the point of sale app to do it. Think of the app as a proof of concept. For things it doesn't cover that the spec includes, you can fork and add.
+And any teams here specifically working on a Shopify payment app?
+Hey guys, any news on solana-pay getting approved by Shopify for their appstore?
+I am working on adding the memo functionality from here (in process): https://github.com/solana-labs/solana-program-library . Because I am assuming I need this to enter the memo info???
+
+As is, the launched solana POS program does not provide any fields for entering a memo, reference or message at the time of sale.  And I see no record for any of these fields on solscan for our test transactions. 
+
+ **solana:<recipient>?amount=<amount>&label=<label>&message=<message>&memo=<memo>&reference=<reference>**  
+
+How do I enable these fields so that I can see and complete them at the time of transaction?
+
+I would like to use the solana POS system as is *and *be able to enter a message, memo, or reference before generating a QR code.
+Take a look at the spec, and specifically the `reference` field. You can use multiple reference keys and wallets will include them in the transaction. These could be used to locate and categorize transactions. However for these references to have meaning, you'll have to implement something that persists them.
+
+Another way to differentiate transactions is by the recipient address. I'm not sure if it makes sense for your use case, but consider that each store can have it's own public key (and private key).
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks for the info
+This would be an ad hoc fix ahead of our planned Solana Pay update ~first week of april
+We have a fix as of this morning and it's looking good on my phone. Assuming it passes QA should have a release out soon. Will let you know if I get an ETA
+Understood. Thanks for the info.🙂
+<@!783025592777965589> we should move here now your questions have moved to Solana Pay API specifically
+
+There's an optional third param you can use:
+
+```
+  export type SignaturesForAddressOptions = {
+    /**
+     * Start searching backwards from this transaction signature.
+     * @remark If not provided the search starts from the highest max confirmed block.
+     */
+    before?: TransactionSignature;
+    /** Search until this transaction signature is reached, if found before `limit`. */
+    until?: TransactionSignature;
+    /** Maximum transaction signatures to return (between 1 and 1,000, default: 1,000). */
+    limit?: number;
+  };
+``` 
+
+Default and max limit is 1000 transactions
+gm! I was wondering if there is any updates on this?
+I believe I understand and appreciate your direction!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+you mean solana.py has it already?
+Use solana sdk
+where can i find info about that?
+Yes it is
+i am already using solana.py
+i want to add some payment integration to my discord server
+hey is solana pay available for python?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Found some issue in solana pay and able to resolve it. Finally this is what i built in 1 Month.
+https://www.linkedin.com/feed/update/urn:li:activity:6911591366472921088/
+```/* createTransaction from '@solana/pay'; */
+
+  let transaction = await createTransaction(connection, publicKey, recipient, amount, { reference, 
+memo });
+  let recentBH = await state.connection.getRecentBlockhash('finalized');
+
+  transaction.recentBlockhash = recentBH.blockhash;
+  transaction.feePayer = state.publicKey;
+  
+  const signedTransaction = await window.solana.signAndSendTransaction(transaction);
+
+```
+Do any of the chrome extension wallets support solana-pay?
+
+I create a transaction created with solana-pay's createTransaction()... 
+When signing the transaction, the phantom chrome-extension doesn't display the memo / other data... the transaction does complete
+Not officially. I found this, but no idea what it does/if it works: https://pypi.org/project/solana-pay-py/
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+No, not at this time. The way to handle this is likely to use wallet-adapter and connect to a wallet in the browser if the user has that.
+👍
+But using metamask you can scan the qrcode though
+I don't think so
+Hello, I'm building an app with Solanapay integration, and i'm just wondering if there is a way to pay with the generated url on phantom's browser extension?
+Looks good!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Definitely wrong channel
+https://twitter.com/_buildspace/status/1508908398665949187?t=r46DC19RJ62KH5xYWo3t8g&s=19
+
+This might interest some people :D
+🫂
+sorry I should rephrase, it doesn't work with browser *extensions*, but yes Solana Pay should work in browsers to then open a native app
+It depends on the transport implementation
+Not true at all but ok
+> certainly Solana Pay doesn't work in browsers
+Solana Pay is great but for very specific use-cases, of which not everything in this channel applies.
+Ok I think not everything needs to use Solana Pay, certainly Solana Pay doesn't work ~~in browsers~~ with browser extensions, it's mainly for person-to-person payments or payments using mobile devices. There's no need to overcomplicate things, `@solana/web3.js` works just fine in all cases.
+Hi all .. need your help.. how can i use solana pay for creating nfts using spl-token.. any advice/tips would be a big help.. thank you
+Thanks marc and SBlaze - that was useful. Now at least I'm sure it's not my app 🙌
+This comment helped me. Looks like you first need to navigate to the SPL token , then SEND -> then Scan
+https://discord.com/channels/428295358100013066/938828592232693820/955878499007209513
+https://discord.com/channels/428295358100013066/938828592232693820/956606105918791701
+on this same channel
+
+hmm then it might be an RPC issue? or maybe just a wallet bug in general
+I'm using the latest version I think - just started the project this weekend
+Let's wait until he specifies 😄
+But it stays like this as long as I waited for it
+Or might be the bug that <@!234389741854785537> mentioned
+Phantom's RPC servers are slow on mobile since they haven't updated it yet like they've done on browser (in browser they now use better load balancing but not yet implemented on mobile)
+And the QR
+It's was reported some weeks ago, have you tried updating?
+This is the payment URL that gets generated:
+
+`solana:Dd1JSwojUsptwFa97A3WRZU1SijCWYo9Qa3xLxT8yzb7?amount=25000&spl-token=KinDesK3dYWo3R2wDk6Ucaf31tvQCCSYyL8Fuqp33GX&reference=4DkLAKptfcKQenP93eaYiRULvaMKEe8iBekDZo7VfVzH&label=Beeman%20%F0%9F%90%9D%20Devnet&message=25000%20KIN%20at%20Beeman%20%F0%9F%90%9D%20Devnet&memo=25000%20KIN`
+I think that's a transaction simulation delay or something?
+unless they're specifically looking for mobile browsers maybe?
+I'm having an issue when I want to make the payment using Phantom - the Send buttons stay disabled
+just using JS SDK for browser and everything
+Idk
+seems like <@!750935346585534555> was looking to use it in a "web app" using "an implementation like the common way, opening the wallet and confirm the transaction" in which case it would probably be best to go with what's mentioned up here at https://discord.com/channels/428295358100013066/938828592232693820/958250716386975745 right?
+I have never made a browser extension in my life but I am not sure extensions can actually handle any `protocol:` they want
+scrolling back i guess not
+`Failed to launch 'solana:6moute4cAhkmhA5VGrmhFB3cbZJRCwSoxHe8ZEiPAQRi?amount=0.01' because the scheme does not have a registered handler.`
+wait does Solana Pay work in the browser on desktop as in interacting with browser extensions like Phantom etc?
+awesome
+https://tenor.com/view/noice-nice-click-gif-8843762
+Interesting, I really need to read up more on the spec for Solana Pay, been meaning to do that for a while now. We're planning on hopefully building some cool integrations with Solana Pay + Octane.
+but that's just a matter of implementations, it can be useful
+I got mine but it doesn't support handling the `solana :` protocol on Desktop  yet ( I think ?) Only on mobile
+(besides the one we're building in the relatively near future haha)
+ah well
+I'm curious, which native desktop wallets support Solana Pay? I've only heard of Solana support in multi-chain wallets like Exodus.
+For our wallet integrations so far, we've mainly just supported Phantom, Solflare, and Slope, since those were the easiest and most reliable to integrate
+same goes for desktop in case you got a native wallet instead of a browser-based one
+and you want to pay for something, you would only need to click a button, that would launch your wallet (should support solana:)
+Oh yes that's true good point, there are so many different varying implementations with wallets and communicating between client and these wallets and even with wallet adapter it's still a bit tricky.
+With a normal QR you can share an address, but no metadata and it can't trigger opening Solana specific apps that can handle the payment
+imagine you open a website in your mobile phone
+I think above all Solana Pay is a standard that ensures interoperability between wallets
+* I think *
+He wants to use Solana Pay standard but instead of QRs use buttons or whatever
+just wondering what's the appeal of using Solana Pay vs RPC API/JS SDK for a simple use case like this (without the QR codes and all)?
+ah ok I see
+that
+or is it about the formatting stuff that comes with Solana Pay?
+No
+Seems slightly over-engineered though it's just a simple RPC command no?
+something like https://solana-pay-button-demo.vercel.app/ ?
+qrs are just a fancy transport
+he still wants to use solana pay
+docs for `@solana/web3.js` can be found at https://solana-labs.github.io/solana-web3.js/ (with an overview at https://docs.solana.com/developing/clients/javascript-api), and docs for SOL Pay SDK (solpay.togatech.org) can be found at https://solpay-docs.solblaze.org/
+In fact, you can just use `@solana/web3.js` or a wrapper SDK such as the one we maintain at https://solpay.togatech.org/
+Yes, you can make use of buttons or similar which opens the uris
+Yes, that's easy to do and does not at all require Solana Pay.
+Hi everyone, I'm starting into Solana Pay and I have a question, is it able to make payments in a web app without using the QR Code? Actually I would like to make an implementation like the common way, opening the wallet and confirm the transaction. Hope you can help me. Thank you!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I had noticed the irregularities on our server files. I edited/corrected them and pasted them here. But running the demo still gave problems. Now when I got back to our regular work location and restarted my laptop, tried again and it suddenly worked (to my surprise) so must be some cache not refreshing. We haven't deployed anywhere yet. Will conduct some more thorough tests including on mainnet. Really cool to have SOL Pay as another useful option.
+In any case, very glad you were able to fix the issue, it might be a sizing constraint on the amount or maybe your changes aren't being saved and refreshed? If you share your repo or where your code is being deployed, I can help take a look at the live version and debug that issue.
+Yes, we've tested the quick start code on devnet, testnet, and mainnet, but maybe there are some issues related to how the copy paste worked.
+I changed the transfer amount to lamport equivalent of 0.1 SOL and now the transaction is registered in the history, so the test amount was just too small to register. I've changed the lamports amount in index.js to equivalent of 1 SOL but the wallet transfer figure never changes from 0.1 SOL. I will conduct some more tests - in any event, good to see that the basic transaction works. Thanks for your feedback.
+Wallet connects fine as I get the wallet address and "confirmed" displayed in the console log. One thing that was weird that I noticed now is that when I click on the "Copy" icon on the Quick Start page and paste it in a text editor, the code copies correctly. But when I right-click to paste it inside a terminal editor (nano), it pastes weirdly and a couple of code lines were stuck behind comment lines. I've fixed those irregularities and tried again. Now I get the wallet popup to approve transaction when I click on the Buy button. But I don't see any record of the transaction in the history for the Devnet when I use the "let network_url = await SOLPay.connectNetwork("https://api.devnet.solana.com/", "confirmed");" line. Shouldn't the sent transaction appear in the history of the Phantom wallet? Just curious if you guys have tested the Quick Start code on the Mainnet with real solana transfers from buyer to seller address?
+The variable name part doesn't really matter, `network_details` or `network_url` should both work. What sort of error are you getting on connect? 
+
+Seems like you're doing everything right, but I'll take a closer look and let you know.
+index.js
+--------
+async function connectWallet() {
+/* Connect to Solana network: */
+// same error results with either of the next 2 lines
+//let network_url = await SOLPay.connectNetwork();
+let network_url = await SOLPay.connectNetwork("https://api.devnet.solana.com", "confirmed");
+console.log(network_url); // "https://solana-api.projectserum.com"
+
+/* Connect to user wallet: */
+let wallet = await SOLPay.connectWallet();
+console.log(wallet.address); // the address of the connected wallet
+}
+
+async function buyItem() {
+    let address = "ourselleraddress" // replace with the Solana address of the seller
+    let lamports = 10000;
+    let payment_details = await SOLPay.sendSolanaLamports(address, lamports);
+    // IMPORTANT: Send payment_details.signature to the backend for verification
+    let raw_result = await fetch("verify.php?txid=" + encodeURIComponent(payment_details.signature));
+    let parsed_result = await raw_result.json();
+    // Use parsed_result to either return success message or error message to user
+}
+
+verify.php
+----------
+// If the transaction signature is not yet in the database
+$to = "ourselleraddress";
+$txid = $_GET["txid"]; // Get the txid in the URL from frontend request
+$transaction_data = json_decode(file_get_contents("https://solpay.togatech.org/transaction.php?to=" . $to . "&txid=" . $txid), true);
+if($transaction_data["status"] == "success" && $transaction_data["transaction"]["lamports"] >= 10000) {
+    // Add the transaction signature to the database so that it cannot be reused
+    // Send the item to the user associated with $transaction_data["transaction"]["from"]
+} else if($transaction_data["status"] == "error") {
+    // Send $transaction_data["error"] to the frontend to display to the user
+} else {
+    // Send an error to the user that not enough funds were sent in the transaction
+}
+
+Would be great to learn what I'm doing wrong.
+Thanks - 'appreciate your troubleshooting help!
+
+A couple of things I noticed:
+
+- on the Quick Start page, the individual code snippets have "let network_details" whereas the complete Example code at the bottom of the page (which I tried with) have "let network_url". Should either work? I just copied the Example code snippets as they were and inserted our seller address.
+
+- I tried both the "let network_url = await SOLPay.connectNetwork();" as well as "let network_url = await SOLPay.connectNetwork("https://api.devnet.solana.com", "confirmed");" with same error results.
+
+- The "ourselleraddress" was obviously replaced with our real address in the code snippets below.
+
+- Wallet connects fine, but always get the following error in console log (and no transaction sent in the wallet history):
+
+  Uncaught (in promise) ReferenceError: lamports is not defined
+    buyItem https://www.ourdomain.com/index.js:10
+    onclick https://www.ourdomain.com/index.html:1
+
+Code snippets that I'm using:
+    
+index.html
+----------
+<script src="https://solpay.togatech.org/sdk.js" type="text/javascript"></script>
+<script src="index.js" type="text/javascript"></script>
+<button onclick="connectWallet();">Connect</button>
+<button onclick="buyItem();">Buy Item for 0.00001 SOL</button>
+
+Have to break up this message due to discord 2000 character limit.
+I pinged you on <#517163444747894795> with an answer to this, doesn't involve Solana Pay
+thank you.. but it only use native sol for transfer i want this functionality using custom spl-token
+There's an spl token helper library `@solana/spl-token` I think, but you can also use SOL Pay SDK at https://solpay.togatech.org/ (docs at https://solpay-docs.solblaze.org/) for better abstracting all the complexities for token transfers.
+Hi <@!958023453905133619>  how can i make transaction and payments with custom spl-token using `@solana/web3.js` other than native sol.  thank you
+just ran and code seems to be working for me, so could you please share your code file so that I can help debug the issue?
+oh wait, you're probably using quick start code, let me take a look
+Hmm, can you please share your code or a snippet so that we can take a look? It might be that a parameter is missing or something.
+Nice to see a php-based option for solana payments. Tested the example code provided at the bottom of the Quick Start (index.html, index.js, verify.php) but got the following error when clicking on the "Buy Item for 0.00001 SOL": Uncaught (in promise) ReferenceError: lamports is not defined.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+It's not perfect but it provides some level of privacy. This can be used together with the zk token work, when it lands
+Generally the way we are suggesting to merchant service providers is to use an omnibus wallet for multiple merchants and sweep funds into them later
+I think Solana developers are currently working on SPL zk-token which would allow for private transfers of SPL tokens
+Is there any project that has a working architecture for securing a merchant privacy? I don't know any merchant that would be interested in publicly revealing their earnings
+Thanks for your feedback
+That's more like a general crypto question not really related to solana pay itself
+if i run a business with Solana pay, would it cause some legal issue? like tax etc
+i know it can vary for different countries but i am generally curious what happens in your countries
+It might be some odd caching issue, anyways be sure to let us know how the testing goes and whether you have any further bugs or errors!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Solana Pay in the wild. https://mobile.twitter.com/remilabs/status/1499813001381105667?s=21
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+hey guys, Im trying to integrate Solana Pay in my VueJS Project, but Im getting this error:
+```
+This dependency was not found:
+
+* @solana/web3.js in ./node_modules/@solana/buffer-layout-utils/lib/esm/web3.mjs, ./node_modules/@solana/pay/lib/esm/constants.mjs
+```
+All required libs are installed I cant seem to find the problem, do u have any ideas?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hey guys running some tests on localnet. After a payment is made initially using the reference and findTransactionSignature works but after a while its as if there is a reset on the localnet and the transaction cannot be found and also disappears from the browser wallet activity feed although wallet balances stay correct (as if the payment went through) is this something specific with the localnet?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+hi!
+i'm looking to integrate solanapay in my sound store on shopify at http://believeinsampl.es currently just having coinbase commerce at checkout
+would appreciate any help in setting up if someone has the time 🤝
+Hmm hard to say without having more context on what your application intends to do. How are the tasks being paid for? You could potentially use Solana Pay for that part of it, but unless the payers are paying the payees directly, you'd just be using Solana Pay to pay some wallet you control, and you'd handle payouts for the tasks separately.
+Sounds like a problem with localnet not maintaining the full transaction history
+Hi Solana community. We have one question regarding the payouts to the users of the protocol: we are developing a dApp that would pay for the tasks done by the users. This is the opposite of the payments use-case described. 
+Therefore, we wonder if it is possible to repurpose this protocol for the payouts use case or it would be better to handle payments without this framework, at least with SOL only for the MVP? Thank you for the valuable help.
+Try to delete node_modules. Check version in package.json
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Sometimes it says "receipt" not found, why's that?
+Is there anyway wrong with my network??
+I am using chrome now but still isn't working
+Yes
+
+I'd suggest checking your browser's network tab when you have the QR code displaying and see if you're seeing these requests. There should be a constant stream (every 250ms I think) of calls to api.devnet.solana.com with status 200 responses
+Yeh actually with firefox issue is same..
+If Brave is blocking the request for confirmed signatures then that'll stop it working
+May it's bcoz of brave.let me check
+Vivaldi, it's basically Chrome
+Which browser are you using??
+It's the URL you shared - testing-2-delta.vercel.app
+Is this my app?
+Yeh that what is not happening with my solana pay
+I am just following the docs and github still not sure why things are happening like this..
+
+
+
+Your app works correctly for me - I just sent a payment and got the Complete screen. I'm not sure why but the progress bar was much slower than I've seen before, but it seems to work!
+My slope wallet is on devnet and App is also
+Already did but not seeing any confirmation there
+https://testing-2-delta.vercel.app/new?recipient=GTpM26zoZo7k1R3QFq8mLTfUakvLbe5sVXkXXvhBWFDK&label=RiyaStore
+If the issue is that you're not seeing your transaction confirm or be found, it may be because you are not sending the transaction on the right network.
+If you're using the point of sale app from Github and following the instructions to run it, there is already a confirmation page/view in it. You can customize this without changing the logic.
+Have you definitely used that `reference` in your URL?
+I tried this and FindTransactionSignature but none is showing the confirmation on my console.. Can you suggest anything else??
+Thanks
+You can do this by listening for signatures using the reference. This is a simple React example:
+
+```
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const signatures = await connection.getSignaturesForAddress(reference, {}, 'confirmed')
+      if (signatures.length > 0) {
+        router.push('/confirmed')
+      }
+    }, 250)
+
+    return () => clearInterval(interval)
+  }, [reference])
+```
+
+`await connection.getSignaturesForAddress(reference, {}, 'confirmed')` will return an empty list until there's a confirmed transaction using the reference
+
+You can then redirect to eg. a `/confirmed` page, or set state to display the confirmation 
+
+In this case I have an interval that checks for signatures every 250ms
+Means the circle which shows up on the screen after qr code
+Can anyone suggest me how can I add the confirmation to my point of sale solana pay?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Worked on devnet (with a lot of tx's just not going through due to devnet reasons). I could make a small nft collection on mainnet to have a better presentation.
+But don't have any mobile wallet to do an example with, so I've just done what your example has done and simulated it
+So instead of doing a SystemProgram.transfer I've adapted it to minting NFTs
+Feel free to ask here! All hackathon projects are going to be public in a week anyway 🙂
+There are several people working on it, they even have their own Discord (linked from there)
+Check out https://github.com/solana-labs/solana-pay/issues/62
+It was just to discuss the idea I am submitting for the hackathon, has to do a little bit with solana-pay, mainly the use of QR codes to create transactions
+I can help with the woocommerce/wordpress/php/rest api side of things if anyone is interested in doing a collab. Lots of existing custom payment gateways out there so integration should be fairly simple 😉
+Let's get SolanaPay on Woocommerce. Anyone do it yet?
+Hey family!
+Thanks! I flagged this to them yesterday, they are updating.
+<@150787664553967616> I found out that there was an issue with the wallet app that I was using! I used `Slope Wallet` and it somehow doesn't add the reference key to the transaction! I'm wondering if someone as a Solana foundation representative would inform them of their software issue as it's gonna cause lots of issues for customers who would be using the payment gateways. :)
+I think you mean, "DMs are a scam"
+Please only DM if your issue absolutely requires privacy. Otherwise please use this channel or <#517163444747894795> for more general questions.
+This isn't enough context on what you're trying to do to understand how it relates to Octane. I'll also note that Octane is very experimental right now and will change in significant and breaking ways, so we can't support it until it stabilizes somewhat.
+Collateral pay would likely require building a program to lock collateral and use yield from some source to pay off the purchase. We can't really provide specific advice on this, but looking at how lending protocols like SPL token lending work is a start.
+the signature field on the tx is a Buffer and you can use base58 encoding to compute the string which you can use to find the tx on an explorer  `bs58.encode(transaction.signature)`
+<@!150787664553967616> hi do you mind If I DM you
+i am trying to make this transaction work through octane,  i am passing the transaction instruction to body of the octane post request , but i am getting probably i'm sending the transaction in a wrong...so what is the correct way to sent it
+Is there any method using which I can see the transaction signature on my console before using FindTransactionSignature method???
+Hi, im interested in implementation of collateral pay in my apps, if i understand that its a concept waiting for implementation, if that's true which DEX? you recommend to integrate with ? (it will be great if this dex have some devnet)
+Shopify dev docs document this whole process quite clearly.
+It’s just a node application implemented into development store. You just use Custom App type which means can only be deployed to one store. 
+
+Public Apps take a while to vet and you must have dev partner account.
+For which App type you applied in Shopify to have it working?
+Thank you for making it more clear to me.
+issue solved after updating vercel to 24.0.0
+also while running octane through vercel on local im getting this err but when i deploy it its working good
+"https://octane-test.vercel.app/api/transfer" this is the API endpoint  for octane to send transaction right ?
+Yes, definitely missing something - this functionality is built into the Solana Pay SDK and the point of sale app uses this to confirm transactions.
+
+Check out the code in the `core` directory of the repo to see how transactions can be created and found on chain in accordance with the spec.
+Thank you. Yes based on my underestanding after making a transaction from pubkey(A) to pubkey(B) with refrence pubkey(R), I should be able to find that transaction on the chain using any of those keys. I have made a transaction on devnet the same way and I can find it using A and B but when I search by R I can't find it. Am I missing something?
+Sure, did you read the relevant part of the spec first? https://github.com/solana-labs/solana-pay/blob/master/SPEC.md#reference
+Hey guys. Can someone explain to me how reference key works in the transaction? Should I be able to find the transaction by its reference key on the chain?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

@@ -1,0 +1,814 @@
+{
+    "total_results": 28,
+    "messages": [
+        [
+            {
+                "id": "918964666129088513",
+                "type": 0,
+                "content": "Btw, in case you're interested, all this was due to the struct I'm manipulating being serialized in a way that does not allow deserialization. Changing from:\n\n```rust\npub struct CliAccount {\n    #[serde(flatten)]\n    pub keyed_account: RpcKeyedAccount,\n    #[serde(skip_serializing)]\n    pub use_lamports_unit: bool,\n}\n```\nto\n```rust\npub struct CliAccount {\n    #[serde(flatten)]\n    pub keyed_account: RpcKeyedAccount,\n    #[serde(skip_serializing, skip_deserializing)]\n    pub use_lamports_unit: bool,\n}\n```\nnow makes it possible",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:37:29.943000+00:00",
+                "edited_timestamp": "2021-12-10T20:38:37.690000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918962480796041246",
+                "type": 0,
+                "content": "But it's great, at least I have a way forward now. Just got confused by this silence. Thanks man.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:28:48.919000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918962142252761168",
+                "type": 0,
+                "content": "Here I got absolutely **nothing**",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:27:28.204000+00:00",
+                "edited_timestamp": "2021-12-10T20:27:53.904000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918962085709348884",
+                "type": 0,
+                "content": "Mostly kidding, I don't think it's a Rust thing, maybe more of a serde thing. Generally `unwrap` panic well.... **panics**. I get a few lines of fireworks explaining what went wrong",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:27:14.723000+00:00",
+                "edited_timestamp": "2021-12-10T20:30:29.590000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918961787515310200",
+                "type": 0,
+                "content": "Ha, what do you mean by exagerates the concept of panic?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:26:03.628000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918961717889880164",
+                "type": 0,
+                "content": "Oh, huh, interesting\u2014would have guessed you'd have Debug here, but got it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:25:47.028000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918961554882445352",
+                "type": 0,
+                "content": "Probably the frustration talking here, but Rust grossly exaggerates the concept of \"panic\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:25:08.164000+00:00",
+                "edited_timestamp": "2021-12-10T20:25:20.528000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918961222316064868",
+                "type": 0,
+                "content": "The crucial bit being `msg!` or `{:?}` ? If the latter I cannot, I'm guessing because the wrapper serde Result struct does not implement the Debug trait",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:23:48.874000+00:00",
+                "edited_timestamp": "2021-12-10T20:24:07.442000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918960923685822464",
+                "type": 19,
+                "content": "Ah, cool. Think you can probably also do `msg!(\"{:?}\", result)`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:22:37.675000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918960776612552726"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918960776612552726",
+                "type": 0,
+                "content": "(i switched to this:\n```rust\n    let serialized = serde_json::to_string(&cli_account).unwrap();\n    println!(\"serialized = {}\", serialized);\n    let result: serde_json::Result<CliAccount> = serde_json::from_str(&serialized);\n    match result {\n        Err(err) => {\n            println!(\"{}\", err);\n        }\n        Ok(deserialized) => {\n            println!(\"{}\", deserialized);\n        }\n    }\n```)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:22:02.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918960692885860382",
+                "type": 0,
+                "content": "bingo: `missing field `use_lamports_unit` at line 1 column 179`\nAlthough that kinda sucks.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:21:42.648000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959695908192266",
+                "type": 0,
+                "content": "unwrap will panic if it didn't work (which it probably didn't, lol)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:17:44.950000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959631756308480",
+                "type": 0,
+                "content": "We want to see what possible error state it's in",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:17:29.655000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959595391680643",
+                "type": 0,
+                "content": "No, you can just print it like that",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:17:20.985000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959552928571422",
+                "type": 19,
+                "content": "`serde::from_str` returns a Result. I will need an unwrap at some point isnt' it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:17:10.861000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918959128695697440"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959534335205426",
+                "type": 0,
+                "content": "Ok yeah, definitely get rid of the unwrap then (it could still be panicking there, right?)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:17:06.428000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959309319196733",
+                "type": 19,
+                "content": "I've got loads of stuff going on after that and want the execution to stop after this bit while I debug this",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:16:12.780000+00:00",
+                "edited_timestamp": "2021-12-10T20:16:31.282000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918959005395718164"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959239345602630",
+                "type": 0,
+                "content": "And I would print the value itself, not just its type (that doesn't tell you much)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:15:56.097000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959163055431710",
+                "type": 0,
+                "content": "Why not just get rid of all the unwraps",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:15:37.908000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959128695697440",
+                "type": 0,
+                "content": "You're also still unwraping something too right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:15:29.716000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918959005395718164",
+                "type": 0,
+                "content": "Wait, what's the `exit(0)` for lol",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:15:00.319000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918958171350003762",
+                "type": 0,
+                "content": "so it looks ok to me, up until radio silence",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:11:41.467000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918957446695878706",
+                "type": 0,
+                "content": "Same here. Errors I can dig into, but silence treatment... After changing the end of the snippet to:\n```rust\n    let serialized = serde_json::to_string(&cli_account).unwrap();\n    println!(\"serialized = {}\", serialized);\n    let deserialized: serde_json::Result<CliAccount> = serde_json::from_str(&serialized);\n    println!(\"deserialized\");\n    print_type_of(&deserialized);\n    let unwrapped = deserialized.unwrap();\n    println!(\"unwrapped\");\n    println!(\"deserialized = {:?}\", unwrapped.keyed_account);\n    exit(0);\n```\n\nthe extend of the logs is:\n```\nserialized = {\"pubkey\":\"BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW\",\"account\":{\"lamports\":1,\"data\":[\"\",\"base64\"],\"owner\":\"11111111111111111111111111111111\",\"executable\":false,\"rentEpoch\":0}}\ndeserialized\ncore::result::Result<solana_cli_output::cli_output::CliAccount, serde_json::error::Error>\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T20:08:48.696000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918955208443330590",
+                "type": 0,
+                "content": "I'm not sure how the execution could just stop unless it panics \ud83e\udd14",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T19:59:55.055000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918954915483779122",
+                "type": 0,
+                "content": "I was expecting to panic *because* of the unwrap actually. But no it does not. The execution simply stops. Let me try to remove it and see",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T19:58:45.208000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918954766703411222",
+                "type": 0,
+                "content": "Like, is it panicking there?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T19:58:09.736000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918954724429037598",
+                "type": 19,
+                "content": "What happens if you get rid of the serde `unwrap()` and just log whatever its return value is?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T19:57:59.657000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918941684782485524"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918941684782485524",
+                "type": 0,
+                "content": "Hi, would anyone know what I am missing in the following snippet?\n```rust\n    let pubkey = Pubkey::from_str(\"BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW\").unwrap();\n    let system_account = Account::new(1, 0, &system_program::id());\n    let cli_account = CliAccount {\n        keyed_account: RpcKeyedAccount {\n            pubkey: pubkey.to_string(),\n            account: UiAccount::encode(\n                &pubkey,\n                &system_account,\n                UiAccountEncoding::Base64,\n                None,\n                None,\n            ),\n        },\n        use_lamports_unit: false,\n    };\n\n    let serialized = serde_json::to_string(&cli_account).unwrap();\n    println!(\"serialized = {}\", serialized);\n    let deserialized: CliAccount = serde_json::from_str(&serialized).unwrap();\n    println!(\"deserialized = {:?}\", deserialized.to_string());\n```\nI am trying to serialize/deserialize a struct (CliAccount, defined here: https://github.com/solana-labs/solana/blob/b8837c04ec3976c9c16d028fbee86f87823fb97f/cli-output/src/cli_output.rs#L99), but the program simply exits without any complaint/error as soon as it hits serde_json::from_str(...).\n\nMy assumption is was that this was possible since the struct is decorated with the serde `#[derive(Serialize, Deserialize)]`, but I guess I'm wrong. Would someone have pointers? Maybe a reason or an alternative?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-10T19:06:10.763000+00:00",
+                "edited_timestamp": "2021-12-10T19:07:30.006000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "da831bcf433fff5b432f05eda6563fd8"
+}

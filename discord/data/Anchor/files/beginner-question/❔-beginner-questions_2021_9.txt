@@ -1,0 +1,2721 @@
+thanks a lot
+ok great
+Also see https://project-serum.github.io/anchor/getting-started/introduction.html, which will walk through the code.
+<@!813309414702448641> in /examples/tutorial
+and where are the tutorials?
+The `/examples` are explained in the tutorials.
+ok but in the examples folder, it doesnt say what each pgm does...does it?
+The `/examples` and `/tests` directory are a good resource as well.
+ok...just went thru the resources channel...could see a few links there
+There's also the API docs.
+figured it out, I was missing the `ANCHOR_WALLET` env variable,  however I don't recall seeing this anywhere in the docs.
+Hi, running `client.js` for `basic_0` i get the following error. I only changed the program id for that file. The error seems odd, not sure what to make of it because the path is pased in as a string, and the file does exist.
+
+```
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.openSync (fs.js:490:10)
+    at Object.readFileSync (fs.js:394:35)
+    at Function.local (/home/.../Dev/anchor/examples/tutorial/basic-0/node_modules/@project-serum/anchor/dist/cjs/provider.js:154:92)
+    at Function.local (/home/.../Dev/anchor/examples/tutorial/basic-0/node_modules/@project-serum/anchor/dist/cjs/provider.js:38:35)
+    at Object.<anonymous> (/home/.../Dev/anchor/examples/tutorial/basic-0/client.js:7:36)
+    at Module._compile (internal/modules/cjs/loader.js:1072:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)
+    at Module.load (internal/modules/cjs/loader.js:937:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:778:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}```
+is this the main and only documentation for anchor?
+https://project-serum.github.io/anchor/getting-started/introduction.html
+hi
+<@!625881690614661121> yeah this gets a mention in the tests for that example https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/transfer-lamports/tests/functional.rs#L26
+Ah—I think so, yeah. I should double check this, but I think your program can transfer lamports from account A to account B as long is your program owns A (a program can only decrement an account's lamports if it owns the account, but incrementing B's lamports doesn't require ownership)
+is this how you would do a basic lamports transfer though? im confused a bit on that pattern. i've followed a couple examples of transferring spl tokens in an anchor program, but I can't find any for a lamports transfer?
+cool. thanks
+So basically, if you want to say "decrement this account's lamports by 5", you/somebody will need to do a `try_borrow_mut`
+The `try_borrow` functions are just part of RefCell's api, and then I guess solana has wrapped them a little bit to give you a ProgramError if the borrow fails.
+<@!625881690614661121> I think the situation is just that the low-level `AccountInfo` gives you access to an account's lamports as a `Rc<RefCell<&mut u64>>`
+what's the use case for try_borrow_lamports? in the core solana-labs example it uses a lower level borrow_lamports func as a transfer (https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/transfer-lamports/src/processor.rs). So is borrow_lamps effectively a helper for transferring?
+Please don't cross post.
+Context is a generic struct in the same way that the `Point` example is.
+It's the same kind of thing as here: https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions
+in this section - seems like T doesn't really align with what we have been talking about
+https://doc.rust-lang.org/book/ch10-01-syntax.html this seems to be different
+I think I'm still misunderstanding your q tbh—what feels non-generic about `Context`?
+As the way rust explains generics
+Ah ok so it’s better to think of that versus as a generic
+<@!781655859108511845> I'm double checking if there are constraints on what T can be for `Context`, but for some generics there's no need for T to be a struct—e.g. as <@!693486673606082580> mentioned, think of `Vec`. You can have a `Vec` of (almost) anything, no need for it to be a struct, e.g. `Vec<u32>`.
+I guess the only remaining point is in pure rust docs, I never see T being defined as a struct
+Almost seems like implementation for a parameter
+So think of Context as a type that can be paramatrized by whatever you want to define - like initialize takes in something while other parameters basically tell the function what to expect?
+a better way to think about it is - Context is like a container of Initialize
+Context is a type parametrized by T (in c++ they are called templates) -> just like Vec -> as you have Vec<u64> Vec<String> you can have Context<Initialize> or Context<Deposit>
+
+as you know with Vec, there is no direct relationship between Vec and u64 or Vec and String.
+Ok fully understand that - I guess there’s no good documentation on this in rust, because I did go through the generics section and this wasn’t explained hahaha
+So there's no subtype relationship at all between Initialize and Context—Initialize is just "filling in" a generic type
+`Context` isn't a type all by itself in the sense that you can't do `some_variable: Context`, you can only do `some_variable: Context<Something>`
+It's a "type constructor". `Context<Something>` is a type
+Mm, the type terminology is always a little funky—at least coming from Haskell, I'd say that `Context` isn't really a type all by itself
+Can I think of Initialize as a subtype of Context?
+But like Initialize as a generic to me seems off versus using T, which seems natural as a generic
+Then what’s inside the the <> is generic?
+Context is the type, correct?
+When you say "it" in "it's not really generic", what are you referring to haha? Just to make sure I'm understanding
+Mm, maybe I'm misunderstanding your question—`Context` is generic over the accounts it will hold, but the accounts themselves will be something concrete.
+I guess the conceptual confusion on my end is I haven’t seen a generic set up this way ever in rust
+Saying hey, this is the struct that should match this “generic”
+Like it’s context of type whatever you then define as a struct
+Ah so it’s not really generic then??
+But in a given instruction handler it will always be something concrete (since the instruction handler will have to deserialize the `Something` so you can use it in the handler)
+But yeah, if you really wanted to you could have some function that works on generic Context<T>'s etc.
+<@!781655859108511845> in `ctx: Context<Something>` , `Something` is filling in/instantiating a generic type
+Because of the angle brackets
+Should we think of each of those as generics?
+And then underneath the functions each one of those is a struct
+Yes I already have! I am asking in the basic anchor explanation programs, XYZ is defined as Initialize and then Increment etc
+Not sure I understand the question, maybe you should have a look at https://doc.rust-lang.org/book/ch10-00-generics.html
+When writing unit tests, how to have a mock mintAuthority that does match a specific token?
+In my program I have some hard checks on wrapped sol, how would I mock that in test to have the mint authority with the associated pubkey
+Hi guys - wanted to ask a conceptual question. In the basic programs, you have ctx: Context<XYZ>. So I get that the type is of Context (I learned Rust past two weeks) but then XYZ usually is a generic in rust. Here, it seems like each XYZ is defined as a struct. Is that an anchor specific rule or can we still view whatever XYZ is as a generic?
+This did the trick. Didn't expect to be this far behind with `1.53.0` -> `1.55.0` solving the issue. Ya'll must be keeping up to date on all the changes
+Update your rust version. `rustup update stable`
+From running `cargo install --git https://github.com/project-serum/anchor --tag v0.16.0 anchor-cli --locked`
+Anyone having trouble building anchor 0.16.0 from source? Intel MacOS 
+Getting 
+```
+error[E0658]: arbitrary expressions in key-value attributes are unstable
+#![doc = include_str!("../README.md")]
+```
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+<@!501570363566587905>
+did anyone get recentBlockhashes to work in anchor ?
+For other folks starting up, you can set ANCHOR_WALLET=~/.config/solana/id.json
+Nvm just running a `tail`. Thanks
+Oh thanks! Is there a way to have them outputed on stdout along the regular anchor ones?
+Yes logs are in `.anchor/program-logs/`.
+When running anchor test, should my `msg!("foo")` print in the output?
+Nothing great. If you have the keypair file in the default `target/deploy/` location, then it will use that with `anchor deploy`.
+Recommendation works either way
+Nothing in Anchor CLI's toolkit?
+You need the keypair file. If you have it you can specify `solana program deploy -k <file-path>`
+Is there a cli command for deploying a program to a specific programId?
+Is there an up to date link to the Anchor Program Registry? The link on this page (https://project-serum.github.io/anchor/getting-started/publishing.html#getting-started) appears to be broken: https://anchor.projectserum.com/, along with the links to the two examples on the same page
+https://github.com/project-serum/anchor/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0.0-blocker
+Ok sounds good. Thanks!
+breaking api changes. Not behind the scenes. There is a list of issues on github that are security issues that need to be completed
+Oh ok that makes sense. Are those usually behind the scenes or would that be breaking API changes?
+but the changes are just to remove footguns usually
+I see
+it changes every week!
+oh ok sounds good. What's anchor's stability currently?
+anchor is really opinionated and there are some optimization efficiencies you can do in terms of serialization if you dont use bpf. So if you dont like opinionated code / need to squeeze performance out, you might not want to use anchor.
+What are the pros and especially cons of using Anchor over using the normal Solana crates directly?
+I've been able to find pros (easy to develop with comparatively), but I haven't been able to find cons from searching around
+that worked! thank you!
+`@project-serum/anchor-cli` is  for linux only. Looks like it's still being picked up in your path. Try `npm uninstall -g @project-serum/anchor-cli`.
+Hi - having trouble installing anchor on a macOS:
+
+First tried `npm i -g @project-serum/anchor-cli`. This got me: 
+```~ % anchor --version
+Only x86_64 / Linux distributed in NPM package right now.
+Trying globally installed anchor.
+Failed to get version of global binary: Error: spawnSync anchor ENOENT```
+
+Then I tried to build from source: `cargo install --git https://github.com/project-serum/anchor --tag v0.16.0 anchor-cli --locked`
+Now seeing:
+```~ % anchor --version
+Only x86_64 / Linux distributed in NPM package right now.
+Trying globally installed anchor.
+Globally installed anchor version is not correct. Expected "anchor-cli 0.16.1", found "anchor-cli 0.16.0".```
+
+Any ideas?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+you can see how you can wrap anchor cpi around non-anchor program here, in this case, the spl-token program.
+https://github.com/project-serum/anchor/blob/master/spl/src/token.rs
+In example 3, it shows how to do CPI with another anchor program. Is there an example how someone might do this if the program to be invoked wasn't made with anchor?
+Correct.
+In example 3, is this part of the doc outdated as well, similar to program account?
+```
+Our Accounts struct has a new type, CpiAccount, containing the target program's Puppet account. Think of CpiAccount exactly like ProgramAccount, except used for accounts not owned by the current program.
+```
+Also don't forget to update the declare_id! and Anchor.toml to switch to that new key!
+I see, so before deploying to dev/main net, you need to populate it via the the `solana-keygen new` command. Thanks
+For local development, an arbitrary string will do (if it aligns with the Anchor.toml). But when deploying to mainnet/devnet, you need the keypair file, which can be generated via `solana-keygen new`. Also the framework will automatically create some in the workspace (run `anchor keys list`).
+No, sorry, when you run 'anchor deploy' it will print out "Program ID: <pubkey>"
+is there a way to generate one so that there is no conflicts?
+So developers just pick a string?
+When you call 'anchor deploy', you can see the program ID being used
+That is the program ID, it newer versions of anchor it needs to be explicitly stated at the top of your program
+In example 1, what is the purpose of `declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");` ? And where does this string come from?
+Makes me wonder if you could get rid of the `signers` argument entirely and have an account sign the transaction if you pass its keypair rather than just its public key (otherwise you have this annoying issue where signers have to pass *both* their pub key as well as their full keypair)
+Gotcha, thanks
+<@!885532999356153856> mm, looks like the tutorial text is outdated—ProgramAccount is now just `Account`
+question regarding example 1: https://project-serum.github.io/anchor/tutorials/tutorial-1.html#defining-a-program
+docs mention:
+```The my_account field is of type ProgramAccount<'info, MyAccount>```
+but the code defines it as:
+```pub my_account: Account<'info, MyAccount>```
+I do not see the ProgramAccunt Type?
+got it, thanks 🤝
+(Signers show up in the program as an `AccountInfo` with `is_signer = true`)
+<@!141059180969721856> not totally sure but I think that happens when you use a signer but forget to pass it as an account too: https://github.com/solana-labs/solana/blob/master/web3.js/src/transaction.ts#L315
+anybody know what this is about?
+every time i run a test where i generate a signer keypair on the fly and use it to sign the tx, i get the error: `Error: unknown signer:`
+it's a bit if you want to create a marketplace. metaplex lets you host your own marketplace in 10 mins
+You don't have to write the smart contract to create an NFT, just mint 1 token using the SPL token library
+<@!445019022338031618> You can access the already deployed token program through web3.js https://solana-labs.github.io/solana-web3.js/
+https://spl.solana.com/token without writing any Rust code at all. Just learn how to call the token program using the token program ID, and you're all set
+the goal is to create a market place, but i have to take baby steps first, i need to learn how to create an nft token smart contruct on solana from scratch, are there any resources related to this, metaplex rust code is several thousands of line 😛 i just need a resource which could help me make a basic contract so i can play around and go from there.
+<@!445019022338031618>
+Looking for something like Metaplex? https://github.com/metaplex-foundation/metaplex
+if i wanted to write my own nft smart contract
+@devs am a solidity developer, if i want to make a smart contract erc20,erc721 equivalent is there any resource out there on how to write one on solana using vanilla solana or anchor ?
+Anyone please how do you update Anchor version assuming you're working with an old version? Thanks!
+hey Im facing a weird issue in anchor, Whenever Im trying to anchor test or ancor deploy my local network seems to be not respoinding it gives error
+Error: unable to connect to server
+
+ws error: connect ECONNREFUSED 127.0.0.1:8900
+ws error: connect ECONNREFUSED 127.0.0.1:8900
+new to anchor, was reading in another forum that composition can be a bit tough with anchor/sealevel, could someone elaborate on this? w.r.t comparing with plain solana sdk based smart contract
+Does anyone has any examples of creating, storing and retrieving data using a btreemap in the program code? Not using javascript api. Thanks
+Very nice
+I'm able to run the test validator manually now, though.. that's the good stuff I got out of updating the cli
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/mysolanaapp$ lsof -i :9900
+COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+solana-te 35201   kk   12u  IPv4 233743      0t0  TCP *:9900 (LISTEN)
+```
+but I found another weird behavior.. while the above log says "unable to start test validator.", I see that the test validator actually got started on the intended port
+I updated my solana cli.. that gives me more or less the same result:
+```Running: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+The program address will default to this keypair (override with --program-id):
+  /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp-keypair.json
+Unable to start test validator.```
+okay let me try
+maybe update your solana cli
+Don't know, it works fine for me
+could that mess up the validator?
+okay I'll take that back.. I actually removed the directory altogether and did a fresh anchor init with the same name\
+and the validator was running within that time
+I'll be honest, I'm not quite sure where I ran the validator from for the first time, but I don't think I switched directories in the past hour
+navigate to where you previously ran solana-test-validator
+the test validator was running fine before I did the keygen
+And here's my attempt to run the test validator manually:
+
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/mysolanaapp$ solana-test-validator
+Error: Unable to create directory test-ledger: No such file or directory (os error 2)
+```
+Yeah I tried that and replaced my old keypair with the generated one, and now I get this:
+
+```Running: /home/kk/.local/share/solana/install/releases/1.7.10/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+Unable to start test validator.```
+You need to do a keygen
+I just started learning anchor and my first attempt to run a test results in this:
+
+```Running: /home/kk/.local/share/solana/install/releases/1.7.10/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+Error: Unable to read keypair file```
+
+Can anyone help?
+looks like I created with an old version of anchor. I see the anchor-lang version in src/Cargo.toml
+aah - never mind
+I'd expect that it would pull in anchor-lang 0.16 as well
+my anchor cli version is 0.16
+Running: rustup toolchain list -v
+Running: cargo +bpf build --target bpfel-unknown-unknown --release
+    Blocking waiting for file lock on package cache
+   Compiling anchor-lang v0.9.0
+error[E0277]: the trait bound `Pubkey: BorshSerialize` is not satisfied
+and getting
+building a vanilla anchor init project
+extreme beginner question here
+https://tenor.com/view/cave-dive-darkness-leap-gif-5803442
+The low-level syscall code is kinda gnarly 🧙‍♂️
+Gotcha, figured as much. thank you!
+In case anyone is curious, I think this is the low-level solana place where passing the right bump to `invoke_signed` becomes relevant: https://github.com/solana-labs/solana/blob/master/programs/bpf_loader/src/syscalls.rs#L1760. Under the hood it's using `Pubkey::create_program_address`, not `find_program_address`.
+No. One can't call those endpoints directly. One would have to have the data passed in via the instruction data from an external client.
+Is it possible for on-chain programs to retrieve the same data offered by JSON RPC endpoints? For example, could a deployed program get the data provided by an endpoint like getConfirmedSignatureForAddress2?
+First off youre a legend for being on here at this hour answering q's, sincerely thank you
+Beginner questions is why we're here! Can you clarify what you mean by rpc endpoints? Are you referring to methods in a another program?
+Correct. The naming doesn't matter, only the order and type. By convention, the names should be the same.
+probably a super beginner question but can you call rpc endpoints from a contract?
+amazing ya, and so how does anchor know where those arg names from? does it handle all the deserializing of those automatically such that u just include those as arguments in the instruction handler with the same name like here (https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/lib.rs#L120) and then u can just use them in the instruction macro?
+This is nice in the event you have account validation that depends on instruction data, e.g., a bump as you mentioned. Without this, you have to move some account validation to the instruction handler which is not ideal.
+Example here https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/context.rs#L8.
+Exactly. It's just a way to pass through the instruction args so that they are in scope to the derive macro.
+anchor question about the `instruction` macro...i cant seem to find some good examples with it but is the point of that if we want to use something from the instruction data in the account macro (like having the seed / bump come from instruction data?)
+Technically a bump is optional if the seeds produce an address not on the curve, but in practice you should always use it.
+You do need to pass the bump to invoke signed.
+initial seeds if not passed in is auto generated
+it seems weird we would pass the initial seeds, *and* the bump, and not just the bump, maybe just the bump works and is more efficient than having it iterate the seeds as well
+Ah, sorry, I'm looking at the `invoke_signed` function, not `create_program_address`
+Weird, I had convinced myself you did—thank you for clearing that up! [Edit: nope, see below]
+Oh! So you don't need to pass the bump? [Editing for clarity: do you need to pass bumps to `invoke_signed`?]
+yes its a lot faster if you include the bump seed. Otherwise it just does the search manually which takes a lot of compute cost
+hmm ya i actually have seen that too i see that in the SPL docs
+https://docs.rs/solana-program/1.5.6/src/solana_program/pubkey.rs.html#225
+but in the 2 examples of `transfer_one_token_from_escrow` it looks like they dont pass the bump in the list of seeds in the first example when `create_program_address` is used but u do have to pass it when `find_program_address` is used
+https://docs.solana.com/developing/programming-model/calling-between-programs
+Is that just so `invoke_signed` doesn't have to recalculate it on the fly? (So, just an efficiency q?)
+When you actually call `invoke_signed` though, why do you need to include a PDA's bump with the rest of its seeds? The bump is a function of the seeds and the program_id, both of which `invoke_signed` already has access to (you have to pass the seeds explicitly, since they identify which PDA you want to sign for, and then `invoke_signed`/the runtime just knows I guess which program_id is initiating the CPI).
+I think I understand the address part of a PDA: it looks like a public key but it's not actually on the ed25519 curve (so there's simply no corresponding private key). This means a PDA address can't possibly be under the authority of some person etc, so fair game for a program to "sign" for it during cross-program invocations (the callee will receive the PDA's AccountInfo with is_signer = true).
+Ok, speaking of PDAs, I'm confused about how PDA signatures work in `invoke_signed`.
+Correct.
+Yeah, that's my understanding.
+got it thanks, makes sense. So its deprecated in favor of actually creating a PDA with account(init and seed / bump)?
+Yes. @project-serum/anchor
+<@!438874996614365185> the #[state] macro has been deprecated, but yeah, under the hood it's using a PDA
+in basic-4 in the anchor examples, how does `state` actually work? What account stores the data? I am trying to look at the macro to understand but presumably its different than a PDA derived from a seed that the program owns since its not using the `#[account(init, seeds..,bump..` syntax
+is there an js sdk for anchor?
+You'r using the `./.anchor/program-logs/...` ?
+Ah got you, thank you ser 🙂
+Hexadecimal 0x92 = 146
+https://github.com/project-serum/anchor/blob/90df0b19766ef2a0937312a3864f44e49bb16cad/ts/src/error.ts#L71
+Hmm anyone remember what 0x92 usually entail?
+
+```
+pub fn fill_transaction(ctx: Context<FillTransaction>, transaction: [u8; 64], request_id: [u8; 64], bump: u8) -> ProgramResult {
+  msg!("instruction: fill transaction")
+}
+```
+
+
+On the client (the two arrays have length of 64)
+```
+program.rpc.fillTransaction([.....], [.....], nonce,
+```
+
+The first message never printed on program log.
+
+Also pretty sure it's the array causing problems, everything is fine if I take them out hmmmm
+can you send me the example with the frontend part
+would love that
+Ah, <@134416332509675520> that's exactly what I was looking for. Thanks!
+Are there any examples of mocking NFT's for the js tests?
+<@!185605576162672641> you can also see some JS error examples in tests/errors/tests/errors.js
+Did some work for a team im interviewing with so the repo is currently private but I can provide a non private example for you if you're still looking for it
+I did
+https://github.com/project-serum/anchor/blob/master/lang/src/error.rs
+there should be a list in the error.rs file in anchor/lang
+Does anyone know how to access the custom error codes that are thrown?
+
+My code is successfully throwing the custom error but I would like to "assert" that the desired error code is thrown in my Mocha testing
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I don't really know anything about anything solana yet, I'm just getting started too lol 🐣 I just know some rust
+to generate nfts
+from what i can tell it is an anchor wrapper to interact with metaplex cli
+<@!134416332509675520>  any idea about candy machine
+Ah, great, that should be a helpful example
+<@!134416332509675520>  https://twitter.com/armaniferrante/status/1432805639554691075?lang=en
+😦
+this tweet should be NFTed if not already
+<@!445019022338031618> lol https://twitter.com/armaniferrante/status/1434554725093949452
+<@!445019022338031618> sorry, not sure. Tbh I think you're going to have to just dig in and learn how to use low-level solana (and then maybe write the tutorials yourself 🤓)
+I feel like Program is the way to go, but I wouldn't discard executable as an option in some cases.. Very weird cases though lol
+Hear ya, thanks a lot dude...
+<@!706541980032827454> for example, if you say `Program<'info, Token>`, anchor will verify that the account that got passed in really does have the expected pubkey of the SPL token program (rather than some random fake account that just looks like the token program)
+got any starting points
+<@!134416332509675520>  what would be the best way to understand it if there is no tutorial, the code is quite extensive :(\
+Hey
+are there any resources that help understanding the metaplex smart contracts as the source code is quite extensive and in vanilla solana, does their exist a anchor wrap of it or any tutorial that builds on top of metaplex say modify there smart contracts for additional functionality etc.
+<@!706541980032827454> I think the difference is that `executable` only checks that the account is a program, whereas `Program` also checks that it's a *specific* program (it double check's the account's `key`/address against whatever address your struct expects)
+should I still use the account attribute `#[account(executable)]`  or just Program like with the `#[account(signer)]`?
+
+UPDATE:
+
+I think a better way to put this would be, is this:
+
+```rust
+#[account(executable)]
+pub program: AccountInfo<'info>
+```
+
+analogous to:
+
+```rust
+pub program: Program<'info, struct>
+```
+Think you're going to have to do a fair amount of source-code reading, this stuff is all quite new. At any rate, if I'm looking at the rightrepo there are a bunch of non-anchor programs.
+moved it here
+i wanted to learn how to create nft smart contracts, but i have been told to use metaplex instead as they have set the standard, i wanted to ask if metaplex is in vanilla solana or written using anchor ? , is there a resource/ tutorial to use a anchor wrapper over metaplex, if say in the future i want to add some custom functionality or build on top of metaplex smart contracts which in turn i believe use the spl token smart contract
+i saw a tweet by <@!501570363566587905>  it is written in anchor if he could elaborate , would appreciate it
+<@!445019022338031618> moving your metaplex question over here (think this is probably the better channel to use): I don't know anything about metaplex but it seems to be a mix of anchor and low-level solana. https://github.com/metaplex-foundation/metaplex
+from https://project-serum.github.io/anchor/tutorials/tutorial-3.html#defining-a-puppet-master-program
+In fact figured it out, the derive(Accounts) makes the system_program required field, and the payer = user makes the user field required
+can solana programs return anything in a transaction? I saw the event listener example,  but didnt really fully get how its working, naive view is that its doing somethig and then client is polling, but call might not be synchronous
+See the "Create" struct here for reference: https://project-serum.github.io/anchor/tutorials/tutorial-2.html#defining-a-program
+Hi everyone, I have question regarding the initial struct that's marked as "#[derive(Accounts)]"
+It always has a user and system_program fields, even when they are not being used in the entrypoint itself. Are they mandatory, or why they are in the tutorials?
+Awesome. Thanks for your help!
+There should be quite a few examples on initialising a PDA in `anchor/tests/misc`
+Interesting! I need to read up on that
+Yeah that's what I thought originally but wanted to see if there were better ways. Was curious how defi apps did it
+Alternatively, make the account a PDA and you would just have validation checks in your smart contract.
+You can probably whip something up pretty quickly using `express`
+You would make the front end make a request to a backend server that holds the keypair file and is not exposed haha
+nothing of value, but I would still like to not be totally insecure if I can help it
+No its just a simple voting app I made to understand how anchor works
+What are you trying to do here? Is it like an admin function
+Would not recommend exposing the signer key to the world haha
+so if I did something like:
+```
+const myAccount = anchor.web3.Keypair.generate();
+fs.writeFileSync('./app/src/keypair.json', JSON.stringify(myAccount))```
+
+And hosted that keypair.json in my frontend that would be ok? I just felt weird putting that in a frontend for all to see
+Similar to your id.json
+You should store the secret key of that account if you want to reuse it and instead of generate, load the keypair
+What's considered best practice for persisting a signer account that I want to deploy to mainnet? I'm working with something like this, which works fine for local development, but `myAccount` does not persist after reach refresh
+```const myAccount = Keypair.generate();
+...
+      const tx = await program.rpc.initialize({
+        accounts: {
+          myAccount: myAccount.publicKey,
+          user: provider.wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [myAccount],
+      });
+```
+ok will look for that just so i know. my current type is just a u8 though
+Presumably there's a way to specify that in the BN type.
+Though you need to be careful, e.g., if you have  a u32 vs a u64.
+yup that does it
+cool
+Maybe try `(new BN(<number>)).toBuffer()`
+would it just be `Uint8Array.from([BINARY_REPRESENTATION_OF_NUMBER])`?
+client side question:
+what is the correct way to pass in a `number` as a seed to `PublicKey.findProgramAddress(...)`?
+check dms
+<@!141059180969721856> sent you a pm, can you provide me with the recentBlockhashes example ?
+Yeh, it ended up the problem being I didn't define the full instructions in the `#[instruction` tag
+Hmm... not sure what's happening there, I think I'd need to see more of your code. Can you put it in a gist/repo or something?
+I generated a new keypair and changed the program ID in my program, now I'm getting `Error: failed to send transaction: invalid transaction: index out of bounds`
+they're on an intel chipset and im on an m1 - both mac users
+its weird because i asked someone to run the code on their machine and the tests pass just fine
+`     Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account`
+What happens if you just don't include the PDA in `signers` at all?
+<@!185605576162672641> don't think it's possible to pass a PDA as a signer from the client (they don't have private keys—only the program itself can sign for them, when doing a cross-program invocation)
+I am passing the PDA in with `signers: [<PDA>]`
+When using "program.rpc", is my local wallet automatically used to sign? I am generating a PDA and attempting to "await program.rpc.<my_function>" and am getting `Error: Signature verification failed`
+For accounts? No. That's imposed by the solana runtime.
+<@!501570363566587905> is there a way to surpass the 10 mb limit size ?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+is there a helper function we can use to calculate this space
+Look at the fields. In this case It's probably a `Pubkey` and `u64` which is `32 +8` bytes.
+I see. How did you figure "Counter" is 40 bytes?
+8 is the account discriminator, which is prefixed to every anchor program. 40 Is probably the size in bytes of `Counter`.
+Hello there fellow anchormen and anchorwomen! Does anyone know how I determine the space to be used when initializing an account? Where did the "8 + 40" come in this section of the tutorial?
+
+    #[account(init, payer = user, space = 8 + 40)]
+    pub counter: Account<'info, Counter>,
+Hey guys what’s the most straight forward way to determine if a user holds a particular token?
+Hello, I'm trying Anchor framework. I've launch the local cluster and trying to airdrop 5 sol on my address but I'm getting error : Error: unable to confirm transaction. This can happen in situations such as transaction expiration and insufficient fee-payer funds. Can someone help me please?
+So how are PDAs different? When a Solana account gets passed to a program at runtime, Solana will tell you whether that account *signed* the transaction. It's in how you sign transactions that PDAs differ from regular addresses: a regular address is an ed25519 public key, and if you want to sign a transaction involving it you need to know its corresponding private key (e.g. if you want to send lamports to someone via Phantom, Phantom keeps track of your private key and handles signing the transfer for you). PDAs on the other hand are *not* ed25519 public keys, they just kinda look like them (they still have type `Pubkey` in Rust but if you're being pedantic that's a lie). Given that they're not actual public keys, they simply don't have a corresponding private key, so there's no way for a PDA to sign a tx in the same way a regular account would. Nevertheless, solana lets the program that derived a given program-derived address, and only that program, "sign" for it in cross-program invocations, no private key necessary.
+I tried explaining them a bit above, but will elaborate here (correct me if I'm still confused about this stuff). Addresses in Solana, whether PDA or regular, identify accounts. (As an example of a regular, non-PDA address, you can open your Phantom wallet and paste the pubkey-looking thing into explorer.solana.com and see info about your wallet.) As far as identifying accounts goes, PDAs aren't really any different from regular addresses.
+The solana docs talk about them here https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses but tbh I had quite a hard time understanding what they meant. Paulx also talks about them https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/#program-derived-addresses-pdas-part-1
+Thank you, I will look into it 👍
+It's a lifetime, rust thing: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+Hello. I am new here. 
+This is a very beginner question but I would like to know what 'info is. First I thought it was like a normal generic but it wasn't. I couldn't find any reference in the doc, even in the anchor workshop. 
+
+Thanks
+
+```
+Account<'info, MyAccount>
+```
+
+https://project-serum.github.io/anchor/tutorials/tutorial-1.html#:~:text=of%20type%20ProgramAccount%3C-,%27info,-%2C%20MyAccount%3E%2C%20telling%20the
+Address has to be passed, yes
+he mentioned that u can pass as many accounts as long as transaction size does not exceed
+am currently watching that workshop
+https://youtu.be/FmdPAwsqJC4?t=3187 the only one I can think of
+also these accounts are given from the js side right ? in the accounts object, or do i need to define each account passed in anchor too
+any resource, via anchor
+is it dynamic or one time thing etc
+<@!134416332509675520>  is there any documentation on PDA's as to what they are and what is the concept and how can it be used
+You've effectively got a pubkey => User mapping (looks like basically a pubkey => name mapping)
+<@!128550462742855680> tests/chat looks like a good example of using PDAs to mimic a mapping (not quite as easy as in solidity 😅).
+thanks
+will check it out
+kk
+I haven't looked at how events work in solana but I know that Anchor actually has a `#[event]` annotation—there's an example in the tests/events directory
+A program can use these things called program-derived addresses (PDAs) to have accounts that the program, and only that program, can sign for. The address of a program-derived address is "derived" from the program's `program_id` as well as a "seed" (basically an arbitrary bunch of bytes), so your program can have a bunch of accounts attached to it, identified by different seeds, which could mimic a mapping in ethereum (I think, hopefully explaining this correctly).
+im trying to recreate a game i dev'd on ETH on Solana which is why I ask
+another question i have, coming from ethereum, is how can the frontend check the history of important state transitions for the contract? in eth we usually do this by emitting events - and then we can either filter events using a bloom filter on the contract or using an indexing service like The Graph
+About storing state like this, I think the basic answer is that for *any* on-chain mutable state, at the end of the day you need to use an account/accounts (for example, solana programs can't write to `static mut` variables, the runtime won't allow it)
+yea
+Yeah, I think learning how to think about accounts is the hardest part about learning solana (at least for me so far)
+not rly an issue with anchor but more with solana in general
+i read the docs and i understand how to store 'global' variables now - tho i must say conflating the term `Accounts` with `data` is confusing as fuck
+ok, lmk if you do try, im far from doing that right now but wanted to ensure im taking the right appraoch
+Mm, haven't tried that yet—I'm not super familiar with how the JS side will try to borsh-ify an array etc (maybe it will just work, going to try it)
+how would i call that from javascript? i just pass in JSON with the same key names?
+Pretty sure your arguments can by anything that Borsh serialization/deserialization can handle, so I think an array of borsh-serializable/deserializable things will be fine (haven't tried yet though)
+also - can I take an array of struccts as an argument to an RPC handler?
+can someone help me understand what's the equivalent of storing a global array of objects/maps in a solana contrcat?
+I'm trying to get used to solana's programming paradigm
+Hey! I'm coming from being an eth dev, have a lot of general programming expeirence but none with rust or solana.
+is there a way to tell how many lamports you need to deploy a program to mainnet?
+it works thanks again
+ok thanks
+Run `rustup update stable`.
+Hello everyone, I'm trying to install anchor-cli on my mac but got error in the capture. Can someone help me please?
+yeah that sounds like it
+I think I figured it out. I was generating an instruction and attempting to send the instruction without adding the instruction to a transaction 🤦‍♂️
+It seems like there's some issue with the transaction, can you share how you're sending the transaction?
+<@!706541980032827454> I'm calling `  const playerAccount1 = new anchor.Wallet(anchor.web3.Keypair.generate())`
+Explicitly layout your lifetimes like this https://github.com/project-serum/anchor/blob/master/tests/cfo/programs/cfo/src/lib.rs#L103
+Heyo! How would one set up a transfer for a remaining account. I keep getting lifetime mismatch issues.
+Did you pass to `new anchor.Wallet()` a Keypair?
+`     TypeError: tx.partialSign is not a function
+      at NodeWallet.signTransaction (node_modules/@project-serum/anchor/dist/cjs/provider.js:160:12)`
+
+Has anyone run into this before? I'm using `new anchor.Wallet()` and passing that into a `new anchor.Provider` in order to send transactions for newly generated wallets in each of my tests. It seems like maybe my wallet isn't being generated correctly?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I am trying to pass a transaction ID in order to get all the data within the transaction. This is what I have so far: 
+```new web3.Transaction().sign()``` , but I have nowhere to pass in the transaction id
+Not really https://github.com/solana-labs/solana/issues/17145
+I am trying to initialize an anchor_spl::token::Mint struct. But somehow the implementation is not public? I am getting errors such as constructor is not visible here due to private fields.
+I know this is a challenging problem, but is there any decentralized way to run a chron job on solana without any off chain resources or trusted third parties other than the blockchain itself?
+Ok guys, thx you so much for you help, I manage to pass `PublicKey` instead of `Hash`, both have the same struct `[u8; 32]` and as mentioned by <@!448034961652449283> I parse it on my program with `Hash::new_from_array(arg)`. Not sure it's the best way to do it, but it works ahah. I tried to use anchor serialize but no success, I will retry later.
+Look at how they do it for serum order type in some of the examples
+You need to use the anchor serliaize and deserliaze attributes on a wrapped struct for the hash datatype
+ah nvm.. i can see it from anchor keys list
+what should it be set to?
+hello, i checked back in the history, but i don't think i completely understand what the declare_id macro is for.
+Not sure that this will work, but try `hash` argument as `[u8; 32]`, then you will able to create `hash` with `Hash::new_from_array(arg)`.
+Hey do you know how I can pass my *hash (**Hash**)* as parameter to my program ?
+```
+use solana_program::hash::{hashv, Hash};
+...
+pub fn check_proof(ctx: Context<CheckProof>, hash: Hash) -> ProgramResult {
+...                                                ^^^^
+}
+```
+I'm passing my hash param as a string but obviously this didn't works.
+`Error: Type not found: {"name":"hash","type":{"defined":"Hash"}}`
+I'm searching how to pass this `solana_program:: hash ::Hash` type to my program.
+And the error was due to 
+```rust
+#[account(zero_copy)]
+pub struct mStruct {
+    data: [u8; CONST_VARIABLE], // fixed with putting the litteral value instead
+    //...
+```
+Seems to be related to this instead https://github.com/project-serum/anchor/issues/632
+Could this issue 
+```rust
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }', lang/syn/src/idl/mod.rs:167:34
+```
+Be related to having another file that my lib.rs imported with a `mod mymodule` in the anchor program?
+Look up the associated token account in the Solana docs. This is the new standard for creating tokens accounts for users. You be able to look up the ATA for a given pubkey of a user to see if they have it or not
+Most of the time anchor will calculate space for you automatically
+hi everyone!!!
+Damn that single answer just powerlevel my code beyond any expectation. I had some proper zero-copy stuff and then footgunning myself with that zero. Thanks again <:cheemsredeyes:854496395821449226>
+Hi, I have a list of signatures and I want to extract the transactions and metadata within those signatures. Is there a method I can use to do that? I am new to typescript and I have been using these docs: https://solana-labs.github.io/solana-web3.js/index.html
+Is I want to save some stack size, appart from zero-copy things, any other trick?
+Thanks Armani
+Ok let me try to change this, should also revert back to the elegant and simple code it was.
+Ok so I got mislead, I have the zero copy working, but I though i also had to add the zero thing
+Zero means the account discriminator is zero, i.e. the account is not yhet initialized.
+Zero is not zero copy.
+I'm not initializing it there? I'm using zero to pass as zero-copy, isn't that required?
+Since you can just use a regular type.
+Doesn't seem to make any sense to do close in the same instruction as initializing.
+None other than imperatively closing (i.e. without the macro). Can you elaborate on the use case?
+Is there an idiomatic way to pass an account as `zero` but also close it? 
+    `#[account(zero)] `cannot add `mut` and so cannot add `close = x`
+post images of your output and code. make sure you are in the right testing environment as well
+Hello, can someone help me please?
+Better to explicitly use space in most cases, particularly if you want the account to be resizable in the future.
+Default isn't great, e.g., if you have a vec or option.
+But not sure how safe either of those approaches is (size_of might not match how much space borsh wants to use, and YourStructName::default() might be smaller than a non-default instance, I think.
+You can try using `8 + std::mem::size_of::<YourStructName>()` (that's used in a few examples). One other approach is that if `YourStructName` implements Rust's `Default` trait (search the anchor repo for `Default` for some examples), you can leave off the `space =` stuff entirely and anchor will serialize a `YourStructName::default()` and just check how big it ended up being.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+That's where my config is too, think it's ok
+Also, this is totally unrelated, but has been nagging me from the beginning.. when I installed Solana CLI tools, my config.yml file and the default keypair went into the foler `~/.config/solana/cli/`, which seems to be different than the default paths mentioned in any docs/sources I come across. Is that weird?
+the process appears right after `anchor test` fails, so Anchor is the one that should have started it.. no other options
+I didn't start it manually.. given my experience with it in the past few days.. I make sure to close any test validator I start manually, and run an `lsof` right before running `anchor test` to ensure that nothing is running on 9900 as well
+Just to make sure I understand, was that process started by anchor test, or did you start it by manually running `solana-test-validator`?
+Thanks for the help so far 🙂
+I'll try building from source, and see if I find any luck with that
+I understand.. I haven't made any changes to the minimal example program from the Anchor docs.. I just cloned it, and followed the steps there..
+One thing to note: Despite the console telling me that Anchor can't start the test validator, sure enough, I could see the process somehow running in port 9900
+
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor$ lsof -i :9900
+COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+solana-te 72462   kk   12u  IPv4 394121      0t0  TCP *:9900 (LISTEN)```
+Hmm, ok, so your test validator really isn't starting for some reason. I'm not sure how to debug this from discord, I would probably build anchor from source + stick in some print statements here: https://github.com/project-serum/anchor/blob/master/cli/src/lib.rs#L1604
+thanks very helpful!
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ NODE_PATH=$(npm root -g) anchor test
+BPF SDK: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf
+Running: rustup toolchain list -v
+Running: cargo +bpf build --target bpfel-unknown-unknown --release
+    Finished release [optimized] target(s) in 0.23s
+Running: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0.so
+The program address will default to this keypair (override with --program-id):
+  /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0-keypair.json
+Unable to start test validator.```
+
+Here's the result of that
+Not currently. We could add that though if there's demand.
+Do you mean like this? https://github.com/project-serum/anchor/blob/master/ts/src/coder/event.ts#L52-L55
+
+After you slice off the `Program log:` prefix
+<@!501570363566587905> when listening for the base64 encoded events, is there a way you can tell that a particular line is a base64 encoded borsh serialized event?
+yeah hopefully.. I'll try that and post an update here
+Hmm, not sure. What happens if you at least fix your node require path issue? Either with `NODE_PATH` or by just doing `npm install @project-serum/anchor` from within the directory (not globally).
+I have tried killing the running process using `sudo kill <pid>` as well.. after that if I run `anchor test`, it throws the error complaining that it can't start the test validator, but when I turn around and check for the running process with `lsof` I see the node running
+Are you running your own local test validator? What do you get for `lsof -i :8899` (when not running any tests etc.)?
+to me, the behaviour of the program looks unpredictable
+yeah that's what I'm running, but it almost always ends up throwing an error that - either it can't start the test validator, or it can't find the module "@project-serum/anchor".
+Okay, I'll try that
+I think the tutorial just wants to double check you've installed solana correctly. Normally when testing you just say `anchor test` and it handles spinning up/down a test validator for you.
+If you've got @project-serum/anchor installed globally, you unfortunately also have to make sure node will look for it globally. Try doing `NODE_PATH=$(npm root -g) anchor test` (can set NODE_PATH more permanently in your shell's init file or whatever)
+What more do you want to know?
+With respect to the above error, I do have `@project-serum/anchor` globally installed.. even if I have to install it locally for the project, I don't see a package.json anywhere.. It's all kinda confusing
+Why do we need to run the test validator, and then make sure to shut it down (probably to have a genesis hash in place?) before testing/deploying the program?
+I get a sense that I'm missing the understanding of some of the rudimentary stuff, but I couldn't put my finger on what it could be.. Is there a resource where I could learn about how the test validator works, how the deployment works, etc.?
+I've cut out some of the output due to character limits
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ anchor test
+...
+...
+Error: unable to connect to server
+
+Error: Cannot find module '@project-serum/anchor'
+Require stack:
+- /home/kk/learning/solana/anchor/examples/tutorial/basic-0/tests/basic-0.js
+    at Function.Module._resolveFilename
+...
+...
+kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ node client.js
+internal/modules/cjs/loader.js:905
+  throw err;
+  ^
+
+Error: Cannot find module '@project-serum/anchor'
+Require stack:
+- /home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:902:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:746:27)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:92:18)
+    at Object.<anonymous> (/home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js'
+  ]
+}```
+Hey everyone.. I've been running around in circles trying to get a grip on Anchor basics.. I'm currently following the "Minimal Example" from Anchor docs.. I've deployed the program, and when trying to generate a client, I'm greeted by this:
+thanks
+done
+keep it in one place, please
+can you elaborate accountinfo
+so accounts for a pda ?
+Account info does basically no checks on what the structure inside the data is, like what serialization format it uses or what the struct name it uses is or who its owner program is
+Accounts are just for when the account is owned by a program ( usually other than the system program)
+but how do i know the program id before hand without deploying
+\also what is the concept about hte program id i assume its the address where that program/smart contract is on the solana c\hain
+Different between Account and AccountInfo when should you be using account vs accountinfo, in some examples i see a mix, i dont get it if account is the safe thing why not just use accounts ?
+https://github.com/CristinaSolana/solana-developer-resources
+is there any resource that explains pda and cpi, more importantly i want to understand how do token contracts work, for e.g i make a erc 20 in ethereum and can mint it to address, now in solana we use the spl can anyone shed more light on how will this work with the solana architechture ?, token programs, token accounts etc am kind of confused how alll this works and in what order
+That'd be awesome, thank you for the context!
+It's ok I think we have enough people that have gone through the trenches
+😦 we shall rebuild from the ashes.
+Also all our gems in the serum discord have been deleted <@!501570363566587905> 😦
+I haven't gotten around to fixing it yet 😅 but will look to come to a solution when I free up more
+There's a bit more context here 
+https://github.com/project-serum/anchor/issues/577
+From the graph on node provider the ping never really stopped, let me wait overnight and see if it happens again.
+
+Thank you ❤️
+My understanding was the disconnections would be transient on some providers like RPCPool and they'd reconnect you (so the issue is you may miss a few events in that period)
+very likely, adding something to check on status and reconnect. thought it should be done automatically though
+Has the websocket just failed or failed temporarily?
+Nice
+Speaking of event, I have a running event listener running in a backend with `forever` to handle some incoming requests, but it seems to be disconnected after I left it overnight. 
+
+Curious if anyone else running into similar issues, or have a way to mitigate?
+Especially since no one is currently composing with consume events that I know of.
+I don't see why not.
+Since it only costs 4k, can we program log FillEvent in serum too?
+🔥
+26k savings
+anchor version costs 4k
+https://explorer.solana.com/tx/2wqw3cJuk1HBosq4wPTgaDpiCjC92cxoxtgV435ad7ov952K3KhLaSXbJYHPnQyoV2gdQk3nMmPawWb7kMuY9XtK?cluster=devnet
+To decode event strings (e.g. what you see on the explorer), use the `EventCoder` https://project-serum.github.io/anchor/ts/classes/eventcoder.html#decode. You can just make your own custom IDL by hand for the events to generate the coder object.
+At some point we may need to roll our own library. 😦
+I haven't measured, but I think it depends on the data structure. For nested structs, I'm told borsh is a bit wasteful.
+Does serialization cost much compute
+Here's an example using them <@!748249199606497502>  https://github.com/project-serum/anchor/blob/master/tests/events/programs/events/src/lib.rs
+I'm interested to see if anchor events improves at all.
+Costs just as much if I put all the strings in an array and .join() too
+sweet I'll try it. I think the default way costs so much because of string interpolation
+You could import `anchor_lang` and use `anchor_lang::event` and `anchor_lang::emit` in a non-anchor program.
+I haven't actually measured compute though.
+It just
+
+* borsh serializes
+* base 64 encodes
+* logs
+Yea this is the code https://github.com/project-serum/anchor/blob/master/lang/attribute/event/src/lib.rs#L57-L59.
+It's just `emit` event or something
+This reminds me of all the crap serde does to waste compute budget.
+Wow
+what I learned so far (or the examples I saw) are using mocha js tests as integration tests. But didn't see any example of rust unit tests. I thought this might be a limitation of some sort
+That's a lot of compute ;P
+^^ That's how I'm doing it and it costs 30k compute
+```
+                    msg!(
+                        "FillEvent details: {{ \
+                            \"timestamp\": {}, \
+                            \"seq_num\": {}, \
+                            \"maker\": {}, \
+                            \"taker\": {}, \
+                            \"taker_side\": {}, \
+                            \"maker_order_id\": {}, \
+                            \"taker_order_id\": {}, \
+                            \"maker_fee\": {}, \
+                            \"taker_fee\": {}, \
+                            \"price\": {}, \
+                            \"quantity\": {} \
+                            }}",
+                        fill.timestamp,
+                        fill.seq_num,
+                        fill.maker.to_string(),
+                        fill.taker.to_string(),
+                        if fill.taker_side == Side::Bid { "bid" } else { "sell" },
+                        fill.maker_order_id,
+                        fill.taker_order_id,
+                        fill.maker_fee.to_num::<f64>(),
+                        fill.taker_fee.to_num::<f64>(),
+                        fill.price,
+                        fill.quantity
+                    );
+```
+Interesting I didn't know it saved compute.
+I was told I should do program logs the way Anchor does them to save compute. It was a little difficult to figure out what that means when searching the repo. Do you know at a high level what Anchor does differently (if at all)?
+The latter takes a little longer to develop, and so I prefer the javascript based testing for integration tests. But if you need a step through debugger, `program-test` is great.
+* unit tests
+* program-test
+There's two ways of doing rust tests and both are definitely encouraged.
+Hi everyone, me again with yet another n00b question 🙂
+What's the rationale behind not adopting the traditional Rust test approach? I mean I know from security perspective, integration test are the way to go. Is that it all, or there is other limitations that regular Rust tests won't work with Anchor/Solana in general?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I was going to point out that `solana deploy` worked fine
+thanks!
+aahhh my wallet is pointing towards the programID keypair 😦
+Did you set the correct cluster and wallet in your Anchor.toml? You can specify them via cli args `--provider.cluster` and `--provider.wallet`.
+what are the steps to deploy to devnet with `anchor deploy`?
+
+I'm likely doing something very dumb
+
+To be sure I understand this correctly we have:
+_account pubkey_: this is our account with pubkey stored in `~/.config/solana/id.json` 
+_programid_ : this is associated with our program and is generated during `anchor build` in `target/deploy/key.json`
+
+When deploying I assume we are paying the fee with our account/pubkey. In fact if I try to airdrop to the program id, `anchor deploy` will complain saying `Account ##### is not an upgradeable program or already in use`. 
+
+I've tried completely from scratch:
+1. generating keypair with `solana-keygen new`
+2. `anchor build` then looking at the program id with `solana address -k target/deploy/mysolanaapp-keypair.json`, placing this in lib.rs, anchor.toml and the idl files
+3. `anchor deploy`
+
+Every time I try I get a complaint that the programID has insufficient funds but if I try to fund it I now get told it is already in use....
+You can subscribe via https://project-serum.github.io/anchor/ts/classes/program.html#addeventlistener, but websockets aren't very reliable on solana right now.
+It simulates the transaction. So it doesn't actually cost sol or mutate state.
+Nice.  Is there a general purpose way to subscribe to events emitted by a program?
+I'm a tad unclear about what the `simulate` property on the Anchor program is for . . .
+Example:
+
+* smart contract https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/lib.rs#L67
+*  client https://github.com/project-serum/anchor/blob/master/tests/misc/tests/misc.js#L143
+Currently no. To do this, you need to `emit!(event)` and `#[event]` and use `program.simulate.testReturn` on the client.
+Glad we have a beginner channel.
+Can I get return values from an RPC I called in web3?
+```rust
+pub fn test_return(_ctx: Context<Nothing>) -> Result<u64> {
+    Ok(1234)
+}
+```
+Called from web3
+```js
+const sig = await program.rpc.testReturn({
+  accounts: {},
+});
+const val = await provider.connection.confirmTransaction(sig);
+console.log(val);
+```
+
+All I see is `{ context: { slot: 209179 }, value: { err: null } }`
+
+Thanks!
+ahh i see, that makes sense
+It's because all accounts used in the transaction need to be specified up front by the client.
+For PDAs that is not the case (though for non-pdas yes that's true).
+this is because accounts that will be created need to sign the transaction right?
+ok awesome, thank you for your patience with my noob questions! i'm sure i'll have more, much appreciated!
+Both. You can CPI to create acocunt with a PDA but the client also needs to pass in that address.
+Correct.
+and one more hopefully not too stupid question, but is it possible to call createAccount via cpi to create a PDA account on behalf of a user? or does the client code need to still pass in the initial account and public key?
+ok awesome! so does it actually call SystemAccount::createAccount internally?
+Generally, I prefer to use `init`.
+`init` is like malloc. It creates and initializes an account in your program. `zero` is similar, but it assumes that malloc was called in a previous instruction, and that the account data is zero initialized.
+👋 i was looking through some of the test contracts and comparing to some of the code i managed to write myself using the tutorials, and I was wondering what the differences are between `#[account(zero)]` and `#[account(init, ...)]`
+Awesome.. Thank you.. as for Solana, I installed it via Curl as given here: https://docs.solana.com/cli/install-solana-cli-tools
+I think you can `cargo uninstall anchor`, and as for solana, it depends on how you installed it probably
+Anyone?
+thanks!
+Yep, you can just do them one after the other
+Hi, is it possible to do two CPIs (that has to be done sequentially) in the same method execution?
+things should be non-mutable by default
+how do i get the amount of sols transferred in a txn?
+yeah makes sense. dunno why i assumed it should be mutable by default
+well no, Signer is just a signer, it doesn't have to be mut
+not sure, figured that'd be some sort of default baked into it or something
+why not
+the new `Signer` type doesn't need to be explicitly marked as `mut`, right?
+how do I remove Anchor, Solana CLI Tools and all their dependencies in Ubuntu 20.04? I am not getting much clues for the issues I'm facing at the beginner level, so I'd at least like to start with a clean slate
+Hey when I am using an object which keeps its data on the heap in the storage (i.e Vec, BTreeMap etc),
+What should i set the value of space parameter in Initialize?
+size of the object or size of object + heap space it takes?
+Greets to everyone. I am beginner with anchor, installed all deps as the guide says. I have a program and I wrote some tests for it, but when i try to "anchor build" of "anchor test" I recieve this message:
+
+**To deploy this program:
+  $ solana program deploy .../solana-sc/target/deploy/program_name.so
+The program address will default to this keypair (override with --program-id):
+  .../solana-sc/target/deploy/program_name-keypair.json
+thread 'main' panicked at 'Code not parseable: Error("payer must be provided when initializing an account")', lang/syn/src/idl/file.rs:338:58**
+
+Platform: Linux, installed anchor via npm and tried to clone repo + cargo build
+I have generated keys with solana-keygen
+The same tests and program are successfully executed on my friend's computer, so the problem is with my environment.
+Don't know where to search for the answer. Thanks in advance
+it is in programs/cfog/Cargo.toml
+ok thank you!
+it's a git submodule
+just wondering, are the serum dependencies in https://github.com/project-serum/anchor/tree/master/tests/cfo/deps added manually or with Cargo? I don't see it as a dependency in the Cargo.toml file.
+Thanks, will try around!
+test.genesis is for your external program
+And that deploys the program stored at: e.g. ./deps/stake/target/deploy/registry.so
+And [[test.genesis]] is required too?
+I see
+this config is just saying, add a program at a specific address
+The second program is owned by a different team.
+but if they are highly correlated i would put them in the same workspace
+I don't quite get how this config works. Do I need to put the program id of the CPI program and idl path in the first program's config?
+https://github.com/project-serum/anchor/blob/master/tests/cfo/Anchor.toml#L29-L43
+I have anchor projects in two different workspaces. I would like to setup a test where one program invokes the other program. How do I set this up in the Anchor.toml file?
+It's not possible, you need to pass AccountInfo in accounts :\
+If I have an account that references another account like this:
+
+#[account]
+pub struct MyAccount {
+    pub my_sub_account: Pubkey,
+}
+
+How do I read the referenced account into an AccountInfo?
+
+im there
+I could chat now for a bit if you want (maybe in the general voice channel?)
+Hey yall, second day hacking at tutorial examples 1 and 2. I also went and rewatched the ignition workshop again and still can't figure it out. 
+
+I know it's a big ask, but I would love to hop on a call with someone who is a bit more experienced. I feel like I'm really close to breaking through in understanding of anchor in general
+Could you also post your corresponding instruction handler's signature? I wonder if you're running into an issue with how you're using the #[instruction] annotation.
+Is it possible you're somehow sending the wrong eth_addr?
+I can reproduce that error message (with a local example following the spirit of your code) by passing the wrong `eth_addr` to the rpc call. Meaning, use one eth_addr byte array to produce the PDA, but send a different one with the instruction.
+how to fetch nft metadata from connected wallet?
+On `seeds = [ b"mint-1234".as_ref(), &eth_addr ],`it fails with:
+```
+Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3648:13)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3608:20)
+      at Connection.sendTransaction (node_modules/@solana/web3.js/src/connection.ts:3596:12)
+      at Object.sendAndConfirmTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-transaction.ts:29:21)
+```
+but it works with `seeds = [b"mint-1234".as_ref()],`
+yes
+```
+Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Program failed to complete
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3648:13)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3608:20)
+      at Connection.sendTransaction (node_modules/@solana/web3.js/src/connection.ts:3596:12)
+      at Object.sendAndConfirmTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-transaction.ts:29:21)
+```
+What doesn't work? Are you getting an error etc?
+Hi!
+How I should define `seed` properly?
+It doesn't work:
+```
+#[derive(Accounts)]
+#[instruction(
+    bump_seed_mint: u8,
+    eth_addr: [u8; 20],
+)]
+pub struct CreateRepresentation<'info> {
+    #[account(
+        init,
+        seeds = [ b"mint-12345".as_ref(), &eth_addr ],
+        bump = bump_seed_mint,
+        mint::decimals = 2,
+        mint::authority = owner,
+        payer = owner,
+    )]
+    pub mint: Account<'info, Mint>,
+    pub owner: AccountInfo<'info>,
+...
+```
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+my current understanding of this is that the client has to create an account, transfer sol to it, transfer ownership of account to program, then program can transfer the sol to itself, not sure if i'm adding an extra step
+Anybody know what this `#[index]` does. https://github.com/project-serum/anchor/blob/d325f218ddc33625397f81c6d2133667bd9140e9/tests/events/programs/events/src/lib.rs#L37 
+
+It's some rust macro and hard to find documentation about it
+👋 got another noob question. i want to accept an initial deposit as payment to create a user account. how can the contract check if sol was included with the instruction call?
+it seems like it, would be very cool to have eventually though!
+I think we need some fancy new rust libraries to do this.
+I want this too 😦 I've been too lazy to figure out the right way and just use multiple vs code windows, one for anchor's source + one per subproject. Would love to know a better way!
+yes, nothing appears in my terminal although my tests run fine
+who uses the TypesCoder? I can't find any examples of it being used in the anchor repo, either in the examples or the library code itself
+awesome, i will try to give this a shot soon
+My guess is on account deserialization, it will load the account into your heap/stack and you can add elements freely to it as per rust functionality, then once you serialize that back into the account, it will have the new memory layout for your modified vectors.
+i'll need to figure out if the whole `Market` object needs to be replaced with a longer `Vec<Bracket>` or if i can just add elements to the `Vec<Bracket>` without it complaining
+yep, it's a PDA so i just plan to set space to maximum
+that would be awesome if true
+You are constrained by the space you allocate on account initialisation
+ideally it would be variable
+It should just resize as you need?
+Ok I'm not certain this would work since I haven't tried, but if you had a Vec<Market> with a Vec<Brackets> inside, then once you add elements to the vector in your smart contract, once you serialize the account again, it would work if you had enough space.
+nope
+Do you know how many brackets per market at the time of market initialization (adding)
+But they are of variable size right
+the struct itself contains an array as one element
+it would be an array of a specific type of struct
+can't both the list of markets and the list of brackets be arrays
+right, i haven't seen any examples of vectors being used in zero copy arrays but perhaps i haven't looked hard enough
+Vector wouldn't solve it unless you had a vector of vectors lol
+Right and you add markets one at a time
+brackets can be variable length, so it's not possible to specify up front a maximum number of markets in a fixed size array, unless i choose a `max` value for the number of brackets in a market, like 2 or 3
+here's the struct layout i'm using
+
+list metadata
+- name of list
+- list of markets
+  * market one
+    ^ bracket one
+    ^ bracket two
+  * market two
+    ^ bracket one
+  * market three
+    ^ bracket one
+I mean conceptually they should be the same, except i suppose you'd need to track the index of what you've added in an array.
+i'll use whatever provides this functionality `I would love to init an empty account and only add elements progressively.`
+Am curious why you'd prefer using a vector?
+yeh, that's what the code does currently
+Fwiw using a fixed size array will just initialize the elements to that type's default value
+i should just try it out
+so just literally switch from using fixed size array to vecs
+If you have a vector and allocate space for your estimated max size of array, you can keep adding elements until you are full?
+all the zero copy examples seem to use lists with a set length. Is there an example anywhere of someone using variable length arrays that get updated progressively?
+this is something i'm not clear on. 
+https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7
+I would love to init an empty account and only add elements progressively.
+For example
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L14 Initing this as an empty array and then adding one element at a time.
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L26 Similarly here, initing this with a single element and then appending to the array as new brackets are added
+
+But I'm under the impression that all of this space needs to be allocated up front? Is it possible to have expanding arrays or something that is functionally equivalent using zero copy?
+hmm.. doing the basic_0 tutorial - looked through the previous convos and saw that i had to set ANCHOR_WALLET... but Anchor.toml already has a wallet set under provider... is there a difference between the two?
+with `anchor test`?
+Hi! I'm struggling to find how if there is a way to log messages  from within the program while doing tests? I tried the msg! macro but it doesn't seem to do anything
+rust noob here: does anyone know how to get rust-analyzer to work in VScode for all files when you fork the anchor repo? (out of the box it doesnt work for `examples` and `tests`)
+Oh ok  because I store  a PDA `bank: ProgramAccount<'info, Bank>`
+```
+#[account]
+pub struct Bank {
+    wallets: Vec<Wallet>,
+    bump: u8,
+}
+
+pub const WALLET_SIZE: usize = 32 + 1;
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub struct Wallet {
+    pub address: Pubkey,
+    pub share: u8,
+}
+
+``` 
+and when calling the `withdraw()` I would like to *iter* through all the wallets on my bank to split the funds in bank.
+So I would need to pass all the `wallets` + `accountsInfo` in *accounts* to use it in my function
+In `withdraw()`:
+```
+        let accounts = ctx.remaining_accounts;
+        let wallets: Vec<Wallet> = (&*ctx.accounts.bank.wallets).into();
+        for wallet in wallets.iter() {
+            invoke(
+                &system_instruction::transfer(
+                    &ctx.accounts.payer.key,
+                    &wallet.address,
+                    price,
+                ),
+                &accounts,
+            )?;
+        }
+```
+You mean inside your program? If so, no—any account(info)'s your solana program wants to use have to get passed in explicitly as pubkeys from the client
+is it possible to transform a publicKey stored in an *Account* to a *AccountInfo* ? and pass it to my `invoke`
+Would be good to do after or along side https://github.com/project-serum/anchor/issues/695
+If not, I could see about adding and opening a PR!
+No not yet. THough we should add that.
+Was wondering if there was a config to set the path to the program key-pair?
+We could make the devex better by searching the local filesystem, though.
+I see no reason to share a program ID.
+Ideal would be all share same program ID?
+Dont even need to do that if you're running `anchor test`.
+Don't want to commit that change to git for everyone
+Yeah, then you have to build once, get the id, then dump it back in to declare_id and Anchor.toml?
+As long as the `declare_id!` and `Anchor.toml` have the same addresss.
+For development, you can just use a random keypair.
+<@!501570363566587905> Question on the storage of program keys in anchor: How do you recommend setting up the dev environment? Do you just share them between devs outside the repo? Otherwise every new `anchor build` will generate a new keypair?
+Ahh, let me google. Thanks
+I think just loading the code client side would work, but using webpack/next is the issue
+There's some webpack configs to do that magic, though I dont know the config off the top of my had.
+If webpack is freaking out, just stub it.
+Trying to think of how to work around this since webpack freaks out at the reference.?
+I've never had a problem.
+Thanks! Also, I'm looking at your code here: https://github.com/project-serum/anchor/blob/cfba251fc4cb366adcd4ad48eefee2201d7448c5/ts/src/provider.ts#L236
+
+This require('fs') prevents this lib from running clientside in a react app?
+okay the earlier part of the example steps have you go through what I was doing then later on tell you we dont need the local validator node and anchor test will do it all in one go so it is there just not the env variable part
+thank you!
+aha!
+Tbh you usually run your anchor stuff via `anchor test` or whatever, which handles setting this env var for you. I think it may have slipped through the tutorial docs by accident.
+Try doing `ANCHOR_WALLET=~/.config/solana/id.json node client.js`
+how is that set? I'm not seeing a command in the CLI section of the docs but i might be missing something
+You'll probably want it to be whatever the keypair path is when you do `solana config get` (something like `~/.config/solana/id.json`)
+Hmm, maybe this isn't mentioned in the tutorial?
+^ This is probably because you haven't set your ANCHOR_WALLET env variable
+having an issue trying out basic_0, when i get to node client.js Im getting TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+from the setProvider looks like
+I would not do this.
+so, not a very helpful response, but unless you have a good reason to add that keypair to the source control, i wouldn't necessarily do it
+and the keypair still shows up in the `target` folder 🤷
+lately anchor makes you use `declare id`
+anchor just does that itself
+not sure really
+or do you copy back in the key-pair?
+But then your program ID changes every time?
+personally i delete the `target` directory a lot
+Anyone have knowledge on this? 🥺
+Is the keypair in an anchor projects `/targets/deploy/<name>-keypair` ok to put under source control? IE is it only used to generate the program address and the `Upgrade Authority` is really the only authority to change that program?
+was anyone able to get https://docs.rs/switchboard-program/0.1.52/switchboard_program/struct.VrfAccount.html working in anchor ?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+Thank you
+Ok, good idea...
+i am going through it as i speak
+i would suggest you to see the examples and tests provided on the anchor github
+maybe
+I copied this guy's code line for line to learn how the contracts work. It was built on an older version of Anchor, so that is what the issues I am facing are
+https://github.com/RohanKapurDEV/streaming-anchor/blob/master/programs/streaming/src/lib.rs
+Thanks!
+yes its on tests on anchor github
+also, <@!426974456548818946>  what chatRoom thing are you working on? Is it a tutorial?
+
+I understand the seeds, PDAs, etc. but I still have no idea how to solve my problem
+Not sure if that is being used but i generated it with  `solana-keygen new -o my-keypair.json --force`
+Does the wallet matter?
+
+I am not running a local validator, and yes I replaced it in anchor.toml too
+this is from the chatRoom test src
+Hmm. Did you also replace it in Anchor.toml? Also, are you running your own local validator etc. or letting anchor test spin one up for you?
+where is createInstruction defined, i cant find it
+
+another noob question
+The first 2 tests work fine
+I just pull your repo directly
+1) Do anchor build
+2) Run  `solana address -k target/deploy/basic_1-keypair.json ` to  get id and replace in lib.rs
+3) Do anchor build again
+4) do anchor test
+Hmm let me check
+Hmm, not sure why yours isn't working but mine does. How are you setting up the test's wallet/provider stuff?
+Does the transfer function need a signer?
+Sorry
+This is above my paygrade... maybe ask <@!134416332509675520>
+
+
+Yea, the JS looks good. Can I see the Rust
+It looks correct to me
+i am too noob to look at that, and will probably get my mind lost haha
+
+Specifically the program.rpc part
+What does your JS code look like?
+That's probably because you are only providing the public key
+```
+  1) basic-1
+       Can tranfer lamports:
+     Error: unknown signer: 2PY9aesXPdtkpDdnSHzTSvQap263ufjZEwjTcqWbvT9G
+      at Transaction._addSignature (node_modules/@solana/web3.js/lib/index.cjs.js:1104:13)
+      at /Users/mcdonald/Desktop/cqfd/anchor/examples/tutorial/basic-1/node_modules/@solana/web3.js/lib/index.cjs.js:1078:12
+      at Array.forEach (<anonymous>)
+      at Transaction._partialSign (node_modules/@solana/web3.js/lib/index.cjs.js:1075:13)
+      at Transaction.partialSign (node_modules/@solana/web3.js/lib/index.cjs.js:1066:10)
+      at /Users/mcdonald/Desktop/cqfd/anchor/examples/tutorial/basic-1/node_modules/@project-serum/anchor/dist/cjs/provider.js:82:16
+      at Array.forEach (<anonymous>)
+      at Provider.send (node_modules/@project-serum/anchor/dist/cjs/provider.js:81:14)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async Object.rpc [as transfer] (node_modules/@project-serum/anchor/dist/cjs/program/namespace/rpc.js:11:31)
+      at async Context.<anonymous> (tests/basic-1.js:83:5)
+```
+🤔  Getting unknown signer for the test
+The source for Loader is actually super fun Rust code btw
+oh man thanks
+Loader is a fancy way to not have to actually deserialize the account struct (in this case the ChatRoom). You leave the bytes that came with its `AccountInfo` alone and just kind of pretend they're a ChatRoom, no deserializing at all. In reality you're working with a bunch of &mut [u8] bytes, but Loader lets you (handwaving) say, uh, pretend this is a &mut ChatRoom 🤞
+Like I sort of get that stuff, but not really... I have some studying to do
+Ok, thank you
+am i helpful, if you still dont understand, i suggest you go through PDA section on Solana Docs carefully
+which would result in having no private key to the said address, which is what we want to achieve with PDA's
+it is to push the program address from the ed25519 curve
+I found this in the rust docs, but have no idea what is going on
+its required for PDA, i guess
+
+I think this is my last problem... what is a bump and what are seeds?
+
+Yea, it was a mistype at first as a "$"
+Heh I think you need "token_program.key == &token::ID" (missing ampersand)
+I've still got one more problem... (Thank you for all the help)
+
+If you don't pass an explicit `space = ...` it will just use Rust's `Default` trait to say, uh, let me see how big a "default" one of these things is and use that 🤷‍♂️
+Thank you
+You are right!
+<@!847130012879814668> have to be slightly careful with that, I think Anchor is just confused about how much space to allocate for some account
+Where? (I am very novice)
+try adding `#[derive(Default)]`
+Ok, it is still yelling at me...
+
+on demand zero copy deserialization?? what does that mean
+Struct anchor_lang::Loader
+
+pub struct Loader<'info, T: ZeroCopy> { /* fields omitted */ }
+
+Account loader facilitating on demand zero copy deserialization
+Thank you!
+"token_program.key == &token::ID" rather than a $
+Does anyone know why the rust is yelling at me?
+
+<@!501570363566587905>  Maybe can answer this question
+what does Loader do?
+<@!381015687486898176> yeah! I/we were wondering about that (was looking at this during a stream)—it seems like you wouldn't need it but you do 🤷‍♂️ I would love to understand that better.
+hey guys, whats Loader type used for? i am new to this, cant find documentation on it
+
+Just a question why is systemProgram needed in the instruction? It isnt being used
+Sent ser
+Buy yourself a beer
+Thanks ser
+Haha ok (guess I'm now a professional anchor developer) GZUFf8jC6xdqHRZGv26sW631stLik8Z5hdGyMFYiTdMK
+😆
+You sure pls i want to give you .2 sol for your time
+Haha it's all good, was educational for me 👨‍🎓
+I am eternally grateful
+Ser pls dm me your sol address
+Heh, this was actually slightly trickier than I thought it would be, here's an example https://github.com/project-serum/anchor/compare/master...cqfd:lamport-transfer-example?expand=1
+What's up
+Yea
+<@!134416332509675520>  messaged you, i just need help on how to interjact with that one function on the js side so i could infer and do the other functions my self
+Like why do you need a '
+This is more of a rust question, but what does <'info> do?
+I am transferring to myself though
+So this works?
+```
+    pub fn pay(ctx: Context<Increment>, count: u64) -> ProgramResult {
+            &system_instruction::transfer(
+                &ctx.accounts.user.key,
+                &ctx.accounts.user.key,
+                count,
+            );
+        Ok(())
+    }
+```
+In JS how do I convert a <BN: a891> to decimal?
+Thanks!
+You might be doing `anchor.Provider.local()` in the js test (`anchor.Provider.env()` might work? Not sure)
+How would I create a simple function that takes in lamports and sends it to another account?
+
+
+How do I change from localnet to devnet in anchor test? I have changed my anchor.toml, but it still wants to connect to localnet
+<@!381015687486898176> when you say a function that takes lamports, what do you mean?
+😩
+Will transfer .1 SOL for tutorial
+Any example how to transfer lamports? Please teach me 😫
+you
+I didn't know this, but Anchor test spins up a test validator for yo
+The problem for anyone curious is that I had a test validator running in the background fouling things up
+Yea
+<@!847130012879814668> want to pair real quick? Feel free to ☎️  me on discord if you want
+It just is the tutorial modified a little to take a switchboard accountinfo and read the info
+
+True... I am now very confused... If I had more experience with this, I feel like I would have more answers. I would think it would have something to do with the JS, but don't know what I'd change
+So I would have thought the above would have made switchboard do a `ProgramError::InvalidAccountData`.
+Yeah. Hmm, still confused about your error, since I think Anchor only generates an `InvalidProgramId` when checking a `Program<'info, SomeProgram>`. You can pass whatever address you want for an `AccountInfo`.
+AccountInfo<'info> just takes 'info, not an addional struct
+
+No, the function I am passing the var into takes an AccountInfo, not an account
+Since it looks like the `switch` is just a raw `AccountInfo` in your program. Are you ever doing something like `Program<'info, Switch>`, or whatever?
+I'm actually confused how you're getting that error with the code snippet above though 🤔
+That makes sense.... I am running the program in localnet becaue of the airdrop restrictions, but the publickey is for devnet
+That error is for an InvalidProgramId (the hacky way to discover this currently is to calculate 0xa8 = 168 and then go find it in `error.ts` in the anchor codebase, lol—working on making these errors log in a nicer way)
+
+And the rust struct
+Here is the JS
+I am trying to pass a publickey into my rust program for a Switchboard oracle
+What does this mean? Error processing Instruction 0: custom program error: 0xa8
+I think you can run anchor.PRovider.local("https://api.devnet...") and it will connect to devnet
+yeah! That was the issue.  Thanks
+Thanks
+just use u64 and track how many decimal places each u64 should have
+don't use decimals
+Can the IDL read an f64 variable from the rust contract? I don't want to convert the type to an i64 or u64 because I like having the decimals...
+Are you maybe doing `anchor.Provider.local()` in your test?
+how do you configure anchor test to connect to devnet?
+I get this error ```
+Initializes test state:
+     FetchError: request to http://localhost:8899/ failed, reason: connect ECONNREFUSED 127.0.0.1:8899
+```
+
+and my Anchor.toml file
+```
+[programs.devnet]
+token = "2EMTdFYydWGcupkeGriNL61fdKwznxBfc2ZkdJxEmZME"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "mocha -t 1000000 tests/"
+```
+Attempting to explain why `declare_id!` exists (I was confused about this too): I think you never(?) need to statically know your *own* program's id, since it gets passed in to the program at runtime (`ctx.program_id` in an instruction handler). However, it's often necessary to know some *other* program's id statically, e.g. anytime you have code like `if some_condition(some_account.state) { do_something(); }` you need to make sure `some_account` has the owner you expect, or else people could trick you by passing in a fake/spoofed account. If `some_account` is supposed to belong to your own program, you could check it with e.g. `some_account.to_account_info().owner == ctx.program_id` (so, dynamically, no need for `declare_id!`). But if it's supposed to belong to a different program you'll need to somehow know that program's id (for example, maybe `some_account` is supposed to be a token account, so you need to check that its owner really is the SPL token program—otherwise it's fake and just looks like a token account).
+I see. thanks for the help
+Any beginner examples for a function that takes lamports?
+This is a bug in the tutorial, the `client.js` script is expecting you to have an ANCHOR_WALLET env variable set. Try doing `ANCHOR_WALLET=~/.config/solana/id.json node client.js`
+tests run totally fine
+yes, use declare id. If in doubt check the changelogs
+Running on Ubuntu btw
+and even if i hardcode the provider to my localhost, I get this other error
+TypeError: provider.send is not a function
+Hi does anyone have this issue running client.js in example basic0?
+
+i get this error at anchor.Provider.local()
+node client.js
+node:internal/fs/utils:670
+    throw new ERR_INVALID_ARG_TYPE(propName, ['string', 'Buffer', 'URL'], path);
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+is declare id necessary am still confused about what exactly is it needed for, i was looking the candy machine nft code and they dont be using a declare_id , its written in anchor as per <@!501570363566587905>  tweet
+all the rest is just updating the data on an account
+and the arguments in this function are the main things that are used when initializing an account
+<https://docs.rs/solana-sdk/1.6.8/solana_sdk/system_instruction/fn.create_account.html>
+you just really have to understand that everything in solana is an account, and all the accounts need to be owned by programs
+this could help too
+<https://2501babe.github.io/posts/solana101.html>
+yea i think i should maybe try a hello world program without anchor first and then try and use anchor. i had read through the docs but was trying to write my first program with anchor without basic solana first
+anchor does also automatically calculate `space` for you in most situations
+happy to answer any more question but you should check out some of the docs on how solana itself works and then maybe we can try to link that back to what anchor is doing / abstracting away from
+`the singature for the account trait?`
+if you look at the corresponding javascript / client side code you'll probably see that they're passing in a keypair in the `signatures` object
+
+`but since it's not in line 2 and 3`
+assuming you mean accounts 2 and 3 here. You only need to specify `space` when creating an account. `user` is just an empty signer account (it doesn't store any data on it), and the `system_program` account already exists with the program data on it
+where could i find the signature for the account trait? like how to know what payer=user and the keyword space is?
+
+like it makes sense space is included in the first line, but since it's not in line 2 and 3, does that mean there's a default space set if you don't specify one?
+i'm guessing `user` needs to be `mut` here because it's paying for the new account
+when you submit the public key for `my_account` you're just submitting an empty pubkey (and its signature) in the transaction. Then the program itself sends the instruction to the system program to create an account with the requested amount of space / data
+system program is an account as well
+no, there's three accounts there
+so is it saying that within the Initalize struct, there's actually two different accounts? my_account and then the user/system_program account?
+`init` varies in meaning
+```
+lang: #[account(init)] now creates the account inside the same instruction to be consistent with initializing PDAs. To maintain the old behavior of init, replace it with #[account(zero)]
+```
+`mut` just means the data in the account can be changed and the changes will persist on the solana blockchain
+the meanings change every now and again
+https://github.com/project-serum/anchor/blob/master/CHANGELOG.md
+can someone walk me through what the line "#[account(init, ...)]" and "#[account(mut)]" means and does?
+
+```rust
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    #[account(init, payer = user, space = 8 + 8)]
+    pub my_account: Account<'info, MyAccount>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+```
+Cool thanks
+```seeds = [b"whitelist", user.key().as_ref()],
+           bump,
+```
+This results in checking what address whitelist_entry is at
+```#[derivce(Accounts)]
+pub struct WhitelistedOperation {
+    pub user: Signer<'info>,
+    #[account(
+           seeds = [b"whitelist", user.key().as_ref()],
+           bump,
+     )]
+    pub whitelist_entry: Account<'info, WhitelistEntry>
+}
+```
+got it the signer should be that user ... if I add something like this #[account(signer)] would work
+ya I got it ... so inorder to check if the program is accessed by that  whitelisted PDA user or not how to check that part ?
+there is only a small overhead per account
+which will be about the same rent price as creating the big array in one account
+yes
+So I as a admin has to create a PDA for all the whitelisted user ?
+You can actually imagine the associated token accounts like a gigantic map of map, with the key being the user, the second key being the mint, then you get the value, the token account
+kind of a map, but solana address/account style
+If you want infinitely scalable whitelist, you make the "admin" create a PDA that is derived from the whitelisted user, then the user has to give that + be the signer to get through as whitelisted.
+Someone not whitelisted wouldn't have this PDA created
+but who makes this whitelist?
+yeah it is for whitelisting purpose
+if it is some sort of whitelist, then you can just ask the client to propose the index, so the program only checks the signer is fact in the list
+it also depends of how you use it
+that will do
+chuck in a zero copy account
+say about 1000 at max
+Do you know how many addresses you wish to store?
+Can someone guide me a way or any docs to look at  to store a list of addresses on chain using anchor ?
+Yeah thx you I was looking for that
+https://github.com/project-serum/anchor/blob/d325f218ddc33625397f81c6d2133667bd9140e9/ts/src/error.ts#L53
+you will end up in the map for them
+you convert them to decimal, then search for them
+Someone know where I can found a list about the hex error code ?
+I was getting errors earlier, and wasn't sure if it was the fact I was trying to return an f64 type or something else
+Can I return an f64 type in the fetch idl?
+i've done `anchor init` on my project and im trying to run `anchor build` and getting this error. has anyone seen ?  ```thread 'main' panicked at 'Not in workspace.', cli/src/lib.rs:442:47
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace```
+Is it possible close an account and recover its balance? the target account is a candymachine config account created by me but now it is owned by the candymachine program.
+Probably legacy. It's just a wrapper for `IdlCoder`.
+What’s the intended usage?
+Lol
+It doesn't appear to be . 😛
+I could also be wrong and it could be used somewhere by Anchor itself, but I can’t see where if so
+If anyone’s out there using the TypesCoder, show yourself coward
+No docs. It's just a marker that has no functional significance. It gets added to the IDL and can be optionally used by off-chain indexers to know to build an index on the field.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+<<<<<<< HEAD
+thanks a lot
+ok great
+Also see https://project-serum.github.io/anchor/getting-started/introduction.html, which will walk through the code.
+<@!813309414702448641> in /examples/tutorial
+and where are the tutorials?
+The `/examples` are explained in the tutorials.
+ok but in the examples folder, it doesnt say what each pgm does...does it?
+The `/examples` and `/tests` directory are a good resource as well.
+ok...just went thru the resources channel...could see a few links there
+There's also the API docs.
+figured it out, I was missing the `ANCHOR_WALLET` env variable,  however I don't recall seeing this anywhere in the docs.
+Hi, running `client.js` for `basic_0` i get the following error. I only changed the program id for that file. The error seems odd, not sure what to make of it because the path is pased in as a string, and the file does exist.
+
+```
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+    at Object.openSync (fs.js:490:10)
+    at Object.readFileSync (fs.js:394:35)
+    at Function.local (/home/.../Dev/anchor/examples/tutorial/basic-0/node_modules/@project-serum/anchor/dist/cjs/provider.js:154:92)
+    at Function.local (/home/.../Dev/anchor/examples/tutorial/basic-0/node_modules/@project-serum/anchor/dist/cjs/provider.js:38:35)
+    at Object.<anonymous> (/home/.../Dev/anchor/examples/tutorial/basic-0/client.js:7:36)
+    at Module._compile (internal/modules/cjs/loader.js:1072:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1101:10)
+    at Module.load (internal/modules/cjs/loader.js:937:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:778:12)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12) {
+  code: 'ERR_INVALID_ARG_TYPE'
+}```
+is this the main and only documentation for anchor?
+https://project-serum.github.io/anchor/getting-started/introduction.html
+hi
+<@!625881690614661121> yeah this gets a mention in the tests for that example https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/transfer-lamports/tests/functional.rs#L26
+Ah—I think so, yeah. I should double check this, but I think your program can transfer lamports from account A to account B as long is your program owns A (a program can only decrement an account's lamports if it owns the account, but incrementing B's lamports doesn't require ownership)
+is this how you would do a basic lamports transfer though? im confused a bit on that pattern. i've followed a couple examples of transferring spl tokens in an anchor program, but I can't find any for a lamports transfer?
+cool. thanks
+So basically, if you want to say "decrement this account's lamports by 5", you/somebody will need to do a `try_borrow_mut`
+The `try_borrow` functions are just part of RefCell's api, and then I guess solana has wrapped them a little bit to give you a ProgramError if the borrow fails.
+<@!625881690614661121> I think the situation is just that the low-level `AccountInfo` gives you access to an account's lamports as a `Rc<RefCell<&mut u64>>`
+what's the use case for try_borrow_lamports? in the core solana-labs example it uses a lower level borrow_lamports func as a transfer (https://github.com/solana-labs/solana-program-library/blob/master/examples/rust/transfer-lamports/src/processor.rs). So is borrow_lamps effectively a helper for transferring?
+Please don't cross post.
+Context is a generic struct in the same way that the `Point` example is.
+It's the same kind of thing as here: https://doc.rust-lang.org/book/ch10-01-syntax.html#in-struct-definitions
+in this section - seems like T doesn't really align with what we have been talking about
+https://doc.rust-lang.org/book/ch10-01-syntax.html this seems to be different
+I think I'm still misunderstanding your q tbh—what feels non-generic about `Context`?
+As the way rust explains generics
+Ah ok so it’s better to think of that versus as a generic
+<@!781655859108511845> I'm double checking if there are constraints on what T can be for `Context`, but for some generics there's no need for T to be a struct—e.g. as <@!693486673606082580> mentioned, think of `Vec`. You can have a `Vec` of (almost) anything, no need for it to be a struct, e.g. `Vec<u32>`.
+I guess the only remaining point is in pure rust docs, I never see T being defined as a struct
+Almost seems like implementation for a parameter
+So think of Context as a type that can be paramatrized by whatever you want to define - like initialize takes in something while other parameters basically tell the function what to expect?
+a better way to think about it is - Context is like a container of Initialize
+Context is a type parametrized by T (in c++ they are called templates) -> just like Vec -> as you have Vec<u64> Vec<String> you can have Context<Initialize> or Context<Deposit>
+
+as you know with Vec, there is no direct relationship between Vec and u64 or Vec and String.
+Ok fully understand that - I guess there’s no good documentation on this in rust, because I did go through the generics section and this wasn’t explained hahaha
+So there's no subtype relationship at all between Initialize and Context—Initialize is just "filling in" a generic type
+`Context` isn't a type all by itself in the sense that you can't do `some_variable: Context`, you can only do `some_variable: Context<Something>`
+It's a "type constructor". `Context<Something>` is a type
+Mm, the type terminology is always a little funky—at least coming from Haskell, I'd say that `Context` isn't really a type all by itself
+Can I think of Initialize as a subtype of Context?
+But like Initialize as a generic to me seems off versus using T, which seems natural as a generic
+Then what’s inside the the <> is generic?
+Context is the type, correct?
+When you say "it" in "it's not really generic", what are you referring to haha? Just to make sure I'm understanding
+Mm, maybe I'm misunderstanding your question—`Context` is generic over the accounts it will hold, but the accounts themselves will be something concrete.
+I guess the conceptual confusion on my end is I haven’t seen a generic set up this way ever in rust
+Saying hey, this is the struct that should match this “generic”
+Like it’s context of type whatever you then define as a struct
+Ah so it’s not really generic then??
+But in a given instruction handler it will always be something concrete (since the instruction handler will have to deserialize the `Something` so you can use it in the handler)
+But yeah, if you really wanted to you could have some function that works on generic Context<T>'s etc.
+<@!781655859108511845> in `ctx: Context<Something>` , `Something` is filling in/instantiating a generic type
+Because of the angle brackets
+Should we think of each of those as generics?
+And then underneath the functions each one of those is a struct
+Yes I already have! I am asking in the basic anchor explanation programs, XYZ is defined as Initialize and then Increment etc
+Not sure I understand the question, maybe you should have a look at https://doc.rust-lang.org/book/ch10-00-generics.html
+When writing unit tests, how to have a mock mintAuthority that does match a specific token?
+In my program I have some hard checks on wrapped sol, how would I mock that in test to have the mint authority with the associated pubkey
+Hi guys - wanted to ask a conceptual question. In the basic programs, you have ctx: Context<XYZ>. So I get that the type is of Context (I learned Rust past two weeks) but then XYZ usually is a generic in rust. Here, it seems like each XYZ is defined as a struct. Is that an anchor specific rule or can we still view whatever XYZ is as a generic?
+This did the trick. Didn't expect to be this far behind with `1.53.0` -> `1.55.0` solving the issue. Ya'll must be keeping up to date on all the changes
+Update your rust version. `rustup update stable`
+From running `cargo install --git https://github.com/project-serum/anchor --tag v0.16.0 anchor-cli --locked`
+Anyone having trouble building anchor 0.16.0 from source? Intel MacOS 
+Getting 
+```
+error[E0658]: arbitrary expressions in key-value attributes are unstable
+#![doc = include_str!("../README.md")]
+```
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+<@!501570363566587905>
+did anyone get recentBlockhashes to work in anchor ?
+For other folks starting up, you can set ANCHOR_WALLET=~/.config/solana/id.json
+Nvm just running a `tail`. Thanks
+Oh thanks! Is there a way to have them outputed on stdout along the regular anchor ones?
+Yes logs are in `.anchor/program-logs/`.
+When running anchor test, should my `msg!("foo")` print in the output?
+Nothing great. If you have the keypair file in the default `target/deploy/` location, then it will use that with `anchor deploy`.
+Recommendation works either way
+Nothing in Anchor CLI's toolkit?
+You need the keypair file. If you have it you can specify `solana program deploy -k <file-path>`
+Is there a cli command for deploying a program to a specific programId?
+Is there an up to date link to the Anchor Program Registry? The link on this page (https://project-serum.github.io/anchor/getting-started/publishing.html#getting-started) appears to be broken: https://anchor.projectserum.com/, along with the links to the two examples on the same page
+https://github.com/project-serum/anchor/issues?q=is%3Aissue+is%3Aopen+label%3Av1.0.0-blocker
+Ok sounds good. Thanks!
+breaking api changes. Not behind the scenes. There is a list of issues on github that are security issues that need to be completed
+Oh ok that makes sense. Are those usually behind the scenes or would that be breaking API changes?
+but the changes are just to remove footguns usually
+I see
+it changes every week!
+oh ok sounds good. What's anchor's stability currently?
+anchor is really opinionated and there are some optimization efficiencies you can do in terms of serialization if you dont use bpf. So if you dont like opinionated code / need to squeeze performance out, you might not want to use anchor.
+What are the pros and especially cons of using Anchor over using the normal Solana crates directly?
+I've been able to find pros (easy to develop with comparatively), but I haven't been able to find cons from searching around
+that worked! thank you!
+`@project-serum/anchor-cli` is  for linux only. Looks like it's still being picked up in your path. Try `npm uninstall -g @project-serum/anchor-cli`.
+Hi - having trouble installing anchor on a macOS:
+
+First tried `npm i -g @project-serum/anchor-cli`. This got me: 
+```~ % anchor --version
+Only x86_64 / Linux distributed in NPM package right now.
+Trying globally installed anchor.
+Failed to get version of global binary: Error: spawnSync anchor ENOENT```
+
+Then I tried to build from source: `cargo install --git https://github.com/project-serum/anchor --tag v0.16.0 anchor-cli --locked`
+Now seeing:
+```~ % anchor --version
+Only x86_64 / Linux distributed in NPM package right now.
+Trying globally installed anchor.
+Globally installed anchor version is not correct. Expected "anchor-cli 0.16.1", found "anchor-cli 0.16.0".```
+
+Any ideas?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+you can see how you can wrap anchor cpi around non-anchor program here, in this case, the spl-token program.
+https://github.com/project-serum/anchor/blob/master/spl/src/token.rs
+In example 3, it shows how to do CPI with another anchor program. Is there an example how someone might do this if the program to be invoked wasn't made with anchor?
+Correct.
+In example 3, is this part of the doc outdated as well, similar to program account?
+```
+Our Accounts struct has a new type, CpiAccount, containing the target program's Puppet account. Think of CpiAccount exactly like ProgramAccount, except used for accounts not owned by the current program.
+```
+Also don't forget to update the declare_id! and Anchor.toml to switch to that new key!
+I see, so before deploying to dev/main net, you need to populate it via the the `solana-keygen new` command. Thanks
+For local development, an arbitrary string will do (if it aligns with the Anchor.toml). But when deploying to mainnet/devnet, you need the keypair file, which can be generated via `solana-keygen new`. Also the framework will automatically create some in the workspace (run `anchor keys list`).
+No, sorry, when you run 'anchor deploy' it will print out "Program ID: <pubkey>"
+is there a way to generate one so that there is no conflicts?
+So developers just pick a string?
+When you call 'anchor deploy', you can see the program ID being used
+That is the program ID, it newer versions of anchor it needs to be explicitly stated at the top of your program
+In example 1, what is the purpose of `declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");` ? And where does this string come from?
+Makes me wonder if you could get rid of the `signers` argument entirely and have an account sign the transaction if you pass its keypair rather than just its public key (otherwise you have this annoying issue where signers have to pass *both* their pub key as well as their full keypair)
+Gotcha, thanks
+<@!885532999356153856> mm, looks like the tutorial text is outdated—ProgramAccount is now just `Account`
+question regarding example 1: https://project-serum.github.io/anchor/tutorials/tutorial-1.html#defining-a-program
+docs mention:
+```The my_account field is of type ProgramAccount<'info, MyAccount>```
+but the code defines it as:
+```pub my_account: Account<'info, MyAccount>```
+I do not see the ProgramAccunt Type?
+got it, thanks 🤝
+(Signers show up in the program as an `AccountInfo` with `is_signer = true`)
+<@!141059180969721856> not totally sure but I think that happens when you use a signer but forget to pass it as an account too: https://github.com/solana-labs/solana/blob/master/web3.js/src/transaction.ts#L315
+anybody know what this is about?
+every time i run a test where i generate a signer keypair on the fly and use it to sign the tx, i get the error: `Error: unknown signer:`
+it's a bit if you want to create a marketplace. metaplex lets you host your own marketplace in 10 mins
+You don't have to write the smart contract to create an NFT, just mint 1 token using the SPL token library
+<@!445019022338031618> You can access the already deployed token program through web3.js https://solana-labs.github.io/solana-web3.js/
+https://spl.solana.com/token without writing any Rust code at all. Just learn how to call the token program using the token program ID, and you're all set
+the goal is to create a market place, but i have to take baby steps first, i need to learn how to create an nft token smart contruct on solana from scratch, are there any resources related to this, metaplex rust code is several thousands of line 😛 i just need a resource which could help me make a basic contract so i can play around and go from there.
+<@!445019022338031618>
+Looking for something like Metaplex? https://github.com/metaplex-foundation/metaplex
+if i wanted to write my own nft smart contract
+@devs am a solidity developer, if i want to make a smart contract erc20,erc721 equivalent is there any resource out there on how to write one on solana using vanilla solana or anchor ?
+Anyone please how do you update Anchor version assuming you're working with an old version? Thanks!
+hey Im facing a weird issue in anchor, Whenever Im trying to anchor test or ancor deploy my local network seems to be not respoinding it gives error
+Error: unable to connect to server
+
+ws error: connect ECONNREFUSED 127.0.0.1:8900
+ws error: connect ECONNREFUSED 127.0.0.1:8900
+new to anchor, was reading in another forum that composition can be a bit tough with anchor/sealevel, could someone elaborate on this? w.r.t comparing with plain solana sdk based smart contract
+Does anyone has any examples of creating, storing and retrieving data using a btreemap in the program code? Not using javascript api. Thanks
+Very nice
+I'm able to run the test validator manually now, though.. that's the good stuff I got out of updating the cli
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/mysolanaapp$ lsof -i :9900
+COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+solana-te 35201   kk   12u  IPv4 233743      0t0  TCP *:9900 (LISTEN)
+```
+but I found another weird behavior.. while the above log says "unable to start test validator.", I see that the test validator actually got started on the intended port
+I updated my solana cli.. that gives me more or less the same result:
+```Running: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+The program address will default to this keypair (override with --program-id):
+  /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp-keypair.json
+Unable to start test validator.```
+okay let me try
+maybe update your solana cli
+Don't know, it works fine for me
+could that mess up the validator?
+okay I'll take that back.. I actually removed the directory altogether and did a fresh anchor init with the same name\
+and the validator was running within that time
+I'll be honest, I'm not quite sure where I ran the validator from for the first time, but I don't think I switched directories in the past hour
+navigate to where you previously ran solana-test-validator
+the test validator was running fine before I did the keygen
+And here's my attempt to run the test validator manually:
+
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/mysolanaapp$ solana-test-validator
+Error: Unable to create directory test-ledger: No such file or directory (os error 2)
+```
+Yeah I tried that and replaced my old keypair with the generated one, and now I get this:
+
+```Running: /home/kk/.local/share/solana/install/releases/1.7.10/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+Unable to start test validator.```
+You need to do a keygen
+I just started learning anchor and my first attempt to run a test results in this:
+
+```Running: /home/kk/.local/share/solana/install/releases/1.7.10/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/mysolanaapp/target/deploy/mysolanaapp.so
+Error: Unable to read keypair file```
+
+Can anyone help?
+looks like I created with an old version of anchor. I see the anchor-lang version in src/Cargo.toml
+aah - never mind
+I'd expect that it would pull in anchor-lang 0.16 as well
+my anchor cli version is 0.16
+Running: rustup toolchain list -v
+Running: cargo +bpf build --target bpfel-unknown-unknown --release
+    Blocking waiting for file lock on package cache
+   Compiling anchor-lang v0.9.0
+error[E0277]: the trait bound `Pubkey: BorshSerialize` is not satisfied
+and getting
+building a vanilla anchor init project
+extreme beginner question here
+https://tenor.com/view/cave-dive-darkness-leap-gif-5803442
+The low-level syscall code is kinda gnarly 🧙‍♂️
+Gotcha, figured as much. thank you!
+In case anyone is curious, I think this is the low-level solana place where passing the right bump to `invoke_signed` becomes relevant: https://github.com/solana-labs/solana/blob/master/programs/bpf_loader/src/syscalls.rs#L1760. Under the hood it's using `Pubkey::create_program_address`, not `find_program_address`.
+No. One can't call those endpoints directly. One would have to have the data passed in via the instruction data from an external client.
+Is it possible for on-chain programs to retrieve the same data offered by JSON RPC endpoints? For example, could a deployed program get the data provided by an endpoint like getConfirmedSignatureForAddress2?
+First off youre a legend for being on here at this hour answering q's, sincerely thank you
+Beginner questions is why we're here! Can you clarify what you mean by rpc endpoints? Are you referring to methods in a another program?
+Correct. The naming doesn't matter, only the order and type. By convention, the names should be the same.
+probably a super beginner question but can you call rpc endpoints from a contract?
+amazing ya, and so how does anchor know where those arg names from? does it handle all the deserializing of those automatically such that u just include those as arguments in the instruction handler with the same name like here (https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/lib.rs#L120) and then u can just use them in the instruction macro?
+This is nice in the event you have account validation that depends on instruction data, e.g., a bump as you mentioned. Without this, you have to move some account validation to the instruction handler which is not ideal.
+Example here https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/context.rs#L8.
+Exactly. It's just a way to pass through the instruction args so that they are in scope to the derive macro.
+anchor question about the `instruction` macro...i cant seem to find some good examples with it but is the point of that if we want to use something from the instruction data in the account macro (like having the seed / bump come from instruction data?)
+Technically a bump is optional if the seeds produce an address not on the curve, but in practice you should always use it.
+You do need to pass the bump to invoke signed.
+initial seeds if not passed in is auto generated
+it seems weird we would pass the initial seeds, *and* the bump, and not just the bump, maybe just the bump works and is more efficient than having it iterate the seeds as well
+Ah, sorry, I'm looking at the `invoke_signed` function, not `create_program_address`
+Weird, I had convinced myself you did—thank you for clearing that up! [Edit: nope, see below]
+Oh! So you don't need to pass the bump? [Editing for clarity: do you need to pass bumps to `invoke_signed`?]
+yes its a lot faster if you include the bump seed. Otherwise it just does the search manually which takes a lot of compute cost
+hmm ya i actually have seen that too i see that in the SPL docs
+https://docs.rs/solana-program/1.5.6/src/solana_program/pubkey.rs.html#225
+but in the 2 examples of `transfer_one_token_from_escrow` it looks like they dont pass the bump in the list of seeds in the first example when `create_program_address` is used but u do have to pass it when `find_program_address` is used
+https://docs.solana.com/developing/programming-model/calling-between-programs
+Is that just so `invoke_signed` doesn't have to recalculate it on the fly? (So, just an efficiency q?)
+When you actually call `invoke_signed` though, why do you need to include a PDA's bump with the rest of its seeds? The bump is a function of the seeds and the program_id, both of which `invoke_signed` already has access to (you have to pass the seeds explicitly, since they identify which PDA you want to sign for, and then `invoke_signed`/the runtime just knows I guess which program_id is initiating the CPI).
+I think I understand the address part of a PDA: it looks like a public key but it's not actually on the ed25519 curve (so there's simply no corresponding private key). This means a PDA address can't possibly be under the authority of some person etc, so fair game for a program to "sign" for it during cross-program invocations (the callee will receive the PDA's AccountInfo with is_signer = true).
+Ok, speaking of PDAs, I'm confused about how PDA signatures work in `invoke_signed`.
+Correct.
+Yeah, that's my understanding.
+got it thanks, makes sense. So its deprecated in favor of actually creating a PDA with account(init and seed / bump)?
+Yes. @project-serum/anchor
+<@!438874996614365185> the #[state] macro has been deprecated, but yeah, under the hood it's using a PDA
+in basic-4 in the anchor examples, how does `state` actually work? What account stores the data? I am trying to look at the macro to understand but presumably its different than a PDA derived from a seed that the program owns since its not using the `#[account(init, seeds..,bump..` syntax
+is there an js sdk for anchor?
+You'r using the `./.anchor/program-logs/...` ?
+Ah got you, thank you ser 🙂
+Hexadecimal 0x92 = 146
+https://github.com/project-serum/anchor/blob/90df0b19766ef2a0937312a3864f44e49bb16cad/ts/src/error.ts#L71
+Hmm anyone remember what 0x92 usually entail?
+
+```
+pub fn fill_transaction(ctx: Context<FillTransaction>, transaction: [u8; 64], request_id: [u8; 64], bump: u8) -> ProgramResult {
+  msg!("instruction: fill transaction")
+}
+```
+
+
+On the client (the two arrays have length of 64)
+```
+program.rpc.fillTransaction([.....], [.....], nonce,
+```
+
+The first message never printed on program log.
+
+Also pretty sure it's the array causing problems, everything is fine if I take them out hmmmm
+can you send me the example with the frontend part
+would love that
+Ah, <@134416332509675520> that's exactly what I was looking for. Thanks!
+Are there any examples of mocking NFT's for the js tests?
+<@!185605576162672641> you can also see some JS error examples in tests/errors/tests/errors.js
+Did some work for a team im interviewing with so the repo is currently private but I can provide a non private example for you if you're still looking for it
+I did
+https://github.com/project-serum/anchor/blob/master/lang/src/error.rs
+there should be a list in the error.rs file in anchor/lang
+Does anyone know how to access the custom error codes that are thrown?
+
+My code is successfully throwing the custom error but I would like to "assert" that the desired error code is thrown in my Mocha testing
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I don't really know anything about anything solana yet, I'm just getting started too lol 🐣 I just know some rust
+to generate nfts
+from what i can tell it is an anchor wrapper to interact with metaplex cli
+<@!134416332509675520>  any idea about candy machine
+Ah, great, that should be a helpful example
+<@!134416332509675520>  https://twitter.com/armaniferrante/status/1432805639554691075?lang=en
+😦
+this tweet should be NFTed if not already
+<@!445019022338031618> lol https://twitter.com/armaniferrante/status/1434554725093949452
+<@!445019022338031618> sorry, not sure. Tbh I think you're going to have to just dig in and learn how to use low-level solana (and then maybe write the tutorials yourself 🤓)
+I feel like Program is the way to go, but I wouldn't discard executable as an option in some cases.. Very weird cases though lol
+Hear ya, thanks a lot dude...
+<@!706541980032827454> for example, if you say `Program<'info, Token>`, anchor will verify that the account that got passed in really does have the expected pubkey of the SPL token program (rather than some random fake account that just looks like the token program)
+got any starting points
+<@!134416332509675520>  what would be the best way to understand it if there is no tutorial, the code is quite extensive :(\
+Hey
+are there any resources that help understanding the metaplex smart contracts as the source code is quite extensive and in vanilla solana, does their exist a anchor wrap of it or any tutorial that builds on top of metaplex say modify there smart contracts for additional functionality etc.
+<@!706541980032827454> I think the difference is that `executable` only checks that the account is a program, whereas `Program` also checks that it's a *specific* program (it double check's the account's `key`/address against whatever address your struct expects)
+should I still use the account attribute `#[account(executable)]`  or just Program like with the `#[account(signer)]`?
+
+UPDATE:
+
+I think a better way to put this would be, is this:
+
+```rust
+#[account(executable)]
+pub program: AccountInfo<'info>
+```
+
+analogous to:
+
+```rust
+pub program: Program<'info, struct>
+```
+Think you're going to have to do a fair amount of source-code reading, this stuff is all quite new. At any rate, if I'm looking at the rightrepo there are a bunch of non-anchor programs.
+moved it here
+i wanted to learn how to create nft smart contracts, but i have been told to use metaplex instead as they have set the standard, i wanted to ask if metaplex is in vanilla solana or written using anchor ? , is there a resource/ tutorial to use a anchor wrapper over metaplex, if say in the future i want to add some custom functionality or build on top of metaplex smart contracts which in turn i believe use the spl token smart contract
+i saw a tweet by <@!501570363566587905>  it is written in anchor if he could elaborate , would appreciate it
+<@!445019022338031618> moving your metaplex question over here (think this is probably the better channel to use): I don't know anything about metaplex but it seems to be a mix of anchor and low-level solana. https://github.com/metaplex-foundation/metaplex
+from https://project-serum.github.io/anchor/tutorials/tutorial-3.html#defining-a-puppet-master-program
+In fact figured it out, the derive(Accounts) makes the system_program required field, and the payer = user makes the user field required
+can solana programs return anything in a transaction? I saw the event listener example,  but didnt really fully get how its working, naive view is that its doing somethig and then client is polling, but call might not be synchronous
+See the "Create" struct here for reference: https://project-serum.github.io/anchor/tutorials/tutorial-2.html#defining-a-program
+Hi everyone, I have question regarding the initial struct that's marked as "#[derive(Accounts)]"
+It always has a user and system_program fields, even when they are not being used in the entrypoint itself. Are they mandatory, or why they are in the tutorials?
+Awesome. Thanks for your help!
+There should be quite a few examples on initialising a PDA in `anchor/tests/misc`
+Interesting! I need to read up on that
+Yeah that's what I thought originally but wanted to see if there were better ways. Was curious how defi apps did it
+Alternatively, make the account a PDA and you would just have validation checks in your smart contract.
+You can probably whip something up pretty quickly using `express`
+You would make the front end make a request to a backend server that holds the keypair file and is not exposed haha
+nothing of value, but I would still like to not be totally insecure if I can help it
+No its just a simple voting app I made to understand how anchor works
+What are you trying to do here? Is it like an admin function
+Would not recommend exposing the signer key to the world haha
+so if I did something like:
+```
+const myAccount = anchor.web3.Keypair.generate();
+fs.writeFileSync('./app/src/keypair.json', JSON.stringify(myAccount))```
+
+And hosted that keypair.json in my frontend that would be ok? I just felt weird putting that in a frontend for all to see
+Similar to your id.json
+You should store the secret key of that account if you want to reuse it and instead of generate, load the keypair
+What's considered best practice for persisting a signer account that I want to deploy to mainnet? I'm working with something like this, which works fine for local development, but `myAccount` does not persist after reach refresh
+```const myAccount = Keypair.generate();
+...
+      const tx = await program.rpc.initialize({
+        accounts: {
+          myAccount: myAccount.publicKey,
+          user: provider.wallet.publicKey,
+          systemProgram: SystemProgram.programId,
+        },
+        signers: [myAccount],
+      });
+```
+ok will look for that just so i know. my current type is just a u8 though
+Presumably there's a way to specify that in the BN type.
+Though you need to be careful, e.g., if you have  a u32 vs a u64.
+yup that does it
+cool
+Maybe try `(new BN(<number>)).toBuffer()`
+would it just be `Uint8Array.from([BINARY_REPRESENTATION_OF_NUMBER])`?
+client side question:
+what is the correct way to pass in a `number` as a seed to `PublicKey.findProgramAddress(...)`?
+check dms
+<@!141059180969721856> sent you a pm, can you provide me with the recentBlockhashes example ?
+Yeh, it ended up the problem being I didn't define the full instructions in the `#[instruction` tag
+Hmm... not sure what's happening there, I think I'd need to see more of your code. Can you put it in a gist/repo or something?
+I generated a new keypair and changed the program ID in my program, now I'm getting `Error: failed to send transaction: invalid transaction: index out of bounds`
+they're on an intel chipset and im on an m1 - both mac users
+its weird because i asked someone to run the code on their machine and the tests pass just fine
+`     Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account`
+What happens if you just don't include the PDA in `signers` at all?
+<@!185605576162672641> don't think it's possible to pass a PDA as a signer from the client (they don't have private keys—only the program itself can sign for them, when doing a cross-program invocation)
+I am passing the PDA in with `signers: [<PDA>]`
+When using "program.rpc", is my local wallet automatically used to sign? I am generating a PDA and attempting to "await program.rpc.<my_function>" and am getting `Error: Signature verification failed`
+For accounts? No. That's imposed by the solana runtime.
+<@!501570363566587905> is there a way to surpass the 10 mb limit size ?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+is there a helper function we can use to calculate this space
+Look at the fields. In this case It's probably a `Pubkey` and `u64` which is `32 +8` bytes.
+I see. How did you figure "Counter" is 40 bytes?
+8 is the account discriminator, which is prefixed to every anchor program. 40 Is probably the size in bytes of `Counter`.
+Hello there fellow anchormen and anchorwomen! Does anyone know how I determine the space to be used when initializing an account? Where did the "8 + 40" come in this section of the tutorial?
+
+    #[account(init, payer = user, space = 8 + 40)]
+    pub counter: Account<'info, Counter>,
+Hey guys what’s the most straight forward way to determine if a user holds a particular token?
+Hello, I'm trying Anchor framework. I've launch the local cluster and trying to airdrop 5 sol on my address but I'm getting error : Error: unable to confirm transaction. This can happen in situations such as transaction expiration and insufficient fee-payer funds. Can someone help me please?
+So how are PDAs different? When a Solana account gets passed to a program at runtime, Solana will tell you whether that account *signed* the transaction. It's in how you sign transactions that PDAs differ from regular addresses: a regular address is an ed25519 public key, and if you want to sign a transaction involving it you need to know its corresponding private key (e.g. if you want to send lamports to someone via Phantom, Phantom keeps track of your private key and handles signing the transfer for you). PDAs on the other hand are *not* ed25519 public keys, they just kinda look like them (they still have type `Pubkey` in Rust but if you're being pedantic that's a lie). Given that they're not actual public keys, they simply don't have a corresponding private key, so there's no way for a PDA to sign a tx in the same way a regular account would. Nevertheless, solana lets the program that derived a given program-derived address, and only that program, "sign" for it in cross-program invocations, no private key necessary.
+I tried explaining them a bit above, but will elaborate here (correct me if I'm still confused about this stuff). Addresses in Solana, whether PDA or regular, identify accounts. (As an example of a regular, non-PDA address, you can open your Phantom wallet and paste the pubkey-looking thing into explorer.solana.com and see info about your wallet.) As far as identifying accounts goes, PDAs aren't really any different from regular addresses.
+The solana docs talk about them here https://docs.solana.com/developing/programming-model/calling-between-programs#program-derived-addresses but tbh I had quite a hard time understanding what they meant. Paulx also talks about them https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/#program-derived-addresses-pdas-part-1
+Thank you, I will look into it 👍
+It's a lifetime, rust thing: https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+Hello. I am new here. 
+This is a very beginner question but I would like to know what 'info is. First I thought it was like a normal generic but it wasn't. I couldn't find any reference in the doc, even in the anchor workshop. 
+
+Thanks
+
+```
+Account<'info, MyAccount>
+```
+
+https://project-serum.github.io/anchor/tutorials/tutorial-1.html#:~:text=of%20type%20ProgramAccount%3C-,%27info,-%2C%20MyAccount%3E%2C%20telling%20the
+Address has to be passed, yes
+he mentioned that u can pass as many accounts as long as transaction size does not exceed
+am currently watching that workshop
+https://youtu.be/FmdPAwsqJC4?t=3187 the only one I can think of
+also these accounts are given from the js side right ? in the accounts object, or do i need to define each account passed in anchor too
+any resource, via anchor
+is it dynamic or one time thing etc
+<@!134416332509675520>  is there any documentation on PDA's as to what they are and what is the concept and how can it be used
+You've effectively got a pubkey => User mapping (looks like basically a pubkey => name mapping)
+<@!128550462742855680> tests/chat looks like a good example of using PDAs to mimic a mapping (not quite as easy as in solidity 😅).
+thanks
+will check it out
+kk
+I haven't looked at how events work in solana but I know that Anchor actually has a `#[event]` annotation—there's an example in the tests/events directory
+A program can use these things called program-derived addresses (PDAs) to have accounts that the program, and only that program, can sign for. The address of a program-derived address is "derived" from the program's `program_id` as well as a "seed" (basically an arbitrary bunch of bytes), so your program can have a bunch of accounts attached to it, identified by different seeds, which could mimic a mapping in ethereum (I think, hopefully explaining this correctly).
+im trying to recreate a game i dev'd on ETH on Solana which is why I ask
+another question i have, coming from ethereum, is how can the frontend check the history of important state transitions for the contract? in eth we usually do this by emitting events - and then we can either filter events using a bloom filter on the contract or using an indexing service like The Graph
+About storing state like this, I think the basic answer is that for *any* on-chain mutable state, at the end of the day you need to use an account/accounts (for example, solana programs can't write to `static mut` variables, the runtime won't allow it)
+yea
+Yeah, I think learning how to think about accounts is the hardest part about learning solana (at least for me so far)
+not rly an issue with anchor but more with solana in general
+i read the docs and i understand how to store 'global' variables now - tho i must say conflating the term `Accounts` with `data` is confusing as fuck
+ok, lmk if you do try, im far from doing that right now but wanted to ensure im taking the right appraoch
+Mm, haven't tried that yet—I'm not super familiar with how the JS side will try to borsh-ify an array etc (maybe it will just work, going to try it)
+how would i call that from javascript? i just pass in JSON with the same key names?
+Pretty sure your arguments can by anything that Borsh serialization/deserialization can handle, so I think an array of borsh-serializable/deserializable things will be fine (haven't tried yet though)
+also - can I take an array of struccts as an argument to an RPC handler?
+can someone help me understand what's the equivalent of storing a global array of objects/maps in a solana contrcat?
+I'm trying to get used to solana's programming paradigm
+Hey! I'm coming from being an eth dev, have a lot of general programming expeirence but none with rust or solana.
+is there a way to tell how many lamports you need to deploy a program to mainnet?
+it works thanks again
+ok thanks
+Run `rustup update stable`.
+Hello everyone, I'm trying to install anchor-cli on my mac but got error in the capture. Can someone help me please?
+yeah that sounds like it
+I think I figured it out. I was generating an instruction and attempting to send the instruction without adding the instruction to a transaction 🤦‍♂️
+It seems like there's some issue with the transaction, can you share how you're sending the transaction?
+<@!706541980032827454> I'm calling `  const playerAccount1 = new anchor.Wallet(anchor.web3.Keypair.generate())`
+Explicitly layout your lifetimes like this https://github.com/project-serum/anchor/blob/master/tests/cfo/programs/cfo/src/lib.rs#L103
+Heyo! How would one set up a transfer for a remaining account. I keep getting lifetime mismatch issues.
+Did you pass to `new anchor.Wallet()` a Keypair?
+`     TypeError: tx.partialSign is not a function
+      at NodeWallet.signTransaction (node_modules/@project-serum/anchor/dist/cjs/provider.js:160:12)`
+
+Has anyone run into this before? I'm using `new anchor.Wallet()` and passing that into a `new anchor.Provider` in order to send transactions for newly generated wallets in each of my tests. It seems like maybe my wallet isn't being generated correctly?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I am trying to pass a transaction ID in order to get all the data within the transaction. This is what I have so far: 
+```new web3.Transaction().sign()``` , but I have nowhere to pass in the transaction id
+Not really https://github.com/solana-labs/solana/issues/17145
+I am trying to initialize an anchor_spl::token::Mint struct. But somehow the implementation is not public? I am getting errors such as constructor is not visible here due to private fields.
+I know this is a challenging problem, but is there any decentralized way to run a chron job on solana without any off chain resources or trusted third parties other than the blockchain itself?
+Ok guys, thx you so much for you help, I manage to pass `PublicKey` instead of `Hash`, both have the same struct `[u8; 32]` and as mentioned by <@!448034961652449283> I parse it on my program with `Hash::new_from_array(arg)`. Not sure it's the best way to do it, but it works ahah. I tried to use anchor serialize but no success, I will retry later.
+Look at how they do it for serum order type in some of the examples
+You need to use the anchor serliaize and deserliaze attributes on a wrapped struct for the hash datatype
+ah nvm.. i can see it from anchor keys list
+what should it be set to?
+hello, i checked back in the history, but i don't think i completely understand what the declare_id macro is for.
+Not sure that this will work, but try `hash` argument as `[u8; 32]`, then you will able to create `hash` with `Hash::new_from_array(arg)`.
+Hey do you know how I can pass my *hash (**Hash**)* as parameter to my program ?
+```
+use solana_program::hash::{hashv, Hash};
+...
+pub fn check_proof(ctx: Context<CheckProof>, hash: Hash) -> ProgramResult {
+...                                                ^^^^
+}
+```
+I'm passing my hash param as a string but obviously this didn't works.
+`Error: Type not found: {"name":"hash","type":{"defined":"Hash"}}`
+I'm searching how to pass this `solana_program:: hash ::Hash` type to my program.
+And the error was due to 
+```rust
+#[account(zero_copy)]
+pub struct mStruct {
+    data: [u8; CONST_VARIABLE], // fixed with putting the litteral value instead
+    //...
+```
+Seems to be related to this instead https://github.com/project-serum/anchor/issues/632
+Could this issue 
+```rust
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }', lang/syn/src/idl/mod.rs:167:34
+```
+Be related to having another file that my lib.rs imported with a `mod mymodule` in the anchor program?
+Look up the associated token account in the Solana docs. This is the new standard for creating tokens accounts for users. You be able to look up the ATA for a given pubkey of a user to see if they have it or not
+Most of the time anchor will calculate space for you automatically
+hi everyone!!!
+Damn that single answer just powerlevel my code beyond any expectation. I had some proper zero-copy stuff and then footgunning myself with that zero. Thanks again <:cheemsredeyes:854496395821449226>
+Hi, I have a list of signatures and I want to extract the transactions and metadata within those signatures. Is there a method I can use to do that? I am new to typescript and I have been using these docs: https://solana-labs.github.io/solana-web3.js/index.html
+Is I want to save some stack size, appart from zero-copy things, any other trick?
+Thanks Armani
+Ok let me try to change this, should also revert back to the elegant and simple code it was.
+Ok so I got mislead, I have the zero copy working, but I though i also had to add the zero thing
+Zero means the account discriminator is zero, i.e. the account is not yhet initialized.
+Zero is not zero copy.
+I'm not initializing it there? I'm using zero to pass as zero-copy, isn't that required?
+Since you can just use a regular type.
+Doesn't seem to make any sense to do close in the same instruction as initializing.
+None other than imperatively closing (i.e. without the macro). Can you elaborate on the use case?
+Is there an idiomatic way to pass an account as `zero` but also close it? 
+    `#[account(zero)] `cannot add `mut` and so cannot add `close = x`
+post images of your output and code. make sure you are in the right testing environment as well
+Hello, can someone help me please?
+Better to explicitly use space in most cases, particularly if you want the account to be resizable in the future.
+Default isn't great, e.g., if you have a vec or option.
+But not sure how safe either of those approaches is (size_of might not match how much space borsh wants to use, and YourStructName::default() might be smaller than a non-default instance, I think.
+You can try using `8 + std::mem::size_of::<YourStructName>()` (that's used in a few examples). One other approach is that if `YourStructName` implements Rust's `Default` trait (search the anchor repo for `Default` for some examples), you can leave off the `space =` stuff entirely and anchor will serialize a `YourStructName::default()` and just check how big it ended up being.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+That's where my config is too, think it's ok
+Also, this is totally unrelated, but has been nagging me from the beginning.. when I installed Solana CLI tools, my config.yml file and the default keypair went into the foler `~/.config/solana/cli/`, which seems to be different than the default paths mentioned in any docs/sources I come across. Is that weird?
+the process appears right after `anchor test` fails, so Anchor is the one that should have started it.. no other options
+I didn't start it manually.. given my experience with it in the past few days.. I make sure to close any test validator I start manually, and run an `lsof` right before running `anchor test` to ensure that nothing is running on 9900 as well
+Just to make sure I understand, was that process started by anchor test, or did you start it by manually running `solana-test-validator`?
+Thanks for the help so far 🙂
+I'll try building from source, and see if I find any luck with that
+I understand.. I haven't made any changes to the minimal example program from the Anchor docs.. I just cloned it, and followed the steps there..
+One thing to note: Despite the console telling me that Anchor can't start the test validator, sure enough, I could see the process somehow running in port 9900
+
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor$ lsof -i :9900
+COMMAND     PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+solana-te 72462   kk   12u  IPv4 394121      0t0  TCP *:9900 (LISTEN)```
+Hmm, ok, so your test validator really isn't starting for some reason. I'm not sure how to debug this from discord, I would probably build anchor from source + stick in some print statements here: https://github.com/project-serum/anchor/blob/master/cli/src/lib.rs#L1604
+thanks very helpful!
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ NODE_PATH=$(npm root -g) anchor test
+BPF SDK: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf
+Running: rustup toolchain list -v
+Running: cargo +bpf build --target bpfel-unknown-unknown --release
+    Finished release [optimized] target(s) in 0.23s
+Running: /home/kk/.local/share/solana/install/releases/1.7.12/solana-release/bin/sdk/bpf/dependencies/bpf-tools/llvm/bin/llvm-readelf --dyn-symbols /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0.so
+
+To deploy this program:
+  $ solana program deploy /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0.so
+The program address will default to this keypair (override with --program-id):
+  /home/kk/learning/solana/anchor/examples/tutorial/basic-0/target/deploy/basic_0-keypair.json
+Unable to start test validator.```
+
+Here's the result of that
+Not currently. We could add that though if there's demand.
+Do you mean like this? https://github.com/project-serum/anchor/blob/master/ts/src/coder/event.ts#L52-L55
+
+After you slice off the `Program log:` prefix
+<@!501570363566587905> when listening for the base64 encoded events, is there a way you can tell that a particular line is a base64 encoded borsh serialized event?
+yeah hopefully.. I'll try that and post an update here
+Hmm, not sure. What happens if you at least fix your node require path issue? Either with `NODE_PATH` or by just doing `npm install @project-serum/anchor` from within the directory (not globally).
+I have tried killing the running process using `sudo kill <pid>` as well.. after that if I run `anchor test`, it throws the error complaining that it can't start the test validator, but when I turn around and check for the running process with `lsof` I see the node running
+Are you running your own local test validator? What do you get for `lsof -i :8899` (when not running any tests etc.)?
+to me, the behaviour of the program looks unpredictable
+yeah that's what I'm running, but it almost always ends up throwing an error that - either it can't start the test validator, or it can't find the module "@project-serum/anchor".
+Okay, I'll try that
+I think the tutorial just wants to double check you've installed solana correctly. Normally when testing you just say `anchor test` and it handles spinning up/down a test validator for you.
+If you've got @project-serum/anchor installed globally, you unfortunately also have to make sure node will look for it globally. Try doing `NODE_PATH=$(npm root -g) anchor test` (can set NODE_PATH more permanently in your shell's init file or whatever)
+What more do you want to know?
+With respect to the above error, I do have `@project-serum/anchor` globally installed.. even if I have to install it locally for the project, I don't see a package.json anywhere.. It's all kinda confusing
+Why do we need to run the test validator, and then make sure to shut it down (probably to have a genesis hash in place?) before testing/deploying the program?
+I get a sense that I'm missing the understanding of some of the rudimentary stuff, but I couldn't put my finger on what it could be.. Is there a resource where I could learn about how the test validator works, how the deployment works, etc.?
+I've cut out some of the output due to character limits
+```kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ anchor test
+...
+...
+Error: unable to connect to server
+
+Error: Cannot find module '@project-serum/anchor'
+Require stack:
+- /home/kk/learning/solana/anchor/examples/tutorial/basic-0/tests/basic-0.js
+    at Function.Module._resolveFilename
+...
+...
+kk@kk-Lenovo-ideapad-330-15IKB:~/learning/solana/anchor/examples/tutorial/basic-0$ node client.js
+internal/modules/cjs/loader.js:905
+  throw err;
+  ^
+
+Error: Cannot find module '@project-serum/anchor'
+Require stack:
+- /home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:902:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:746:27)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:92:18)
+    at Object.<anonymous> (/home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js:5:16)
+    at Module._compile (internal/modules/cjs/loader.js:1085:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:790:14)
+    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:76:12) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/kk/learning/solana/anchor/examples/tutorial/basic-0/client.js'
+  ]
+}```
+Hey everyone.. I've been running around in circles trying to get a grip on Anchor basics.. I'm currently following the "Minimal Example" from Anchor docs.. I've deployed the program, and when trying to generate a client, I'm greeted by this:
+thanks
+done
+keep it in one place, please
+can you elaborate accountinfo
+so accounts for a pda ?
+Account info does basically no checks on what the structure inside the data is, like what serialization format it uses or what the struct name it uses is or who its owner program is
+Accounts are just for when the account is owned by a program ( usually other than the system program)
+but how do i know the program id before hand without deploying
+\also what is the concept about hte program id i assume its the address where that program/smart contract is on the solana c\hain
+Different between Account and AccountInfo when should you be using account vs accountinfo, in some examples i see a mix, i dont get it if account is the safe thing why not just use accounts ?
+https://github.com/CristinaSolana/solana-developer-resources
+is there any resource that explains pda and cpi, more importantly i want to understand how do token contracts work, for e.g i make a erc 20 in ethereum and can mint it to address, now in solana we use the spl can anyone shed more light on how will this work with the solana architechture ?, token programs, token accounts etc am kind of confused how alll this works and in what order
+That'd be awesome, thank you for the context!
+It's ok I think we have enough people that have gone through the trenches
+😦 we shall rebuild from the ashes.
+Also all our gems in the serum discord have been deleted <@!501570363566587905> 😦
+I haven't gotten around to fixing it yet 😅 but will look to come to a solution when I free up more
+There's a bit more context here 
+https://github.com/project-serum/anchor/issues/577
+From the graph on node provider the ping never really stopped, let me wait overnight and see if it happens again.
+
+Thank you ❤️
+My understanding was the disconnections would be transient on some providers like RPCPool and they'd reconnect you (so the issue is you may miss a few events in that period)
+very likely, adding something to check on status and reconnect. thought it should be done automatically though
+Has the websocket just failed or failed temporarily?
+Nice
+Speaking of event, I have a running event listener running in a backend with `forever` to handle some incoming requests, but it seems to be disconnected after I left it overnight. 
+
+Curious if anyone else running into similar issues, or have a way to mitigate?
+Especially since no one is currently composing with consume events that I know of.
+I don't see why not.
+Since it only costs 4k, can we program log FillEvent in serum too?
+🔥
+26k savings
+anchor version costs 4k
+https://explorer.solana.com/tx/2wqw3cJuk1HBosq4wPTgaDpiCjC92cxoxtgV435ad7ov952K3KhLaSXbJYHPnQyoV2gdQk3nMmPawWb7kMuY9XtK?cluster=devnet
+To decode event strings (e.g. what you see on the explorer), use the `EventCoder` https://project-serum.github.io/anchor/ts/classes/eventcoder.html#decode. You can just make your own custom IDL by hand for the events to generate the coder object.
+At some point we may need to roll our own library. 😦
+I haven't measured, but I think it depends on the data structure. For nested structs, I'm told borsh is a bit wasteful.
+Does serialization cost much compute
+Here's an example using them <@!748249199606497502>  https://github.com/project-serum/anchor/blob/master/tests/events/programs/events/src/lib.rs
+I'm interested to see if anchor events improves at all.
+Costs just as much if I put all the strings in an array and .join() too
+sweet I'll try it. I think the default way costs so much because of string interpolation
+You could import `anchor_lang` and use `anchor_lang::event` and `anchor_lang::emit` in a non-anchor program.
+I haven't actually measured compute though.
+It just
+
+* borsh serializes
+* base 64 encodes
+* logs
+Yea this is the code https://github.com/project-serum/anchor/blob/master/lang/attribute/event/src/lib.rs#L57-L59.
+It's just `emit` event or something
+This reminds me of all the crap serde does to waste compute budget.
+Wow
+what I learned so far (or the examples I saw) are using mocha js tests as integration tests. But didn't see any example of rust unit tests. I thought this might be a limitation of some sort
+That's a lot of compute ;P
+^^ That's how I'm doing it and it costs 30k compute
+```
+                    msg!(
+                        "FillEvent details: {{ \
+                            \"timestamp\": {}, \
+                            \"seq_num\": {}, \
+                            \"maker\": {}, \
+                            \"taker\": {}, \
+                            \"taker_side\": {}, \
+                            \"maker_order_id\": {}, \
+                            \"taker_order_id\": {}, \
+                            \"maker_fee\": {}, \
+                            \"taker_fee\": {}, \
+                            \"price\": {}, \
+                            \"quantity\": {} \
+                            }}",
+                        fill.timestamp,
+                        fill.seq_num,
+                        fill.maker.to_string(),
+                        fill.taker.to_string(),
+                        if fill.taker_side == Side::Bid { "bid" } else { "sell" },
+                        fill.maker_order_id,
+                        fill.taker_order_id,
+                        fill.maker_fee.to_num::<f64>(),
+                        fill.taker_fee.to_num::<f64>(),
+                        fill.price,
+                        fill.quantity
+                    );
+```
+Interesting I didn't know it saved compute.
+I was told I should do program logs the way Anchor does them to save compute. It was a little difficult to figure out what that means when searching the repo. Do you know at a high level what Anchor does differently (if at all)?
+The latter takes a little longer to develop, and so I prefer the javascript based testing for integration tests. But if you need a step through debugger, `program-test` is great.
+* unit tests
+* program-test
+There's two ways of doing rust tests and both are definitely encouraged.
+Hi everyone, me again with yet another n00b question 🙂
+What's the rationale behind not adopting the traditional Rust test approach? I mean I know from security perspective, integration test are the way to go. Is that it all, or there is other limitations that regular Rust tests won't work with Anchor/Solana in general?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+I was going to point out that `solana deploy` worked fine
+thanks!
+aahhh my wallet is pointing towards the programID keypair 😦
+Did you set the correct cluster and wallet in your Anchor.toml? You can specify them via cli args `--provider.cluster` and `--provider.wallet`.
+what are the steps to deploy to devnet with `anchor deploy`?
+
+I'm likely doing something very dumb
+
+To be sure I understand this correctly we have:
+_account pubkey_: this is our account with pubkey stored in `~/.config/solana/id.json` 
+_programid_ : this is associated with our program and is generated during `anchor build` in `target/deploy/key.json`
+
+When deploying I assume we are paying the fee with our account/pubkey. In fact if I try to airdrop to the program id, `anchor deploy` will complain saying `Account ##### is not an upgradeable program or already in use`. 
+
+I've tried completely from scratch:
+1. generating keypair with `solana-keygen new`
+2. `anchor build` then looking at the program id with `solana address -k target/deploy/mysolanaapp-keypair.json`, placing this in lib.rs, anchor.toml and the idl files
+3. `anchor deploy`
+
+Every time I try I get a complaint that the programID has insufficient funds but if I try to fund it I now get told it is already in use....
+You can subscribe via https://project-serum.github.io/anchor/ts/classes/program.html#addeventlistener, but websockets aren't very reliable on solana right now.
+It simulates the transaction. So it doesn't actually cost sol or mutate state.
+Nice.  Is there a general purpose way to subscribe to events emitted by a program?
+I'm a tad unclear about what the `simulate` property on the Anchor program is for . . .
+Example:
+
+* smart contract https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/lib.rs#L67
+*  client https://github.com/project-serum/anchor/blob/master/tests/misc/tests/misc.js#L143
+Currently no. To do this, you need to `emit!(event)` and `#[event]` and use `program.simulate.testReturn` on the client.
+Glad we have a beginner channel.
+Can I get return values from an RPC I called in web3?
+```rust
+pub fn test_return(_ctx: Context<Nothing>) -> Result<u64> {
+    Ok(1234)
+}
+```
+Called from web3
+```js
+const sig = await program.rpc.testReturn({
+  accounts: {},
+});
+const val = await provider.connection.confirmTransaction(sig);
+console.log(val);
+```
+
+All I see is `{ context: { slot: 209179 }, value: { err: null } }`
+
+Thanks!
+ahh i see, that makes sense
+It's because all accounts used in the transaction need to be specified up front by the client.
+For PDAs that is not the case (though for non-pdas yes that's true).
+this is because accounts that will be created need to sign the transaction right?
+ok awesome, thank you for your patience with my noob questions! i'm sure i'll have more, much appreciated!
+Both. You can CPI to create acocunt with a PDA but the client also needs to pass in that address.
+Correct.
+and one more hopefully not too stupid question, but is it possible to call createAccount via cpi to create a PDA account on behalf of a user? or does the client code need to still pass in the initial account and public key?
+ok awesome! so does it actually call SystemAccount::createAccount internally?
+Generally, I prefer to use `init`.
+`init` is like malloc. It creates and initializes an account in your program. `zero` is similar, but it assumes that malloc was called in a previous instruction, and that the account data is zero initialized.
+👋 i was looking through some of the test contracts and comparing to some of the code i managed to write myself using the tutorials, and I was wondering what the differences are between `#[account(zero)]` and `#[account(init, ...)]`
+Awesome.. Thank you.. as for Solana, I installed it via Curl as given here: https://docs.solana.com/cli/install-solana-cli-tools
+I think you can `cargo uninstall anchor`, and as for solana, it depends on how you installed it probably
+Anyone?
+thanks!
+Yep, you can just do them one after the other
+Hi, is it possible to do two CPIs (that has to be done sequentially) in the same method execution?
+things should be non-mutable by default
+how do i get the amount of sols transferred in a txn?
+yeah makes sense. dunno why i assumed it should be mutable by default
+well no, Signer is just a signer, it doesn't have to be mut
+not sure, figured that'd be some sort of default baked into it or something
+why not
+the new `Signer` type doesn't need to be explicitly marked as `mut`, right?
+how do I remove Anchor, Solana CLI Tools and all their dependencies in Ubuntu 20.04? I am not getting much clues for the issues I'm facing at the beginner level, so I'd at least like to start with a clean slate
+Hey when I am using an object which keeps its data on the heap in the storage (i.e Vec, BTreeMap etc),
+What should i set the value of space parameter in Initialize?
+size of the object or size of object + heap space it takes?
+Greets to everyone. I am beginner with anchor, installed all deps as the guide says. I have a program and I wrote some tests for it, but when i try to "anchor build" of "anchor test" I recieve this message:
+
+**To deploy this program:
+  $ solana program deploy .../solana-sc/target/deploy/program_name.so
+The program address will default to this keypair (override with --program-id):
+  .../solana-sc/target/deploy/program_name-keypair.json
+thread 'main' panicked at 'Code not parseable: Error("payer must be provided when initializing an account")', lang/syn/src/idl/file.rs:338:58**
+
+Platform: Linux, installed anchor via npm and tried to clone repo + cargo build
+I have generated keys with solana-keygen
+The same tests and program are successfully executed on my friend's computer, so the problem is with my environment.
+Don't know where to search for the answer. Thanks in advance
+it is in programs/cfog/Cargo.toml
+ok thank you!
+it's a git submodule
+just wondering, are the serum dependencies in https://github.com/project-serum/anchor/tree/master/tests/cfo/deps added manually or with Cargo? I don't see it as a dependency in the Cargo.toml file.
+Thanks, will try around!
+test.genesis is for your external program
+And that deploys the program stored at: e.g. ./deps/stake/target/deploy/registry.so
+And [[test.genesis]] is required too?
+I see
+this config is just saying, add a program at a specific address
+The second program is owned by a different team.
+but if they are highly correlated i would put them in the same workspace
+I don't quite get how this config works. Do I need to put the program id of the CPI program and idl path in the first program's config?
+https://github.com/project-serum/anchor/blob/master/tests/cfo/Anchor.toml#L29-L43
+I have anchor projects in two different workspaces. I would like to setup a test where one program invokes the other program. How do I set this up in the Anchor.toml file?
+It's not possible, you need to pass AccountInfo in accounts :\
+If I have an account that references another account like this:
+
+#[account]
+pub struct MyAccount {
+    pub my_sub_account: Pubkey,
+}
+
+How do I read the referenced account into an AccountInfo?
+
+im there
+I could chat now for a bit if you want (maybe in the general voice channel?)
+Hey yall, second day hacking at tutorial examples 1 and 2. I also went and rewatched the ignition workshop again and still can't figure it out. 
+
+I know it's a big ask, but I would love to hop on a call with someone who is a bit more experienced. I feel like I'm really close to breaking through in understanding of anchor in general
+Could you also post your corresponding instruction handler's signature? I wonder if you're running into an issue with how you're using the #[instruction] annotation.
+Is it possible you're somehow sending the wrong eth_addr?
+I can reproduce that error message (with a local example following the spirit of your code) by passing the wrong `eth_addr` to the rpc call. Meaning, use one eth_addr byte array to produce the PDA, but send a different one with the instruction.
+how to fetch nft metadata from connected wallet?
+On `seeds = [ b"mint-1234".as_ref(), &eth_addr ],`it fails with:
+```
+Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3648:13)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3608:20)
+      at Connection.sendTransaction (node_modules/@solana/web3.js/src/connection.ts:3596:12)
+      at Object.sendAndConfirmTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-transaction.ts:29:21)
+```
+but it works with `seeds = [b"mint-1234".as_ref()],`
+yes
+```
+Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Program failed to complete
+      at Connection.sendEncodedTransaction (node_modules/@solana/web3.js/src/connection.ts:3648:13)
+      at processTicksAndRejections (internal/process/task_queues.js:93:5)
+      at Connection.sendRawTransaction (node_modules/@solana/web3.js/src/connection.ts:3608:20)
+      at Connection.sendTransaction (node_modules/@solana/web3.js/src/connection.ts:3596:12)
+      at Object.sendAndConfirmTransaction (node_modules/@solana/web3.js/src/util/send-and-confirm-transaction.ts:29:21)
+```
+What doesn't work? Are you getting an error etc?
+Hi!
+How I should define `seed` properly?
+It doesn't work:
+```
+#[derive(Accounts)]
+#[instruction(
+    bump_seed_mint: u8,
+    eth_addr: [u8; 20],
+)]
+pub struct CreateRepresentation<'info> {
+    #[account(
+        init,
+        seeds = [ b"mint-12345".as_ref(), &eth_addr ],
+        bump = bump_seed_mint,
+        mint::decimals = 2,
+        mint::authority = owner,
+        payer = owner,
+    )]
+    pub mint: Account<'info, Mint>,
+    pub owner: AccountInfo<'info>,
+...
+```
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+my current understanding of this is that the client has to create an account, transfer sol to it, transfer ownership of account to program, then program can transfer the sol to itself, not sure if i'm adding an extra step
+Anybody know what this `#[index]` does. https://github.com/project-serum/anchor/blob/d325f218ddc33625397f81c6d2133667bd9140e9/tests/events/programs/events/src/lib.rs#L37 
+
+It's some rust macro and hard to find documentation about it
+👋 got another noob question. i want to accept an initial deposit as payment to create a user account. how can the contract check if sol was included with the instruction call?
+it seems like it, would be very cool to have eventually though!
+I think we need some fancy new rust libraries to do this.
+I want this too 😦 I've been too lazy to figure out the right way and just use multiple vs code windows, one for anchor's source + one per subproject. Would love to know a better way!
+yes, nothing appears in my terminal although my tests run fine
+who uses the TypesCoder? I can't find any examples of it being used in the anchor repo, either in the examples or the library code itself
+awesome, i will try to give this a shot soon
+My guess is on account deserialization, it will load the account into your heap/stack and you can add elements freely to it as per rust functionality, then once you serialize that back into the account, it will have the new memory layout for your modified vectors.
+i'll need to figure out if the whole `Market` object needs to be replaced with a longer `Vec<Bracket>` or if i can just add elements to the `Vec<Bracket>` without it complaining
+yep, it's a PDA so i just plan to set space to maximum
+that would be awesome if true
+You are constrained by the space you allocate on account initialisation
+ideally it would be variable
+It should just resize as you need?
+Ok I'm not certain this would work since I haven't tried, but if you had a Vec<Market> with a Vec<Brackets> inside, then once you add elements to the vector in your smart contract, once you serialize the account again, it would work if you had enough space.
+nope
+Do you know how many brackets per market at the time of market initialization (adding)
+But they are of variable size right
+the struct itself contains an array as one element
+it would be an array of a specific type of struct
+can't both the list of markets and the list of brackets be arrays
+right, i haven't seen any examples of vectors being used in zero copy arrays but perhaps i haven't looked hard enough
+Vector wouldn't solve it unless you had a vector of vectors lol
+Right and you add markets one at a time
+brackets can be variable length, so it's not possible to specify up front a maximum number of markets in a fixed size array, unless i choose a `max` value for the number of brackets in a market, like 2 or 3
+here's the struct layout i'm using
+
+list metadata
+- name of list
+- list of markets
+  * market one
+    ^ bracket one
+    ^ bracket two
+  * market two
+    ^ bracket one
+  * market three
+    ^ bracket one
+I mean conceptually they should be the same, except i suppose you'd need to track the index of what you've added in an array.
+i'll use whatever provides this functionality `I would love to init an empty account and only add elements progressively.`
+Am curious why you'd prefer using a vector?
+yeh, that's what the code does currently
+Fwiw using a fixed size array will just initialize the elements to that type's default value
+i should just try it out
+so just literally switch from using fixed size array to vecs
+If you have a vector and allocate space for your estimated max size of array, you can keep adding elements until you are full?
+all the zero copy examples seem to use lists with a set length. Is there an example anywhere of someone using variable length arrays that get updated progressively?
+this is something i'm not clear on. 
+https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7
+I would love to init an empty account and only add elements progressively.
+For example
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L14 Initing this as an empty array and then adding one element at a time.
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L26 Similarly here, initing this with a single element and then appending to the array as new brackets are added
+
+But I'm under the impression that all of this space needs to be allocated up front? Is it possible to have expanding arrays or something that is functionally equivalent using zero copy?
+hmm.. doing the basic_0 tutorial - looked through the previous convos and saw that i had to set ANCHOR_WALLET... but Anchor.toml already has a wallet set under provider... is there a difference between the two?
+with `anchor test`?
+Hi! I'm struggling to find how if there is a way to log messages  from within the program while doing tests? I tried the msg! macro but it doesn't seem to do anything
+rust noob here: does anyone know how to get rust-analyzer to work in VScode for all files when you fork the anchor repo? (out of the box it doesnt work for `examples` and `tests`)
+Oh ok  because I store  a PDA `bank: ProgramAccount<'info, Bank>`
+```
+#[account]
+pub struct Bank {
+    wallets: Vec<Wallet>,
+    bump: u8,
+}
+
+pub const WALLET_SIZE: usize = 32 + 1;
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub struct Wallet {
+    pub address: Pubkey,
+    pub share: u8,
+}
+
+``` 
+and when calling the `withdraw()` I would like to *iter* through all the wallets on my bank to split the funds in bank.
+So I would need to pass all the `wallets` + `accountsInfo` in *accounts* to use it in my function
+In `withdraw()`:
+```
+        let accounts = ctx.remaining_accounts;
+        let wallets: Vec<Wallet> = (&*ctx.accounts.bank.wallets).into();
+        for wallet in wallets.iter() {
+            invoke(
+                &system_instruction::transfer(
+                    &ctx.accounts.payer.key,
+                    &wallet.address,
+                    price,
+                ),
+                &accounts,
+            )?;
+        }
+```
+You mean inside your program? If so, no—any account(info)'s your solana program wants to use have to get passed in explicitly as pubkeys from the client
+is it possible to transform a publicKey stored in an *Account* to a *AccountInfo* ? and pass it to my `invoke`
+Would be good to do after or along side https://github.com/project-serum/anchor/issues/695
+If not, I could see about adding and opening a PR!
+No not yet. THough we should add that.
+Was wondering if there was a config to set the path to the program key-pair?
+We could make the devex better by searching the local filesystem, though.
+I see no reason to share a program ID.
+Ideal would be all share same program ID?
+Dont even need to do that if you're running `anchor test`.
+Don't want to commit that change to git for everyone
+Yeah, then you have to build once, get the id, then dump it back in to declare_id and Anchor.toml?
+As long as the `declare_id!` and `Anchor.toml` have the same addresss.
+For development, you can just use a random keypair.
+<@!501570363566587905> Question on the storage of program keys in anchor: How do you recommend setting up the dev environment? Do you just share them between devs outside the repo? Otherwise every new `anchor build` will generate a new keypair?
+Ahh, let me google. Thanks
+I think just loading the code client side would work, but using webpack/next is the issue
+There's some webpack configs to do that magic, though I dont know the config off the top of my had.
+If webpack is freaking out, just stub it.
+Trying to think of how to work around this since webpack freaks out at the reference.?
+I've never had a problem.
+Thanks! Also, I'm looking at your code here: https://github.com/project-serum/anchor/blob/cfba251fc4cb366adcd4ad48eefee2201d7448c5/ts/src/provider.ts#L236
+
+This require('fs') prevents this lib from running clientside in a react app?
+okay the earlier part of the example steps have you go through what I was doing then later on tell you we dont need the local validator node and anchor test will do it all in one go so it is there just not the env variable part
+thank you!
+aha!
+Tbh you usually run your anchor stuff via `anchor test` or whatever, which handles setting this env var for you. I think it may have slipped through the tutorial docs by accident.
+Try doing `ANCHOR_WALLET=~/.config/solana/id.json node client.js`
+how is that set? I'm not seeing a command in the CLI section of the docs but i might be missing something
+You'll probably want it to be whatever the keypair path is when you do `solana config get` (something like `~/.config/solana/id.json`)
+Hmm, maybe this isn't mentioned in the tutorial?
+^ This is probably because you haven't set your ANCHOR_WALLET env variable
+having an issue trying out basic_0, when i get to node client.js Im getting TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+from the setProvider looks like
+I would not do this.
+so, not a very helpful response, but unless you have a good reason to add that keypair to the source control, i wouldn't necessarily do it
+and the keypair still shows up in the `target` folder 🤷
+lately anchor makes you use `declare id`
+anchor just does that itself
+not sure really
+or do you copy back in the key-pair?
+But then your program ID changes every time?
+personally i delete the `target` directory a lot
+Anyone have knowledge on this? 🥺
+Is the keypair in an anchor projects `/targets/deploy/<name>-keypair` ok to put under source control? IE is it only used to generate the program address and the `Upgrade Authority` is really the only authority to change that program?
+was anyone able to get https://docs.rs/switchboard-program/0.1.52/switchboard_program/struct.VrfAccount.html working in anchor ?
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+Thank you
+Ok, good idea...
+i am going through it as i speak
+i would suggest you to see the examples and tests provided on the anchor github
+maybe
+I copied this guy's code line for line to learn how the contracts work. It was built on an older version of Anchor, so that is what the issues I am facing are
+https://github.com/RohanKapurDEV/streaming-anchor/blob/master/programs/streaming/src/lib.rs
+Thanks!
+yes its on tests on anchor github
+also, <@!426974456548818946>  what chatRoom thing are you working on? Is it a tutorial?
+
+I understand the seeds, PDAs, etc. but I still have no idea how to solve my problem
+Not sure if that is being used but i generated it with  `solana-keygen new -o my-keypair.json --force`
+Does the wallet matter?
+
+I am not running a local validator, and yes I replaced it in anchor.toml too
+this is from the chatRoom test src
+Hmm. Did you also replace it in Anchor.toml? Also, are you running your own local validator etc. or letting anchor test spin one up for you?
+where is createInstruction defined, i cant find it
+
+another noob question
+The first 2 tests work fine
+I just pull your repo directly
+1) Do anchor build
+2) Run  `solana address -k target/deploy/basic_1-keypair.json ` to  get id and replace in lib.rs
+3) Do anchor build again
+4) do anchor test
+Hmm let me check
+Hmm, not sure why yours isn't working but mine does. How are you setting up the test's wallet/provider stuff?
+Does the transfer function need a signer?
+Sorry
+This is above my paygrade... maybe ask <@!134416332509675520>
+
+
+Yea, the JS looks good. Can I see the Rust
+It looks correct to me
+i am too noob to look at that, and will probably get my mind lost haha
+
+Specifically the program.rpc part
+What does your JS code look like?
+That's probably because you are only providing the public key
+```
+  1) basic-1
+       Can tranfer lamports:
+     Error: unknown signer: 2PY9aesXPdtkpDdnSHzTSvQap263ufjZEwjTcqWbvT9G
+      at Transaction._addSignature (node_modules/@solana/web3.js/lib/index.cjs.js:1104:13)
+      at /Users/mcdonald/Desktop/cqfd/anchor/examples/tutorial/basic-1/node_modules/@solana/web3.js/lib/index.cjs.js:1078:12
+      at Array.forEach (<anonymous>)
+      at Transaction._partialSign (node_modules/@solana/web3.js/lib/index.cjs.js:1075:13)
+      at Transaction.partialSign (node_modules/@solana/web3.js/lib/index.cjs.js:1066:10)
+      at /Users/mcdonald/Desktop/cqfd/anchor/examples/tutorial/basic-1/node_modules/@project-serum/anchor/dist/cjs/provider.js:82:16
+      at Array.forEach (<anonymous>)
+      at Provider.send (node_modules/@project-serum/anchor/dist/cjs/provider.js:81:14)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async Object.rpc [as transfer] (node_modules/@project-serum/anchor/dist/cjs/program/namespace/rpc.js:11:31)
+      at async Context.<anonymous> (tests/basic-1.js:83:5)
+```
+🤔  Getting unknown signer for the test
+The source for Loader is actually super fun Rust code btw
+oh man thanks
+Loader is a fancy way to not have to actually deserialize the account struct (in this case the ChatRoom). You leave the bytes that came with its `AccountInfo` alone and just kind of pretend they're a ChatRoom, no deserializing at all. In reality you're working with a bunch of &mut [u8] bytes, but Loader lets you (handwaving) say, uh, pretend this is a &mut ChatRoom 🤞
+Like I sort of get that stuff, but not really... I have some studying to do
+Ok, thank you
+am i helpful, if you still dont understand, i suggest you go through PDA section on Solana Docs carefully
+which would result in having no private key to the said address, which is what we want to achieve with PDA's
+it is to push the program address from the ed25519 curve
+I found this in the rust docs, but have no idea what is going on
+its required for PDA, i guess
+
+I think this is my last problem... what is a bump and what are seeds?
+
+Yea, it was a mistype at first as a "$"
+Heh I think you need "token_program.key == &token::ID" (missing ampersand)
+I've still got one more problem... (Thank you for all the help)
+
+If you don't pass an explicit `space = ...` it will just use Rust's `Default` trait to say, uh, let me see how big a "default" one of these things is and use that 🤷‍♂️
+Thank you
+You are right!
+<@!847130012879814668> have to be slightly careful with that, I think Anchor is just confused about how much space to allocate for some account
+Where? (I am very novice)
+try adding `#[derive(Default)]`
+Ok, it is still yelling at me...
+
+on demand zero copy deserialization?? what does that mean
+Struct anchor_lang::Loader
+
+pub struct Loader<'info, T: ZeroCopy> { /* fields omitted */ }
+
+Account loader facilitating on demand zero copy deserialization
+Thank you!
+"token_program.key == &token::ID" rather than a $
+Does anyone know why the rust is yelling at me?
+
+<@!501570363566587905>  Maybe can answer this question
+what does Loader do?
+<@!381015687486898176> yeah! I/we were wondering about that (was looking at this during a stream)—it seems like you wouldn't need it but you do 🤷‍♂️ I would love to understand that better.
+hey guys, whats Loader type used for? i am new to this, cant find documentation on it
+
+Just a question why is systemProgram needed in the instruction? It isnt being used
+Sent ser
+Buy yourself a beer
+Thanks ser
+Haha ok (guess I'm now a professional anchor developer) GZUFf8jC6xdqHRZGv26sW631stLik8Z5hdGyMFYiTdMK
+😆
+You sure pls i want to give you .2 sol for your time
+Haha it's all good, was educational for me 👨‍🎓
+I am eternally grateful
+Ser pls dm me your sol address
+Heh, this was actually slightly trickier than I thought it would be, here's an example https://github.com/project-serum/anchor/compare/master...cqfd:lamport-transfer-example?expand=1
+What's up
+Yea
+<@!134416332509675520>  messaged you, i just need help on how to interjact with that one function on the js side so i could infer and do the other functions my self
+Like why do you need a '
+This is more of a rust question, but what does <'info> do?
+I am transferring to myself though
+So this works?
+```
+    pub fn pay(ctx: Context<Increment>, count: u64) -> ProgramResult {
+            &system_instruction::transfer(
+                &ctx.accounts.user.key,
+                &ctx.accounts.user.key,
+                count,
+            );
+        Ok(())
+    }
+```
+In JS how do I convert a <BN: a891> to decimal?
+Thanks!
+You might be doing `anchor.Provider.local()` in the js test (`anchor.Provider.env()` might work? Not sure)
+How would I create a simple function that takes in lamports and sends it to another account?
+
+
+How do I change from localnet to devnet in anchor test? I have changed my anchor.toml, but it still wants to connect to localnet
+<@!381015687486898176> when you say a function that takes lamports, what do you mean?
+😩
+Will transfer .1 SOL for tutorial
+Any example how to transfer lamports? Please teach me 😫
+you
+I didn't know this, but Anchor test spins up a test validator for yo
+The problem for anyone curious is that I had a test validator running in the background fouling things up
+Yea
+<@!847130012879814668> want to pair real quick? Feel free to ☎️  me on discord if you want
+It just is the tutorial modified a little to take a switchboard accountinfo and read the info
+
+True... I am now very confused... If I had more experience with this, I feel like I would have more answers. I would think it would have something to do with the JS, but don't know what I'd change
+So I would have thought the above would have made switchboard do a `ProgramError::InvalidAccountData`.
+Yeah. Hmm, still confused about your error, since I think Anchor only generates an `InvalidProgramId` when checking a `Program<'info, SomeProgram>`. You can pass whatever address you want for an `AccountInfo`.
+AccountInfo<'info> just takes 'info, not an addional struct
+
+No, the function I am passing the var into takes an AccountInfo, not an account
+Since it looks like the `switch` is just a raw `AccountInfo` in your program. Are you ever doing something like `Program<'info, Switch>`, or whatever?
+I'm actually confused how you're getting that error with the code snippet above though 🤔
+That makes sense.... I am running the program in localnet becaue of the airdrop restrictions, but the publickey is for devnet
+That error is for an InvalidProgramId (the hacky way to discover this currently is to calculate 0xa8 = 168 and then go find it in `error.ts` in the anchor codebase, lol—working on making these errors log in a nicer way)
+
+And the rust struct
+Here is the JS
+I am trying to pass a publickey into my rust program for a Switchboard oracle
+What does this mean? Error processing Instruction 0: custom program error: 0xa8
+I think you can run anchor.PRovider.local("https://api.devnet...") and it will connect to devnet
+yeah! That was the issue.  Thanks
+Thanks
+just use u64 and track how many decimal places each u64 should have
+don't use decimals
+Can the IDL read an f64 variable from the rust contract? I don't want to convert the type to an i64 or u64 because I like having the decimals...
+Are you maybe doing `anchor.Provider.local()` in your test?
+how do you configure anchor test to connect to devnet?
+I get this error ```
+Initializes test state:
+     FetchError: request to http://localhost:8899/ failed, reason: connect ECONNREFUSED 127.0.0.1:8899
+```
+
+and my Anchor.toml file
+```
+[programs.devnet]
+token = "2EMTdFYydWGcupkeGriNL61fdKwznxBfc2ZkdJxEmZME"
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "mocha -t 1000000 tests/"
+```
+Attempting to explain why `declare_id!` exists (I was confused about this too): I think you never(?) need to statically know your *own* program's id, since it gets passed in to the program at runtime (`ctx.program_id` in an instruction handler). However, it's often necessary to know some *other* program's id statically, e.g. anytime you have code like `if some_condition(some_account.state) { do_something(); }` you need to make sure `some_account` has the owner you expect, or else people could trick you by passing in a fake/spoofed account. If `some_account` is supposed to belong to your own program, you could check it with e.g. `some_account.to_account_info().owner == ctx.program_id` (so, dynamically, no need for `declare_id!`). But if it's supposed to belong to a different program you'll need to somehow know that program's id (for example, maybe `some_account` is supposed to be a token account, so you need to check that its owner really is the SPL token program—otherwise it's fake and just looks like a token account).
+I see. thanks for the help
+Any beginner examples for a function that takes lamports?
+This is a bug in the tutorial, the `client.js` script is expecting you to have an ANCHOR_WALLET env variable set. Try doing `ANCHOR_WALLET=~/.config/solana/id.json node client.js`
+tests run totally fine
+yes, use declare id. If in doubt check the changelogs
+Running on Ubuntu btw
+and even if i hardcode the provider to my localhost, I get this other error
+TypeError: provider.send is not a function
+Hi does anyone have this issue running client.js in example basic0?
+
+i get this error at anchor.Provider.local()
+node client.js
+node:internal/fs/utils:670
+    throw new ERR_INVALID_ARG_TYPE(propName, ['string', 'Buffer', 'URL'], path);
+    ^
+
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received undefined
+is declare id necessary am still confused about what exactly is it needed for, i was looking the candy machine nft code and they dont be using a declare_id , its written in anchor as per <@!501570363566587905>  tweet
+all the rest is just updating the data on an account
+and the arguments in this function are the main things that are used when initializing an account
+<https://docs.rs/solana-sdk/1.6.8/solana_sdk/system_instruction/fn.create_account.html>
+you just really have to understand that everything in solana is an account, and all the accounts need to be owned by programs
+this could help too
+<https://2501babe.github.io/posts/solana101.html>
+yea i think i should maybe try a hello world program without anchor first and then try and use anchor. i had read through the docs but was trying to write my first program with anchor without basic solana first
+anchor does also automatically calculate `space` for you in most situations
+happy to answer any more question but you should check out some of the docs on how solana itself works and then maybe we can try to link that back to what anchor is doing / abstracting away from
+`the singature for the account trait?`
+if you look at the corresponding javascript / client side code you'll probably see that they're passing in a keypair in the `signatures` object
+
+`but since it's not in line 2 and 3`
+assuming you mean accounts 2 and 3 here. You only need to specify `space` when creating an account. `user` is just an empty signer account (it doesn't store any data on it), and the `system_program` account already exists with the program data on it
+where could i find the signature for the account trait? like how to know what payer=user and the keyword space is?
+
+like it makes sense space is included in the first line, but since it's not in line 2 and 3, does that mean there's a default space set if you don't specify one?
+i'm guessing `user` needs to be `mut` here because it's paying for the new account
+when you submit the public key for `my_account` you're just submitting an empty pubkey (and its signature) in the transaction. Then the program itself sends the instruction to the system program to create an account with the requested amount of space / data
+system program is an account as well
+no, there's three accounts there
+so is it saying that within the Initalize struct, there's actually two different accounts? my_account and then the user/system_program account?
+`init` varies in meaning
+```
+lang: #[account(init)] now creates the account inside the same instruction to be consistent with initializing PDAs. To maintain the old behavior of init, replace it with #[account(zero)]
+```
+`mut` just means the data in the account can be changed and the changes will persist on the solana blockchain
+the meanings change every now and again
+https://github.com/project-serum/anchor/blob/master/CHANGELOG.md
+can someone walk me through what the line "#[account(init, ...)]" and "#[account(mut)]" means and does?
+
+```rust
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    #[account(init, payer = user, space = 8 + 8)]
+    pub my_account: Account<'info, MyAccount>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+```
+Cool thanks
+```seeds = [b"whitelist", user.key().as_ref()],
+           bump,
+```
+This results in checking what address whitelist_entry is at
+```#[derivce(Accounts)]
+pub struct WhitelistedOperation {
+    pub user: Signer<'info>,
+    #[account(
+           seeds = [b"whitelist", user.key().as_ref()],
+           bump,
+     )]
+    pub whitelist_entry: Account<'info, WhitelistEntry>
+}
+```
+got it the signer should be that user ... if I add something like this #[account(signer)] would work
+ya I got it ... so inorder to check if the program is accessed by that  whitelisted PDA user or not how to check that part ?
+there is only a small overhead per account
+which will be about the same rent price as creating the big array in one account
+yes
+So I as a admin has to create a PDA for all the whitelisted user ?
+You can actually imagine the associated token accounts like a gigantic map of map, with the key being the user, the second key being the mint, then you get the value, the token account
+kind of a map, but solana address/account style
+If you want infinitely scalable whitelist, you make the "admin" create a PDA that is derived from the whitelisted user, then the user has to give that + be the signer to get through as whitelisted.
+Someone not whitelisted wouldn't have this PDA created
+but who makes this whitelist?
+yeah it is for whitelisting purpose
+if it is some sort of whitelist, then you can just ask the client to propose the index, so the program only checks the signer is fact in the list
+it also depends of how you use it
+that will do
+chuck in a zero copy account
+say about 1000 at max
+Do you know how many addresses you wish to store?
+Can someone guide me a way or any docs to look at  to store a list of addresses on chain using anchor ?
+Yeah thx you I was looking for that
+https://github.com/project-serum/anchor/blob/d325f218ddc33625397f81c6d2133667bd9140e9/ts/src/error.ts#L53
+you will end up in the map for them
+you convert them to decimal, then search for them
+Someone know where I can found a list about the hex error code ?
+I was getting errors earlier, and wasn't sure if it was the fact I was trying to return an f64 type or something else
+Can I return an f64 type in the fetch idl?
+i've done `anchor init` on my project and im trying to run `anchor build` and getting this error. has anyone seen ?  ```thread 'main' panicked at 'Not in workspace.', cli/src/lib.rs:442:47
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace```
+Is it possible close an account and recover its balance? the target account is a candymachine config account created by me but now it is owned by the candymachine program.
+Probably legacy. It's just a wrapper for `IdlCoder`.
+What’s the intended usage?
+Lol
+It doesn't appear to be . 😛
+I could also be wrong and it could be used somewhere by Anchor itself, but I can’t see where if so
+If anyone’s out there using the TypesCoder, show yourself coward
+No docs. It's just a marker that has no functional significance. It gets added to the IDL and can be optionally used by off-chain indexers to know to build an index on the field.
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+=======
+>>>>>>> 20bea11087240cc616c020a0810cf4b960b99b41

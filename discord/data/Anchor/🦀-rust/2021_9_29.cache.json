@@ -1,0 +1,435 @@
+{
+    "total_results": 13,
+    "messages": [
+        [
+            {
+                "id": "892806200901652480",
+                "type": 0,
+                "content": "If we don't specify the lifetimes like this, then the compiler will \"elide\" the lifetimes, which means automatically giving a separate lifetime to each.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T16:13:05.832000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892806067602464798",
+                "type": 0,
+                "content": "Notice how `'info` is specified here twice. This is telling the compiler that the fields that rely on both those lifetimes share the same `'info` lifetime.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T16:12:34.051000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892805729168265256",
+                "type": 0,
+                "content": "This can be done by giving explicit lifetimes to the `Context` via `ctx: Context<'_, '_, '_, 'info, SwapToUsdc<'info>>,`. Example here https://github.com/project-serum/anchor/blob/master/tests/cfo/programs/cfo/src/lib.rs#L103",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T16:11:13.362000+00:00",
+                "edited_timestamp": "2021-09-29T16:11:28.673000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892805497940492338",
+                "type": 19,
+                "content": "This happens when you have two different types with two different set of lifetimes and you try to put either those types, or references to fields of those types into the same data structure.\n\nThis most commonly happens when using `CpiContext`, since the accounts get flattened into a single `Vec<AccountInfo>`, in which case you need to tell the compiler that all those `AccountInfo` indeed do have the same lifetime!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "860076534651158529",
+                        "username": "thalesonchain",
+                        "avatar": "3b1184247b021978ea308466ddcced39",
+                        "avatar_decoration": null,
+                        "discriminator": "9236",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T16:10:18.233000+00:00",
+                "edited_timestamp": "2021-09-29T16:10:30.187000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "892786584359936051"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892795323171352666",
+                "type": 19,
+                "content": "I don't know the exact reason, but my I guess the lifetime of struct you are adding that `fn to_account_info(&self)` to is different than `'info` -- which is the specified lifetime of the result `AccountInfo<'info>` -- perhaps if you share the whole `impl` block we could help you a bit more",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "103986638320861184",
+                    "username": "davoclavo",
+                    "avatar": "d0f49d5060205269bd1a195055855925",
+                    "avatar_decoration": null,
+                    "discriminator": "2968",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "860076534651158529",
+                        "username": "thalesonchain",
+                        "avatar": "3b1184247b021978ea308466ddcced39",
+                        "avatar_decoration": null,
+                        "discriminator": "9236",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T15:29:52.379000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "892786584359936051"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892787705040236614",
+                "type": 19,
+                "content": "I have (not in your specific situation, just in a low-level solana program) and gave up figuring it out haha. Would like to understand it better \ud83d\udd2e",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "860076534651158529",
+                        "username": "thalesonchain",
+                        "avatar": "3b1184247b021978ea308466ddcced39",
+                        "avatar_decoration": null,
+                        "discriminator": "9236",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T14:59:36.075000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "892786584359936051"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892786584359936051",
+                "type": 0,
+                "content": "Anybody ever seen this error:\n```\nfn to_account_info(&self) -> AccountInfo<'info>\nlifetime mismatch\n\n...but data from `ctx` flows into `ctx` hererustc(E0623)\nlib.rs(96, 10): these two types are declared with different lifetimes...\nlib.rs(96, 18):\nlib.rs(137, 41): ...but data from `ctx` flows into `ctx` here\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "860076534651158529",
+                    "username": "thalesonchain",
+                    "avatar": "3b1184247b021978ea308466ddcced39",
+                    "avatar_decoration": null,
+                    "discriminator": "9236",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T14:55:08.884000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892776835111342080",
+                "type": 0,
+                "content": "so yeh, we might have to stick with fixed length arrays for now unless there's a way to access elements of the vector without knowing the length of all the sub-vectors and/or having to decode all prior pieces of data",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T14:16:24.482000+00:00",
+                "edited_timestamp": "2021-09-29T14:27:35.866000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892776770372243456",
+                "type": 0,
+                "content": "basically we would end up decoding the entire vector just to add to the end of the vector or expand the space used",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T14:16:09.047000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892776620786602055",
+                "type": 0,
+                "content": "re: discussion about vecs containing vecs in a zero copy account in <#889702325231427584> , it seems more appropriate for the rust channel\n\nsome thoughts from <@!97462263392243712> on using the variable length vectors in a zero copy account.\n\n```\nI want you to think, if I give you a list of bytes, and some bytes are parts of strings and some bytes are lengths that appear before strings\nhow are you going to tell me the eighth string without reading the first seven lengths?\n...\nmaybe you can get a vector of strings where the strings are just pointers into the account, that would be sweet\nidk how to do this\nor, idk if Anchor provides an easy way to do this\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "97462263392243712",
+                        "username": "sharpobject",
+                        "avatar": "bbce662aa5bd73545d8d7938b15e9d6b",
+                        "avatar_decoration": null,
+                        "discriminator": "8640",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T14:15:33.383000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892745925049589783",
+                "type": 0,
+                "content": "Client-side for what?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "448034961652449283",
+                    "username": "fanatid",
+                    "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                    "avatar_decoration": null,
+                    "discriminator": "8814",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T12:13:34.949000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892721822947221525",
+                "type": 0,
+                "content": "Please tell me where can I find out (see examples, etc.) of creating a client-side in Rust?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "251377492579975169",
+                    "username": "Praetor.Pavel",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0643",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-29T10:37:48.560000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "892490642297597972",
+                "type": 19,
+                "content": "Not really \"send a transaction\" as much as \"invoke an instruction with a signed PDA\"\nhttps://docs.solana.com/developing/programming-model/calling-between-programs\n\nRead the docs like 50 times per day.  I had to do that for months so my brain built an index. lol, no joke.  There's a lot to wrap your head around.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "99911938955309056",
+                    "username": "locuester",
+                    "avatar": "c35cd66ee810cc730b408cfe19b1f31f",
+                    "avatar_decoration": null,
+                    "discriminator": "8306",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "avatar_decoration": null,
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-28T19:19:10.798000+00:00",
+                "edited_timestamp": "2021-09-28T19:20:04.536000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "892313795412774913"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "5a46ca5f81b1a0412b639af8d0e73aa7"
+}

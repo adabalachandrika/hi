@@ -1,0 +1,402 @@
+{
+    "total_results": 10,
+    "messages": [
+        [
+            {
+                "id": "906214461013119028",
+                "type": 19,
+                "content": "Can you just keep them as regular js numbers, no anchor.BN at all? Js numbers are already effectively f64s (they're doubles).",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock (shardul)",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "avatar_decoration": null,
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T16:12:44.156000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906209558849028126"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906210141903405097",
+                "type": 19,
+                "content": "Yes, declare_id of both programs in Anchor.toml are the same as in lib.rs files",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "894513797044244490",
+                    "username": "Robert | Synthetify",
+                    "avatar": "6d89dda78a4e7e6473eb408c408f1ace",
+                    "avatar_decoration": null,
+                    "discriminator": "7588",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T15:55:34.400000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906203094931623967"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906209558849028126",
+                "type": 19,
+                "content": "Any pointers on how to proceed? BN doesn't support decimal points. As a hack, we found that f64 can be encoded as u64 without losing bits. But a clean client side solution would be great.\n\n```rs\nlet my_float = -5.01;\nlet encoded_float = (my_float as f64).to_bits();\nmsg!(\"Encoded float {}\", encoded_float);\nlet decoded_float = f64::from_bits(encoded_float);\nmsg!(\"Decoded float {}\", decoded_float);\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T15:53:15.389000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906160290469666846"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906203094931623967",
+                "type": 19,
+                "content": "Does your `declare_id` match your Anchor.toml or whatever is deployed on the network?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "894513797044244490",
+                        "username": "Robert | Synthetify",
+                        "avatar": "6d89dda78a4e7e6473eb408c408f1ace",
+                        "avatar_decoration": null,
+                        "discriminator": "7588",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T15:27:34.271000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906195764747849792"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906195764747849792",
+                "type": 0,
+                "content": "Hello everyone,\nI have problem with AccountLoader, I'm trying to load account from another program, like this  \"pub pool: AccountLoader<'info, Pool>,' but I'm getting this error 'Error processing Instruction 0: custom program error: 0xa7' which stands for AccountNotProgramOwned. This error is triggered by this code in account_loader.rs\n\nif acc_info.owner != &T::owner() {\n     return Err(ErrorCode::AccountNotProgramOwned.into());\n}\nPool account is owned by another program and i don't know what's causing the problem . \nCould someone help ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "894513797044244490",
+                    "username": "Robert | Synthetify",
+                    "avatar": "6d89dda78a4e7e6473eb408c408f1ace",
+                    "avatar_decoration": null,
+                    "discriminator": "7588",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T14:58:26.619000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906160290469666846",
+                "type": 19,
+                "content": "Should be.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock (shardul)",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "avatar_decoration": null,
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T12:37:28.892000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906157979760480296"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906157979760480296",
+                "type": 19,
+                "content": "This would be trivial? Saw that borsh-js has no typescript equivalent for f32 and f64.\n\nhttps://github.com/near/borsh-js#type-mappings",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/near/borsh-js",
+                        "title": "GitHub - near/borsh-js: TypeScript/JavaScript implementation of Bin...",
+                        "description": "TypeScript/JavaScript implementation of Binary Object Representation Serializer for Hashing - GitHub - near/borsh-js: TypeScript/JavaScript implementation of Binary Object Representation Serializer...",
+                        "color": 1975079,
+                        "reference_id": "906157979760480296",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/fcb6550a242ab5af4fea44d64f1ce8c6b1b5cb11fd5eb064a8db94728b14e4e7/near/borsh-js",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/EjiphbaWpy3mJpUEC6HUCoeteY4N-zXMxkQYp_MCk_A/https/opengraph.githubassets.com/fcb6550a242ab5af4fea44d64f1ce8c6b1b5cb11fd5eb064a8db94728b14e4e7/near/borsh-js",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T12:28:17.976000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "905490920789663754"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906095727862763540",
+                "type": 19,
+                "content": "thanks a lot!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "194280119710253068",
+                    "username": "MinatoTW",
+                    "avatar": "558459eb7c113a70373eb53b0218d687",
+                    "avatar_decoration": null,
+                    "discriminator": "9698",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "448034961652449283",
+                        "username": "fanatid",
+                        "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                        "avatar_decoration": null,
+                        "discriminator": "8814",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T08:20:55.967000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "906093614038384691"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906093614038384691",
+                "type": 0,
+                "content": "- you can `drop(account)` after `account.last = time` assignment\n- or as alternative, remove `account` variable and write assignment as `ctx.accounts.account.last = time`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "448034961652449283",
+                    "username": "fanatid",
+                    "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                    "avatar_decoration": null,
+                    "discriminator": "8814",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T08:12:31.992000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "906091254864019467",
+                "type": 0,
+                "content": "```rust\n        let account = &mut ctx.accounts.account;\n       \n        let time = ctx.accounts.clock.unix_timestamp;\n        account.last = time;\n        ..........\n        token::transfer(ctx.accounts.into_transfer_ctx().with_signer(&[&seeds[..]]), amt)?;\n        // Can't borrow ctx.accounts as immutable again ^^\n```\n\nDoes anyone know how I can circumvent this issue? It's probably something simple",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "194280119710253068",
+                    "username": "MinatoTW",
+                    "avatar": "558459eb7c113a70373eb53b0218d687",
+                    "avatar_decoration": null,
+                    "discriminator": "9698",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-05T08:03:09.521000+00:00",
+                "edited_timestamp": "2021-11-05T08:09:05.899000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "cba4eb27f11efb107987bea8813d2822"
+}

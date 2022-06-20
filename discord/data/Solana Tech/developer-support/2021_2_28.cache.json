@@ -1,0 +1,2759 @@
+{
+    "total_results": 83,
+    "messages": [
+        [
+            {
+                "id": "815651878712901753",
+                "type": 0,
+                "content": "I pushed the code to git: https://github.com/eltNEG/solana-frontend/blob/main/pages/addvoters.tsx",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/eltNEG/solana-frontend/blob/main/pages/addvoters.tsx",
+                        "title": "eltNEG/solana-frontend",
+                        "description": "Contribute to eltNEG/solana-frontend development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://avatars.githubusercontent.com/u/22221987?s=400&v=4",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/2s0nAdAjQk-PECxwruAH6xmB1gZZo5PBgzeYZ0ahtzg/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/22221987",
+                            "width": 400,
+                            "height": 400
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T18:29:21.964000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815650384038723644",
+                "type": 0,
+                "content": "I am trying to write a modified version of a vote tutorial I saw on medium. I want the user who created a new vote to be able to add user accounts who can vote.\n\nIn the addvoter process, I am doing a create with seed and such that the seed is gotten from the voteDataAddress:\n\n`let expected_voter_data_account = Pubkey::create_with_seed(voter_account.key, seed, program_id)?;`\n\nAnd I am writing to the  `expected_voter_data_account`\n\nOn the frontend, the `vote_creator` is calling the addvoter process.\n\nI am not sure if this is the right approach but I am facing two issues at the frontend.\n\n1. I am getting `Attempt to debit an account but found no record of a prior credit.` when I tried to createwithseed\n\n\n```\nconst seed = voteDataAddress.substring(30)\n        console.log(seed)\n        const voterDataAccountKey = await PublicKey.createWithSeed(voterAccount.publicKey, seed, sol.getProgramPublicKey())\n        console.log(\"voterDataAccount\", voterDataAccountKey.toString())\n\n        const numBytes = 2\n        const rentExempt = await sol.conn.getMinimumBalanceForRentExemption(numBytes)\n\n        // await sol.conn.requestAirdrop(voterAccount.publicKey, 100_000_000)\n\n        let createTransaction = new Transaction().add( SystemProgram.createAccountWithSeed({\n            fromPubkey: voterAccount.publicKey,       // payer\n            lamports: rentExempt,                // funds to deposit on the new account\n            space: 2,                        // space required in bytes\n\n            basePubkey: userAccount.publicKey,       // derive from... must be signer\n            seed,                                   // derive from...\n            programId: sol.getProgramPublicKey(),                 // derive from... and will be owner of account\n\n            newAccountPubkey: voterDataAccountKey,\n        }))\n\n        const voterDataTx = await sendAndConfirmTransaction(\n            sol.conn,\n            createTransaction,\n            [userAccount]\n        )\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T18:23:25.606000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815638597666340885",
+                "type": 0,
+                "content": "Thanks ( Issue was I forgot to add --url htpps://devnet.solana.com )",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "173872622604386304",
+                    "username": "NBDY",
+                    "avatar": "9d5d694a2c9560af4c3d086acf86ac67",
+                    "avatar_decoration": null,
+                    "discriminator": "2087",
+                    "public_flags": 640
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T17:36:35.516000+00:00",
+                "edited_timestamp": "2021-02-28T17:52:44.303000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815638569737650217",
+                "type": 0,
+                "content": "ask for less SOL, or wait.  it's rate limited",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T17:36:28.857000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815638326773284904",
+                "type": 0,
+                "content": "",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "173872622604386304",
+                    "username": "NBDY",
+                    "avatar": "9d5d694a2c9560af4c3d086acf86ac67",
+                    "avatar_decoration": null,
+                    "discriminator": "2087",
+                    "public_flags": 640
+                },
+                "attachments": [
+                    {
+                        "id": "815638324626063360",
+                        "filename": "unknown.png",
+                        "size": 3810,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/815638324626063360/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/815638324626063360/unknown.png",
+                        "width": 525,
+                        "height": 28,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T17:35:30.930000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815638246402949122",
+                "type": 0,
+                "content": "Any ideas what to do when `solana airdrop 10` gives connection timed out?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "173872622604386304",
+                    "username": "NBDY",
+                    "avatar": "9d5d694a2c9560af4c3d086acf86ac67",
+                    "avatar_decoration": null,
+                    "discriminator": "2087",
+                    "public_flags": 640
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T17:35:11.768000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815633025433993226",
+                "type": 0,
+                "content": "<@401815058012962840> - are you creating the token accounts on behalf of the user before the swap?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "401815058012962840",
+                        "username": "andrew",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8147",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T17:14:26.992000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815627818658037761",
+                "type": 0,
+                "content": "How can I get Token Accounts owned by <Main Account> that's already been delegated to <ProgramId>?\n\nWe have a smart contract with PubKey = <ProgramId>. The user gives swap permissions to <TokenAccount>, which is owned by <Main Account>.\n\nWhen the user reconnects to our frontend app with <MainAccount>, how can we find the existing <TokenAccount>?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "401815058012962840",
+                    "username": "andrew",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8147",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:53:45.600000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815626592562446408",
+                "type": 0,
+                "content": "I got my tokens stuck on bridge that sollet.io uses, from sol to erc20, didn't receive the confirmation part on metamask. Are tokens gonna be sent back after some time, or what do I do now?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "793844193561673769",
+                    "username": "DjBarons",
+                    "avatar": "1b0620e17e8135a5175e776862797b9b",
+                    "avatar_decoration": null,
+                    "discriminator": "7986",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:48:53.276000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815625632821411860",
+                "type": 0,
+                "content": "<@!445425471027544095>  nice, thanks bro",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "700244911101837352",
+                    "username": "tuphan",
+                    "avatar": "3b7fe827443bcca5690f937107b678fe",
+                    "avatar_decoration": null,
+                    "discriminator": "9058",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445425471027544095",
+                        "username": "mvines.sol",
+                        "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                        "avatar_decoration": null,
+                        "discriminator": "6646",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:45:04.456000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815624938743660544",
+                "type": 0,
+                "content": "<@!700244911101837352> - sollet has some utility code that should help: https://github.com/project-serum/spl-token-wallet/blob/5ca3e3d90366be74383ec04aaa4cfbdb3ef77e22/src/utils/tokens/index.js#L204",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/project-serum/spl-token-wallet/blob/5ca3e3d90366be74383ec04aaa4cfbdb3ef77e22/src/utils/tokens/index.js",
+                        "title": "project-serum/spl-token-wallet",
+                        "description": "Contribute to project-serum/spl-token-wallet development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://avatars.githubusercontent.com/u/69240779?s=400&v=4",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/A_typiuO_HQUw0DdcaGdCvsneTucyd6NVpTbcb39Pm4/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/69240779",
+                            "width": 400,
+                            "height": 400
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "700244911101837352",
+                        "username": "tuphan",
+                        "avatar": "3b7fe827443bcca5690f937107b678fe",
+                        "avatar_decoration": null,
+                        "discriminator": "9058",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:42:18.975000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815620804763058185",
+                "type": 0,
+                "content": "Can anyone help me out?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "700244911101837352",
+                    "username": "tuphan",
+                    "avatar": "3b7fe827443bcca5690f937107b678fe",
+                    "avatar_decoration": null,
+                    "discriminator": "9058",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:25:53.357000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815620775762722836",
+                "type": 0,
+                "content": "But the doc right here https://spl.solana.com/associated-token-account#creating-an-associated-token-account is very ambiguous",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "700244911101837352",
+                    "username": "tuphan",
+                    "avatar": "3b7fe827443bcca5690f937107b678fe",
+                    "avatar_decoration": null,
+                    "discriminator": "9058",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://spl.solana.com/associated-token-account",
+                        "title": "Associated Token Account Program | Solana Program Library Docs",
+                        "description": "This program defines the convention and provides the mechanism for mapping"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:25:46.443000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815620661040644127",
+                "type": 0,
+                "content": "Hey team, I'm looking for a javascript function to create the associated token account.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "700244911101837352",
+                    "username": "tuphan",
+                    "avatar": "3b7fe827443bcca5690f937107b678fe",
+                    "avatar_decoration": null,
+                    "discriminator": "9058",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T16:25:19.091000+00:00",
+                "edited_timestamp": "2021-02-28T16:26:03.216000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815603539845971968",
+                "type": 19,
+                "content": "looks like bonfida on devnet is using old contract with new code",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "752722929397137452",
+                    "username": "b.sol",
+                    "avatar": "abb501a0ba6c489b0622eec0ac41653c",
+                    "avatar_decoration": null,
+                    "discriminator": "5322",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "447814520224743424",
+                        "username": "aaronov",
+                        "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                        "avatar_decoration": null,
+                        "discriminator": "2886",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T15:17:17.080000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815446753859207238"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815592647807991858",
+                "type": 0,
+                "content": "forget the question about `u64` I handeled it in other way",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T14:34:00.216000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815571339485511680",
+                "type": 19,
+                "content": "Sorry about that, we don't surface that information from the program.  It's actually hard-coded in the program that the fee account must be owned by 'HfoTxFR1Tm6kGmWgYWD6J7YHVy1UwqSULUGVLXkJqaKN' -- you can see the information at https://github.com/project-serum/oyster-swap/blob/master/src/utils/ids.tsx#L15",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "539801435571748868",
+                    "username": "jon!",
+                    "avatar": "b98d522909d620dd42a0a9d716cc467a",
+                    "avatar_decoration": null,
+                    "discriminator": "1687",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/project-serum/oyster-swap/blob/master/src/utils/ids.tsx",
+                        "title": "project-serum/oyster-swap",
+                        "description": "Contribute to project-serum/oyster-swap development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "815571339485511680",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://avatars.githubusercontent.com/u/69240779?s=400&v=4",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/A_typiuO_HQUw0DdcaGdCvsneTucyd6NVpTbcb39Pm4/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/69240779",
+                            "width": 400,
+                            "height": 400
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "447814520224743424",
+                        "username": "aaronov",
+                        "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                        "avatar_decoration": null,
+                        "discriminator": "2886",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T13:09:19.916000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815378820004839447"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815568615322419231",
+                "type": 0,
+                "content": "how to deal with it, how do you create `u64` in TS ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:58:30.425000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815568465774903328",
+                "type": 0,
+                "content": "`u64.fromBuffer(Buffer.from([100]));`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:57:54.770000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815568451312681013",
+                "type": 0,
+                "content": "but when trying to used fromBuffer i got another error with wrong array size",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:57:51.322000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815568037931122698",
+                "type": 0,
+                "content": "```export class u64 extends BN {\n    toBuffer(): Buffer;\n    static fromBuffer(buffer: Buffer): u64;\n  }\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:56:12.764000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815568009988014171",
+                "type": 0,
+                "content": "when I;m going to the sources I see",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:56:06.102000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815567833991741440",
+                "type": 0,
+                "content": "but this does not compile, there is no cuntructor like that",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:55:24.141000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815567746876178482",
+                "type": 0,
+                "content": "in paul-shaf example here creates u64 in FE layer as : `new u64(tokenAmount.value, 10),`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:55:03.371000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815567467308515348",
+                "type": 0,
+                "content": "`import {u64} from \"@solana/spl-token\";`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:53:56.717000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815567455585435658",
+                "type": 0,
+                "content": "guys I got stuck on some stupid TypeScript issue with `u64` from `spl-token` lib",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "756434712683216956",
+                    "username": "GregoryWhale",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5949",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:53:53.922000+00:00",
+                "edited_timestamp": "2021-02-28T13:00:37.362000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815562278824837130",
+                "type": 0,
+                "content": "correction - its solana-cargo-build-bpf that is no longer there. There is no build-bpf that i can find",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:33:19.686000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815561380769824789",
+                "type": 0,
+                "content": "oh, and solana 1.5.11",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:29:45.573000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815560965453905920",
+                "type": 0,
+                "content": "am I missing something obvious ? it looks a bit like the instructions dont work for me. Running windows 10",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:28:06.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815560749095059479",
+                "type": 0,
+                "content": "Hi, total newb on solana here, so please be patient while I get up to speed! I'm trying the build/run the hello world application. I've followed the instructions but when I try to run  npm run build:program-rust it spawns this command: cargo build-bpf <blah, blah> - and it then fails with the error error: no such subcommand: `build-bpf`. I tried cargo install build-bpf, but when I checked cargo it seems this package has been removed",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T12:27:14.970000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815534121567780894",
+                "type": 0,
+                "content": "Ok so I suspect it is because the `struct LendingMarket` 's `bump_seed` variable is not set correctly. But I don't see anyway to set it explicitly. \n\nIn the `process_init_lending_market` function, all the fields in the `LendingMarket` struct is set but the `bump_seed` is not. Why is that?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "287924636493152257",
+                    "username": "Leonard Ge",
+                    "avatar": "d8c5f940d53b8b76d72c65da6fcfcac0",
+                    "avatar_decoration": null,
+                    "discriminator": "1110",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T10:41:26.473000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815533256703344672",
+                "type": 0,
+                "content": "Hi I am wondering has anyone encountered `InvalidSeeds` when calling `initReserve` of the `token-lending` program? \n\nI am quite confused by this error since it is not used anywhere in the `token-lending` program... Some help will be greatly appreciated!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "287924636493152257",
+                    "username": "Leonard Ge",
+                    "avatar": "d8c5f940d53b8b76d72c65da6fcfcac0",
+                    "avatar_decoration": null,
+                    "discriminator": "1110",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T10:38:00.273000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815529303193550848",
+                "type": 19,
+                "content": "Great! I just started. node with bigtable and it works as expected,. thanks <@!445425471027544095> !",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445425471027544095",
+                        "username": "mvines.sol",
+                        "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                        "avatar_decoration": null,
+                        "discriminator": "6646",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T10:22:17.683000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815503135022907412"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815529144179621948",
+                "type": 0,
+                "content": "I suppoose it was 19 March but have no confirmation",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T10:21:39.771000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815528223953387590",
+                "type": 0,
+                "content": "What is the time/date of genesis on mainnet? When was mainnet on Solana launched?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T10:18:00.372000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815503235279618078",
+                "type": 0,
+                "content": "It does",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T08:38:42.608000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815503135022907412",
+                "type": 0,
+                "content": "I hope that BigTable has this",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T08:38:18.705000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815501666538487808",
+                "type": 19,
+                "content": "Looks like they do not have --enable-cpi-and-log-storage This is major problem",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445425471027544095",
+                        "username": "mvines.sol",
+                        "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                        "avatar_decoration": null,
+                        "discriminator": "6646",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T08:32:28.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815273933850935306"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815488561712201730",
+                "type": 0,
+                "content": "thanks, I was able to find that I was using systemprogram in my client code, while using my programID on the chain, so once I started using the right programID it worked out",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "716418766501576775",
+                    "username": "chknslaya",
+                    "avatar": "49650e4ef7fe4a0d15b92a194a1e2f5f",
+                    "avatar_decoration": null,
+                    "discriminator": "6955",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T07:40:24.157000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815486205613047808",
+                "type": 0,
+                "content": "<@!716418766501576775> - here's the correct derivation:\n```\n    fn test() {\n        let base= Pubkey::from_str(\"ATWubNdyC3UWQX1BAtQKZmusXnET3iTwdnLdMfnZ4uKD\").unwrap();\n        let owner = Pubkey::from_str(\"7hdnq9bTCxHKTpWiBJoML2b6YCmte8qRJzYuUZrLzJ3s\").unwrap();\n\n        assert_eq!(\n            Pubkey::create_with_seed(\n                &base,\n                \"whowannadietoday\",\n                &owner,\n            ),\n            Ok(\"Hn4T59DM4fJ982qWx8tbdroWzaBKW35cNA9FbBw2qgju\" // <-- not \"6RveYsjQKu3aA1gR9rvbMEhKApKoKNQAHR15GrGJCY8j\"\n                .parse()\n                .unwrap())\n        );\n    }\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "716418766501576775",
+                        "username": "chknslaya",
+                        "avatar": "49650e4ef7fe4a0d15b92a194a1e2f5f",
+                        "avatar_decoration": null,
+                        "discriminator": "6955",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T07:31:02.419000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815486080848494602",
+                "type": 0,
+                "content": "<@!716418766501576775> - looks like you are calling the `CreateAccountWithSeed` instruction of the system program and it's returning  \"custom program error: 0x5\", which corresponds to AddressWithSeedMismatch [1].    Check that the second account [2] that you are passing into the `CreateAccountWithSeed` instruction matches what `Pubkey::create_with_seed()` [3] would output.\n\n[1] https://github.com/solana-labs/solana/blob/3ac7e09de66f8a38a4da30cc4470fe3c55cf605a/sdk/program/src/system_instruction.rs#L25\n[2] https://github.com/solana-labs/solana/blob/3ac7e09de66f8a38a4da30cc4470fe3c55cf605a/sdk/program/src/system_instruction.rs#L94\n[3] https://github.com/solana-labs/solana/blob/0f6f6080f30dcb969eac17c682baa7d6127e210e/sdk/program/src/pubkey.rs#L121",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "716418766501576775",
+                        "username": "chknslaya",
+                        "avatar": "49650e4ef7fe4a0d15b92a194a1e2f5f",
+                        "avatar_decoration": null,
+                        "discriminator": "6955",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T07:30:32.673000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815463737271255051",
+                "type": 0,
+                "content": "hi all, could use a little advice on this transaction: https://explorer.solana.com/tx/2UyQxuRCtKx1riKNqREToVfTMbRSU4ZNEynBj1uGV1Eq5Hp6L5hsbqXHGrD2UEyR7VXHXdqAeqK5c1F4Qp4rXPTm?cluster=devnet\nfor some reason my transaction is returning custom error 0x5 which lines up with Account Data too small, but this is an unallocated account and the allocation function is only for 100 Bytes. Any tips would be appreciated,",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "716418766501576775",
+                    "username": "chknslaya",
+                    "avatar": "49650e4ef7fe4a0d15b92a194a1e2f5f",
+                    "avatar_decoration": null,
+                    "discriminator": "6955",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/tx/2UyQxuRCtKx1riKNqREToVfTMbRSU4ZNEynBj1uGV1Eq5Hp6L5hsbqXHGrD2UEyR7VXHXdqAeqK5c1F4Qp4rXPTm?cluster=devnet",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T06:01:45.549000+00:00",
+                "edited_timestamp": "2021-02-28T06:02:12.235000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815449405854318622",
+                "type": 0,
+                "content": "Trying to setup a pool that I have access to mint two tokens so I can test swapping from my program.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T05:04:48.673000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815449138242125825",
+                "type": 0,
+                "content": "I'm more or less running the same code as this: https://github.com/solana-labs/solana-program-library/blob/833ea9324d129b340b873f636d795daf85acc61f/token-swap/js/cli/token-swap-test.js#L161",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/solana-labs/solana-program-library/blob/833ea9324d129b340b873f636d795daf85acc61f/token-swap/js/cli/token-swap-test.js",
+                        "title": "solana-labs/solana-program-library",
+                        "description": "A collection of Solana-maintained on-chain programs - solana-labs/solana-program-library",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://avatars.githubusercontent.com/u/35608259?s=400&v=4",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/08f5_NPtMG-2NPdbbrrn13r1RY4G9Eqm-kbZ6B8F2Ik/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/35608259",
+                            "width": 400,
+                            "height": 400
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T05:03:44.869000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815448749001801740",
+                "type": 0,
+                "content": "At least not in terms of being able to view it on explorer",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T05:02:12.067000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815448342434938910",
+                "type": 0,
+                "content": "`Transaction simulation failed: Error processing Instruction 1: custom program error: 0x2 \n    Program 11111111111111111111111111111111 invoke [1]\n    Program 11111111111111111111111111111111 success\n    Program SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8 invoke [1]\n    Program log: Instruction: Init\n    Program log: Error: The input account owner is not the program address\n    Program SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8 consumed 18887 of 200000 compute units\n    Program SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8 failed: custom program error: 0x2\n`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T05:00:35.134000+00:00",
+                "edited_timestamp": "2021-02-28T05:00:47.062000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815448238454079509",
+                "type": 0,
+                "content": "Ok thanks. I don't think a transaction even occurs.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T05:00:10.343000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815447789353566218",
+                "type": 0,
+                "content": "(I don't have the swap details paged into my brain unfortunately)",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T04:58:23.269000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815447661749862441",
+                "type": 0,
+                "content": "The best folks to help with ^ are <@!539801435571748868>,  <@!752722929397137452> or <@!466984915376799748>",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "466984915376799748",
+                        "username": "starry",
+                        "avatar": "a020cfb4a52402d29aed84faf59cf181",
+                        "avatar_decoration": null,
+                        "discriminator": "3856",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "539801435571748868",
+                        "username": "jon!",
+                        "avatar": "b98d522909d620dd42a0a9d716cc467a",
+                        "avatar_decoration": null,
+                        "discriminator": "1687",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "752722929397137452",
+                        "username": "b.sol",
+                        "avatar": "abb501a0ba6c489b0622eec0ac41653c",
+                        "avatar_decoration": null,
+                        "discriminator": "5322",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T04:57:52.846000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815446753859207238",
+                "type": 19,
+                "content": "Yeah I'm really struggling to find the correct registry of programs and account info to be able to move forward. I'm also having trouble being able to create a Pool on the different dex/swap UI's available. Just tried bonfida on devnet and it fails the same way as the oyster-swap project. https://explorer.solana.com/tx/iSmP9KKKqZVWvVZgXnWupTS3ubRxGzg58mpAQwiY7hBGPgau3TLh7h2a2Y46mswebdgWNzx7dfzKYeUCbdyYiws?cluster=devnet",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/tx/iSmP9KKKqZVWvVZgXnWupTS3ubRxGzg58mpAQwiY7hBGPgau3TLh7h2a2Y46mswebdgWNzx7dfzKYeUCbdyYiws?cluster=devnet",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters",
+                        "reference_id": "815446753859207238"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "445425471027544095",
+                        "username": "mvines.sol",
+                        "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                        "avatar_decoration": null,
+                        "discriminator": "6646",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T04:54:16.388000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815445780088225813"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815445780088225813",
+                "type": 19,
+                "content": "<@!539801435571748868> might be able to help if you can share the transaction.  \nLooks like the swap program could use some logging during error conditions that return the same `SwapError::InvalidOwner` for easier user debug:\nhttps://github.com/solana-labs/solana-program-library/blob/b26491552f78de3b1f0652c35e4df6fda3af477d/token-swap/program/src/processor.rs#L238-L250",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/solana-labs/solana-program-library/blob/b26491552f78de3b1f0652c35e4df6fda3af477d/token-swap/program/src/processor.rs",
+                        "title": "solana-labs/solana-program-library",
+                        "description": "A collection of Solana-maintained on-chain programs - solana-labs/solana-program-library",
+                        "color": 1975079,
+                        "reference_id": "815445780088225813",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://avatars.githubusercontent.com/u/35608259?s=400&v=4",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/08f5_NPtMG-2NPdbbrrn13r1RY4G9Eqm-kbZ6B8F2Ik/%3Fs%3D400%26v%3D4/https/avatars.githubusercontent.com/u/35608259",
+                            "width": 400,
+                            "height": 400
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "447814520224743424",
+                        "username": "aaronov",
+                        "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                        "avatar_decoration": null,
+                        "discriminator": "2886",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "539801435571748868",
+                        "username": "jon!",
+                        "avatar": "b98d522909d620dd42a0a9d716cc467a",
+                        "avatar_decoration": null,
+                        "discriminator": "1687",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T04:50:24.223000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815379005247062037"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815445122980380725",
+                "type": 19,
+                "content": "does the account only need to exist during the transaction? If so then no rent is required by the system at all",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "473198585890996224",
+                        "username": "lev_s",
+                        "avatar": "035854bf27fbfcb8951d5f33346f4722",
+                        "avatar_decoration": null,
+                        "discriminator": "7844",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T04:47:47.556000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815410376480260096"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815411115839193088",
+                "type": 19,
+                "content": "You could close the account at the end and it would refund the remainder?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "473198585890996224",
+                        "username": "lev_s",
+                        "avatar": "035854bf27fbfcb8951d5f33346f4722",
+                        "avatar_decoration": null,
+                        "discriminator": "7844",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T02:32:39.622000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815410376480260096"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815410376480260096",
+                "type": 0,
+                "content": "Hi, is there a way to have an account funded with enough rent for just one transaction?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "473198585890996224",
+                    "username": "lev_s",
+                    "avatar": "035854bf27fbfcb8951d5f33346f4722",
+                    "avatar_decoration": null,
+                    "discriminator": "7844",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T02:29:43.345000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815379005247062037",
+                "type": 0,
+                "content": "<@!445425471027544095> is there a way to figure out which account its complaining about owner?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445425471027544095",
+                        "username": "mvines.sol",
+                        "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                        "avatar_decoration": null,
+                        "discriminator": "6646",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T00:25:03.860000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815378820004839447",
+                "type": 0,
+                "content": "From what I could figure out swap program is `SwaPpA9LAaLfeLi3a68M4DjnLqgtticKg6CnyNwgAC8` and its fee account is `Hj4WnYu918EN5rzevpZx8RTzkW28iZYNcktUHDRJr5er`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T00:24:19.695000+00:00",
+                "edited_timestamp": "2021-02-28T00:24:28.634000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815378645103018004",
+                "type": 0,
+                "content": "Trying to create a pool programatically and keep hitting `Error: The input account owner is not the program address`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T00:23:37.995000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815373731659907132",
+                "type": 0,
+                "content": "Does anyone have the account info for the token swap program on devnet? Looking for the `owner fee` address",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-28T00:04:06.539000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815371490258059308",
+                "type": 0,
+                "content": "I hold data and lamports in a system program account owned by my program across calls, but I am thinking this is unsafe since anybody can create such account on behalf of the program which would just look the same to other users. Am i right to think that ownership should be given to the PDA by the program during the initialization phase?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T23:55:12.147000+00:00",
+                "edited_timestamp": "2021-02-27T23:56:05.808000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815365745516216320",
+                "type": 19,
+                "content": "I'd probably model it off how token program is done and then import it as a library to your program needing to call it.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "486834292895252489",
+                        "username": "Kirill Madorin",
+                        "avatar": "60b4d0f7176f9b9f878cce1753e82390",
+                        "avatar_decoration": null,
+                        "discriminator": "6788",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T23:32:22.494000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815339922860146698"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815339922860146698",
+                "type": 0,
+                "content": "I have Program A from which I'd like to invoke instruction of Program B. \nAt the moment of writing Program A I only know that Program B will have execute_operation instruction and its interface (which params and accounts it should accept). \nHow can I invoke execute_operation instruction of Program B from Program A? I don't know how to pack it inside Program A without knowing  the implementation of program B. Should I pass instruction data as an argument?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "486834292895252489",
+                    "username": "Kirill Madorin",
+                    "avatar": "60b4d0f7176f9b9f878cce1753e82390",
+                    "avatar_decoration": null,
+                    "discriminator": "6788",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T21:49:45.893000+00:00",
+                "edited_timestamp": "2021-02-27T22:52:12.656000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815338466559656008",
+                "type": 0,
+                "content": "why testnet.solana.com domain have cors?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "289763878877790210",
+                    "username": "AC | Avaulto.com",
+                    "avatar": "03be557da5ea12b5319dc3c2bff6bc26",
+                    "avatar_decoration": null,
+                    "discriminator": "3896",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "815338464211239003",
+                        "filename": "unknown.png",
+                        "size": 16746,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/815338464211239003/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/815338464211239003/unknown.png",
+                        "width": 485,
+                        "height": 69,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T21:43:58.684000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815338397341188097",
+                "type": 0,
+                "content": "guys",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "289763878877790210",
+                    "username": "AC | Avaulto.com",
+                    "avatar": "03be557da5ea12b5319dc3c2bff6bc26",
+                    "avatar_decoration": null,
+                    "discriminator": "3896",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T21:43:42.181000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815324540502540379",
+                "type": 0,
+                "content": "That is exactly what I needed, thank you",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "300792744693989377",
+                    "username": "Ubarjohade",
+                    "avatar": "a9ea11be2deb5e1094ba03fd333bc269",
+                    "avatar_decoration": null,
+                    "discriminator": "8387",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T20:48:38.453000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815323375068119080",
+                "type": 19,
+                "content": "The explorer doesn't offer any sort of API functionality.  You'll have to use an RPC node, https://docs.solana.com/developing/clients/jsonrpc-api#getconfirmedblock",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "585868308419444749",
+                    "username": "trent.sol",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9709",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://docs.solana.com/developing/clients/jsonrpc-api",
+                        "title": "JSON RPC API | Solana Docs",
+                        "description": "Solana nodes accept HTTP requests using the JSON-RPC 2.0 specification.",
+                        "reference_id": "815323375068119080"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "300792744693989377",
+                        "username": "Ubarjohade",
+                        "avatar": "a9ea11be2deb5e1094ba03fd333bc269",
+                        "avatar_decoration": null,
+                        "discriminator": "8387",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T20:44:00.592000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815321763340615730"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815321763340615730",
+                "type": 0,
+                "content": "Anyone know the correct way to make a request to https://explorer.solana.com/block/66960001 using python. Might not be possible, if there is public api somewhere that allows me to get this information that would be helpful too \ud83d\ude42",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "300792744693989377",
+                    "username": "Ubarjohade",
+                    "avatar": "a9ea11be2deb5e1094ba03fd333bc269",
+                    "avatar_decoration": null,
+                    "discriminator": "8387",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/block/66960001",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T20:37:36.326000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815321693861445663",
+                "type": 0,
+                "content": "Is this Serum event parsed correctly? https://explorer.solana.com/tx/217Eetx8T2bpT8wRKcFwywavBupZLowHeaK28rFYiiepvgSAqfq8jBAXtj16D6veC5akhVFMouCmk93LspygoAnk   in action ConsumeEvents look like event queue parameter is incorrect.... ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "546486384622305307",
+                    "username": "Aleksey Studnev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "3244",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/tx/217Eetx8T2bpT8wRKcFwywavBupZLowHeaK28rFYiiepvgSAqfq8jBAXtj16D6veC5akhVFMouCmk93LspygoAnk",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T20:37:19.761000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304892318351360",
+                "type": 19,
+                "content": "Thank you",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "447814520224743424",
+                        "username": "aaronov",
+                        "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                        "avatar_decoration": null,
+                        "discriminator": "2886",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:30:33.961000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815304738294726696"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304738294726696",
+                "type": 0,
+                "content": "I'm new to Rust too but learned some pack/unpack info from this tutorial: https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/",
+                        "title": "Programming on Solana - An Introduction | paulx",
+                        "description": "Learn the fundamentals of Programming on Solana by building an escrow"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:29:57.239000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304673237401671",
+                "type": 0,
+                "content": "Ok. thanks. Let me give it a try",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:29:41.728000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304536902074428",
+                "type": 0,
+                "content": "I don't have a simple example to show. But since it is a fixed byte array you can just unpack/pack that number of bytes",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:29:09.223000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304365207584828",
+                "type": 0,
+                "content": "I am curious how this was done in the token program. It seems the token name and token symbols are not stored",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:28:28.288000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815304092322365461",
+                "type": 0,
+                "content": "can you please show me a full eg that includes how to pack and unpack? I am new to rust too",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:27:23.227000+00:00",
+                "edited_timestamp": "2021-02-27T19:27:52.050000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303857076699166",
+                "type": 19,
+                "content": "I solved string by using a fixed byte array - [u8; MAX_LEN]",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "584061031702200340",
+                        "username": "eltneg",
+                        "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                        "avatar_decoration": null,
+                        "discriminator": "6429",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:26:27.140000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815303694253555732"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303694253555732",
+                "type": 19,
+                "content": "What if I give the title a max len?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "447814520224743424",
+                        "username": "aaronov",
+                        "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                        "avatar_decoration": null,
+                        "discriminator": "2886",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:25:48.320000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815303363163717694"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303546844610630",
+                "type": 0,
+                "content": "Since account storage has to be known and allocated up front, you can't have a dynamic type like string.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:25:13.175000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303363163717694",
+                "type": 19,
+                "content": "You can store a fixed length string, otherwise I think you would need to use a byte array with another variable storing the length.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "584061031702200340",
+                        "username": "eltneg",
+                        "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                        "avatar_decoration": null,
+                        "discriminator": "6429",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:24:29.382000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "message_id": "815303131583610920"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303289624068156",
+                "type": 0,
+                "content": "how can I implement pack and unpack for this?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:24:11.849000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303191704371201",
+                "type": 0,
+                "content": "I have a struct defined as\n\n```\npub struct Vote {\n    pub yes: u8,\n    pub no: u8,\n    pub title: str,\n}\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:23:48.503000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815303131583610920",
+                "type": 0,
+                "content": "can I store a string into an account?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "584061031702200340",
+                    "username": "eltneg",
+                    "avatar": "54f504e8736a309d5e9b7d5e95764564",
+                    "avatar_decoration": null,
+                    "discriminator": "6429",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:23:34.169000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815302964184481813",
+                "type": 0,
+                "content": "Anyone aware of any examples available for interacting with serum via a program? Seems to only be JS/web libraries available. Can serum-dex rust repo be used as a library like the token program?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "447814520224743424",
+                    "username": "aaronov",
+                    "avatar": "2ed9b87e2f1c884c5f0ada2401d6c230",
+                    "avatar_decoration": null,
+                    "discriminator": "2886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:22:54.258000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815300103765360691",
+                "type": 0,
+                "content": "yeah we aligned fees across devnet, testnet, mainnet for convenience",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "445425471027544095",
+                    "username": "mvines.sol",
+                    "avatar": "54d3267c14344903fa4e7e472e15aa23",
+                    "avatar_decoration": null,
+                    "discriminator": "6646",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:11:32.281000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "815299050294870046",
+                "type": 0,
+                "content": "devnet fees end up comparable to mainnet fees, right?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "296346160124395520",
+                    "username": "tenoke",
+                    "avatar": "f0fb68bd226a66f492d84556510ee5db",
+                    "avatar_decoration": null,
+                    "discriminator": "4247",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-02-27T19:07:21.114000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "55a62e0ac61b1c64b4269fb305ae2f57"
+}

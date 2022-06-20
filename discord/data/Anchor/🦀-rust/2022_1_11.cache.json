@@ -1,0 +1,355 @@
+{
+    "total_results": 11,
+    "messages": [
+        [
+            {
+                "id": "930526363142742106",
+                "type": 19,
+                "content": "I'm thinking it has to do with the memory layout (https://docs.solana.com/developing/on-chain-programs/overview#memory-map). The account data lives in the \"Program input parameters\" memory, so if you make a CPI call, that data changes without your local variable updating, hence you need to deserialize again from that memory space into your variable located in the stack/heap.\nI have not seen this part of the code though, so more of a guess. Maybe someone could confirm.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T18:19:33.317000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930523406888218664"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930523406888218664",
+                "type": 0,
+                "content": "anyone here understands how does reload work, i have looked at the code, all it does is borrows data from the account and deserializes it again, am confused, when you use the Account type it does this thing and deserializes it, why do i need to do this whole process of borrowing data and deserializing again to get the updated value, i feel like am missing a rust concept or something in-order to understand what the reload function does.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T18:07:48.491000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930504990617903184",
+                "type": 19,
+                "content": "use `iter_mut` instead of `iter`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "857366464139100231",
+                        "username": "toplus",
+                        "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                        "discriminator": "6688",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T16:54:37.710000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930404068151656468"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930418923747307540",
+                "type": 0,
+                "content": "Is there a way to change compute units limit on Solana 1.8.11 locally? maybe some flag in [test.validator] in Anchor.toml ? because now it is a 200 000 per transaction, in 1.7.17 it was 1M and in 1.9 we can set how much we need. I've heard that limits on devnet and mainnet is different from local",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "894513797044244490",
+                    "username": "Robert | Synthetify",
+                    "avatar": "6d89dda78a4e7e6473eb408c408f1ace",
+                    "discriminator": "7588",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T11:12:37.769000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930404283923456020",
+                "type": 0,
+                "content": "solved in this way:\n\nif base_account.users.iter().any(|u| u.user_address == *user.to_account_info().key) {\n            let index = base_account.users.iter().position(|u| u.user_address == *user.to_account_info().key).unwrap();\n\n            let content = Content {\n                user_address: *user.to_account_info().key,\n                link: link.to_string(),\n                description: description.to_string(),\n                votes: 0,\n                date: 0,\n            };\n            \n            base_account.users[index].contents.push(content);\n        }",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "857366464139100231",
+                    "username": "toplus",
+                    "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                    "discriminator": "6688",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T10:14:27.363000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930404068151656468",
+                "type": 19,
+                "content": "ok I was expecting something like this. I have add a check and then made an unwrap, but I receive that the type is unmutable. I still make a lot of confusion with rust. Probably is easier to find the index and then use it to modify the users content.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "857366464139100231",
+                    "username": "toplus",
+                    "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                    "discriminator": "6688",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T10:13:35.919000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930403617947648020"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930403617947648020",
+                "type": 19,
+                "content": "youre calling the `find` function to find the appropriate user and then try to access `contents` on the `user_found`. But `find` returns an `Option<&User>` (because `find` cannot be sure there is a user matching your predicate in the vector) so you need to handle that option before you can access the `contents` field",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "347689664855015424",
+                    "username": "paulx",
+                    "avatar": "f0f52417776819a379ec501b16d461c1",
+                    "discriminator": "9059",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "857366464139100231",
+                        "username": "toplus",
+                        "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                        "discriminator": "6688",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T10:11:48.582000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930398665800048670"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930398665800048670",
+                "type": 0,
+                "content": "I am trying to find a user from my users Vec, and add some content in the contents Vec of the user. I am getting mad. Here is the code:\n\npub fn add_content(ctx: Context<AddContent>, link: String, description: String) -> ProgramResult {\n        let base_account = &mut ctx.accounts.base_account;\n        let user = &mut ctx.accounts.user;\n\n        let user_found = base_account.users.iter().find(|u| u.user_address == *user.to_account_info().key);\n       \n        let content = Content {\n            user_address: *user.to_account_info().key,\n            link: link.to_string(),\n            description: description.to_string(),\n            votes: 0,\n            date: 0,\n          };\n          \n        user_found.contents.push(content);\n        \n        Ok(())\n    }\n\n#[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]\npub struct Content {\n    pub user_address: Pubkey,\n    pub link: String,\n    pub description: String,\n    pub votes: u64,\n    pub date: u128,\n}\n\n#[derive(Debug, Clone, AnchorSerialize, AnchorDeserialize)]\npub struct User {\n    pub user_address: Pubkey,\n    pub name: String,\n    pub contents: Vec<Content>,\n}\n\n#[account]\npub struct BaseAccount {\n    pub users: Vec<User>,\n}\n\nActually I receive  error:\n\"no field `contents` on type `Option<&User>`\"\n\nbut I've tried in a lot of different ways. Is anyone able to help me?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "857366464139100231",
+                    "username": "toplus",
+                    "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                    "discriminator": "6688",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T09:52:07.898000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930326448672227328",
+                "type": 0,
+                "content": "I'm playing with the new (to me at least) `init_if_needed` constraint documented in 0.20.0. Was curious if Anchor provides a way to check if the account has already been initialized in the instruction, or if the best way to do this is to just store a `bool` in the account and set that on first call.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "150318120567963648",
+                    "username": "VegetarianOrc",
+                    "avatar": "269b6ddecbdd6df410e0163af8cb18e2",
+                    "discriminator": "8658",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T05:05:09.993000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930253335326523402",
+                "type": 0,
+                "content": "HashMap's are not supported",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "448034961652449283",
+                    "username": "fanatid",
+                    "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                    "discriminator": "8814",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-11T00:14:38.413000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "930231664884465714",
+                "type": 0,
+                "content": "When I test I get idlError:\n\nIdlError: Type not found: {\"name\":\"contents\",\"type\":{\"defined\":\"HashMap<String,Vec<Content>>\"}}\n\nThis is my base account:\n\n#[account]\npub struct BaseAccount {\n    pub contents: HashMap<String,Vec<Content>>,\n    pub users: HashMap<String,Vec<Content>>,\n}",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "857366464139100231",
+                    "username": "toplus",
+                    "avatar": "fe85373cc8d16152ac426bec2bfc0aaf",
+                    "discriminator": "6688",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-10T22:48:31.777000+00:00",
+                "edited_timestamp": "2022-01-10T22:48:51.228000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "80b16465da5340e4876d242beb7884ec"
+}

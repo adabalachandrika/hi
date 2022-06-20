@@ -1,0 +1,202 @@
+{
+    "total_results": 6,
+    "messages": [
+        [
+            {
+                "id": "951451798613397615",
+                "type": 0,
+                "content": "8 for the \"account discriminator\" bytes. Then a vec takes up 4 bytes to encode its length, plus N times however much space each individual item takes (in this case a u64 takes 8 bytes). So if you want a max size of 8, you'd need 8 + (4 + 8 * 8) + (4 * 8 + 8).",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T12:09:45.909000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951420136429076500",
+                "type": 0,
+                "content": "Hey all, How to calculate the space of struct has vector. (Max size = 8)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "476806559674925066",
+                    "username": "Michael Duong",
+                    "avatar": "f0e99b25717f62e6d0bfdf04251c30af",
+                    "discriminator": "1148",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "951420134944276490",
+                        "filename": "unknown.png",
+                        "size": 9276,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/951420134944276490/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/951420134944276490/unknown.png",
+                        "width": 251,
+                        "height": 113,
+                        "content_type": "image/png"
+                    },
+                    {
+                        "id": "951420135170789436",
+                        "filename": "unknown.png",
+                        "size": 9282,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/951420135170789436/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/951420135170789436/unknown.png",
+                        "width": 426,
+                        "height": 84,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T10:03:57.056000+00:00",
+                "edited_timestamp": "2022-03-10T10:09:57.531000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951254239110385705",
+                "type": 0,
+                "content": "Right, thanks! I will not need to write to that account, but thanks for the heads up",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "687995939893411895",
+                    "username": "Laki",
+                    "avatar": "ecc52fd846044155e6821bbdabfc552b",
+                    "discriminator": "5882",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T23:04:44.053000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951253976450478090",
+                "type": 0,
+                "content": "You have to be a bit careful though, because I think you have to manually remember to call `the_account.exit(ctx.program_id)?;` if you write to that `TheStruct`.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T23:03:41.430000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951253565396123678",
+                "type": 19,
+                "content": "You can do\n```.rs\nlet the_account: Account<TheStruct> = Account::try_from(&ctx.accounts.the_account_info)?;\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "687995939893411895",
+                        "username": "Laki",
+                        "avatar": "ecc52fd846044155e6821bbdabfc552b",
+                        "discriminator": "5882",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T23:02:03.427000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "951251599177703454"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951251599177703454",
+                "type": 0,
+                "content": "Hey all, are there any examples of how to parse an `AccountInfo` or `UncheckedAccount` to an `Account<'info, Struct>` or at least just data to the `Struct`? My reason for not using `Account` is that I sometimes want to pass an uninitialized PDA that I intentionaly do not want to initialize in that instruction because depending on some other Account in the instruction it should or doesn't have to be initialized. Any clean way of doing this? Thanks",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "687995939893411895",
+                    "username": "Laki",
+                    "avatar": "ecc52fd846044155e6821bbdabfc552b",
+                    "discriminator": "5882",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-09T22:54:14.644000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "f1546437428d7f45e84063af01bc2e42"
+}

@@ -1,0 +1,843 @@
+looks like it works. Thanks! To be clear, this auto-handles turning the array into a slice, correct?
+I often just inline expressions like this since rust does a better job figuring out what type to infer.
+<@!369925492431912980> amending my other answer, this is just an annoying rust type inference issue I think. What happens if you add an explicit annotation, `let seeds: &[&[&[u8]]] = &[ &[PDA_SEED, pubkey.as_ref(), &[_bump_seed]] ]`?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Maybe will be helpful to somebody: https://github.com/fanatid/solana-nice-address (I do not have a GPU, so spent little time for CPU generator)
+Someone know why I get this error ?
+```the trait bound `MyEvent: Event` is not satisfied
+the trait `Event` is not implemented for `MyEvent```
+everything else would be in the library
+you should be able to use `anchor-client` as a crate dependency for your code and just replicate the `events` function in the code
+<@!501570363566587905> is there a way to import this using cargo ? I don't wanna rewrite most of the code
+https://github.com/project-serum/anchor/blob/master/client/example/src/main.rs#L169
+See `client/example`.
+https://github.com/project-serum/anchor/blob/master/lang/attribute/event/src/lib.rs#L53
+the typescript client does it by watching program logs. an anchor event is just a formatted log message so you'd probably have to reimplement that logic
+anyone know how to listen to events in rust ? or give me a hint
+I prefer to code in rust > js
+rust can be used in the off-chain :))
+people don't really use websockets cause they're mostly broken and unreliable
+it's just you're asking in the rust channel, hence the confusion probably
+only if you like track values in an account as a way of "listening"
+yeah I figured
+nope
+Okay, what about rust ?
+yeah or ts
+this is in js ?
+`program.addEventListener('MyOnChainEvent', event => {...})`
+is it possible to listen to events on-chain ?
+front end
+are you trying to do this on the front end or in your program?
+<@!248066053161222144>
+when that instruction is emitted
+how to listen to events for certain instruction ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+but i will stop doing that soon
+Ah, yeah, that can be super confusing
+so right now i run `cargo run --manifest-path ../anchor/Cargo.toml test` which ensures that they're the same exact anchor
+so like if you're referring to `anchor_spl = '../../spl'` or something
+the only weirdness with versions I've noticed is when the anchor CLI doesn't match the local anchor repo
+yeh
+hmm
+I'm not sure if there's even any syntax in rust to specifically import one version of a crate's dependency like that :/ (Also not sure how multiple versions even work in cargo, what the lock file looked like, etc. Was super confusing)
+Even more confusing, they just wanted to do `SomeAccountType::borsh_method`. So Rust tells you to do `use anchor_lang::AnchorDeserialize` or whatever, but that actually imports the *new* anchor version of that trait—but that `borsh_method` is actually provided by the *old* anchor version's trait, just because the library they're using was written with an old anchor version :/ So you still can't call it.
+how did the version clash manifest itself
+so what exactly was going on. Candy machine had v14 and you were trying to do CPI to it using a V17 program?
+Yeah, you need to explicitly import traits in order for their methods to come into scope. Funny example that came up recently: https://discord.com/channels/889577356681945098/889577356681945101/895213633385140224 Multiple versions of anchor wandering around => tough to import the old version's traits while working in a crate using the new version 🥴
+although solana program is failing, it's not for rust reasons at least
+everything working fine for now
+that solved it
+it looks like for generic you can just add the `where` clause to the struct definition as well
+ok,
+which is strange because we use `#[account]` above `SellNoAccount` which implements the required traits
+getting this error on the original struct with the generic
+```rust
+struct OrderbookClient<'info, T> {
+    trading_account: ProgramAccount<'info, T>,
+    ...
+}
+```
+```
+the trait bound `T: anchor_lang::AccountSerialize` is not satisfied
+
+the trait `anchor_lang::AccountSerialize` is not implemented for `T`rustc(E0277)
+```
+more compile errors
+hmm ok no
+rust is so great sometimes
+once these traits were added to the list of constraints the errors went away and the correct trait was available!
+```rust
+impl<'info, T> OrderbookClient<'info, T> 
+where T: Seeds + anchor_lang::AccountSerialize + anchor_lang::AccountDeserialize + std::clone::Clone {
+```
+it's fixed seemingly
+ok weird
+but presumably to access `Seeds` on `ProgramAccount<'info, TradeYesAccount>` something additional is needed?
+Here's my rough code setup
+```rust
+#[account]
+#[derive(Default)]
+pub struct TradeYesAccount {
+  ...
+}
+
+pub trait Seeds {
+    fn get(&self) -> [&[u8]; 4];
+}
+
+impl Seeds for TradeYesAccount {
+    fn get(&self) -> [&[u8]; 4] {
+        [...]
+    }
+}
+```
+`get` is the method name on the trait `Seeds`
+But I get this error 
+```
+no method named `get` found for struct `anchor_lang::ProgramAccount` in the current scope
+```
+so there's a `ProgramAccount<'info, T>` and I've implemented a trait `Seeds` on some of the program account structs
+how to access traits implemented on a ProgramAccount's type?
+complicated question
+```struct Env {
+    ctx: ProgramTestContext,
+    payer: Keypair,
+    anchor_client: Client,
+}```
+Can you tell me how to create `anchor_client :: Client` for `solana_program_test`. I want to test methods with signature `(client: & Client, pid: Pubkey) -> Result <()>`.
+Implementation for the environment on the screen. Thank you in advance ! 🙂
+Though some old apis, e.g., the spl token program, still require it for legacy reasons.
+You can get all the sysvars dynamically, e.g., `Clock::get()`.
+No way! 🎉
+You don't anymore!
+"... you have to pass in the clock??"
+Haha, yeah, this is definitely a funny part of the learning curve. Lots of "... ffs, I have to pass that in too??"
+it's one of the things I thought were really weird about solana. If i already know the address of things like spl-token, why do I need to pass it in. I'm even using the address I already know to verify the address that the user passed 😵‍💫
+Yea that would be nice. But the runtime doesn't allow it.
+darn ok, thanks
+Nope. Context.
+any clean way to construct `AccountInfo` from just a pubkey or does it have to be passed in context
+Correct.
+you need to do a full balance transfer out of a token account prior to doing `close_account` correct? the destination for the context is just for lamports?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+^ He links to another of his crates, https://github.com/dtolnay/linkme, and I thought it might be good for vacuuming up all the different error enum variants in your program... but unfortunately it also doesn't quite work for solana's target 😦 You get an `Access violation in program section` error from the linker shenanigans.
+Doesn't work on solana's ebpf target unfortunately, but still, definitely a neat idea.
+This is a kind of fascinating dtolnay crate I ran into while thinking about errors: https://crates.io/crates/inventory
+Hi Friends. I am trying to read Metaplex Metadata account data. My Problem is .. I am not sure how to pass the data in Metadata struct provided in metaplex contract state. I mean if it was my own data I would have made an unpack instruction but I am not sure how I can unpack Metadata in metadata struct. Any help/guidance would be appreciable.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+When writing tests (in Rust) for a program written in anchor, I encountered a nuance that you do not have access (within the solana-program-test) to an instance of the RpcClient structure so that you can create the correct anchor_client :: Client. The first thing that came to mind was to extend the RequestBuilder implementation with a method with the signature `(self, recent_blockhash: Hash) -> Transaction`. That allows you to write tests of the program in approximately the following way:
+```rust
+#[tokio::test]
+async fn test_hello_word() {
+    let mut env = Env::new().await;
+
+    let pda_key = Pubkey::find_program_address(
+        &[b"hello".as_ref(), env.payer.pubkey().as_ref()],
+        &hello_world::ID,
+    );
+
+    let program = env.anchor_client.program(id());
+
+    let tx = program
+        .request()
+        .signer(&env.payer)
+        .accounts(Create {
+            greeted_account: pda_key.0,
+            user: env.payer.pubkey(),
+            system_program: system_program::ID,
+        })
+        .args(CreateAcc)
+        .build_tx(env.ctx.last_blockhash);
+
+    env.ctx.banks_client.process_transaction(tx).await.unwrap();
+}
+```
+To put it mildly, it seems to me that I am doing something wrong :). In this regard, I have two questions:
+1) Am I doing something wrong? 🙂  How to properly test a program with Rust? Is it possible at the same time to do integration tests, testing the client (written in Rust) and program parts together?
+2) What do you think about extending RequestBuilder with the functionality described above? I can assume that in some scenarios it might be useful to have access to the transaction generated by the RequestBuilder.
+yes
+ok, so for serum then it's always a necessity
+something like that
+it disables the entrypoint macro
+then bim boom badaboom at build time
+if there is a program in it and you don't enable this feature you end up with 2 entrypoints
+for my own experiments i reference local version of packages, e.g. `path = "../../deps/serum-dex/dex"` instead `version = "4.0"` and was trying to figure out ahead of time if i needed to start adding features
+<https://github.com/project-serum/anchor/blob/master/spl/Cargo.toml>
+the cargo.toml for anchor-spl now has a bunch of these features, which i'm not sure if they were there before
+With reference to `Cargo.toml` files, when is it necessary to add `features = ["no-entrypoint"]` to the dependencies?
+i'm gunna take another crack at it and if for some reason i'm still falling short on an understanding of how the logic behind em get setup, a call would be great
+Sounds reasonable to me!
+my thoughts were to just add a new `checked` constraint that falls into the `ConstraintInitGroup` instead of an `init` duplicate
+yep got that file up already 😁
+Would need to be in the code generation step. Here is where the `init` constraint gets generated https://github.com/project-serum/anchor/blob/master/lang/syn/src/codegen/accounts/constraints.rs#L144.
+that would be awesome, i was working on the implementation for this issue (https://github.com/project-serum/anchor/issues/852) but getting lost on where the zero data check needs to be
+At a high level, all the macros can be broken down into three steps. For `#[derive(Accounts)]` we have
+
+1) Entry - This is code that the macro first executes. https://github.com/project-serum/anchor/blob/master/lang/derive/accounts/src/lib.rs#L57 
+2) Parsing - Transforms from the raw rust syntax the macro decorates, into an Anchor specific intermediate representation that is more convenient to use for code generation. https://github.com/project-serum/anchor/blob/master/lang/syn/src/parser/accounts/mod.rs#L10
+3) Codegen - Transforms from the Anchor specific IR into the new Rust code. https://github.com/project-serum/anchor/blob/master/lang/syn/src/codegen/accounts/mod.rs#L16
+Also <@!134416332509675520> is an expert now.
+Happy to hop on a call to walk through at some point.
+would love a logical step through of how the account constraints/macros are implemented at some point so i can make meaning contributions to them
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Base58-encoded strings look like what you feed to `declare_id!`.
+```        Keypair::from_base58_string(s),```
+what to input to this ? I have the private key, but keeps giving me wrong syntax error
+I'm doing it like this : "[1,2,3, etc...]"
+It’s sad that my monorepo is just some legacy repo now
+But I’ve been upgrading to new versions of anchor past few weeks, before I was stuck on 0.12.0 lol
+I think typically when it has trouble generating IDL from source
+This is really bad if true. Do you have an example?
+typically i just run `cargo build` to see compile errors ..
+anchor build seems to swallow the compiler errors at times (or maybe this got fixed)
+Or, sorry, it sort of works on macs (it works for me), but people have weird issues with it that I don't totally get, and it's just as easy to install from cargo 🤷‍♂️ Up to you.
+https://project-serum.github.io/anchor/getting-started/installation.html#build-from-source-for-other-operating-systems (the instructions mention that the npm package is only meant for linux)
+Also, could you uninstall the anchor-cli npm package (it doesn't work on macs for some reason, you should just install directly from cargo)
+ok
+ahhh
+0.17.0
+Ah, lol, that's incredibly out of date 🙂
+```anchor-lang = "0.7.0"```
+yes
+Also, are you on a M1 mac? ^
+And what about your anchor-lang cargo dependency?
+```Only x86_64 / Linux distributed in NPM package right now.
+Trying globally installed anchor.
+anchor-cli 0.17.```
+What version of anchor are you using? `anchor --version`
+You are forgetting a `.key` in the seeds though
+Mm... I'm actually not sure why you're getting that 🤔
+```error: Invalid attribute
+   --> programs/new-vault/src/lib.rs:327:67
+    |
+327 |     #[account(seeds = [vault_account.to_account_info().as_ref()], bump = vault_account.nonce)]```
+Mm, that's not showing much, what does `anchor build` say? (Hopefully a longer error)
+
+same
+What error do you get?
+nope, that didn't fix
+yes
+ah
+Think you're missing a closing paren on the right there
+hmm, intelisense says invalid attribute
+
+Ah, ok, the `#[account(...)]` attribute expects you to pass this as `#[account(seeds = [vault_account.to_account_info().as_ref()], bump = vault_account.nonce]`
+|| `    #[account(seeds = [vault_account.to_account_info().key.as_ref(), &[vault_account.nonce]])]`
+<@!134416332509675520>
+```        let seeds = &[
+            ctx.accounts.vault_account.to_account_info().key.as_ref(),
+            &[ctx.accounts.vault_account.nonce],
+        ];
+        let signer = &[&seeds[..]];```
+yes, but is there docs on what the `bump` argument should be?
+Are you using `seeds = [...]` somewhere without a `bump` argument as well?
+```thread 'main' panicked at 'Code not parseable: Error("bump must be provided with seeds")', lang/syn/src/idl/file.rs:338:58
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace```
+has anybody encountered this when runnin anchor build ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I just added two custom `types`
+
+If I was not clear, see the difference between the IDL that was resulting in error and the modified one
+This was write by hand. If the resulting objects are actually usable (I will test it), it would be interesting to have Anchor to "convert" BTreeMap and HashMap to Vec automatically by writing this to the IDL file.
+This was sufficient to get ride of the error at IDL-read time. Don't know if this won't crash in the case I actually use the type later (but I am not expecting to use it)
+So, by defining these two types I am just saying to the coder that BTreeMap<Outcome,Pubkey> is actually a Vec
+```json
+    {
+       "name": "BTreeMap<Outcome,Pubkey>",
+       "type": {
+          "kind": "struct",
+          "fields": [
+             {
+                "name": "values",
+                "type": {
+                   "vec": {
+                      "defined": "<Outcome,Pubkey>"
+                   }
+                }
+             }
+          ]
+       }
+    },
+    {
+      "name": "<Outcome,Pubkey>",
+       "type": {
+          "kind": "struct",
+          "fields": [
+             {
+                "name": "outcome",
+                "type": {
+                   "defined": "Outcome"
+                }
+             },
+             {
+                "name": "pubkey",
+                "type": "publicKey"
+             }
+          ]
+       }
+    }
+```
+Well, I was able to get ride of the error by adding these 2 types to the IDL:
+Don't know if it will do it
+Thank you. I am trying something with IDL types (define that "BTreeMap<X,Z>" is a vec xD)
+Running anchor build will then give you the idl.
+^ the way I generated this btw, was adding a dummy `#[account]` to basic-1 (that's the project I use for scratch experiments)
+Thanks!!
+Is that what you mean?
+The idl will look like
+```
+{
+  "name": "stuff",
+  "type": {
+    "vec": "string"
+  }
+}
+```
+I know know, I just want to see the IDL json resulting from something like that 😅
+Yeah, you can just do something like this:
+```.rs
+#[account]
+pub struct Thing {
+  stuff: Vec<String>
+}
+```
+You can also look at the tests to see how vector arguments are passed to the program.
+You can generate the IDL of the multisig program by cloning and running `anchor build`.
+Thank you, I think not. I was just asking for an example IDL definition (the JSON file), where the type Vec was used. My IDL doesn't have one and was just avoiding to have to write a dummy struct with a Vec and then build the IDL just to see it ahaha
+I think you're trying to do something similar?
+https://github.com/project-serum/multisig/blob/master/programs/multisig/src/lib.rs#L26
+?
+Where's that? Is it "vec": "aType"
+One of the arguments on init is a vector of public keys
+You can look at the multsig program that armani wrote
+From the idl code, I am guessing it's just "vec", but would be nice to confirm
+I am trying something...
+Currently only have array, but I would to see a Vec one
+<@!134416332509675520> do you have an idl.json at hand with a Vec? Just to see how it's defined
+The recommendation now is to just use an account with static seeds.
+Yeah, state is/was a way to have some static/global state for your program (under the hood it's an account with a `Pubkey::create_with_seed` address)
+So, basically just a normal Account?
+Don't know that 'state'. Is it to have some data associated with a program? To save state between program calls?
+I think a `StateCoder` is for the ~~now-decremented~~ lol, now-deprecated `#[state]` feature
+What's a `StateCoder`?
+This is the stack trace. Basically, it starts on the worspace proxy, then Program constructor, then Coder constructor, then AccountsCoder constructor
+I'll see if I can do it
+Think your solution (which I sufficient for me) is probably easier to implement that these custom encoder/decoders
+Alternatively, Anchor could allow custom decoder/encoder for particular account struct. Don't know exactly how. On the on-chain side, it would normally serialize the data with Borsh, and on the JS client it would either use the decoder to get a JS object from the account data or the encoder to convert a given object to the serialized representation (e.g., for passing an object as instruction data)
+Lazily would solve the problem in my case, because I am not planing to use the type
+Right, got it.
+I don't even call any instruction or something
+Yes, it's only at IDL read time. It just fails on this line:
+Actually, yeah, when do you get these errors? At idl-read time? I guess anchor could use the idl lazily or something (but maybe that's also super confusing if you don't get some idl errors until you actually use them :/)
+Ye, it's for reading convenience, got it
+Mm, not 100% sure but I think this is because you can use anchor to fetch nicely deserialized account structs too, e.g. `await program.account.myAccountType(somePubkey)`
+Actually, think that all my instruction data are very simple data types. Only my accounts data use more complex types, but I don't need them on the JS side to still be able to call the program, right? For accounts, I just need the pubkey or keypair. EDIT: By default, Anchor seems to force a JS twin for every Rust account struct, don't know exatcly why.
+Yea, had already thought about that. It's an option. Nonetheless, is it possible to set Anchor to ignore a particular account struct on JS side?  I don't really need this account struct/type on JS, none of my instruction calls require it as instruction data (only as account, but for that I only need the pubkey or keypair, not the object itself)
+So at the end of the day it's basically using a simple serialization strategy (an array/vec of kv pairs) under the hood and then converting those kv pairs into an actual fancy BTreeMap.
+For example, I was curious how Borsh serializes BTreeMaps, and it looks like it does something super straighforward: 4 bytes for the number of key-value pairs, then the k-v pairs themselves, one after another. [Edit: in other words, an array/vec of kv pairs]
+Hmm. My guess is that in practice your best bet is to just stick to simple composite types in your Accounts struct, and then convert them into fancier types as necessary, within the program.
+Well, it seems that wasm_bindgen is itself somewhat limited on the types it can export to JS. In particular, it cannot directly export most of the std::collections data structures (including BTreeMap). Nonetheless, it is possible to pass arbitrary data between Rust and JS using Serde, as described here https://rustwasm.github.io/wasm-bindgen/reference/arbitrary-data-with-serde.html.
+Maybe someone else will have a more experienced opinion. Let's see. Anyway, thanks a lot for the attention!
+I was just developing some dapp using the solana library but then I was continuously validating the account signatures etc. in a procedural way, while that was something that should be done in a declarative way. That's why I shift to Anchor, which allowed me to reduce lot of the code boilerplate. But now I am facing this issue, which I don't exactly know whether is my fault or Anchor's. But anyway I would prefer to spend some time solving this correctly before proceed with dapp development
+I am very newbie here on Anchor (and solana actually) but I have been digging into the code around the IDL and it's seems to be designed in a way that's not much scalable. But I might be wrong, so I think it would be interesting to listen the opinion of the people that developed it (maybe armani ferrante?)
+Ha, I was thinking the same thing—I'm not a specialist either though, but it does seem like a neat idea
+Hopefully I am just being noob and there is a easy solution to use a BTreeMap in an account struct. But if I am not, what would you think about using wasm_bindgen to generate the data types on the JS side instead of the IDL? (I am not a specialist on any of these, is just an idea)
+^ just replying to say that I'm thinking about this, not sure yet what your best option is though
+The IDL is somewhat limited to a small set of rust data types (it's not ready for BTreeMap, for example).  What should I do when designed my account structs using some data type that's not compatible with the IDL? For example, BTreeMap is such a generic struct that I am sure that someone else  already faced the same problem. What's the solution in this situation? Redesign my account structs to use another data type? I would rather anchor.workspace ignore the accounts structs that are IDL incompatible and/or allow me to specify a custom encoder/decoder between the borsh representation and javascript object. Maybe this is possible but I don't know how (if it is please tell me how). I love the automatic (de)serialization, signature validation, etc. that Anchor offers on the on-chain side by declaratively defining the instruction accounts, but the IDL thing seems very limited and incapable of scaling (to any data type).
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Note: I have only added support for BTreeMap but not for HashMap, since the latter does not work on solana (due to rand)
+On the JS a https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map is built
+This actually had a bug. For example it would fail for BTreeMap<Vec<u8>, u8>. i.e., if there were more than one comma. So, I was forced to parse it using `syn`. I have added tests for it, run all of them and they've passed
+<@!501570363566587905> should I pull request them?
+https://github.com/joaompfe/anchor/commit/d89fda9997e83ab8d10dfeb5cf8f13f6a92d6e3c
+https://github.com/joaompfe/serum-ts/commit/54c2aa27a66463d582e15990ff0d9cf2efd3704e
+Tomorrow I will clean this up and put it on my Github. Then we evaluate whether I should pull request it or not. Sorry for the noise here 😅
+KeyValueLayout is actually just a tuple. It would be interesting to develop a layout for any kind of tuple. But not sure how for now.
+This would need to go to https://github.com/project-serum/serum-ts/blob/master/packages/borsh/src/index.ts
+```ts
+} else if ("map" in field.type) {
+          let keyTy = field.type.map[0];
+          let valueTy = field.type.map[1];
+          return map(
+            IdlCoder.fieldLayout(
+              {
+                name: undefined,
+                type: keyTy
+              },
+              types
+            ),
+            IdlCoder.fieldLayout(
+              {
+                name: undefined,
+                type: valueTy
+              },
+              types
+            ),
+            fieldName
+          );
+        } else {
+          throw new Error(`Not yet implemented: ${field}`);
+        }
+```
+Then, I simplified the IdlCoder:
+```ts
+class KeyValueLayout<K, V> extends Layout<[K, V]> {
+  keyLayout: Layout<K>;
+  valueLayout: Layout<V>;
+
+  constructor(
+    keyLayout: Layout<K>,
+    valueLayout: Layout<V>,
+    property?: string
+  ) {
+    super(keyLayout.span + valueLayout.span, property);
+    this.keyLayout = keyLayout;
+    this.valueLayout = valueLayout;
+  }
+
+  decode(b: Buffer, offset?: number): [K, V] {
+    offset = offset || 0;
+    const key = this.keyLayout.decode(b, offset);
+    const value = this.valueLayout.decode(b, offset + this.keyLayout.span);
+    return [key, value]
+  }
+
+  encode(src: [K, V], b: Buffer, offset?: number): number {
+    offset = offset || 0;
+    const keyBytes = this.keyLayout.encode(src[0], b, offset);
+    const valueBytes = this.valueLayout.encode(src[1], b, offset + keyBytes);
+    return keyBytes + valueBytes;
+  }
+
+  getSpan(b: Buffer, offset?: number): number {
+    return this.keyLayout.getSpan(b, offset) + this.valueLayout.getSpan(b, offset);
+  }
+}
+
+function map<K, V>(
+  keyLayout: Layout<K>,
+  valueLayout: Layout<V>,
+  property?: string,
+): Layout<Map<K, V>> {
+  const length = u32('length');
+  const layout: Layout<{ values: [K, V][] }> = borsh.struct([
+    length,
+    seq(new KeyValueLayout(keyLayout, valueLayout), offset(length, -length.span), 'values'),
+  ]);
+  return new WrappedLayout(
+    layout,
+    ({ values }) => new Map(values),
+    values => ({ values: Array.from(values.entries()) }),
+    property,
+  );
+}
+```
+I have developed one at ts/src/coder/idl instead (just for simplicity since the layout are on another project):
+To return a Map on deserialization on JS side I need to implement a custom layout here https://github.com/project-serum/serum-ts/blob/master/packages/borsh/src/index.ts, I think.
+Ok, thank you. I'll see if can get things prettier on the JS side (generate a Map object instead of a vec). Then I'll comeback here
+Now that I am also reading that again, I have to make sure that their implementations isn't currently just a Vec 🤣
+Ah yes. Mine are actually intended to be large. But rust BTreeMap implementation already have that issue in mind, it think. See https://doc.rust-lang.org/std/collections/struct.BTreeMap.html
+My guess (not confirmed) is that for "small" BTreeMaps, assuming you're using them like hash maps, it might actually be faster to just use a vec of kv pairs and search through it etc.
+Borsh serializes it like a Vec and my current implementation deserializes it like a Vec. I think I didn't get what you are curious about 🤔 (I am noob)
+I'm actually curious too at what size of map a BTreeMap beats out a kv-pair/assoc list
+No we can add it. I'm curious what the compute costs are for deserializing a BTreeMap. I'd be careful with wasting compute there.
+<@!501570363566587905> did you have thoughts on adding map types to the IDL?
+Also: I think that's trivial to support other `std::collections`, such as VecDeque and LinkedList (the latter I am not sure how it's serialized by borsh, but guess it's in the same way as Vec)
+Sorry for the prints, I don't have this on Github (yet)
+<@!134416332509675520> Do you think this feature is interesting for you? To pull request it? This is just a scratch but it seems functional
+On the javascript side this yields to a vec, whose elements have a `key` and `value` attribute. It would be interesting that it yields to a JS Map instead. But this is just an experiment for now
+lang/syn/src/idl/mod.rs
+lang/syn/src/idl/mod.rs
+ts/src/coder/common.ts
+ts/src/coder/idl.ts
+ts/src/idl.ts
+These were the changes I've done:
+I have a beta implementation for BTreeMap support
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Oh so it's converting to fat pointer from thin pointer
+Good exercise to try removing it and see what breaks haha 🙂
+How about this from the ido pool example?
+https://github.com/project-serum/anchor/blob/master/tests/ido-pool/programs/ido-pool/src/lib.rs#L93
+Ah, ok, pretty sure it's unnecessary in this case (people get in the habit of doing it because the type inference is so finicky)
+Sorry, I don't know if I need it because i didn't write that code xD it's from the anchor test
+By the way, the annoyance with this kind of type inference issue has made me prefer to just inline the seed stuff (forget local variables lol, just stick all that stuff right into the function you're calling—way easier that way)
+Do you actually need the `&seed[..]` part there? I don't think you do actually, since you've already asked rust to treat b"escrow" as a byte slice (if you left off that type annotation, the inferred type of b"escrow" wouldn't be a slice, it would be an array reference: &[u8; 6].
+Rust question.
+
+Why do you need to do `&str[..]` ?
+```
+const ESCROW_PDA_SEED: &[u8] = b"escrow";
+let seeds = &[&ESCROW_PDA_SEED[..], &[bump_seed]];
+```
+I was reading this: https://doc.rust-lang.org/reference/expressions/range-expr.html
+
+But if you need to whole string, why can't you just do `&str` ?
+
+Full code: https://github.com/project-serum/anchor/blob/master/tests/escrow/programs/escrow/src/lib.rs#L60
+i see, in my case the account data contains only that slice
+Without the extra [..] slice, the weird thing is that call to `.write` will actually shorten the length of the account info's `data` (https://doc.rust-lang.org/std/io/trait.Write.html#impl-Write-6). I was pretty sure this made solana complain, because you can't really resize an account's data on the fly like that.
+^ I'm actually still not sure how that works lol. I could have sworn the extra [..] slice was necessary, but it's not 🤔. Huh.
+thanks
+Oh interesting, cool
+it seems happy with
+```
+        account.try_borrow_mut_data()?
+            .write(&amount_bytes)
+            .unwrap();
+```
+With `use std::io::Writer;` in scope to pull in the Write trait.
+This looks so weird, but I think you have to do it like this, for example: `(&mut &mut account.try_borrow_mut_data()?[..]).write(&[1, 2, 3]);`
+but how would one go about setting several at once?
+account_info.data.borrow_mut() i can set individual bytes
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I ran into that, not sure exactly how I fixed it but it took a bunch of reinstalling 😬
+but still with 1.52
+what is weird is i then upgraded to 1.56 and this error still appears...
+
+Anybody suddenly had this appear? Same code, was compiling earlier, no reason
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+oh thanks didn't clock that ahah 🙂
+That example just happens to pass in a `start` param as an instruction argument.
+ok thanks, wanted to know if changing directly was not right for some reason
+🤷‍♂️ may be this done for showing more details, idk. There is no difference.
+I mean from the official Anchor examples they're borrowing it too instead of changing directly
+So I should just change values directly ?
+Yes following some tutorial (timestamped) https://youtu.be/w-n87Aq3f8k?t=1950
+in the counter tutorial in the readme, I am struggling to understand this line:
+        `counter.count = start;`
+why is it not `counter.count = 0;` ?
+You shouldn't. Why you thought about 2 lines? From some example?
+Since compiler isn't giving me any errors?
+Why in Rust, I should be doing
+`let account_to_increment = &mut ctx.accounts.account_to_increment;
+       account_to_increment.authority = *ctx.accounts.auth.key;`
+
+instead of just doing
+
+`ctx.accounts.account_to_increment.authority = *ctx.account.auth.key`
+This worked 🙂
+I think you'll need to do something like `let hmm: [u8; 32] = bytes[0..32].try_into().unwrap();`
+Like downscale from an &[u8] to &[u8; 32]?
+Of course. Any way for Rust to typecast it?
+Right, a `&[u8]` could be any number of bytes (32, or 0, or whatever)
+
+Ok, coming back here as it's a rust question. 
+As I have learned to pass PubKeys as 32 bytes over instruction data, it's now yelling as cannot convert `&[u8]` to `&[u8; 32]`. Any suggestions please <@!134416332509675520> ?
+
+It was finally updated last month "as a disclaimer"
+For account data, yes, but for instruction data its such a small part of the compute budget it doesn't matter.
+Migrane.
+I'd say there is none.
+Not sure what the advantage is of ditching borsh for instruction data.
+Yeah, saw that in a headspinning section of how to ditch borsh and just YEET the deserialization and serialization by yourself over the tutorial haha.
+So the way I'm planning to place the instruction is
+`0 -> Instruction Tag`
+`1..4 -> First Pubkey`
+`5..16 -> [Pubkey; 3]`
+This one is pretty good https://docs.rs/arrayref/0.3.6/arrayref/
+The easiest way to do that would be to use some util crates.
+You need to make sure you're getting the right part of the slice.
+Not quite.
+So, if I understood it right, I basically can put the above thingy into a util function and call that 3 times to get `[Pubkey; 3]` and just call once to get `Pubkey` ..
+I see. Yeah, it's like continuing to get that result and put that into map for converting towards u64. Wow, Rust is indeed awesome haha.
+Not really sanitization. Just conversion.
+`try_into` is probably just converting from the slice into u64.
+Reason why I'm asking is, do we need to do this for like every `&[u8]` slice we get, as some sort of "sanitization" technique?
+Ahhh, it's that simple eh? Thanks a tonne 🙂 
+I have been asking the following question to myself a lot, but still haven't got conviced haha.
+
+Why did Paul make sure to convert that `&[u8]` using `try_into()` and what exactly is happening there tho?
+Though i'm sure i've got details wrong there.
+Which you can do with something like
+
+```
+let mut bytes = [0u8; 32];
+bytes.copy_from_slice(the_slice)
+PubkeY::new_from_array(bytes)
+```
+Just need to convert the `&[u8]` into a `[u8; 32]`
+Pubkey has a `Pubkey::new_from_array` method that you can use.
+Hey, I'm trying to expand my understanding over unwrapping instruction_data (&[u8]) into various types. (Was able to understand the conversion from u8 to u64 via Paulx), Currently trying to convert &[u8] little endian to a Pubkey type in Rust. 
+
+Same goes for &[u8] little endian to [Pubkey; 5]
+
+Could someone help me the Rust way to do this please?
+
+BTW, this is like the non-anchor version, (low level Solana)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+you right
+thanks
+don't use vectors
+you will be more likely get an answer if you share a) your code b) the exact errors youre getting
+Hello everyone, can you help me? I want to track a voter's address on my program in a vectors but can't figure out how to achieve it.
+I add this on my struct 
+pub adresses: Vec <Pubkey> but got some errors
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Is this the kind of thing you're looking for? https://github.com/project-serum/anchor/tree/master/client/example
+Anyone know how to call an on-chain anchor program from a solana client in rust? Maybe there's a way of getting a `solana_program::instruction::Instruction` from an anchor program?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+If you extract code to repo / branch / playground with simple test case which fail I think more people will willing to help and issue will be resolved faster. It's really hard to create environment for making sure that code fails.
+yea went down that rabbit hole and with no luck. Running into issues where it complains some of the object types dnt impl `Copy`, which is not possible given some of their fields
+Usually this is solved with clones and Arc ing everything.
+Generally async closures need to have ownership of everything that's inside it.
+I tried looking briefly but I couldn't get your snippet working on my computer (too many compile errors/looks like it's not a fully-functioning example/stuff is missing).
+stackoverflow post:
+https://stackoverflow.com/questions/69768664/the-trait-stdmarkercopy-is-not-implemented-for-type
+hey having trouble 'moving' values into an async closure block any help appreciated
+🤯
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks a lot mate
+You'll need to pass the wallet to your program from the client (in solana, all accounts have to get passed in from the client, no dynamic lookups allowed from the program)
+how do I create an AccountInfo in rust from and existing Wallet address? To transfer some Sols to it.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+is there any known issue with storing these kind of metadata traits (the ones I want to update often) in a pda derived from the mint address (using the token metadata program)?
+pain 😪
+Can't do any network requests from within your solana program, no 😔 You'll have to do that from the client.
+then modify it and upload it to arweave?
+is there a way to fetch the uri of a mint's metadata from a program?
+nvm
+hm I think that worked
+should I still be wrapping the Mutex in an Arc?
+cool updated, still get the `the trait std::marker::Copy is not implemented for Publisher<Request>` err
+Why you need to use `*const`? (if you use async/await better use tokio Mutex instead of std)
+stripped out a bunch of stuff and mocking external crates not avail in playground
+https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=a89d46722f8ddd465a62ed0097b6741c
+<@!134416332509675520> <@!448034961652449283> u asked I listened!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+So in words, the function above says: try grabbing the first 8 bytes of input (bail if there aren't enough); `and_then` try to convert that slice into a `[u8; 8]`; assuming that went `ok`, make a u64 from those 8 bytes.
+`.and_then` exists on Rust's `Option` type and runs the body of the closure if the thing on the left is `Some(something)` rather than `None`.
+The syntax is rust's way of writing a closure (an anonymous function).
+what is the syntax `|slice|` placed in the `and_then()` function
+`fn unpack_amount(input: &[u8]) -> Result<u64, ProgramError> {
+        let amount = input
+            .get(..8)
+            .and_then(|slice| slice.try_into().ok())
+            .map(u64::from_le_bytes)
+            .ok_or(InvalidInstruction)?;
+        Ok(amount)
+    }`
+
+can anyone describe what exactly is going on here?
+".and_then(|slice| slice.try_into().ok())"
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Ah anchor_lang::Account::try_from.
+CpiAccount::try_from gets me closer, but still doesn't quite work because it's not an Account
+If I'm trying to invoke a CPI call with an AccountInfo<'info>, and that CPI accounts object expects an Account<'info, SomeStruct>, how do I coerce so I don't get mismatched types? The use case here is that the account is optional, and so the main call does not parse the account.
+Cargo cli version they used was 0.13.2.
+
+Found out I was using a wrong anchor cli version but when trying to install version 0.13.2 on my cli thi happened (image attached):
+probably a versionning problem, verify your anchor cli version and the cargo anchor version of parrot.
+Hi I have an issue compiling this repo https://github.com/gopartyparrot/ido-pool. I Have the right version of anchor (13.2) but it still gives me problems:
+
+`thread 'main' panicked at 'Code not parseable: Error("payer must be provided when initializing an account")', lang/syn/src/idl/file.rs:337:58
+note: run with RUST_BACKTRACE=1 environment variable to display a backtrace
+`
+
+Has anyone else ran into this problem?
+
+btw thanks <@!248066053161222144> for referring me to this server for help!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks!
+Clone the source. Checkout the  git tag. And run cargo build inside the cli dir.
+hello, how can I compile version 0.13.2 of anchor for linux?
+<@!137101040687382528> by the way, this rust lifetime post was helpful for me (evidently I need to reread it) https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+If I'm understanding your q right, this is actually a funny thing about solana—you *have* to pass the program-derived address in from the client if you want to create an account there, because in solana you just have to pass in all accounts needed by your program, no dynamic account lookups allowed within the program.
+
+Hi! I am studying Anchor. Please tell me how you can make the program create a PDA account with seeds, but in the client I would not need to pass the pubkey of this account as an argument (in fact, the address is determined based on the pubkey payer, program ID and str). I wrote something similar, but in the client it still requires a key. I have a suspicion that this functionality needs to be implemented in the body of the corresponding method. In general, I will be grateful if you point the right way 🙂
+nvm fixed
+Here is PR https://github.com/project-serum/anchor/pull/792
+sb knows why rust hate me ? ```error[E0308]: mismatched types
+  --> lang/tests/generics_test.rs:20:9
+   |
+20 |     pub const_generic_loader: AccountLoader<'info, FooAccount<N>>,
+   |         ^^^^^^^^^^^^^^^^^^^^ expected struct `anchor_lang::AccountLoader`, found struct `anchor_lang::Account`
+   |
+   = note: expected struct `anchor_lang::AccountLoader<'_, FooAccount<N>>`
+              found struct `anchor_lang::Account<'_, FooAccount<N>>````
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks again! 🙂 If you hadn't helped, I probably would have spent a lot more time solving an unsolvable problem. If I understand you correctly, then this is not a limitation of Anchor itself, but, let's say, architecture and approaches to writing programs for Solana.
+You could definitely have your program check whether or not the account has been created already (e.g. by checking whether it's owned by the program, or whatever), but the client still has to find the pda and pass it in.
+I agree it feels quite odd to have to do that but solana forces you to do it that way.
+Ok, yeah, I think I understand what you're trying to do—you still have to pass that account in from the client though 😛
+Thank you very much for your answer! Yesterday I puzzled over this question for a long time :). I think you got the point right. The only thing is that I will clarify a couple of points. I write a "hello word" that simply counts the number of calls to it from users and stores their value in a separate PDA account for each user. Accordingly, in theory, it is not necessary for us in the client part to know and transmit the address of this PDA account (since it is derived from the program ID and the client's address). I would like the program to check itself whether an account has already been created for this user and, if not, then create it. Therefore, I am thinking how to make the most convenient API for the client. In this case, the absence of address derivation on the client side is implied.
+does anyone have an example with using events and listening off-chain with rust ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks for sharing your development experience! I had a hypothesis that you use TS testing because of time savings (which, if I understood you correctly, you partly confirmed).
+Once again I want to thank you and <@!134416332509675520>  for your help and wish you a good weekend! 🙂
+Personally, I do TypeScript testing unless there's a good reason to switch to Rust for end to end tests.
+There's tradeoffs. TypeScript testing is a faster feedback loop imo. But Rust testing gives you a step through debugger, and if you were to fuzz, I'd use Rust for performance reasons.
+Many thanks ! I've been studying Solana for a little over a month now and haven't worked with tests yet. Something tells me that tests can significantly speed up the development process 🙂
+But all the same, do I understand correctly that you intend (by default out of the box) to use JS for this? Personally, I got this impression after watching the stream with you, where you talk about Anchor.
+Yes. You can use `solana_program_test` via the `entry` function in all Anchor programs.
+Is it possible to test the program through Rust (for example, using solana_program_test)? It seemed to me that the use of JS is proposed as an environment for implementing tests.
+
+
+Thnx ! It works ! 😉
+If I'm understanding the constraint codegen that will let you skip the bump (not super obvious you can do that haha)
+Actually, I learned yesterday that you can do `#[account(seeds = [...], bump)]` (no equals after bump)
+All the same, I cannot understand why I cannot use seed without bump. It seems that we do not need anything from instruction data to get the address of the PDA account
+Thanks ! Getting various non-trivial bugs is my strong point! 🙂
+The idea of the `#[instruction(...)]` attribute is to give you access to instruction arguments in your `#[account(...)]` constraints (bumps are a common example, but you might want to use arguments in other ways too). But yeah, it's unfortunately tough to do this in a really bullet-proof way—I like your rust example since you might have thought you'd get a type error for this kind of oversight, but no!
+Thanks ! I read your discussion 🙂
+Frankly, I have no understanding of how this attribute works, I inserted it, because seed (as I understand it) does not work without it. The tutorials (https://project-serum.github.io/anchor/tutorials/tutorial-2.html#clone-the-repo) did not pay attention to this aspect either 🙂 From the description of the crate (https://docs.rs/anchor-lang/0.17.0/anchor_lang/derive.Accounts.html) I also did not get a complete understanding of working with these attributes, so I found a similar code in the Anchor source and tried use it  🙂
+This is actually a funny example of the gotcha discussed yesterday https://discord.com/channels/889577356681945098/889577399308656662/895815856968323082
+But you're not passing any actual instruction arguments
+You've got an `#[instruction(bump: u8)]` in your accounts derivation
+Ah! I see it 😛
+As I understand it, the program crashes when the instruction is deserialized.
+Ah ok, pid looks right. Hmm.
+
+Ah, sorry, I mean your `pid` variable—how are you passing it to the `hello_world` function that sends the tx?
+If I understand you correctly, are you suggesting debugging without hosting the program?
+Just to double check, you're definitely using that 6tx address as the program_id for your client?
+
+
+Thanks ! I tried to update the program code, but the result did not change.
+Is it possible that you're talking to a stale version of the program on localhost? The instruction deserialization you're doing above is super simple, it just needs to check 8 bytes worth of sighash.
+Mm, if I were debugging this locally I would log the actual ix_data (would have to tweak some of the macro codegen stuff to add a call to `msg!`)
+I deployed the program on localhost (solana test validator). Then cargo run on the client side. I also deployed your example (basic-2) it works correctly.
+How are you running/deploying the program?
+Hmm, I haven't tried the rust client yet, but yeah, that looks like it should work.
+
+client side
+program
+Hello everyone ! Can you tell me what I'm doing wrong? My Hello Word is not working 🙂 I suspect the crash is happening at this point.
+yeh this makes sense, thanks very much
+i see
+ah
+```rust
+fn withdraw_only_phase<'info, T: Accounts<'info>>(ctx: &Context<T>) -> ProgramResult {
+```
+it seems silly to have to copypasta the same function but with a different argument type
+but there must be some way to allow for different argument types (it's not a major blocker, there are workarounds, but i'm curious what the right way to do this in rust is)
+the second raises an error
+```rust
+fn withdraw_only_phase(ctx: &Context<ExchangeRedeemableForUsdc>) -> ProgramResult {
+```
+vs.
+```rust
+fn withdraw_only_phase(ctx: &Context<T>) -> ProgramResult {
+```
+e.g.
+is it possible to make the argument type generic so that different structs could be passed in?
+let's say you have a function which takes one of the account context structs as an argument
+Mentioned this in another channel, this is an incredibly good talk about C++-style "move constructors" in Rust, via Pin: https://www.youtube.com/watch?v=UrDhMWISR3w
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+It should only be used when an account could be initialized by more than one user in the same transaction
+Yeh, `init_if_needed` should just be used in the init function to ensure it doesn't fail incorrectly. Not as a way to get around having separate init and update functions
+This one call https://github.com/project-serum/multisig/blob/master/programs/multisig/src/lib.rs#L46-L74 ?
+But, if you don't have `init_if_needed`, then only one will get the opportunity to create the account, and the other will just fail, forcing the user to send a new transaction to accept.
+Multisig is a better example. I want the program to mark both addresses as "accepted".
+what can the program do though when 2 escrow state are intiialized on the same account?
+Which is probably the better solution now that I think about it.
+And suppress it if needed.
+Though you can avoid that by having the UI be smart and looking at the error code.
+Yes. So what this is trying to avoid is the UI displaying an error when it shouldn't.
+so 2 people trying to create the same escrow state?
+Most of the time it is. I agree.
+I don't think that's always the case.
+then there is a design issue
+E.g. a PDA escrow account
+Yea this is the ideal. Doesn't work if you have a race condition between two users though.
+if the token account is a PDA you wouldn't have to guess if you need to create it if you split create endpoint and update endpoint
+if it can be done outside, do it outside. What belongs to the user and isn't attached to the program should usually happen outside
+one create endpoint, one update endpoint...
+no ifs
+keep endpoints dead simple
+i wouldn't
+but perhaps I am missing something obvious and catastrophic 😅
+my rationale is that it may have a bit of performance overhead, but in terms of developer experience is way easier. So in my case I think I would default to always use `init_if_needed` rather than `init`
+Otherwise this problem you are talking about could also affect `init_if_needed` wouldnt it?
+but perhaps this check could be added to the current `init` as the first step - to verify the constraints of ownership, and if there is data the discriminator and related attributes like authority/mint
+lol
+like a debt
+Because you could wipe whatever was to remain
+most endpoint taking init just initialize the fields, so pretty dangerous to implicitly consume an already initialized account
+and I was also wondering.. couldn't this be the default `init` behavior? or is there a explicit reason to fail if the account has been initialized (due to security reasons or something)
+I had thought this would be useful too! and just yesterday we had a brief discussion in <#889577356681945101>  - the conclusion was for now to do this conditional acc initialization on the `instructions:` attribute in the rpc call, but this `init_if_needed` seems really handy to avoid having to do that in the client
+https://discord.com/channels/889577356681945098/889577399308656662/895842834148626504
+Yeah, that's not what I was trying to use it for.
+or at least, it's notable this is the first anchor constraint that handles "optional" accounts
+however i feel like this is definitely not how people are going to end up using it
+ok so the purpose of `init_if_needed` is to prevent the issue of two people trying to init the same account at once
+Thanks!
+Filed an issue. Feel free to bikeshed the sytnax https://github.com/project-serum/anchor/issues/852
+Array of pdas just meaning I'm encoding the index in the array as part of the pda seeds
+Yeah. In this case, I'm storing an array of pdas on chain. At the root, I'm leaving a separate PDA with some metadata info. So it could init_if_needed when the first pda is added. Or can just have the metadata init be a second call.
+It kind of is in the sense it's ideal for programs to have instructions that do a single thing. But this comes up whenever you have a race between more than one user trying to do the same thing on the same account, so I feel it may be appropriate to have this.
+The fact that nobody else has needed this makes me think it might be an antipattern haha
+Probably `init_if_needed`. For now will just do a separate call
+Currently no. It will always try to CPI to the system program and create it. We could add in this functionality, potentially with a new keyword, e.g., `init_if_needed`, or we could just change the default behavior. What do you think?
+I assume the init probably just has to happen in a separate instruction, right?
+Is it possible to have an `init` account that will either init if it doesn't exist, or just use the account as a mut?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

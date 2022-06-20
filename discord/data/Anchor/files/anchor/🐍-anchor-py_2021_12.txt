@@ -1,0 +1,274 @@
+Hi where do i find kevinheavey ?
+I’ve seen a similar message when passing the incorrect number of arguments or accounts to an RPC call, fwiw
+anyone see this RPCException before? what is the index out of bounds with?
+
+`RPCException: {'code': -32602, 'message': 'invalid transaction: index out of bounds'}`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+it's a name
+What is it?
+Sounds ominous
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+lmao just read about the onion futures act this morning 😅
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+We now support Anchor 0.19.0 btw
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+<@!839599169915846697> can you try the latest AnchorPy version?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+New release time! `anchorpy shell` is a thing now https://twitter.com/dj_d_sol/status/1473398281497726983?s=20
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+oh the other thing is the Rust client uses the program source code, not the IDL, so I think you'd have to write a separate Rust wrapper for each program if you wanted to use the Rust Anchor client
+just checked and solana-py already uses pynacl which requires building libsodium so I think Rust is also fair game
+But yeah I think it means you can’t install it on your toaster
+I think it’s meant to just work in most cases but I’m not sure what the edge cases are 🤔 like the gcc example above was due to some packages being dumb
+But it would be pretty cool to share code between rust and python.
+This would be reason enough to keep it pure python if it creates headaches installing.
+When I first started writing AnchorPy I thought I could be real clever and just make it a thin wrapper around the Rust client but then I realised that it couldn’t possibly be as thin as I wanted. But I still want to remove as much Python logic as possible
+The other drawback is that installing a Python library is more involved if it uses C/C++/Rust. I don’t know how many people are affected by this kind of thing, and I only think about it because in a previous job we couldn’t pip install some packages on prod boxes because of some dumb infosec rule that said gcc wasn’t allowed on prod boxes (but conda was allowed, and you could `conda install gcc`)
+I think the main benefit would be cutting down on duplication of logic by just reusing the Anchor Rust client code.
+
+I think creating transactions is the part where this could be useful.
+
+I don’t want to use Rust for sending network requests as making that play nice with asyncio is a can of worms last I checked. I also don’t think there’s much point using Rust for IDL parsing as it wouldn’t save much code (if any).
+
+There’s still quite a bit of duplication involved in wrapping a crate for Python as you can see in this post https://users.rust-lang.org/t/wrap-rust-library-for-python-without-changing-rust-library/69285
+I don’t *think* the performance benefits of Rust in AnchorPy would be that significant because the one place where I’m aware I’m doing some dumb slow stuff isn’t in the hot path (it’s in creating the Program object).
+
+But maybe creating transactions and signing them is just slow in Python? I haven’t compared the two yet
+Wrapping Rust in Python is pretty popular these days, and there are widely-used libraries that do it e.g. `orjson`
+Jotting down some thoughts here about using Rust in AnchorPy, feel free to chime in if you have any thoughts of your own
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Would need to have a rust idl parser as well
+Ah yea that's no good
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+But that should be right as it’s the same I’m using in js
+The address of the receiver
+and what is `address`?
+so this is what I'm sending
+await meProgram.rpc['exchange2'](amount, PublicKey(address), ctx=ctx)
+PublicKey(address)
+Oh my bad
+`receive_address` not `remaining_accounts`
+```  for creators in creatorsArray:
+    remAccounts.append(AccountMeta(pubkey=PublicKey(creators['address']), is_signer=False, is_writable=True))```
+How are you constructing the receive_address argument?
+Makes it even weirder that it’s not working
+I was hoping maybe there’d be something weird in there but no it’s the most boring IDL of all time
+what do you mean?
+Nice and simple 😅
+"args": [
+          {
+            "name": "solAmount",
+            "type": "u64"
+          },
+          {
+            "name": "receiveAddress",
+            "type": "publicKey"
+          }
+        ]
+What does the IDL look like for that function?
+I don’t think the 0 means it’s the first argument
+yeah
+And if you translate your Python code into JS it works right?
+nope
+Do you have the Rust code for the program you’re interacting with?
+cause if so, then the first argument is the SOL amount
+{'InstructionError': [0, 'InvalidArgument']} - does the 0 mean that the first argument is invalid?
+So that’s probably not the issue
+AnchorPy doesn’t require you to do anything special with integers
+Oh I think it's because I'm submitting the SOL amount as 130000000 but it should be u64, possible? If so, I'd I go about doing this in python?
+I tried logging what it sends but nothing
+how do I figure out which one is the invalid argument now?
+yes finally!
+Progress!
+now I'm getting a different error: `{'code': -32002, 'message': 'Transaction simulation failed: Error processing Instruction 0: invalid program argument', 'data': {'accounts': None, 'err': {'InstructionError': [0, 'InvalidArgument']}`
+Oh I mean a list of AccountMeta objects
+no worries at all, how would I go to make it AccountMeta considering I currently have it as a list?
+Should be AccountMeta
+Oh didn’t see that lol
+Should it be AccountMeta or just plain as I'm submitting it?
+I also tried changing *isSigner* to *is_signer* but still gives the same error
+.
+I can’t see what `remaining_accounts` looks like
+what more do you need? I think I sent everything related to the issue, which right now is this `AttributeError: 'dict' object has no attribute 'is_signer'`
+This will be easier if you can post some code
+I just checked the "transactions.py" file from Solana on the line  that's giving the error and it's this one
+I'm using normal VSC, I believe that the issue tho is in the accounts field
+Are you using an IDE or type checker? I think it should complain about remaining_accounts having the wrong type
+Could you help me out on this bit? I think it's the last thing
+actually this one might be the issue, instead of address there's an actual address there ofc
+```[{'pubkey': 'address', 'isWritable': False, 'isSigner': True}, {'pubkey': 'address', 'isWritable': True, 'isSigner': False}]```
+What does `remaining_accounts` look like in your code?
+how would I go about doing this?
+And this part too probably
+Is it a list of AccountMeta objects?
+My guess is that it’s a problem with `remaining_accounts`
+"accounts": [
+          {
+            "name": "taker",
+            "isMut": false,
+            "isSigner": true
+          },
+and I think I need to add the signer field to "taker" in my code
+this is the idl bit
+I can send you the equivalent piece in js, would that help?
+Or even better a minimal reproducible example
+If you post a full example I can try to replicate it
+it does yes
+Have you checked if the JS equivalent of your code works?
+in theory, from the idl I have, the signer should be the taker field
+yep
+Are they all PublicKey?
+Ok but what are the `another_field` parts 😅
+<@!856894333180706876> here you go, sorry for the delay
+```py
+  ctx = Context(accounts={
+      "taker": walletWrapper.public_key,
+      "another_field": another_value,
+      "another_field": another_value,
+      "another_field": another_value,
+      "another_field": another_value,
+      "another_field": another_value
+    }, remaining_accounts=remainingAccounts)```
+feel free to share code when you're back, it's pretty hard to tell what the problem is from here
+But yeah those are all the fields I’m using, do I need any other one?
+Not at the pc rn so can’t get you the exact one
+There’s this under the account field, and then an array for the remaining_accounts field
+can you show the code where you create `ctx`?
+Yeah as you suggested in the the GitHub issue I opened
+are you using `anchorpy.Context`?
+I thought that maybe it needs more than one? Such as isSigner and set it to True?
+One key one value
+{“taker”: publicKey, “more_required_fields”: more_required_fields}
+what does your `ctx` object look like?
+If it requires a lot of time or anything I don’t mind paying
+Oh alright, here's the output: https://pastebin.com/4TCjxxQM
+if you want to pay me then by all means 😅  otherwise I prefer to keep discussion here so other people can benefit
+can I DM you?
+if the traceback is long you can just use https://pastebin.com/
+welcome!
+Hey, I just opened the github repo, where should I send the output I get?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+```
+  byte_array = base58.b58decode(privateKey)
+  keyPair = Keypair.from_secret_key(secret_key=bytes(byte_array))
+
+  walletWrapper = Wallet(payer=keyPair)
+
+  provider = Provider(async_client, walletWrapper)
+
+  meProgram = Program(idl=idl, program_id="programIdhere", provider=provider)```
+Just to make sure, these imports are correct right? 
+
+```py
+from anchorpy import Provider, Program, Context, Wallet
+from solana.rpc.async_api import AsyncClient
+from solana.keypair import Keypair
+from solana.publickey import PublicKey
+from solana.transaction import AccountMeta```
+The two things that could be different are the ctx and the state of the world before you send the transaction
+Can see if anyone in <#889702325231427584> has any idea, but I don’t think this error comes from Anchor
+but yeah also, what could be causing this? Since the same exact instructions etc.. work on js but not onpy?
+is there any way I can find this out?
+ok there are no results for 0x3f in Discord search 😅
+sadly not :/
+as in anchor_lang, not anchorpy
+do you know what version of Anchor this program is using?
+now
+I think we're super close
+yes!
+progress!
+Error processing Instruction 0: custom program error: 0x3f'
+nope now it's this
+same InvalidArgument error as before?
+so I don't get how it could be failing?
+now even the bytes are the same
+on py it's still returning an error
+but
+lol nice
+the instructions are the same
+now I fixed everything
+this helped a lot
+ok so
+and in js i think it's `program.coder.instruction.decode(the_bytes)`
+think it's `program.coder.instruction.parse(the_bytes)`
+there is a way to parse those bytes back
+Ok cool
+nope
+Do the program.instruction bytes change when you do that?
+tried, still the same error :/
+Try using `str(PublicKey(receiverId)` then
+Ok
+could it be this? (don't think it would but I don't know what to change anymore) 
+
+- basically in the js code, there's this in the second account parameter: receiver: new PublicKey(receiver.id)**.toString()**
+- while in the python code I have this: "receiver": PublicKey(reciverId) (without the toString)
+The raw bytes? No sadly I’m not *that* good
+can it help if I send what it returned?
+Ok this narrows it down at least
+just checked and only three are different pairs
+and to get the python hex to have the same spacing as js you'll want to do this https://stackoverflow.com/questions/51974380/print-hex-with-spaces-between/51974501
+iirc the JS output will be in hex. To convert bytes to hex in Python you just call `.hex()`
+and see if the bytes are the same
+and do the equivalent in JS
+one thing you can try is `meProgram.instruction['exchange2'](amount, PublicKey(address), ctx=ctx)`
+yeah it's gonna be hard for me to spot what's wrong without seeing the full Python and JS code
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ohhh i think other people are just using the `master` branch of their fork instead of creating a new branch
+It could just be that CI should be doing an origin fetch before running those commands
+Anyone else having this same issue? <@!856894333180706876> you could check that everything is pushed up and tagged...
+it's `Error: A branch or tag with the name 'add-anchorpy' could not be found` but yeh, no idea what that means
+oh nevermind
+could it be a linter issue?
+The checkout action fails which I’ve never seen happen before
+Trying to add AnchorPy to solana.com/ecosystem, anyone know why this PR is failing? 😅
+
+https://github.com/solana-labs/ecosystem/pull/869
+works. thanks again!
+just released 0.4.5, should be good now!
+thanks
+and the solana-py dep of course
+i'm upgrading the apischema dep
+i suspect that too
+yep
+from the traceback, i suspect the issue could be a difference in apischema. solana.py 0.18.3 depends on apischema 0.15.7 and solana.py 0.19.0 depends on apischema 0.16.2.
+yep, just normal candy machine
+this is using the candy machine IDL yes? Just wanna check that out in case there's anything uncommon in there
+thanks
+Not sure if it helps, but here's my code (reduced down to what causes the exception) and the traceback.
+i suppose it will
+Will anchor.py be updated to support solana.py 0.19.0? I'm using the websocket RPC functionality of solana.py so I need 0.19.0.
+Forcibly updating to solana.py 0.19.0 despite the version incompatibility makes fetching an IDL fail.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

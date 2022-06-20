@@ -1,0 +1,90 @@
+{
+    "total_results": 3,
+    "messages": [
+        [
+            {
+                "id": "896561109123887144",
+                "type": 0,
+                "content": "A `Dockerfile` template for rust programs which uses `sccache` to cache dependencies, and supports private repositories using ssh keys **without leaking them in the final image**.\n```docker\n# WARNING: BUILD THIS WITH --SQUASH OTHERWISE YOU MAY LEAK SSH KEYS\nFROM rust:1.53.0 as BUILDER\nRUN apt-get update && apt-get install -y libudev-dev\nRUN cargo install sccache\nENV HOME=/home/root\nENV SCCACHE_CACHE_SIZE=\"2G\"\nENV SCCACHE_DIR=$HOME/.cache/sccache\nENV RUSTC_WRAPPER=\"/usr/local/cargo/bin/sccache\"\nWORKDIR $HOME/app\n# Copy all files into the docker image\nADD . .\n# Create the ssh directory, copy relevant files, authorize ssh host, and change permission\nRUN mkdir -p /root/.ssh && \\\n    chmod 0700 /root/.ssh && \\\n    cp ssh/id_rsa /root/.ssh && \\\n    cp ssh/id_rsa.pub /root/.ssh && \\\n    ssh-keyscan github.com > /root/.ssh/known_hosts && \\\n    chmod 600 /root/.ssh/id_rsa && \\\n    chmod 600 /root/.ssh/id_rsa.pub\n# Start the ssh mount\nRUN --mount=type=ssh ssh -q -T git@github.com 2>&1 | echo \"started docker ssh mount\"\n# Start the cache mount and build the cli\nRUN --mount=type=cache,target=/home/root/.cache/sccache cargo build --release --bin cli && cp target/release/cli /tmp/cli\n# Shred the ssh keys and remove them\nRUN shred /root/.ssh/id_rsa && shred /root/.ssh/id_rsa.pub && rm -rf /root/.ssh\nFROM rust:1.53.0 as runtime\nCOPY --from=BUILDER /tmp/cli /usr/local/bin\nENTRYPOINT [\"/usr/local/bin/cli\"]\n```\n\nYou can build the image with the following command, **do not remove --squash or your ssh keys will be leaked**\n```make\nDOCKER_BUILDKIT=1 docker \\\n    build \\\n    -t rust-cli:latest \\\n    --ssh \\\n    --squash .\n```\n\nRequires you have `experimental` set to `true` in your docker daemon config file",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-10T00:53:45.715000+00:00",
+                "edited_timestamp": "2021-10-10T00:57:10.349000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "896560108702662696",
+                "type": 0,
+                "content": "useful way to speed up compilation times in general, and for the aforementioned `Cargo.toml` config\nhttps://github.com/mozilla/sccache",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-10T00:49:47.196000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "896559943610662962",
+                "type": 0,
+                "content": "add this to your workspace `Cargo.toml` and you will save on program space and compute units. depending on what exactly you're doing you can get some wicked compute units saving.  It drastically increases build times though, so you'll want to implement some sort of caching solution\n\n```toml\n[profile.release]\nlto = \"fat\"\ncodegen-units = 1\n[profile.release.build-override]\nopt-level = 3\nincremental = false\ncodegen-units = 1\n```",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-10T00:49:07.835000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "a20ca4a964d3f0c0fc591166a431a5f6"
+}

@@ -1,0 +1,1068 @@
+{
+    "total_results": 34,
+    "messages": [
+        [
+            {
+                "id": "936996306017189918",
+                "type": 0,
+                "content": "Also, please post the *full* program error log, not just a snippet",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T14:48:47.904000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936996231782228008",
+                "type": 0,
+                "content": "Which programs own `user` and `base_account`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T14:48:30.205000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936996110843658280",
+                "type": 19,
+                "content": "Can you walk me through how you're thinking about the program ownership here?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T14:48:01.371000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936970702261743667"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936970702261743667",
+                "type": 19,
+                "content": "I'm getting the same error after trying to spend SOL via the system program method.\n\ndo you have any reccomendations?\n\n```declare_id!(\"DBhPne1rBZNjSMVvPM6gkUzMH486vSZVxoSomzQmaqkq\");\n\n#[program]\npub mod hello {\n    use super::*;\n    pub fn init_house(ctx: Context<InitHouse>, bump: u8) -> ProgramResult {\n        // Debit from_account and credit to_account\n        let user = &mut ctx.accounts.user;\n        let user_address = *user.to_account_info().key;\n        let system_program = &ctx.accounts.system_program;\n        let base_account = &ctx.accounts.base_account;\n        invoke(\n            &system_instruction::transfer(\n                &user.to_account_info().key,\n                &base_account.to_account_info().key,\n                100_000, // 0.001 SOL\n            ),\n            &[\n                base_account.to_account_info().clone(),\n                user.to_account_info().clone(),\n                system_program.to_account_info().clone(),\n            ],\n        )?;\n        Ok(())\n    }\n}```\n\n```     Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: instruction spent from the balance of an account it does not own\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T13:07:03.493000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936300063704092693"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936966488957542430",
+                "type": 19,
+                "content": "do you know where i can find some examples for `invoke`? I don't see it in the cookbook",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "347689664855015424",
+                        "username": "paulx",
+                        "avatar": "f0f52417776819a379ec501b16d461c1",
+                        "discriminator": "9059",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:50:18.963000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936353507399835670"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936966275182264422",
+                "type": 0,
+                "content": "trolling",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:49:27.995000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936966247978004511",
+                "type": 0,
+                "content": "lol",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:49:21.509000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936966210086641664",
+                "type": 19,
+                "content": "localhost?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:49:12.475000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936966104989958154"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936966104989958154",
+                "type": 0,
+                "content": "The seed for the PDA. I think you need to read about it, maybe here: https://solana-cookbook-git-fork-losman0s-using-mainnet-6e845e-cookbook.vercel.app/references/accounts.html#program-derived-address",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://solana-cookbook-git-fork-losman0s-using-mainnet-6e845e-cookbook.vercel.app/references/accounts.html",
+                        "title": "Solana Cookbook | Account References",
+                        "description": "Accounts can be used as System Account and/or Program Derived Addresses. Learn about Accounts and more references for building on Solana at The Solana cookbook.",
+                        "thumbnail": {
+                            "url": "https://solanacookbook.com/cookbook-sharing-card.png",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/VsLGK7t1MWeOswwtxr9fxzNYQlc9t5Ksuukee8xyhBM/https/solanacookbook.com/cookbook-sharing-card.png",
+                            "width": 2400,
+                            "height": 1260
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:48:47.418000+00:00",
+                "edited_timestamp": "2022-01-29T12:49:33.719000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936965565787025489",
+                "type": 19,
+                "content": "thanks what is the b\"escrow\" for?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:46:38.862000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936964938176540672"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936964938176540672",
+                "type": 19,
+                "content": "it's the PDA \"signing\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:44:09.228000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936964559225364520"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936964559225364520",
+                "type": 0,
+                "content": "What is the line `        &[&[b\"escrow\", &[bump_seed]]],` for in \n\n```\n    invoke_signed(\n        &system_instruction::transfer(\n            &pda_account_info.key,\n            &to_account_info.key,\n            100_000_000, // 0.1 SOL\n        ),\n        &[\n            pda_account_info.clone(),\n            to_account_info.clone(),\n            system_program_account_info.clone(),\n        ],\n        &[&[b\"escrow\", &[bump_seed]]],\n    )?;\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T12:42:38.879000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936953480814395432",
+                "type": 19,
+                "content": "https://solanacookbook.com/references/basic-transactions.html",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://solanacookbook.com/references/basic-transactions.html",
+                        "title": "Solana Cookbook | Basic Transactions",
+                        "description": "Learn Basic Transactions like Sending SOL, SPL-Tokens, Calculating Transaction Cost, and more references for Building on Solana at The Solana cookbook.",
+                        "reference_id": "936953480814395432",
+                        "thumbnail": {
+                            "url": "https://solanacookbook.com/cookbook-sharing-card.png",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/VsLGK7t1MWeOswwtxr9fxzNYQlc9t5Ksuukee8xyhBM/https/solanacookbook.com/cookbook-sharing-card.png",
+                            "width": 2400,
+                            "height": 1260
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "886866192080449569",
+                        "username": "armanaurobindo",
+                        "avatar": null,
+                        "discriminator": "7764",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T11:58:37.580000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936952409337507840"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936952409337507840",
+                "type": 0,
+                "content": "I am a newbie I want to make a program to send sol from one acc to another can anyone pls guide me",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "886866192080449569",
+                    "username": "armanaurobindo",
+                    "avatar": null,
+                    "discriminator": "7764",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T11:54:22.120000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936943663601311745",
+                "type": 0,
+                "content": "Hey to do something like combining 3 nfts and creating a new nft, what would the appropriate work flow look like?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "561794511005548545",
+                    "username": "MGHQ_YT",
+                    "avatar": "d337851e45b227f4a0b3429b5d4d4e82",
+                    "discriminator": "6510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T11:19:36.974000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936936490301284392",
+                "type": 0,
+                "content": "interface must be not connected to accounts. It is property of contract only. Requirement to have instruction implemented",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:51:06.726000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936935167187107852",
+                "type": 0,
+                "content": "how to use #[interface] properly?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:45:51.271000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936935108257128448",
+                "type": 0,
+                "content": "use of deprecated macro `state`: #[state] will be removed in a future version.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:45:37.221000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936931595934375977",
+                "type": 19,
+                "content": "My version ```\nuse anchor_lang::prelude::*;\nuse mpl_token_metadata::state::Metadata;\nuse derive_more::Deref;\n\n#[derive(Clone, Deref)]\npub struct MetadataWrapper(Metadata);\n\nimpl AnchorSerialize for MetadataWrapper {\n    fn serialize<W: std::io::Write>(&self, writer: &mut W) -> std::io::Result<()> {\n        self.0.serialize(writer)\n    }\n}\n\nimpl AnchorDeserialize for MetadataWrapper {\n    fn deserialize(buf: &mut &[u8]) -> std::io::Result<Self> {\n        Ok(Self(Metadata::deserialize(buf)?))\n    }\n}\n\nimpl AccountSerialize for MetadataWrapper {\n    fn try_serialize<W: std::io::Write>(&self, writer: &mut W) -> Result<(), ProgramError> {\n        self.serialize(writer)\n            .map_err(|e| ProgramError::BorshIoError(e.to_string()))\n    }\n}\n\nimpl AccountDeserialize for MetadataWrapper {\n    fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self, ProgramError> {\n        MetadataWrapper::deserialize(buf).map_err(|e| ProgramError::BorshIoError(e.to_string()))\n    }\n}\n\nimpl Owner for MetadataWrapper {\n    fn owner() -> Pubkey {\n        mpl_token_metadata::ID\n    }\n}\n\n#[derive(Debug, Clone)]\npub struct MplTokenMetadata;\n\nimpl anchor_lang::Id for MplTokenMetadata {\n    fn id() -> Pubkey {\n        mpl_token_metadata::ID\n    }\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "392371614542725121",
+                        "username": "ronanyeah",
+                        "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                        "discriminator": "3307",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:31:39.818000+00:00",
+                "edited_timestamp": "2022-01-29T10:33:39.369000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936781877543592006"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936931265691676733",
+                "type": 0,
+                "content": "do I need for impl .. for State to make it work?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:30:21.082000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936930914519363604",
+                "type": 0,
+                "content": "Hi. How #[interface] is working in implementation side. I see `impl .. { fn instruction.. }` inside #[program] module is not going to become callable instruction of this program",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T10:28:57.356000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936856785879453756",
+                "type": 0,
+                "content": "Does anyone have an example of how CPI with a non-anchor solana program would look like",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "165481790268506113",
+                    "username": "wenzani",
+                    "avatar": "9c272054a2df926c6ec62d77dd950ca6",
+                    "discriminator": "3498",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T05:34:23.711000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936781877543592006",
+                "type": 0,
+                "content": "For anyone in future, this works:\n```\n#[derive(Clone)]\nstruct MetaWrap(mpl_token_metadata::state::Metadata);\n\nimpl anchor_lang::AccountDeserialize for MetaWrap {\n    fn try_deserialize(buf: &mut &[u8]) -> Result<Self, ProgramError> {\n        MetaWrap::try_deserialize_unchecked(buf)\n    }\n\n    fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self, ProgramError> {\n        mpl_token_metadata::state::Metadata::deserialize(buf)\n            .map(MetaWrap)\n            .map_err(|_| ProgramError::Custom(99))\n    }\n}\n\nimpl anchor_lang::AccountSerialize for MetaWrap {\n    fn try_serialize<W: std::io::Write>(&self, _writer: &mut W) -> Result<(), ProgramError> {\n        // no-op\n        Ok(())\n    }\n}\n\nimpl anchor_lang::Owner for MetaWrap {\n    fn owner() -> Pubkey {\n        mpl_token_metadata::ID\n    }\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T00:36:44.172000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772675802636319",
+                "type": 0,
+                "content": "Oh, sorry, you didn't say that\u2014my bad",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-29T00:00:10.306000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772591773941771",
+                "type": 0,
+                "content": "You also won't be able to derive the serialization/deserialization stuff",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:59:50.272000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772479651815475",
+                "type": 0,
+                "content": "Yeah, `#[account]` is for an on-chain data structure\u2014the thing you're passing in above is more than that, it's also who its owner should be, etc. etc.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:59:23.540000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772365549961308",
+                "type": 0,
+                "content": "You shouldn't need to impl Default though \ud83e\udd14",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:56.336000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772358822297642",
+                "type": 0,
+                "content": "```\n#[account]\nstruct MetaWrap(mpl_token_metadata::state::Metadata);\n```\nThis didn't work unfortunately \ud83d\ude04",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:54.732000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772315348340766",
+                "type": 0,
+                "content": "^ and yeah, you need to wrap it in order to impl new traits on it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:44.367000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772265717153833",
+                "type": 0,
+                "content": "Ok, got it\u2014no, there isn't really any quick way to do that",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:32.534000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772243617349683",
+                "type": 0,
+                "content": "But something like this is required yeah?\n`struct MetaWrap(mpl_token_metadata::state::Metadata);`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:27.265000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936772148268265502",
+                "type": 0,
+                "content": "To use as a passed in account:\n```\nmeta: Account<'info, mpl_token_metadata::state::Metadata>,\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:58:04.532000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936771926020476929",
+                "type": 19,
+                "content": "Just to make sure I'm following, why do you need to wrap an external struct like that?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "392371614542725121",
+                        "username": "ronanyeah",
+                        "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                        "discriminator": "3307",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:57:11.544000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936771697103765594"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936771697103765594",
+                "type": 0,
+                "content": "Is there a shortcut to wrapping an external struct (such as `mpl_token_metadata::state::Metadata`). I am having to impl Default, AccountDeserialize, AccountSerialize and Owner, and wondering if there is an easier way",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "392371614542725121",
+                    "username": "ronanyeah",
+                    "avatar": "e6501b853cb81c21fa3f4772ce0f75c0",
+                    "discriminator": "3307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-28T23:56:16.966000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "73c859073377fa2c327777e91293bd51"
+}

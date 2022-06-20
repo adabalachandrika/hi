@@ -1,0 +1,188 @@
+{
+    "total_results": 6,
+    "messages": [
+        [
+            {
+                "id": "914110559731998721",
+                "type": 0,
+                "content": "GM! anyone had success integrating a chainlink price feed into anchor? any tips for running on localnet?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "848333406849073202",
+                    "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                    "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                    "avatar_decoration": null,
+                    "discriminator": "0001",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-27T11:09:00.793000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "913915853140004917",
+                "type": 0,
+                "content": "It's working, thank Alan. You are like saving my life multiple times a day at that point haha. Thank you man x) I really appreciate it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-26T22:15:19.124000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "913913283927494737",
+                "type": 0,
+                "content": "So you need to help it out.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-26T22:05:06.576000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "913913260833652768",
+                "type": 0,
+                "content": "The underlying issue is that Rust's lifetime inference/elision/whatever it's called actually does something like\n```.rs\npub fn your_fn<'a, 'b, 'c, 'info, 'wtf>(ctx: Context<'a, 'b, 'c, 'info, YourContextThing<'wtf>>) -> ...\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-26T22:05:01.070000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "913911435183157278",
+                "type": 19,
+                "content": "Try changing your ix function's signature to have full lifetime annotations:\n```.rs\npub fn your_fn<'a, 'b, 'c, 'info>(ctx: Context<'a, 'b, 'c, 'info, YourContextThing<'info>>) -> ...\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-26T21:57:45.801000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "913908580707627019"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "913908580707627019",
+                "type": 0,
+                "content": "Lifetime strikes again. Unsure how to solve that, any one got a solution ? : \n```\nlet edition_mint = next_account_info(accounts)?;\n...\nlet cpi_accounts = Burn {\n                    mint: edition_mint.to_account_info(),\n                    to: token_account_info.to_account_info(),\n                    authority: ctx.accounts.user.to_account_info(),\n                };\n```\nError : \n```\n9 |     pub fn merge_one(mut ctx: Context<MergeOne>, _nounce: u8) -> ProgramResult {\n   |                               -----------------\n   |                                       |\n   |                                       these two types are declared with different lifetimes...\n...\n74 |                     mint: edition_mint.to_account_info(),\n   |                                        ^^^^^^^^^^^^^^^ ...but data from `ctx` flows into `ctx` here\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-26T21:46:25.241000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "7c016d46e0ca9fb8fd362ae0ddb2df78"
+}

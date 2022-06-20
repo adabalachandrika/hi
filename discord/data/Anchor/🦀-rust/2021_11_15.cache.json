@@ -1,0 +1,780 @@
+{
+    "total_results": 23,
+    "messages": [
+        [
+            {
+                "id": "909844104391831593",
+                "type": 0,
+                "content": "for now , i can call function within a file and can pass a accounts as context but i need to call them via cpicontext .. is there any way i could do that ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "756778771952042124",
+                    "username": "rohith | kanaswap",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9318",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T16:35:38.573000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909843267267493940",
+                "type": 0,
+                "content": "how can i call a function within a same file via Cpi ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "756778771952042124",
+                    "username": "rohith | kanaswap",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9318",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T16:32:18.987000+00:00",
+                "edited_timestamp": "2021-11-15T16:34:06.311000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909781429787959296",
+                "type": 19,
+                "content": "Can you not just check whether there's a non-zero bump in the account? (Technically the bump could actually legitimately be zero I guess, but that's vanishingly unlikely.) If no bump yet then apparently the account just got `init`'d, so write one; otherwise the account was already set up in some previous instruction.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock (shardul)",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "avatar_decoration": null,
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T12:26:35.783000+00:00",
+                "edited_timestamp": "2021-11-15T12:29:00.433000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909689492280070174"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909776315396263967",
+                "type": 0,
+                "content": "yeh, i dunno, sounds complicated",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T12:06:16.417000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909776286740807730",
+                "type": 0,
+                "content": "hmmm",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T12:06:09.585000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909775034598441010",
+                "type": 0,
+                "content": "Issue is that this particular function has a callback, i.e. it can only be called by another smart contract (A -> B -> A). Separate init and mut functions will cost two CPIs and increase bloat. Won't `to_account_info().executable` with PDA requirement be secure enough, since randos can't create PDAs? To reduce boilerplate we were exploring `init_if_needed`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T12:01:11.051000+00:00",
+                "edited_timestamp": "2021-11-15T12:02:54.031000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773425436942336",
+                "type": 0,
+                "content": "less attack vectors",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:54:47.397000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773399650349097",
+                "type": 0,
+                "content": "but stuff is so dodgy in crypto it's just best to follow best practices that simplify your programs",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:54:41.249000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773290220969995",
+                "type": 0,
+                "content": "i don't know either why it's better design",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:54:15.159000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773203910574130",
+                "type": 0,
+                "content": "just have separate functions \ud83e\udd37",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:53:54.581000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773146477973514",
+                "type": 19,
+                "content": "nope",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock (shardul)",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "avatar_decoration": null,
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:53:40.888000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909773047723077632"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909773047723077632",
+                "type": 19,
+                "content": "How about reading `AccountInfo<'info>` through context, then conditionally initializing in a single function using `to_account_info().executable`? If false then initialize, else decode.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "avatar_decoration": null,
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T11:53:17.343000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909713649319424010"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909713763165433886",
+                "type": 0,
+                "content": "If an account needs to be inited then just add that as an extra instruction to the transaction",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T07:57:42.803000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909713649319424010",
+                "type": 19,
+                "content": "You should have a separate function for initializing accounts",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "avatar_decoration": null,
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock (shardul)",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "avatar_decoration": null,
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T07:57:15.660000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909665512559104052"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909689492280070174",
+                "type": 0,
+                "content": "How to assign initial values if `#[account(init_if_needed)]` performed an initialization? I want to store `bump` in the account was initialized for fist time, otherwise wish to skip this step.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T06:21:16.173000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909672437476638770",
+                "type": 19,
+                "content": "PR created- https://github.com/project-serum/anchor/pull/1023",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/pull/1023",
+                        "title": "Document #[account(init_if_needed)] attribute for accounts by zkwar...",
+                        "description": "Attribute exists in \n  \n    \n      anchor/lang/syn/src/parser/accounts/constraints.rs\n    \n    \n         Line 67\n      in\n      58c0077\n    \n    \n    \n    \n\n        \n          \n           &quot...",
+                        "color": 1975079,
+                        "reference_id": "909672437476638770",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/b2b683cc89b142afe8b329d422ecd2efa49d54620013201128059fe108ab44d9/project-serum/anchor/pull/1023",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/_2EzFvalrWABEsG-INo1436Js-QaKi3mFeiU-NTfxRk/https/opengraph.githubassets.com/b2b683cc89b142afe8b329d422ecd2efa49d54620013201128059fe108ab44d9/project-serum/anchor/pull/1023",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T05:13:29.991000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909667697393016862"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909667697393016862",
+                "type": 19,
+                "content": "Is `#[account(init_if_needed)]` functional / stable? Undocumented currently, found it in code.\n\nhttps://github.com/project-serum/anchor/blob/58c00770cbf39bc7676a43d79791d06c88637a59/lang/syn/src/parser/accounts/constraints.rs#L67",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/blob/58c00770cbf39bc7676a43d79791d06c88637a59/lang/syn/src/parser/accounts/constraints.rs",
+                        "title": "anchor/constraints.rs at 58c00770cbf39bc7676a43d79791d06c88637a59 \u00b7...",
+                        "description": "\u2693 Solana Sealevel Framework. Contribute to project-serum/anchor development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "909667697393016862",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/7b0b90fe4ee9b5bbdc4110835f51d9cec5b10ce52a959abc13afc0d990fc5502/project-serum/anchor",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/GGqbp17RuZ2oIA9a208IMAihajI3PZTvgJUbxfCF7eo/https/opengraph.githubassets.com/7b0b90fe4ee9b5bbdc4110835f51d9cec5b10ce52a959abc13afc0d990fc5502/project-serum/anchor",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T04:54:39.867000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909665512559104052"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909665512559104052",
+                "type": 0,
+                "content": "Does `#[account(init)]` fail if a pre-initialized account is passed? We're looking for if-else behavior- init account if not created, else read it as mutable. How about a PR for `#[account(init_or_mut)]` if this is unsupported currently?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock (shardul)",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "avatar_decoration": null,
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-15T04:45:58.962000+00:00",
+                "edited_timestamp": "2021-11-15T04:46:18.426000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909565021799993365",
+                "type": 0,
+                "content": "Is it worth opening an issue on github around documenting the macro or is that captured elsewhere?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "690575341659619338",
+                    "username": "theycallmeswift",
+                    "avatar": "2ffeaf22001dd976e30275bb42d184fb",
+                    "avatar_decoration": null,
+                    "discriminator": "1898",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-14T22:06:40.098000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909564756212477982",
+                "type": 19,
+                "content": "The format is actually kinda tricky lol, you need to be very careful to have it match your actual instruction arguments (at least up to whatever arguments you need in the accounts block). If you get the order wrong anchor will happily try to deserialize in the order you specify (almost certainly leading to weird/bad things). This is kind of unfortunate but no easy way to fix atm",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "690575341659619338",
+                        "username": "theycallmeswift",
+                        "avatar": "2ffeaf22001dd976e30275bb42d184fb",
+                        "avatar_decoration": null,
+                        "discriminator": "1898",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-14T22:05:36.777000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909562306030080012"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909562306030080012",
+                "type": 0,
+                "content": "Makes sense. Format is just a list of expected arguments and types?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "690575341659619338",
+                    "username": "theycallmeswift",
+                    "avatar": "2ffeaf22001dd976e30275bb42d184fb",
+                    "avatar_decoration": null,
+                    "discriminator": "1898",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-14T21:55:52.608000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909561831599767653",
+                "type": 19,
+                "content": "Not sure there are any docs, but the idea is that it gives you access to instruction arguments while writing your `#[derive(Accounts)]` logic. The most common use case is passing program-derived address bumps, but you can use whatever args you want",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "690575341659619338",
+                        "username": "theycallmeswift",
+                        "avatar": "2ffeaf22001dd976e30275bb42d184fb",
+                        "avatar_decoration": null,
+                        "discriminator": "1898",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-14T21:53:59.495000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "909560973373866014"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "909560973373866014",
+                "type": 0,
+                "content": "Can anyone point me to where I can find docs on the `#[instruction(...)]` macro? I see it being used in the test code, but can't find any reference to it anywhere",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "690575341659619338",
+                    "username": "theycallmeswift",
+                    "avatar": "2ffeaf22001dd976e30275bb42d184fb",
+                    "avatar_decoration": null,
+                    "discriminator": "1898",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-11-14T21:50:34.878000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "3e603bad83695da62bfe901f09cd4296"
+}

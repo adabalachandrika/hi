@@ -1,0 +1,539 @@
+that sounds right. but mango is using this
+At least we know it's a bpf specific problem, then.
+still showing the error
+What about if you remove the `anchor_*` dependencies and run` cargo build-bpf` ?
+nope. `cargo test` doesn't throw this error
+Do you see this error when not using anchor?
+
+Can you share the error?
+Has anyone tried fixed crate with anchor? I guess mango market was using this to do safemath. I am getting errors running `anchor test` with this crate. Probably anchor and `fixed` crate has compatibility issues. https://crates.io/crates/fixed
+do you have a specific use case in mind?
+i actually think rust for data analysis is an over kill
+you don't need to write rust to extract on chain data, you can use the web3 solana library for that
+That would be amazing! I want to extract on chain data 🙏🏽
+yep, good point
+<https://stackoverflow.com/questions/49660467/how-can-i-initialize-an-array-with-a-length-inferred-from-the-variables-type> this is what i ended up basing the solution off of
+oh i remember, i tried this before and got this error 
+```
+only traits defined in the current crate can be implemented for arbitrary types
+
+impl doesn't use only types from inside the current crate
+```
+i did this 
+```
+#[zero_copy]
+pub struct Description {
+    pub array: [u8; 256]
+}
+
+
+impl Default for Description {
+    fn default() -> Self {
+        Description{
+            array: [0; 256]
+        }
+    }
+}
+```
+oh wow, you can call it that directly
+```
+impl Default for [u8; 65] {
+   fn default() -> [u8; 65] {
+        [0; 65]
+   }
+}
+```
+
+but this can blow out of stack frame size, one solution I used (not very happy with it tho) is
+
+```
+let x: [MyType; 12000] = unsafe {
+    msg!("This should not be called on chain");
+    std::mem::MaybeUninit::zeroed().assume_init()
+};
+```
+this is never called on chain tho cause it already comes default initialized, but it's required to compile
+you can implement it yourself tho
+"Arrays of sizes from 0 to 32 (inclusive) implement the Default trait if the element type allows it. As a stopgap, trait implementations are statically generated up to size 32."
+https://doc.rust-lang.org/std/primitive.array.html
+is there something special needed to import for borsh deserialization to work on larger array. I've tried the accepted list of array number (e.g. 128, 64/65) and it still gives off an error
+```
+the trait `std::default::Default` is not implemented for `[u8; 65]`
+```
+Been running into a lot of `mutable borrow not allowed` and other random errors throughout the rust journey.
+
+The possible two solutions to keep in mind are
+- assign variables on structs to their own variable instead of "borrowing" them directly
+e.g.
+```
+let idx = ctx.accounts.this_account.idx
+ctx.accounts.list_account.names[idx as usize]
+```
+instead of
+```
+ctx.accounts.list_account.names[ctx.accounts.this_account.idx as usize]
+```
+- try to change the order of execution. Simply changing the order variables are accessed and assigned by shifting around the lines of code might solve some of the borrowing issues
+My main goal, is to like understand how exactly some of the Solana programming concepts work with Rust (especially Smart Pointers and references), and basically how a regular boilerplated version in Solana can be like converted using Anchor.
+What’s the end goal? To write dapps; primary focus onchain dev? I’d be happy to do a little 1hr crash course for a small group to help you get some clarity around concepts and how they relate to anchor.
+haha welcome aboard lost boi express <@!185307556032413697>
+Im literally at the same position as you <@!721781658906525837> .. Feels so happy that I ain't alone lol.
+I actually just started working at Polygon as a devops engineer so I am gaining some understanding of the networking side of things. On Sunday I was able to get through the first two anchor tutorials, but I realized wow I really don't understand anything that is happening here. So yesterday I started working on this project: https://dev.to/dabit3/the-complete-guide-to-full-stack-solana-development-with-react-anchor-rust-and-phantom-3291 , but realized there is still so much terminology I need to get down. So now I am spending time reading the terminology around solana and drawing out the architecture and flow of things. I have been referencing a few articles i posted in resources. But now I think I really need to also get back to learning Rust. I stopped at chapter 5 from that handbook thats online. I am bit lost atm lol any type of advice will be appreciated
+Are you already familiar with blockchain? Bitcoin? Ethereum?
+the anchor docs are really good at explaining the important differences between solana and ethereum
+this isnt solana related but solana borrows a lot of concepts from ethereum, so this really helped me understand the blockchain terminology used: https://www.youtube.com/watch?v=66SaEDzlmP4
+FOREALLL! I am having a hard time conceptualizing all the terminology. Does anybody have any articles to help with this?
+Also, the Anchor examples of course
+Reading the code in Serum DEX and the Solana Program Library was helpful to get up to speed.
+Indeed. Solana is my only Rust project so far.
+I feel like "rust" is a miniscule part of the learning curve.  Grasping Solana account derivation, API, architecture, and even nuances are the steep part.
+It turned out to be okay... I'm glad I read a lot of Rust code before I dove in.
+Really falling in love with Rust ❣️
+:crustacean:
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thank you so much for the detailed explanation tho 🙂
+Wow. Looks like I for sure need to learn a lot of rust. The &mut and references stumble me a ton.
+Also haha I spent hours on this and was like "jeez solana is kinda hard", it's very funny you ran into the same trickiness
+So you really do need to make a fresh slice (it points to the same data but has its own length, which is safe to mutate since you leave the account's slice's length alone)
+That typechecks fine, but it runs into the issue where you end up changing the length of the account's data :/
+I actually learned the above because I was confused about the doube &mut too, and was like why couldn't you do `serialize(account.data.borrow_mut().deref_mut())?;` ?
+You ser, are a life saviour. Thank you so so so much. Now I really can understand. How did you manage to understand all these tho? lol
+So you need to make a copy so that you can a) write the data you want to, but b) safely let the serialize call mutate the slice you write (weird)
+If you didn't make a copy, you would actually lose account data! Or at least change its length, which doesn't make sense
+Ahhhhh, I see
+So, the call the serialize above actually *changes the length* of the slice
+And if you look at that link, it has a funny comment: writing to a &mut [u8] *updates the slice to point the unwritten part*
+ooookkk?
+https://doc.rust-lang.org/std/io/trait.Write.html#impl-Write-6
+Because the call the serialize takes a std::io::Writer
+Good question haha, it turns out it's important
+To create a copy?
+Sorry if I'm being an idiot, but why exactly are we slicing it tho?
+And then `thing.serialize(&mut bytes)`
+You could do `let mut bytes: &mut [u8] = &mut account.data.borrow_mut()[..];`
+The &mut ... [..] gives you a mutable slice reference
+Oh, ok .. So essentially, we borrow the account's data as a mutable reference. Slicing it, (which creates an immutable slice reference), and then reference casting back as &mut. Correct?
+Syntactically, it means &mut (&mut account.data.borrow_mut()[..])
+I was also confused by this, it's a surprisingly tricky line
+Ah, let me see if I can explain that
+Oh, and also if you don't mind, could you please help me understand this syntax alone? 
+I'm getting blinded by the 2 &mut's and borrow_mut()
+Why in the world it happens like that lol
+Lol, I ran into the exact same error 😂
+You're right
+Oh my GODDDD
+Yeah
+Your vscode may have accidentally inserted it automatically—it unfortunately breaks things lol
+HOLLLYYYYYYYY SHIT
+Ah, I wonder if you've run into this dreaded editor error, are you accidentally doing something like `use std::borrow::BorrowMut` at the top of your file? https://github.com/rust-lang/rust/issues/39232
+Also, I'm still clueless on why we are using two &mut s haha.
+I'm still a newbie in understanding Rc, RefCell so .. I can't decipher where I'm going wrong.
+Hey, hey. Sorry to reply a bit delayed. No I ain't using Anchor at the moment, coz I wanna learn how exactly the serial/de serial happens. I literally followed the way it's written on this GitHub, but I get this error tho 😦
+But at any rate: you can see an example of using the serialize method here https://github.com/solana-labs/example-helloworld/blob/master/src/program-rust/src/lib.rs#L44
+And are you getting your error in an Anchor program, or a pure solana program? I think you ordinarily wouldn't have to do much Borsh stuff yourself if you're using anchor.
+<@!185307556032413697> can you post the error you're getting?
+Hey everyone. Not super related to anchor, but I'm having issues in understanding BorshSerialize and BorshDeserialize. 
+Could someone help me understanding the syntax and what exactly we need to pass inside the seralize method? 
+
+Coz, I'm having an error which is hard to understand yet.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+xD i managed to get it to work, working with string serialization and deserialization is kinda confusing.
+<@!445019022338031618> could you put your code in a github repo? It would be easier for me to understand the errors you're getting if I could clone your code and mess around with it.
+it returns a u8 array
+"Type 'Uint8Array' is missing the following properties from type 'Buffer': write, toJSON, equals, compare, and 48 more"
+NVM IT DSNT
+if it is already a buffer why dint it give errors when my class variables were type u32
+this is when it starts giving me errors
+that is weird when i change my schema to change the type of a variable form u32 to string
+<@!445019022338031618> I think the result of `borsh.serialize` is already a buffer, so don't think you need to wrap it in the `Buffer.from` call.
+"    data: Buffer.from(borsh.serialize(GreetingSchema,greteAcc)), // All instructions are hellos
+"
+when am trying to  make the data part of the transaction
+am getting error on ts file
+"TypeError [ERR_INVALID_ARG_TYPE]: The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined"
+Lifetimes and generics.  Give the rust book a read - it's really good.
+Context<"wrara">
+what do the angular brackets mean
+also can anyone explain the rust syntax for e.g Contect<proxyburn > etc
+ty
+it does transfer burn and mint
+in the tests folder
+check spl token proxy
+ty, is there any resource on how is the anchor wrapper interacting with spl token
+Just a wrapper to make interacting with it easier.
+btw is anchor/spl directory the entire version of spl on vanilla solana converted to anchor or is it just a wrapper to interact with the spl program on vanilla solana
+<@!445019022338031618> yeah, take a look at the tests/escrow directory (I'm not super familiar with it, but it's an anchor translation of this escrow example https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/)
+even using spl token is there an anchor example
+is there any example using anchor
+(I'm fuzzy here though, I suppose it's of course possible you might want your own token program!)
+Ah, ok, in solana things are a bit different—there's just the one token contract, but you can make your own token *accounts*
+in order to do that i need to first know how to make a token smart contract on solana/anchor
+lets say add custom functions
+tbf in solidity we used to create our own versions of tokens etc'
+i will start the anchor tutorial
+sure will check that out
+What changes are you trying to make?
+also could u give an idea on what all aspects anchor automate for you
+There's some token example code in the anchor tests/escrow example, maybe that will be easier?
+and well its really hard to learn how it works and makek changes to it
+hmm i tried understanding it just by reading the code it is several thousands of line
+Mm, I haven't tried any token stuff yet, but I think the idea is that you'll use the built-in token program
+and just interacting with it
+all tutorials i found are using the solana token contract already made
+<@!134416332509675520> is there any resource out there which teaches how to make token contracts on solana or using anchor
+Cool!
+Yeah, in a real program you would handle account creation from within the program itself (that's how the anchor examples work)
+i managed to sort it out
+where acc was created
+Ah, yep
+i had to make some changes on the js side
+If you're invoking the code some other way, you'll have to initialize the accounts yourself
+yes that was the issue
+The basic issue you're probably getting is that you aren't setting up the accounts correctly (take a look at how I'm doing it in the tests, I'm careful to give them the right amount of space)
+<@!445019022338031618> how are you running my code? I'm running it with `cargo test` and everything passes.
+<@!134416332509675520>  i further debugged and found out when i borrow data from acc, its length is only 4, any idea how to increase the amount of data storage my acc has ? so if i have an input of length 7 it fails giving me the error that data storage is only of length 4
+this is with ur code <@!134416332509675520>
+" Transaction simulation failed: Error processing Instruction 0: Failed to serialize or deserialize account data: Unkown 
+    Program 5NqY8T6etknuoDJoF6DjG3ZLyyR72n5bFeNX3NkX3HQQ invoke [1]
+    Program log: Hello World Rust program entrypoint
+    Program 5NqY8T6etknuoDJoF6DjG3ZLyyR72n5bFeNX3NkX3HQQ consumed 1522 of 200000 compute units
+    Program 5NqY8T6etknuoDJoF6DjG3ZLyyR72n5bFeNX3NkX3HQQ failed: Failed to serialize or deserialize account data: Unkown
+SendTransactionError: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Failed to serialize or deserialize account data: Unkown
+"
+i believe the error is in the hello_world.ts, some changes have to be made there i just dont know what exact changes.
+even with ur code
+getting the same error
+<@!445019022338031618> I forked the hello world example here and tried to follow your examples above, does this help? https://github.com/cqfd/example-helloworld
+before sending the transaction i created a instance assigned random values with length representing the actual data length so there is no mismatch there
+i created a class of greeting account with 2 variables, created a schema with 2 u32 variables as my fields
+so how do i pass the input
+i did a bit of debugging and this is where my code fails 
+"    let mut greeting_account : GreetingAccount = GreetingAccount::try_from_slice(&account.data.borrow())?;
+"
+"    let mut greeting_account : GreetingAccount = GreetingAccount::try_from_slice(&account.data.borrow())?;
+    greeting_account.counter = _instruction_data[0] as u32;
+    if greeting_account.counter %2 == 0 {
+            greeting_account.check = 0; 
+            msg!("here in if");
+    }
+    else{
+        msg!("here in else");
+        greeting_account.check = 1;
+    }
+    msg!("Data -> {:?}",greeting_account);
+    let mut bytes : &mut [u8] = &mut account.data.borrow_mut()[..];
+    
+    msg!("Saving Instructions");
+    greeting_account.serialize(&mut bytes)?;
+    msg!("Greeted {:?} time(s)!", greeting_account.counter);
+    msg!("Number was {:?}",greeting_account.check);
+
+    Ok(())"
+and my try_from_slice isnt wrong here then , i did what u said and am still getting the same error.
+<@!134416332509675520>  read thru the hello_world.ts code and realized i am seriakizing the instance with 2 variables count and check and passing that as input
+also if you have got any resources which explain the solana helloworld program and also by modifiying it to take inputs and stuff just for the sake of understanding it, imma move to anchor to make the process a bit easier.
+no i meant the logic
+Yeah (I haven't actually tried typing that so might have some type errors)
+just so i could implement my basic program u want me to do something like this 
+   let mut greeting_account = GreetingAccount::try_from_slice(&account.data.borrow())?;
+    greeting_account.counter  = instruction_account[0]
+if greeting_account.counter %2 ==0 {greeting_account.check = 1} or 0
+    greeting_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
+Yeah, anchor handles the serialization/deserialization for you.
+also on anchor this would be something i wdnt have had to do ?
+it would work >
+so if i make a class with 2 variables and pass a instance of that class with these 2 variables with some value
+would work
+so if i instead pass a object which is similar to the struct i created on rust
+The immediate issue you're probably seeing above is that given that you're passing a number in the instruction data, that doesn't look like a GreetingAccount—so GreetingAccount::try_from_slice fails of course. (If you did happen to pass an instruction that looks like two u32s though, things would "work")
+Ok, you'd want to deserialize an account like in the existing helloworld example, then do `greeting_account.count = instruction_data[0] as u32` or whatever (just a simple example—you could pass more than a byte but then you'd need to deserialize it as a u32 etc)
+and check if its even or odd, by setting the check field to 0 or 1
+yes
+It's going to be the GreetingAccount's `counter` field?
+say '2'
+a number
+'am passing
+Sorry, can you repeat what your passing in the instruction data?
+Oh lol, rereading 👀
+which exact reply are u referring 😛
+Yeah, exactly
+and serialize back greetingaccount into the account storage
+^ yeah
+onto it*
+ont oit
+or you are saying that i deserialize the storage and add instruction_data
+while we are at it, why is deserializing the instruction_data wrong ? isnt this where my input is ? or the input is on the storage of the account
+If you wanted to add some input, that would indeed go in the instruction_data—but you'd still have to deserialize the GreeetingAccount from the account stuff
+i was told i should start on the anchor framework as it handles the serializaiton and deserialization atleast most of it, then i came across this channel and decided to try my luck here xD
+Yeah, you need to pass a slice of bytes that looks like a (serialized) version of a GreetingAccount (see how the original example uses account data, not instruction data: https://github.com/solana-labs/example-helloworld/blob/master/src/program-rust/src/lib.rs#L42)
+i was trying to make a program by modifying solana helloworld which dsnt take any input to take a input(number) and return if its odd or even
+after*
+if am not making any sense do let me know i dk any rust  this is me talking after poking around a few videos and tutorials
+decoding it checking if its even and odd and updated the check variable on the struct
+hmm because am passing a number as an input
+Oh also, why are you deserializing the GreetingAccount from the instruction_data, rather than the account infos?
+i believe
+all that
+the cloned repo of hello world already handles
+using the solana cli
+<@!445019022338031618> how are you creating the accounts that get passed to the program? (Or, how are you running the program?)
+this is the error i keep getting ^
+'Program Hy5Z6FPk4xrVdR5k9TD6teTneN6eXGXfeZzqw5i5SPiN failed: Failed to serialize or deserialize account data: Unkown'
+these are the 2 snippets of code i modified from the hello world example to make a even number checker ,i.e make the check variable 0 for even and 1 for  odd, here is the code snippets which i modified 
+"#[derive(BorshSerialize, BorshDeserialize, Debug)]
+pub struct GreetingAccount {
+    /// number of greetings 
+    pub counter: u32,
+    pub  check : u32,
+}"
+//inside process_instruction
+    let mut greeting_account : GreetingAccount = GreetingAccount::try_from_slice(instruction_data)?;
+    if greeting_account.counter %2 == 0 {
+            greeting_account.check = 0; 
+            msg!("here in if");
+    }
+    else{
+        msg!("here in else");
+        greeting_account.check = 1;
+    }
+    msg!("Data -> {:?}",greeting_account);
+    
+    msg!("Saving Instructions");
+    greeting_account.serialize(&mut &mut account.data.borrow_mut()[..])?;
+    msg!("Greeted {:?} time(s)!", greeting_account.counter);
+    msg!("Number was {:?}",greeting_account.check);
+
+    Ok(())
+}"
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+That's awesome, thank you very much Alan , it is working now 🙏
+Ah, you'll need to do `config.amount = config.amount.checked_sub(1).ok_or(ErrorCode::NumericalError)?;`
+Yes, that's correct, I am trying to do something like doing subtraction and storing the value in the program account , but I am unable to do so using checked_sub
+`config.amount = config.amount - 1;` is working and if I do the following 
+```      config.amount.checked_sub(1).ok_or(ErrorCode::NumericalError)?;
+```
+It is not subtracting and storing in the account of the program.
+When you say it doesn't work, what do you mean? Doing `123u32.checked_sub(1)` works fine, it just returns on Option rather than another u32.
+Hello everyone, I had quick question, any idea why `checked_sub` wouldn't work on a u32 integer ? If I subtract it normally and store it is working fine :))
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://github.com/project-serum/anchor#packages
+like in the workshop video he used use anchor_spl::token::{functions};
+if so is there a list of anchor packages
+is it to import packages
+anyone her can explain how use is used as import equivalent
+ty
+https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html
+alright will do
+They are rust lifetimes. See the rust docs/book for a great explanation.
+"initialize_mint<'a, 'b, 'c, 'info>" what is the a,b,c,info what is the concept behind these and and the angular bracket syntax ?
+except when i go to the link u gave
+cause searching for derive dsnt show up anything
+except directly
+so there is no otherway to access this non complete documentation ?
+https://docs.rs/anchor-lang/0.16.1/anchor_lang/derive.Accounts.html
+The derive macro has some non-complete documentation.
+for e.g the derive macro
+also is there a documentation for all these macros
+One way is via the derive macro https://github.com/project-serum/anchor/blob/master/tests/misc/programs/misc/src/context.rs#L65-L76
+its created inside the program itself ? supplying the program id and user + random seed
+ok so is there a way in anchor to create pda
+You can use the Clock sysvar's `unix_timestamp`.
+To approximate a map, use PDAs (program-derived addresses). Keys are "seeds" values are accounts.
+Yes.
+is this anchor version of requrie ? https://docs.rs/anchor-lang/0.16.1/anchor_lang/macro.require.html
+also what is the block.timestamp version in solana.anchor
+also what is the solidity/ethereum mapping equivalent in solana/anchor
+what is the ethereum require version in solana/anchor
+ty <@!831450660146642974>
+so now i know what do those non anchor vanilla solana file represent
+oh ok ty
+entrypoint is automagically added by anchor #[program] so that file isn't necessary
+sort of
+- program function => processor in vanilla solana
+- accounts lists => instructions
+- account data structs => state
+apart from anchor any idea how vanilla solana breaks it down
+one for program functions, 1 for account lists and one for account data structures
+so anchor usually has a max of 3 .rs files
+hmm ok
+In anchor it's just
+- program functions
+- accounts lists
+- account data structs
+It's not like that in anchor
+so if i want to go indepth and understand someones code i know how it is broken down.
+anyone here can explain how the rust code is organized, like metaplex and some other places i see a file for processor,entrypoint,lib,state,instruction
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Im a fan
+ooo this is indeed better
+
+Ill try it out, Thanks!
+Oh this does look cool
+And because people keep asking me on streams lol, the "error lens" extension is pretty slick looking
+hmm I am too
+I'm using rust-analyzer in vscode
+I feel like that should have been caught by my linter/editor tools, What are y'all using for that sort of thing?
+thanks!
+Yeah you hit the nail on the head it was a fairly simple syntax error ( one of the loops in the function wasn't closed)
+Could you post the function body? Maybe you've got a stray semicolon or something?
+<@!176881314639773696> you're somehow returning () when you aren't supposed to, https://stackoverflow.com/questions/59507109/how-to-fix-implicitly-returns-as-its-body-has-no-tail-or-return-expressi
+I definitely have a return in my function.
+Getting a funky error I'm having a hard time googling... maybe someone here will know whats up. 
+
+```implicitly returns `()` as its body has no tail or `return` expression```
+
+Maybe someone has seen this?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I want to expand to a set of random numbers using a single one in Solana program. 
+
+like this:
+https://docs.chain.link/docs/chainlink-vrf-best-practices/#getting-multiple-random-numbers
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+<https://docs.rs/solana-sdk/1.7.12/solana_sdk/program/fn.invoke_signed.html>
+Send a signed transaction. Check the rust documentation for the Solana package possibly
+what does invoke_signed do seen it in a few places
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+If we don't specify the lifetimes like this, then the compiler will "elide" the lifetimes, which means automatically giving a separate lifetime to each.
+Notice how `'info` is specified here twice. This is telling the compiler that the fields that rely on both those lifetimes share the same `'info` lifetime.
+This can be done by giving explicit lifetimes to the `Context` via `ctx: Context<'_, '_, '_, 'info, SwapToUsdc<'info>>,`. Example here https://github.com/project-serum/anchor/blob/master/tests/cfo/programs/cfo/src/lib.rs#L103
+This happens when you have two different types with two different set of lifetimes and you try to put either those types, or references to fields of those types into the same data structure.
+
+This most commonly happens when using `CpiContext`, since the accounts get flattened into a single `Vec<AccountInfo>`, in which case you need to tell the compiler that all those `AccountInfo` indeed do have the same lifetime!
+I don't know the exact reason, but my I guess the lifetime of struct you are adding that `fn to_account_info(&self)` to is different than `'info` -- which is the specified lifetime of the result `AccountInfo<'info>` -- perhaps if you share the whole `impl` block we could help you a bit more
+I have (not in your specific situation, just in a low-level solana program) and gave up figuring it out haha. Would like to understand it better 🔮
+Anybody ever seen this error:
+```
+fn to_account_info(&self) -> AccountInfo<'info>
+lifetime mismatch
+
+...but data from `ctx` flows into `ctx` hererustc(E0623)
+lib.rs(96, 10): these two types are declared with different lifetimes...
+lib.rs(96, 18):
+lib.rs(137, 41): ...but data from `ctx` flows into `ctx` here
+```
+so yeh, we might have to stick with fixed length arrays for now unless there's a way to access elements of the vector without knowing the length of all the sub-vectors and/or having to decode all prior pieces of data
+basically we would end up decoding the entire vector just to add to the end of the vector or expand the space used
+re: discussion about vecs containing vecs in a zero copy account in <#889702325231427584> , it seems more appropriate for the rust channel
+
+some thoughts from <@!97462263392243712> on using the variable length vectors in a zero copy account.
+
+```
+I want you to think, if I give you a list of bytes, and some bytes are parts of strings and some bytes are lengths that appear before strings
+how are you going to tell me the eighth string without reading the first seven lengths?
+...
+maybe you can get a vector of strings where the strings are just pointers into the account, that would be sweet
+idk how to do this
+or, idk if Anchor provides an easy way to do this
+```
+Client-side for what?
+Please tell me where can I find out (see examples, etc.) of creating a client-side in Rust?
+Not really "send a transaction" as much as "invoke an instruction with a signed PDA"
+https://docs.solana.com/developing/programming-model/calling-between-programs
+
+Read the docs like 50 times per day.  I had to do that for months so my brain built an index. lol, no joke.  There's a lot to wrap your head around.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I want to generate seeds for a pda with multiple inputs and a bump seed. I've only really seen documentation for generating seeds for a pda with one input (seed string) and a bump seed. Any help on how to format? Here's some sample code attached.
+
+If I do it this way bump_seed generates an error saying expected `&[u8]`, found `u8`
+At the root of the program (smart contract), after the project is created (`anchor init`), a key is declared (via `declare_id!("....")`). Do I need to replace it with a valid one (from a keypairs) that is used during deployment?
+dumb question but do you have the solana cli installed
+do i need to do anything special beyond that to include crates in the code?
+```toml
+[package]
+name = "helloworld"
+version = "0.0.1"
+
+[dependencies]
+borsh = "0.9.1"
+borsh-derive = "0.9.1"
+solana-program = "1.7.12"
+```
+this is my Cargo.toml
+getting this error in the example hello world contract for solana
+that too
+lol
+or what actually works
+yeah it really depends of the need
+but yes, it's not a bad idea at all. I will definitely think on it a bit. Thanks for the suggestion!
+the only reason there's 2 is the second call relies on information that is decoded and retrieved from the first
+we can load everything in only 2 getAccountInfo calls because we're using so many PDAs
+it works fairly well
+with indexed PDAs i would have to keep a separate PDA with details of the number of indexes for the number of markets in a list and the number of brackets in a list
+solana doesn't like everything in one go 😄
+and also i like to load everything in one go
+it does add at least 2 accounts to the list though and i'm already at 1232 bytes
+to whatever absurd number you might have one day
+it will also have the advantage to scale
+hmm, interesting idea
+or accessing each of these
+the two main calls are
+- adding markets + 1 bracket
+- adding a bracket to a market
+then i would throw them into indexed PDAs
+each call only interacts with one element at a time
+in what scenario would a call actually need the full `pub markets: [MarketInfo; 5],` rather than 1 element?
+"""
+this is something i'm not clear on. 
+https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7
+I would love to init an empty account and only add elements progressively.
+For example
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L14 Initing this as an empty array and then adding one element at a time.
+- https://gist.github.com/Henry-E/1754501b7b94f3b50ab27206278e2bf7#file-list-hierarchy-rs-L26 Similarly here, initing this with a single element and then appending to the array as new brackets are added
+
+But I'm under the impression that all of this space needs to be allocated up front? Is it possible to have expanding arrays or something that is functionally equivalent using zero copy?
+all the zero copy examples seem to use lists with a set length. Is there an example anywhere of someone using variable length arrays that get updated progressively?
+"""
+how is the first index chosen?
+what is the actual exact structure?
+erm
+an array inside the array
+i already do this
+and without decoding all prior arrays, there's no way to know how many bytes they're taking up
+but there's an array inside the array
+arr: [u8; 10000];
+length: u32;
+
+then you increment length when you add an element, up to 10000
+an array, with some extra fields to make it behave somehow like a vec
+i don't really follow
+Yeah, I haven't seen too many Rust client examples yet, actually not sure why
+Sounds like what I was looking for. Thanks ! I thought that all the examples are in the "Examples" folder (which you must admit looks very logical :), so I did not do a deep search in this repository) and there clients are implemented only in JS.
+If there are more examples, I would be grateful if you provide them.
+Like this? https://github.com/project-serum/anchor/tree/master/client/example
+for a program written in Anchor
+then some traits to reinvent Vec lol
+Seems to be the easiest workaround with zero copy
+Why not use an array big enough but use a field to define its actual length?
+Same thing.
+Now what if it was from remaining accounts?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

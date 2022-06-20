@@ -1,0 +1,369 @@
+{
+    "total_results": 12,
+    "messages": [
+        [
+            {
+                "id": "916736666197184594",
+                "type": 19,
+                "content": "The way anchor does this internally is to use the `Account::try_from_unchecked` function, which ignores the discriminator (the discriminator will get written at the end of the instruction)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T17:04:13.365000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "916696413864341514"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916696413864341514",
+                "type": 0,
+                "content": "I want to init and set parameters of a program account passed through `remaining_accounts`.\n\n- Account creation using `create_account` works properly\n- How do I deserialize and change the account fields? `Account::try_from` panics. It shows `Invalid account discriminator` when I comment out this line and try to decode account on client side.\n\n```rs\nlet space: u64 = 100;\nlet rent = Rent::get()?;\nlet lamports = rent.minimum_balance(space as usize);\n\n// create_account works properly\nlet ix = create_account(\n    ctx.accounts.payer.key,\n    &ctx.remaining_accounts[0].key,\n    lamports,\n    space,\n    ctx.program_id\n);\nsolana_program::program::invoke_signed(\n    &ix,\n    &[\n        ctx.accounts.payer.to_account_info(),\n        ctx.remaining_accounts[0].to_account_info(),\n        ctx.accounts.system_program.to_account_info()\n    ],\n    &[&[\n        ctx.accounts.my_state.some_address.as_ref(),\n        &[bump]\n    ]]\n)?;\n\n// panics here\nlet my_decoded_account: Account<'info, MyAccount> = Account::try_from(&ctx.remaining_accounts[0].to_account_info()).unwrap();\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T14:24:16.461000+00:00",
+                "edited_timestamp": "2021-12-04T14:47:46.950000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916633799985618954",
+                "type": 0,
+                "content": "Which is something people often ask for",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T10:15:28.149000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916633765663625217",
+                "type": 0,
+                "content": "Just that they can load up a local net with Solana data at specific points in time or with certain data",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T10:15:19.966000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916633579281317888",
+                "type": 19,
+                "content": "Not sure what the POC thing is",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "837011211795038260",
+                        "username": "microwavedcola",
+                        "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                        "discriminator": "8705",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T10:14:35.529000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "916618692698181673"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916619298250825768",
+                "type": 19,
+                "content": "Ok, yeah, that's what solana does by default I think (don't have to think about costs of writes).",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T09:17:50.666000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "916261369161064490"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916618692698181673",
+                "type": 0,
+                "content": "you mean the poc thing they have for pen testing?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T09:15:26.291000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916569818872836187",
+                "type": 0,
+                "content": "Is this something we could add to anchor possibly?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T06:01:13.863000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916569769447137331",
+                "type": 0,
+                "content": "Neodyne seem to have some kind of setup for recreating blockchain state",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-04T06:01:02.079000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916445224815968346",
+                "type": 0,
+                "content": "Idl parser can\u2019t yet parse consts for array sizes",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "326107472098099201",
+                    "username": "Tom Linton",
+                    "avatar": "3073b6377f58d2a64e83b0cb82f445c3",
+                    "discriminator": "2464",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-03T21:46:08.325000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916429692049969223",
+                "type": 0,
+                "content": "my only guess would be that 'deriving' happens before assigning the variable but would that be workaroundable?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "889636611736891412",
+                    "username": "Mateusz | Invariant",
+                    "avatar": "a74f9f769cc525f6b35ed45e964c21fb",
+                    "discriminator": "5797",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-03T20:44:25.025000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "916428537106403380",
+                "type": 0,
+                "content": "would like to use `const` to declare array like that:\n```\nconst SIZE: u16 = 100; // UPDATE IN ARRAYS AS WELL!\n\n#[account(zero_copy)]\n#[derive(PartialEq, Debug)]\npub struct Oracle {\n    pub data: [Record; SIZE as usize],\n```\nbut throws: \n`'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }', lang/syn/src/idl/mod.rs:143:76`\nany ideas?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "889636611736891412",
+                    "username": "Mateusz | Invariant",
+                    "avatar": "a74f9f769cc525f6b35ed45e964c21fb",
+                    "discriminator": "5797",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-03T20:39:49.665000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "494515b159cd98d26e9ba8924ad7eee9"
+}

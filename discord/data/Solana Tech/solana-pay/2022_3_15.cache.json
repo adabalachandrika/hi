@@ -1,0 +1,701 @@
+{
+    "total_results": 18,
+    "messages": [
+        [
+            {
+                "id": "953397301529935922",
+                "type": 19,
+                "content": "Yeah. But with the caveat that `Transaction.populate` has some known issues: https://github.com/solana-labs/solana/issues/21722#issuecomment-1067397222\n\nIf you want to get the fee payer, you could just do `message.accountKeys[0]` I think",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "492411676889710592",
+                        "username": "callum.m",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8089",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T21:00:29.950000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953387187913781278"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953387187913781278",
+                "type": 19,
+                "content": "The thing I missed here was how easily you can go from the return from `getTransaction` to an actual transaction. Just to make sure I'm understanding right, you'd call `Transaction.populate(message, signatures)` on this from that `TransactionResponse`?  \n\n```\n  transaction: {\n    /** The transaction message */\n    message: Message;\n    /** The transaction signatures */\n    signatures: string[];\n  };\n```",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T20:20:18.676000+00:00",
+                "edited_timestamp": "2022-03-15T20:21:27.941000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953383911638069348"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953383911638069348",
+                "type": 19,
+                "content": "`Transaction.feePayer`, or just the first pubkey of the serialized message, is the fee payer",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "914192259304546386",
+                        "username": "valentin \u30c3",
+                        "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                        "avatar_decoration": null,
+                        "discriminator": "1022",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T20:07:17.551000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953369277468135465"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953383525736919041",
+                "type": 19,
+                "content": "Hmm this doesn't sound like a Solana Pay question \ud83d\ude42 I'd maybe try <#517163444747894795> for more general DeFi stuff",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "460753135187787777",
+                        "username": "MarekZ",
+                        "avatar": "5587a9ebc0a0431d1714922bbb01dd52",
+                        "avatar_decoration": null,
+                        "discriminator": "4002",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T20:05:45.545000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953380919887155250"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953380919887155250",
+                "type": 19,
+                "content": "i found a way how to automate spl token conversion into lp and farm tokens, now i have problem that user should  deposit this tokens into some \"vault\" with method for owner to use deposited by user tokens only to claim rewards, can u put me into direction how i can do that or which libraries i can use for that (like some vault lib which i can extend ) ?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "460753135187787777",
+                    "username": "MarekZ",
+                    "avatar": "5587a9ebc0a0431d1714922bbb01dd52",
+                    "avatar_decoration": null,
+                    "discriminator": "4002",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:55:24.262000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951204216356093982"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953375239797080144",
+                "type": 19,
+                "content": "I'm not sure, sorry! I was expecting it to be in the `Message` data structure but I can't see how fee payer specifically is encoded. I think what you could do (if you know only the fee payer is a signer, which is the case for transfer requests) is call `isMessageSigner` from https://github.com/solana-labs/solana/blob/master/web3.js/src/message.ts#L86 on each of the account keys\n\nThough looking at the implementation of that function `return index < this.header.numRequiredSignatures;` signers must come first, so if there's only one it should be the first in `message.accountKeys` here: https://github.com/solana-labs/solana/blob/master/web3.js/src/message.ts#L64\n\nThis is almost certainly documented somewhere properly though so you should probably find a better source than me rambling while reading source code \ud83d\ude42",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "914192259304546386",
+                        "username": "valentin \u30c3",
+                        "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                        "avatar_decoration": null,
+                        "discriminator": "1022",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:32:50.023000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953369277468135465"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953372460022112368",
+                "type": 0,
+                "content": "<#812122623654887444>",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "914192259304546386",
+                    "username": "valentin \u30c3",
+                    "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                    "avatar_decoration": null,
+                    "discriminator": "1022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:21:47.273000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953372305990492240",
+                "type": 19,
+                "content": "ah, another one of these scams",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "914192259304546386",
+                    "username": "valentin \u30c3",
+                    "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                    "avatar_decoration": null,
+                    "discriminator": "1022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "952499661481062501",
+                        "username": "Lunar",
+                        "avatar": "47b652a9ad2bb9b32c3afabf988a862e",
+                        "avatar_decoration": null,
+                        "discriminator": "4961",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:21:10.549000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953370869609148496"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953369277468135465",
+                "type": 19,
+                "content": "Hey, thanks alot for your quick response. Would you know by any chance how I could pull the fee payer/sender from getTransaction ?\nThanks in advance!",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "914192259304546386",
+                    "username": "valentin \u30c3",
+                    "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                    "avatar_decoration": null,
+                    "discriminator": "1022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "492411676889710592",
+                        "username": "callum.m",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "8089",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:09:08.493000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953357804243124325"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953368575861723176",
+                "type": 19,
+                "content": "alright thank you guys",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "698223554768011294",
+                    "username": "Merrick",
+                    "avatar": "fec9d61f6c2d7f1e0665d721f6855f7e",
+                    "avatar_decoration": null,
+                    "discriminator": "1243",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "234389741854785537",
+                        "username": "marc",
+                        "avatar": "53c14c396cbdb977cc70f7becfee9cb3",
+                        "avatar_decoration": null,
+                        "discriminator": "8729",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:06:21.217000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953368376254795866"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953368376254795866",
+                "type": 0,
+                "content": "<@!698223554768011294> just think of the reference like a random ID you ask the user to put alongside every transaction. Then, when the user has made the transaction and you get notified, you verify it. But to do so, you need to know which transaction it was, for this you can search by the reference you created at the beginning, which has only be used for that specific transaction.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "234389741854785537",
+                    "username": "marc",
+                    "avatar": "53c14c396cbdb977cc70f7becfee9cb3",
+                    "avatar_decoration": null,
+                    "discriminator": "8729",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "698223554768011294",
+                        "username": "Merrick",
+                        "avatar": "fec9d61f6c2d7f1e0665d721f6855f7e",
+                        "avatar_decoration": null,
+                        "discriminator": "1243",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T19:05:33.627000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953362624597336114",
+                "type": 0,
+                "content": "The code you pasted implies a fundamental misunderstanding of how the `reference` key works. You basically want to do `reference=Keypair.generate().publicKey`, persist that value, include it in the URL or add it to the transfer instruction, and then find the transaction with that persisted value.\n\nLooking at the point of sale app code may help to see how this is done in a simple application, but you'll have the figure out the persistence if you want to verify it on the server.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:42:42.325000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953361273041592350",
+                "type": 19,
+                "content": "Yes, what I'm saying is that this is incorrect. You cannot use the payer's address as the reference. And you cannot generate a reference from the server while verifying the transaction either. It needs to have been generated uniquely prior to the transaction, included in the transaction, and then verified using the same value afterward.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "698223554768011294",
+                        "username": "Merrick",
+                        "avatar": "fec9d61f6c2d7f1e0665d721f6855f7e",
+                        "avatar_decoration": null,
+                        "discriminator": "1243",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:37:20.089000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953360949455233054"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953360949455233054",
+                "type": 19,
+                "content": "as following the code , the reference is used is the payer address , i'm trying to build a rest api from it to integrate it into an existing website",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "698223554768011294",
+                    "username": "Merrick",
+                    "avatar": "fec9d61f6c2d7f1e0665d721f6855f7e",
+                    "avatar_decoration": null,
+                    "discriminator": "1243",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:36:02.940000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953360621880094840"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953360621880094840",
+                "type": 19,
+                "content": "This looks like a problem?\n\n`let reference = new PublicKey(senderAddress);`\n\nYou need to use unique references. You can't use the sender's address as a reference key because there will be other transactions that reference it.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "698223554768011294",
+                        "username": "Merrick",
+                        "avatar": "fec9d61f6c2d7f1e0665d721f6855f7e",
+                        "avatar_decoration": null,
+                        "discriminator": "1243",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:34:44.840000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "952978077481324624"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953357804243124325",
+                "type": 19,
+                "content": "You can get the signature from the response\n\nThen do `await connection.getTransaction(signature)` and then read whatever you need from the transaction",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "492411676889710592",
+                    "username": "callum.m",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "8089",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "914192259304546386",
+                        "username": "valentin \u30c3",
+                        "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                        "avatar_decoration": null,
+                        "discriminator": "1022",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:23:33.063000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "953354525308231731"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953354575925096598",
+                "type": 0,
+                "content": "thanks in advance",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "914192259304546386",
+                    "username": "valentin \u30c3",
+                    "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                    "avatar_decoration": null,
+                    "discriminator": "1022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:10:43.372000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "953354525308231731",
+                "type": 0,
+                "content": "hey, how could i find the sender of a transaction with FindTransactionSignature ?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "914192259304546386",
+                    "username": "valentin \u30c3",
+                    "avatar": "520bc16e2fe0f4be5b2d500186c9c9ee",
+                    "avatar_decoration": null,
+                    "discriminator": "1022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-15T18:10:31.304000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "1876efbe877f6d00487b60d2918b9ef6"
+}

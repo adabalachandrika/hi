@@ -1,0 +1,300 @@
+{
+    "total_results": 10,
+    "messages": [
+        [
+            {
+                "id": "921572711581507584",
+                "type": 0,
+                "content": "Trying this now: https://discord.com/channels/889577356681945098/889577399308656662/910646465351811092",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "798837544640446494",
+                    "username": "evanm",
+                    "avatar": "8268572609d7ee79f8ddb291c1b61b88",
+                    "discriminator": "3245",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:20:56.434000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921571970359910472",
+                "type": 0,
+                "content": "I think I was getting caught up on the 8-byte discrimination / account(zero).\nI'm still figuring out how to pass in the additional account from the client:\n```\nawait this.program.rpc.publishResponse({\n            accounts: {\n                responder: this.keypair.publicKey\n            },\n            remainingAccounts: [requester.publicKey],\n            signers: [this.keypair],\n        });\n```\n\nThat's giving me a: \"TypeError:  Cannot read properties of undefined (reading 'toString')\" error.\n\n```\npub fn publish_response(\n        ctx: Context<PublishResponse>,\n    ) -> ProgramResult {\n        msg!(\"Remaining accounts provided = {}\", ctx.remaining_accounts.len());\n        let loader: Loader<Requester> = Loader::try_from_unchecked(ctx.program_id, &ctx.remaining_accounts[0]).unwrap();\n        let mut requester = loader.load_init()?;\n        requester.active_request = false;\n\n        Ok(())\n    }\n\n#[derive(Accounts)]\npub struct PublishResponse<'info> {\n    pub responder: Signer<'info>,\n}\n```\n\nIf I move the requester into the accounts, it doesn't show up in the loader and the message above prints: \"Remaining accounts provided = 0\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "798837544640446494",
+                    "username": "evanm",
+                    "avatar": "8268572609d7ee79f8ddb291c1b61b88",
+                    "discriminator": "3245",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:17:59.713000+00:00",
+                "edited_timestamp": "2021-12-18T01:18:48.864000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921571060795703317",
+                "type": 0,
+                "content": "Is this true?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:14:22.856000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921570277660450877",
+                "type": 0,
+                "content": "The only reason I can see for this is that the definition of \"pub struct TokenAccount(spl_token::state::Account)\" takes all the content inside it's Account  (spl_token::state::Account struct) and spreads it's content inside the standard Account struct making every variable inside vault reachable directly without having to use vault.account.XXX, Now vault.XXX",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:11:16.142000+00:00",
+                "edited_timestamp": "2021-12-18T01:13:04.922000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921569486073638913",
+                "type": 0,
+                "content": "if the initial &vault.owner instead was &vault.account.owner I would understand what is going on but now I feel like something is wierd.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:08:07.413000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921568633333899324",
+                "type": 0,
+                "content": "However in 2. which is not in the definition of the struct passed to the instruction, but in the instruction itself. We use: .to_account_info() on the vault variable which should only be defined for the struct of the type in the upper right. which is the type defined in the standard anchor library",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:04:44.104000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921568276188921856",
+                "type": 0,
+                "content": "after 1. we see that the owner is seemingly reachable through vault.owner which to me  makes the vault to be of type Account as defined to the down right (spl_token library)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T01:03:18.954000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921567280817643570",
+                "type": 0,
+                "content": "Hello I am stuck with something in regards to how an Account is constructed here",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "203259322573127690",
+                    "username": "VEWilliam",
+                    "avatar": "5dcdde95e85e299eb07df11e96912b48",
+                    "discriminator": "7840",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "921567279974604810",
+                        "filename": "helpz.png",
+                        "size": 47962,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/921567279974604810/helpz.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/921567279974604810/helpz.png",
+                        "width": 1381,
+                        "height": 616,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T00:59:21.639000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921566754461847613",
+                "type": 19,
+                "content": "Can you say more about what you're trying to do? If your program owns an account it can modify it at will, so whether you check any user-level ownership stuff is entirely up to your program. (And if your program *doesn't* own an account it can't modify it at all lol, not by itself\u2014it'll have to ask whichever program *does* own it to do the modification.)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "798837544640446494",
+                        "username": "evanm",
+                        "avatar": "8268572609d7ee79f8ddb291c1b61b88",
+                        "discriminator": "3245",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-18T00:57:16.146000+00:00",
+                "edited_timestamp": "2021-12-18T00:58:33.638000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921516467709673512"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921516467709673512",
+                "type": 0,
+                "content": "Is there a good way to let someone modify an account they don't own? I've seen some mentions of \"Account::try_from_unchecked\" but I'm not sure how to use it in the context of a struct.\n\n```\n#[derive(Accounts)]\npub struct ModifyAccount<'info> {\n    pub user: Loader<'info, UserAccount>,\n    pub admin: Signer<'info>,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "798837544640446494",
+                    "username": "evanm",
+                    "avatar": "8268572609d7ee79f8ddb291c1b61b88",
+                    "discriminator": "3245",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T21:37:26.850000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "0b19d8e8e9ffc9ca90e3d890e0e1ad80"
+}

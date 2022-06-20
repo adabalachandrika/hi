@@ -1,0 +1,2517 @@
+{
+    "total_results": 74,
+    "messages": [
+        [
+            {
+                "id": "941023906318385252",
+                "type": 0,
+                "content": "I kept getting a `writable privilege escalated` error on the `payer` account passed in (https://discord.com/channels/889577356681945098/889577399308656662/940661032328761484)\n\ndid you manage to mint an nft this way?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T17:33:02.645000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941017418443137114",
+                "type": 19,
+                "content": "this worked btw, thanks man \ud83e\udd1c \ud83e\udd1b",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T17:07:15.815000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "941006200143749192"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941016824349331517",
+                "type": 19,
+                "content": "oh interesting, why was it failing?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T17:04:54.172000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "941006433703583764"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941006433703583764",
+                "type": 0,
+                "content": "btw let me know if you manage to CPI a `MintNFT` instruction, I tried yesterday and couldn't get it to work",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:23:36.849000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941006200143749192",
+                "type": 0,
+                "content": "I see. The problem is that the program is called `NftCandyMachineV2` and not `CandyMachine`. So just do:\n```use mpl_candy_machine::program::NftCandyMachineV2```\n(see here https://docs.rs/mpl-candy-machine/latest/mpl_candy_machine/program/index.html)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:22:41.164000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941004910596608050",
+                "type": 0,
+                "content": "I'm trying to CPI it - the same way eg I'd CPI my own program (this throws no error):\n ```rs\nuse gem_bank::{self, cpi::accounts::SetVaultLock, program::GemBank};\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:17:33.712000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941004610573840394",
+                "type": 19,
+                "content": "why are you trying to access the `CandyMachine` struct? as shown on your screenshot, it's private",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "707604162673639504",
+                        "username": "ilmoi",
+                        "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                        "discriminator": "5651",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:16:22.181000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "941004433502900234"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941004433502900234",
+                "type": 19,
+                "content": "any thoughts on this anyone? \ud83d\ude4f",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:15:39.964000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940993225894801419"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941004217420754956",
+                "type": 19,
+                "content": "it did work, thanks!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:14:48.446000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "941004132582563890"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941004132582563890",
+                "type": 0,
+                "content": "oh actually that probably won't work if you're using 0.19.0",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:14:28.219000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "941003801383555112",
+                "type": 19,
+                "content": "Try deserializing  the token account directly instead\n```pub token_a_destination: Account<'info, TokenAccount>```\nas shown in the last example in the documentation https://docs.rs/anchor-lang/0.21.0/anchor_lang/derive.Accounts.html#spl-constraints",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "707604162673639504",
+                        "username": "ilmoi",
+                        "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                        "discriminator": "5651",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T16:13:09.255000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940990695316000918"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940993225894801419",
+                "type": 0,
+                "content": "and another question - I'm trying to CPI the candy machine and am running into this error:\n```rs\nuse mpl_candy_machine::{self, cpi::accounts::MintNFT, program::CandyMachine};\n   |                                                                ^^^^^^^^^^^^ private struct\n```\n\nI don't get this type of errors when I CPI the programs I wrote. How do I get around this?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:31:07.862000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940990913541447730",
+                "type": 0,
+                "content": "which i think comes in 1.9",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:21:56.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940990892360208426",
+                "type": 0,
+                "content": "we need to wait until we can resize accounts before doing this",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:21:51.504000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940990870461751326",
+                "type": 0,
+                "content": "running into this after I upgraded from 0.18.2 to 0.19.0",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:21:46.283000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940990858688335952",
+                "type": 19,
+                "content": "not yet",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "438874996614365185",
+                        "username": "jbogle",
+                        "avatar": "75044f344034a76ee77967b3456a8222",
+                        "discriminator": "5816",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:21:43.476000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940975749064699964"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940990695316000918",
+                "type": 0,
+                "content": "why might this macro:\n```rs\n    #[account(init_if_needed,\n        associated_token::mint = token_a_mint,\n        associated_token::authority = receiver,\n        payer = receiver)]\n    pub token_a_destination: AccountInfo<'info>,\n```\n\nbe throwing this error?\n```rs\nerror[E0277]: can't compare `&anchor_lang::prelude::Pubkey` with `anchor_lang::prelude::Pubkey`\n --> programs/transmuter/src/instructions/execute_mutation.rs:6:10\n  |\n6 | #[derive(Accounts)]\n  |          ^^^^^^^^ no implementation for `&anchor_lang::prelude::Pubkey == anchor_lang::prelude::Pubkey`\n  |\n  = help: the trait `PartialEq<anchor_lang::prelude::Pubkey>` is not implemented for `&anchor_lang::prelude::Pubkey`\n  = note: this error originates in the derive macro `Accounts` (in Nightly builds, run with -Z macro-backtrace for more info)\n```\n\nI don't see where I'm referencing a &Pubkey...",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T15:21:04.525000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940975749064699964",
+                "type": 19,
+                "content": "ya using `close =` and then another instruction with `init = ` in the same transaction says account address still in use",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "438874996614365185",
+                    "username": "jbogle",
+                    "avatar": "75044f344034a76ee77967b3456a8222",
+                    "discriminator": "5816",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T14:21:41.061000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940948801773006909"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940973338422034432",
+                "type": 19,
+                "content": "Yes so I think I found the issue. The account is on mainnet but the connect im running my tests on is local net. Do you know how to force the program ID of the trasaction.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "183006169705480192",
+                    "username": "tbroo",
+                    "avatar": "fdf50acdd161628b1e3fb4a96a9bee7f",
+                    "discriminator": "1304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T14:12:06.319000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940881754191953930"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940948801773006909",
+                "type": 19,
+                "content": "Do you have a piece of code we could look at? I assume you\u2019re taking about initialising / closing PDAs?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "438874996614365185",
+                        "username": "jbogle",
+                        "avatar": "75044f344034a76ee77967b3456a8222",
+                        "discriminator": "5816",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T12:34:36.326000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940912174434500650"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940912174434500650",
+                "type": 0,
+                "content": "does anchor not allow for closing and then init in 2 subsequent instructions in the same transaction?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "438874996614365185",
+                    "username": "jbogle",
+                    "avatar": "75044f344034a76ee77967b3456a8222",
+                    "discriminator": "5816",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T10:09:03.688000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940892645021069342",
+                "type": 0,
+                "content": "Yes, you can use the `getSignaturesForAddress` RPC call (https://docs.solana.com/developing/clients/jsonrpc-api#getsignaturesforaddress or https://solana-labs.github.io/solana-web3.js/classes/Connection.html#getSignaturesForAddress)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:51:27.513000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940884545102831616",
+                "type": 0,
+                "content": "list of last interaction between an account and the blockchain",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:19:16.342000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940884463829786685",
+                "type": 19,
+                "content": "and do you know if there is a way to see list of transactions of an account ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:18:56.965000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940884304630792252"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940884304630792252",
+                "type": 19,
+                "content": "Not that i'm aware of unfortunately, you can't query the blockchain from inside a program. Basically, all you have access to within the smart contract is the accounts you passed as inputs",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "620612278768762880",
+                        "username": "Charles T",
+                        "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                        "discriminator": "8362",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:18:19.009000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940883605780058173"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940883719911276604",
+                "type": 19,
+                "content": "I wanted to use anchor_client to ask the blockchain in the smart_contract",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:15:59.601000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940881346618855434"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940883605780058173",
+                "type": 19,
+                "content": "really ? \ud83d\ude05  is there a way to recup a transaction informations on the blockchain by passing the tx ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:15:32.390000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940881346618855434"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940881754191953930",
+                "type": 19,
+                "content": "This is the address of the System Program. Are you sure you're passing the correct accounts? Showing your code would make it easier for other people to help",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "183006169705480192",
+                        "username": "tbroo",
+                        "avatar": "fdf50acdd161628b1e3fb4a96a9bee7f",
+                        "discriminator": "1304",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:08:10.937000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940820659016204359"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940881346618855434",
+                "type": 19,
+                "content": "I'm not sure what you're trying to do exactly, but this is a *client* crate. That means you can use it to communicate with the solana blockchain (e.g., check if a transaction completed successfully), but you can't use it to run anything on the blockchain itself (ie you can't use it inside smart programs)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "620612278768762880",
+                        "username": "Charles T",
+                        "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                        "discriminator": "8362",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T08:06:33.764000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940794161894940763"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940835559591542785",
+                "type": 0,
+                "content": "Hi. Is it posdible to retreive partial data from the account? For example, I request bytes from the 5th to 15th",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "416329234102091796",
+                    "username": "romych",
+                    "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                    "discriminator": "2992",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T05:04:37.286000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940821541850071040",
+                "type": 0,
+                "content": "Should not be address map program but instead Serum Dex Program as owner.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "183006169705480192",
+                    "username": "tbroo",
+                    "avatar": "fdf50acdd161628b1e3fb4a96a9bee7f",
+                    "discriminator": "1304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T04:08:55.196000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940820659016204359",
+                "type": 0,
+                "content": "Trying to use remaining accounts to load Serum Market Accounts. For some reason the owner id is incorrectly shown as 11111111111111111111111111111111 in my program. Is this a bug?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "183006169705480192",
+                    "username": "tbroo",
+                    "avatar": "fdf50acdd161628b1e3fb4a96a9bee7f",
+                    "discriminator": "1304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T04:05:24.712000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940794234020196392",
+                "type": 0,
+                "content": "",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "940794232225017976",
+                        "filename": "IMG_4292.png",
+                        "size": 509188,
+                        "url": "https://cdn.discordapp.com/attachments/889577399308656662/940794232225017976/IMG_4292.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889577399308656662/940794232225017976/IMG_4292.png",
+                        "width": 828,
+                        "height": 1792,
+                        "content_type": "image/png"
+                    },
+                    {
+                        "id": "940794232455700490",
+                        "filename": "IMG_4291.png",
+                        "size": 478662,
+                        "url": "https://cdn.discordapp.com/attachments/889577399308656662/940794232455700490/IMG_4291.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889577399308656662/940794232455700490/IMG_4291.png",
+                        "width": 828,
+                        "height": 1792,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T02:20:24.502000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940794161894940763",
+                "type": 0,
+                "content": "Hi guys ! Is this working in a Anchor smart contract ? Rpc calls to solana node",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "620612278768762880",
+                    "username": "Charles T",
+                    "avatar": "c4c9bbd369e08b6d30e7f368b17ee0fe",
+                    "discriminator": "8362",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T02:20:07.306000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940783457066446848",
+                "type": 0,
+                "content": "I'm trying to close the mint itself! (account type 'Mint')",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "932665458690244619",
+                    "username": "Philippe Chevalier",
+                    "avatar": null,
+                    "discriminator": "9854",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T01:37:35.076000+00:00",
+                "edited_timestamp": "2022-02-09T01:41:06.353000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940763450441883698",
+                "type": 19,
+                "content": "Are you closing the mint itself or the token account with that mint?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "474851811422109701",
+                    "username": "Doomdoom",
+                    "avatar": "bdbc43cbc072753755d1a470d2b6cf06",
+                    "discriminator": "7145",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "932665458690244619",
+                        "username": "Philippe Chevalier",
+                        "avatar": null,
+                        "discriminator": "9854",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-09T00:18:05.125000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940748534741889075"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940748534741889075",
+                "type": 0,
+                "content": "Is the above at least roughly the correct to close a token MINTING account?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "932665458690244619",
+                    "username": "Philippe Chevalier",
+                    "avatar": null,
+                    "discriminator": "9854",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T23:18:48.945000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940741675704283166",
+                "type": 0,
+                "content": "Hey! I\u2019m trying to close a minting account. However, I\u2019m getting an \u201cinvalid account data for instruction\u201d error. Is there anything wrong with the code below, or is the problem hidden somewhere else? (The program \u201cworks\u201d when that section is commented out.)\n```\n      let signer: &[&[u8]] = &[&my_key, &[bump]];\n        anchor_spl::token::close_account(\n            CpiContext::new_with_signer(\n                ctx.accounts.token_program.to_account_info(),\n                anchor_spl::token::CloseAccount{\n                    account: ctx.accounts.my_mint_account.to_account_info(),\n                    destination: ctx.accounts.owner.to_account_info(),\n                    authority: ctx.accounts.my_mint_account.to_account_info(),\n                },\n                &[&signer[..]]\n        ))?;\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "932665458690244619",
+                    "username": "Philippe Chevalier",
+                    "avatar": null,
+                    "discriminator": "9854",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T22:51:33.623000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940739095263608913",
+                "type": 19,
+                "content": "Hmm so does this mean without the bug in the candy machine, this CPI should go through? Does the signature from the user gets included in the CPI then? So as soon as the user signs its account, we get the write lock on the `user` for the tx and other programs called from the program that the user interacted with are free to write to that as well? I guess my understanding of accounts isn't good enough!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "474851811422109701",
+                    "username": "Doomdoom",
+                    "avatar": "bdbc43cbc072753755d1a470d2b6cf06",
+                    "discriminator": "7145",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T22:41:18.398000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940698892792639518"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940730641769701457",
+                "type": 0,
+                "content": "Surprisingly easy to forget this + then it leads to very confusing behavior lol",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T22:07:42.928000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940730576426655784",
+                "type": 19,
+                "content": "Ah, no! This is actually a pretty common gotcha\u2014you need to be pretty careful to make sure you've re-run `anchor build` before `anchor deploy` if you make any changes",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "416329234102091796",
+                        "username": "romych",
+                        "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                        "discriminator": "2992",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T22:07:27.349000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940730407261974588"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940730407261974588",
+                "type": 19,
+                "content": "oh, thx, I thought that 'deploy' automatically rebuilds the code if there're any changes",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "416329234102091796",
+                    "username": "romych",
+                    "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                    "discriminator": "2992",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T22:06:47.017000+00:00",
+                "edited_timestamp": "2022-02-08T22:06:50.002000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940727770747633674"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940727770747633674",
+                "type": 19,
+                "content": "Hmm, the code you posted actually looks fine, so I wonder if you somehow deployed a different version etc.?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "416329234102091796",
+                        "username": "romych",
+                        "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                        "discriminator": "2992",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T21:56:18.423000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940716317885992960"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940725360985780224",
+                "type": 19,
+                "content": "Thanks for the explanation! For this one I suggest to put it in the doc. I was reading the doc and didn't quite understand what is the re-initialization attack then I searched the Discord to get the answer.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "469776019784466442",
+                    "username": "dovahcrow",
+                    "avatar": "65b53804e1e9d53412c95e075c9390dc",
+                    "discriminator": "3442",
+                    "public_flags": 256
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T21:46:43.891000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940712663024033813"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940716694366748685",
+                "type": 0,
+                "content": "",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "416329234102091796",
+                    "username": "romych",
+                    "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                    "discriminator": "2992",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "940716692990988348",
+                        "filename": "unknown.png",
+                        "size": 109431,
+                        "url": "https://cdn.discordapp.com/attachments/889577399308656662/940716692990988348/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889577399308656662/940716692990988348/unknown.png",
+                        "width": 981,
+                        "height": 964,
+                        "content_type": "image/png"
+                    },
+                    {
+                        "id": "940716693221670972",
+                        "filename": "unknown.png",
+                        "size": 132003,
+                        "url": "https://cdn.discordapp.com/attachments/889577399308656662/940716693221670972/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889577399308656662/940716693221670972/unknown.png",
+                        "width": 1091,
+                        "height": 977,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T21:12:17.608000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940716317885992960",
+                "type": 0,
+                "content": "Hello everyone, I was trying to run some basic examples and stumbled upon the following error:",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "416329234102091796",
+                    "username": "romych",
+                    "avatar": "8a798b446aafc028a2d3cb2205e193aa",
+                    "discriminator": "2992",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "940716317235896381",
+                        "filename": "unknown.png",
+                        "size": 87108,
+                        "url": "https://cdn.discordapp.com/attachments/889577399308656662/940716317235896381/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889577399308656662/940716317235896381/unknown.png",
+                        "width": 1295,
+                        "height": 399,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T21:10:47.848000+00:00",
+                "edited_timestamp": "2022-02-08T21:12:41.989000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712943912386590",
+                "type": 0,
+                "content": "Thanks <@!134416332509675520>",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:57:23.430000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712903135350824",
+                "type": 0,
+                "content": "Yeah that's what I suspected. Good job I just updated deps and got this warning, otherwise would have been open to this.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:57:13.708000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712663024033813",
+                "type": 0,
+                "content": "Just to explain the re-initialization issue: what you definitely don't want to do is use `init_if_needed` and then inside your instruction function do `ctx.accounts.whatever.important_value = INITIAL_VALUE;`. If you pass in an account that has already been initialized then you just overwrote whatever its `important_value` was.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:56:16.461000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712307854573618",
+                "type": 0,
+                "content": "Yep",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:54:51.782000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712252015804457",
+                "type": 0,
+                "content": "This should be safe?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:54:38.469000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712082955964487",
+                "type": 0,
+                "content": "e.g.\n```\n/// This is where we'll store the borrower's token\n#[account(\n    init_if_needed,\n    payer = borrower,\n    seeds = [b\"escrow\", mint.key().as_ref()],\n    bump,\n    token::mint = mint,\n    // We want the program itself to have authority over the escrow token\n    // account, so we need to use some program-derived address here.\n    // The escrow token account itself already lives at a program-derived\n    // address, so we can set its authority to be its own address.\n    token::authority = escrow_account,\n)]\npub escrow_account: Box<Account<'info, TokenAccount>>,\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:53:58.162000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940712053260300288",
+                "type": 19,
+                "content": "You mean like `token::mint` ? You'll have to actually, since anchor will need them in case the init *is* needed",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "533595369368453155",
+                        "username": "ColdSeahorse",
+                        "avatar": "b00be44b4b601ea332c8030f3c733816",
+                        "discriminator": "5234",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:53:51.082000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940711929566097479"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940711929566097479",
+                "type": 19,
+                "content": "Ok, will go with this suggestion then! With token accounts is it advisable to add constraints?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:53:21.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940711038058397767"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940711473431322664",
+                "type": 0,
+                "content": "Yup. I renamed it `user` here https://discord.com/channels/889577356681945098/889577399308656662/940662685861818390, but it's essentially the wallet signing the tx and being passed as `payer` in the CPI call",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:51:32.840000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940711156841066517",
+                "type": 19,
+                "content": "Ah, ok\u2014are you positive you're looking at the right account then?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:50:17.359000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940711065384267776"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940711065384267776",
+                "type": 19,
+                "content": "I thought so too - but then how come the CPI is failing? The `payer` is still the account signing the tx, and it's also been marked as `mut`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:49:55.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940710748110344252"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940711038058397767",
+                "type": 0,
+                "content": "I only ever use `init_if_needed` for third-party accounts, e.g. a token account, since there's no way I was initializing it in my own code",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:49:49.039000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710943434874910",
+                "type": 19,
+                "content": "The protection just consists in not re-initializing something \ud83d\ude1b",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "533595369368453155",
+                        "username": "ColdSeahorse",
+                        "avatar": "b00be44b4b601ea332c8030f3c733816",
+                        "discriminator": "5234",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:49:26.479000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940710861423661098"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710861423661098",
+                "type": 0,
+                "content": "Lots of `init_if_needed` questions today. Are there any docs covering how to protect from reinitialization attacks?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "533595369368453155",
+                    "username": "ColdSeahorse",
+                    "avatar": "b00be44b4b601ea332c8030f3c733816",
+                    "discriminator": "5234",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:49:06.926000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710791651397643",
+                "type": 0,
+                "content": "This is an annoying gotcha, so I understand how they might have forgotten to mark it as mut",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:48:50.291000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710748110344252",
+                "type": 0,
+                "content": "I think the issue is that the `payer` is usually the wallet sending the tx, which is automatically mut since it pays the tx fees",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:48:39.910000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710521521459210",
+                "type": 19,
+                "content": "What's blowing my mind is that this instruction doesn't fail https://github.com/metaplex-foundation/metaplex/blob/master/js/packages/candy-machine-ui/src/candy-machine.ts#L424",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:47:45.887000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940710104813150308"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710491918057512",
+                "type": 19,
+                "content": "Ok, thanks!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "932665458690244619",
+                    "username": "Philippe Chevalier",
+                    "avatar": null,
+                    "discriminator": "9854",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:47:38.829000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940710398489940018"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710398489940018",
+                "type": 0,
+                "content": "If you want to use multiple PDAs you'll need to have multiple distinct seeds.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:47:16.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710354802057237",
+                "type": 19,
+                "content": "Just to keep the terminology straight, an ATA is an associated token account/address. What you have there is a regular old PDA, a program-derived address.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "932665458690244619",
+                        "username": "Philippe Chevalier",
+                        "avatar": null,
+                        "discriminator": "9854",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:47:06.138000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940708981754720256"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710250552635473",
+                "type": 19,
+                "content": "Yeah that's what i was thinking too",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:46:41.283000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940710104813150308"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940710104813150308",
+                "type": 19,
+                "content": "But that's annoying, definitely a bug in candymachine\u2014they should be marking the payer as mut",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "932665458690244619",
+                        "username": "Philippe Chevalier",
+                        "avatar": null,
+                        "discriminator": "9854",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:46:06.536000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940708981754720256"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940709689967124562",
+                "type": 19,
+                "content": "Ah, interesting, I think I actually ran into this too at one point \ud83e\udd14",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:44:27.629000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940702840509300766"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940708981754720256",
+                "type": 0,
+                "content": "Hey! The typical way of making an ATA is to do: ```let [atAccount, bumpAta] = await anchor.web3.PublicKey.findProgramAddress([pdAccount.publicKey.toBuffer()], program.programId);``` But what if I need a second \u2018atAccount\u2019? Is there an increment somewhere?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "932665458690244619",
+                    "username": "Philippe Chevalier",
+                    "avatar": null,
+                    "discriminator": "9854",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:41:38.778000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940702840509300766",
+                "type": 0,
+                "content": "I've noticed something else that might be at the source of the problem. In the `mpl_candy_machine` program that my program is calling, the `payer` account is *not* marked as `mut` (https://docs.rs/mpl-candy-machine/2.0.1/src/mpl_candy_machine/lib.rs.html#702). So you'd think it doesn't require to be mutable. Yet the CPI call fails with a `writable privilage escalated` error about that account.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:17:14.591000+00:00",
+                "edited_timestamp": "2022-02-08T20:29:09.984000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940699607875326012",
+                "type": 19,
+                "content": "Ok so this is what I'm confused about - it *is* marked as `mut`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "917687988266352640",
+                    "username": "Agent Fubar (robin)",
+                    "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                    "discriminator": "3510",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:04:23.871000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940698892792639518"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940698892792639518",
+                "type": 19,
+                "content": "That error does indeed mean that you forgot to mark some account as `mut`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "917687988266352640",
+                        "username": "Agent Fubar (robin)",
+                        "avatar": "fa650afb398b7fc4e2e3675b5b1c978e",
+                        "discriminator": "3510",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T20:01:33.382000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940673632148025405"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "940687789559795834",
+                "type": 19,
+                "content": "Even more bizzare, it seems my on chain data is not overflowing, and is actually accurate. Any guidance as to why the data is off when I am testing would be massively appreciated",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "899395555170586685",
+                    "username": "bengals1915",
+                    "avatar": null,
+                    "discriminator": "8335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-08T19:17:26.165000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "940666538418118666"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "13eaa8140214441b1f9ef73ad2e7e0ed"
+}

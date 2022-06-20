@@ -1,0 +1,396 @@
+{
+    "total_results": 13,
+    "messages": [
+        [
+            {
+                "id": "951542369386393620",
+                "type": 19,
+                "content": "1500 is nuts. Good to know",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T18:09:39.664000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889606719829835816",
+                    "guild_id": "889577356681945098",
+                    "message_id": "951503032821100544"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951507429974245407",
+                "type": 0,
+                "content": "And yeah, looks like that distant bump is 238\u2014so had to do 18 attempts = 18 * (~1500) = 2700 units. Cool!",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:50:49.459000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951505490351910922",
+                "type": 0,
+                "content": "Yep",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:43:07.017000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951505267336568902",
+                "type": 0,
+                "content": "Yeah, it's certainly rare but you can get some edge cases on certain PDA's where it takes a lot of iteration to get to a valid address. For example:\n```\n        let pda_pubkey: Pubkey = pubkey!(\"Et36LeaAFQcyuuWWTDfDznhZ49VC4jUAJE2AForBzcuf\");\n        msg!(\"Bench: FindProgramAddress for close bump\");\n        solana_program::log::sol_log_compute_units();\n        solana_program::pubkey::Pubkey::find_program_address(&[b\"qgjnnkdpbjr2o2e7\"],&pda_pubkey);\n        solana_program::log::sol_log_compute_units();\n\n        msg!(\"Bench: FindProgramAddress for distant bump\");\n        solana_program::log::sol_log_compute_units();\n        solana_program::pubkey::Pubkey::find_program_address(&[b\"qgjnnkdpbjr2o2e4\"],&pda_pubkey);\n        solana_program::log::sol_log_compute_units();\n```\n\nYields \n`Benchmark: FindProgramAddress for close bump - 1569 compute units` and\n`Benchmark: FindProgramAddress for distant bump - 27067 compute units` respectively",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "653649801086500914",
+                    "username": "SchwarzBi3r",
+                    "avatar": "7ae13041dfcdec569907ce3b42d858d1",
+                    "discriminator": "9697",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:42:13.846000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951503032821100544",
+                "type": 0,
+                "content": "Yeah, each call to create_program_address (which gets invoked on each bump attempt in find_program_address) uses 1500 units, so they add up pretty quick: https://github.com/solana-labs/solana/blob/master/program-runtime/src/compute_budget.rs#L29",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:33:21.096000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951502184762208266",
+                "type": 0,
+                "content": "5k for findProgramAddress is low, but variable. I've got examples that use 22k compute units. Just depends on when it find a valid key/bump",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "653649801086500914",
+                    "username": "SchwarzBi3r",
+                    "avatar": "7ae13041dfcdec569907ce3b42d858d1",
+                    "discriminator": "9697",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:29:58.903000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951501885414703164",
+                "type": 0,
+                "content": "I agree, the only ones I found a bit high were the string conversions to and from Base58, but that's somewhat expected.",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "653649801086500914",
+                    "username": "SchwarzBi3r",
+                    "avatar": "7ae13041dfcdec569907ce3b42d858d1",
+                    "discriminator": "9697",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T15:28:47.533000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951350853724430398",
+                "type": 19,
+                "content": "These numbers seem really high, particularly 5k for`find program address`",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "653649801086500914",
+                        "username": "SchwarzBi3r",
+                        "avatar": "7ae13041dfcdec569907ce3b42d858d1",
+                        "discriminator": "9697",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T05:28:38.772000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889606719829835816",
+                    "guild_id": "889577356681945098",
+                    "message_id": "951180962782396426"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951311764644053014",
+                "type": 19,
+                "content": "you can and should avoid Pubkey::from_str using the new `pubkey!` macro or using a `declare_id!` macro",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "653649801086500914",
+                        "username": "SchwarzBi3r",
+                        "avatar": "7ae13041dfcdec569907ce3b42d858d1",
+                        "discriminator": "9697",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:53:19.209000+00:00",
+                "edited_timestamp": "2022-03-10T02:53:54.109000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889606719829835816",
+                    "guild_id": "889577356681945098",
+                    "message_id": "951180901260341258"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951311577137696809",
+                "type": 0,
+                "content": "https://github.com/solana-labs/solana-program-library/blob/master/libraries/math/tests/instruction_count.rs and spl has one for more number operations",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:52:34.504000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951310982607667210",
+                "type": 0,
+                "content": "https://github.com/solana-labs/solana/blob/0a3a18744fe575c0cae66cf68abb5d3d12704565/program-runtime/src/compute_budget.rs here",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:50:12.757000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951310973933867038",
+                "type": 0,
+                "content": "because they keep a close eye on those",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:50:10.689000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951310218686513182",
+                "type": 0,
+                "content": "there is a crate for very basic operations",
+                "channel_id": "889606719829835816",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:47:10.624000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "c25aed751d1f27f2c0f89f0ea3619dbb"
+}

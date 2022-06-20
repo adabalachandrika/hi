@@ -1,0 +1,902 @@
+{
+    "total_results": 27,
+    "messages": [
+        [
+            {
+                "id": "951571373602529380",
+                "type": 0,
+                "content": "I would suggest interacting with this from a Node.js script instead of in a browser at first. It's probably going to be easier to code, debug, and learn about how Octane works this way.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T20:04:54.808000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951570835796283512",
+                "type": 19,
+                "content": "https://github.com/mohan00710/solana-test/blob/8af9ad48765129596733185e8164d343f187cbd3/octane.js#L38-L43\n\nThe code here is incorrect. To interact with Octane, your first instruction must be a transfer instruction to the Octane fee payer address you retrieved. The amount of this transfer is in the config you retrieve as well.\n\nThen you would have your own transfer (between the `from` and `to` keypairs you create) after that.\n\nAdditionally, you cannot call `transaction.sign` because the transaction has not been signed by Octane and still requires its signature. You must call `transaction.partialSign` with your `from` keypair, then serialize it without requiring all signatures (because you are missing the fee payer's), then send it to Octane.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "866701243342913577",
+                        "username": "mohan | Kanaswap",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0343",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T20:02:46.585000+00:00",
+                "edited_timestamp": "2022-03-10T20:03:16.065000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951326985731334185"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951569053267394620",
+                "type": 19,
+                "content": "Have you checked out MoonPay, Ramp, and other fiat onramps?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915943031310532620",
+                        "username": "Graft_Dev",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "4738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T19:55:41.597000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951465528256520222"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951568703667982367",
+                "type": 19,
+                "content": "Awesome! Very glad to hear that, and congrats on the grant.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "647493715270828072",
+                        "username": "JustinMurray",
+                        "avatar": "5fda6c3a36f48a79ee714cd66157a68e",
+                        "avatar_decoration": null,
+                        "discriminator": "4856",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T19:54:18.246000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951541424803962921"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951541424803962921",
+                "type": 0,
+                "content": "We'll be pushing our woocommerce plugin to a public repo asap and ask solana pay to link to it when live \ud83d\ude42 appreciate everyone's patience and input! Our beta is working well with Phantom and woocommerce so might as well allow builders to help build! We also got approved for solana grant so I can pay contributors in some manner depending on their input. Things are accelerating quickly!",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "647493715270828072",
+                    "username": "JustinMurray",
+                    "avatar": "5fda6c3a36f48a79ee714cd66157a68e",
+                    "avatar_decoration": null,
+                    "discriminator": "4856",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T18:05:54.458000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951534998723375149",
+                "type": 19,
+                "content": "Hi <@!291592981520318466> we have a working beta and would love your input! jump into our woolana twitter dms and I'll get you in the discord",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "647493715270828072",
+                    "username": "JustinMurray",
+                    "avatar": "5fda6c3a36f48a79ee714cd66157a68e",
+                    "avatar_decoration": null,
+                    "discriminator": "4856",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "291592981520318466",
+                        "username": "Hanko",
+                        "avatar": "221ad1b49a7aad12e6780461a9f966c9",
+                        "avatar_decoration": null,
+                        "discriminator": "1337",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T17:40:22.361000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951220533016535060"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951465528256520222",
+                "type": 0,
+                "content": "Hello Jordan, I\u2019m looking to allow customers to acquire sol in a user friendly way. They will be using the sol to pay for things in my app. Ideally I would like to have an api that can embed into my wallet that will act as a payment gateway. If they can insert their card details and get sol delivered into their wallet, then that would an amazing solution",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915943031310532620",
+                    "username": "Graft_Dev",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "4738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T13:04:19.311000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951326985731334185",
+                "type": 19,
+                "content": "full code can be found in this repo  https://github.com/mohan00710/solana-test.git ,have a look when you have time and see if you could help, Thanks\ud83d\udc4d",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "866701243342913577",
+                    "username": "mohan | Kanaswap",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0343",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T03:53:48.199000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951204686311096461"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951307102180233256",
+                "type": 0,
+                "content": "for you assistance and time",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:34:47.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951307026657599548",
+                "type": 0,
+                "content": "Thanks",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:34:29.585000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306804485296138",
+                "type": 0,
+                "content": "It doesn't solve your Android/devnet problem, but it could solve your devnet problem",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:33:36.615000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306739758813184",
+                "type": 0,
+                "content": "This exists so you can test from your desktop browser with a wallet browser extension",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:33:21.183000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306627359862804",
+                "type": 0,
+                "content": "https://github.com/solana-labs/solana-pay/blob/fb40bfc0a3a43824a4657b3d2a0ba67d3867c09f/point-of-sale/src/components/routes/RootRoute.tsx#L19-L20 may be of use for your testing in the short term",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:32:54.385000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306602508615711",
+                "type": 0,
+                "content": "Yeh",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:32:48.460000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306569876926506",
+                "type": 0,
+                "content": "Gotcha. And are you in a place where a lot of people would be using an Android device?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:32:40.680000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306452218306630",
+                "type": 0,
+                "content": "Yeh we are thinking to integrating it for our clients but bcoz of confirmation issue haven't.",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:32:12.628000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951306023405244438",
+                "type": 0,
+                "content": "What's your issue, are you just looking for a way to test an app right now?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:30:30.391000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951305960322908262",
+                "type": 0,
+                "content": "I'll probably mention it here once they tell me",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:30:15.351000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951305617283358760",
+                "type": 0,
+                "content": "How can I know that slope has resolved the issue? Do I have to join there discord or some announce here?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:28:53.564000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951305356997455935",
+                "type": 0,
+                "content": "Yeh that's why I am searching for other options..",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:27:51.507000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951305162281066546",
+                "type": 19,
+                "content": "Hmm I believe Slope Android is broken right now too",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915431564031168543",
+                        "username": "AduttyaRyna",
+                        "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                        "avatar_decoration": null,
+                        "discriminator": "3513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:27:05.083000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951304397059686440"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951304397059686440",
+                "type": 19,
+                "content": "Is There any other wallet for android which supports solana pay and devnet ? I have tried solflare, solareum but no success..",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "915431564031168543",
+                    "username": "AduttyaRyna",
+                    "avatar": "40949c45cbe9a0c995d9d4b00100cb8f",
+                    "avatar_decoration": null,
+                    "discriminator": "3513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:24:02.640000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951215067276410920"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951300951216631809",
+                "type": 0,
+                "content": "I haven't been able to get a transaction thru in over 30 minutes. Anyone else?",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "774120544743456808",
+                    "username": "cheeseburger-palace",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5307",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T02:10:21.087000+00:00",
+                "edited_timestamp": "2022-03-10T02:10:35.641000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951285106058883122",
+                "type": 19,
+                "content": "For now I've DM'd it to you",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "112417562863636480",
+                    "username": "Lmvdzande",
+                    "avatar": "5748434e89d8e18400f71838a14bd6a6",
+                    "avatar_decoration": null,
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T01:07:23.307000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951275572074524743"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951275572074524743",
+                "type": 19,
+                "content": "Nice! I'm not sure what that looks like, but if you have a Github repo I'd be happy to look",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "150787664553967616",
+                    "username": "jordaaash",
+                    "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                    "avatar_decoration": null,
+                    "discriminator": "3040",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "112417562863636480",
+                        "username": "Lmvdzande",
+                        "avatar": "5748434e89d8e18400f71838a14bd6a6",
+                        "avatar_decoration": null,
+                        "discriminator": "0001",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T00:29:30.228000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951265397095686226"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951270661295317042",
+                "type": 0,
+                "content": "I just wanna help \ud83d\ude42 I come from an ecom and SEO background and literally closed my ecom brand to go all in on the solana community. Ill check out the link tysm \u2764\ufe0f",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "291592981520318466",
+                    "username": "Hanko",
+                    "avatar": "221ad1b49a7aad12e6780461a9f966c9",
+                    "avatar_decoration": null,
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T00:09:59.407000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "951270412996739082",
+                "type": 19,
+                "content": "my man",
+                "channel_id": "938828592232693820",
+                "author": {
+                    "id": "291592981520318466",
+                    "username": "Hanko",
+                    "avatar": "221ad1b49a7aad12e6780461a9f966c9",
+                    "avatar_decoration": null,
+                    "discriminator": "1337",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "150787664553967616",
+                        "username": "jordaaash",
+                        "avatar": "5c5c7c4f206c30015847c95155eb5727",
+                        "avatar_decoration": null,
+                        "discriminator": "3040",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-10T00:09:00.208000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "938828592232693820",
+                    "guild_id": "428295358100013066",
+                    "message_id": "951229033515987054"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "cfc2c2b4691aed47d13a599e000c9592"
+}

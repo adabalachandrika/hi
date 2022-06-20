@@ -1,0 +1,654 @@
+Are there any other transactions that have to happen before the one that’s failing?
+Though it’s likely to still be right tbh
+I’m not certain about the keypair part but I’m afk
+Happy new year! The imports look right anyway
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+perfect, thanks
+Can see some examples here
+https://github.com/michaelhly/solana-py/blob/master/tests/integration/test_websockets.py
+Ohh ok then yeah we do have websockets
+https://michaelhly.github.io/solana-py/api.html#module-solana.rpc.websocket_api
+Oh sorry I meant solana-py not anchorpy 😂
+solana-py will get you some of the way there
+Yeah we don’t have that yet lol
+anyone have a good usage example of the anchorpy websocket api? `test_events.py` is the only example in the anchorpy repo and it's currently unfinished
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Ooh a side quest
+Oh alright thank you, could you please accept my friend request? need to ask you something
+I don’t know how to do that but there are people in this channel who do, so I’m *manifesting* that they will help you
+I tried using the metaplex api but I think I'm doing something wrong so not sure how I could do it
+Hey guys, was wondering if anyone could help me out in getting the metadata for a given address (a candy machine)
+Are you saying your machine runs out of memory? How much memory is getting used up?
+Is there a way to batch the requests when using ``.all()`` on an account type? In some instances I have found that it allocates memory to the point the program is killed. Or is there a better way to grab all instances of an account type from a program?
+Will require creating an idl manually and writing code to implement the Coder
+Soon it will have support for non-Anchor programs with some extra work
+is anchor py only for anchor smart contracts? wont it work on raw program?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+worse than the raydium botters
+not just that you shouldnever call it but you are actively being a rude person if you call it
+on a public rpc
+I guess I should add that calling getProgramAccounts is incredibly rude
+few exceptions are metaplex, raydium and serum
+that should have all the data
+usually projects have analytics that they store in a db that you can query
+somewhere idk
+Where is it
+Wdym
+and load from that cache directly
+just download that cache
+there is a cache of data somewhere every single time
+you should never call getProgramAccounts anyways
+sorry
+even with a machine with more money it will fail
+you need to use filters
+it's always possible i'm doing something dumb in code that isn't caught in tests but the implementation is fairly simple https://github.com/kevinheavey/anchorpy/blob/294ede9d98df05db7467abc35d3f12af41418085/src/anchorpy/program/namespace/account.py#L165
+hmm, this is a fun problem for sure, I'll let you know how it goes when I move it over to a machine with more memory
+come to think of it i think my favourite internet troll <@!867369388608061470> mentioned that getProgramAccounts doesn't have a size limit, or something along those lines
+the call would take around 1-2 minutes honestly, I found periods of time where it would be less than a minute surprisingly, and yeah, today I am putting some of these scripts onto a machine with more memory to check it out more
+`.all` just uses `getProgramAccounts` and that thing doesn't support batching, though it does support some filtering
+do you have a machine with more memory that you can use to check if the result makes sense?
+how long does it take lol
+that is correct
+and you're calling `.all()` without arguments yes?
+I'm betting money the error is between the chair and the keyboard lol
+I believe so. For example, using ``.all()`` on candy machine V1 did not give much fuss when allocating memory. When V2 was rolled out ``.all()`` on accounts there has allocated memory to the point the program is killed. At this point I am going to do some tests and look at just the bare calls sans any other operations done on that data.
+You’re managing to fetch 1.5GB of data in one http request?
+My machine runs out of memory is what I meant. Looking at the usage it's around 1 - 1.5gb, the server these programs are being on has 2gb of memory max. I'm trying to determine if it is time to upgrade the hardware or not on the server to meet the demands of the programs.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+also one day we won't have case conversions in the client, maybe
+`pyheck` is a wrapper that I wrote around the Rust library `heck`. It was an interesting exercise but it shouldn't really affect anyone here. In theory it helps us at edge cases where `inflection` might have different output from `heck` https://github.com/kevinheavey/pyheck
+updated the solana-py dependency and replaced `inflection` with `pyheck` for case conversion
+small release
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+also i made a new release that uses the latest ipython version after an exploit in ipython was discovered https://www.reddit.com/r/Python/comments/s9l5oy/arbitrary_code_execution_vulnerability_discovered/
+
+this only affects people using `anchorpy shell`
+
+but also the exploit affects anyone using ipython/jupyter, so please update those if you use them for anything
+`mint = Keypair()`
+Yep
+In javascript we do something like this:
+const mint = anchor.web3.Keypair.generate();
+
+But when i check anchor docs it those something like this:
+from solana.keypair import Keypair
+
+Is it the same thing?
+the error is really weird so you need to know that its a python version thing i though so but could not find the required version
+just wanted to say that haha
+Maybe I should add this to the readme as it keeps wasting people’s time
+3.10 also works!
+But I can’t do anything about that
+Of course this wouldn’t happen if pip gave better error messages
+Yeah it’s in the pyproject.toml
+Sorry found it need version 3.9
+Dont see a specific setup.py that says i need minimum or maximum python version
+did not think about that
+Python 3.6.9
+What version of Python are you using?
+No matching distribution found for anchorpy
+
+When trying to do pip install  anchorpy i get this:
+"No matching distribution found for anchorpy"
+
+Has this to do something with my local machine or something else from the package?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+no outstanding questions atm. will direct future questions here. cheers 🙂
+yes
+hi
+<@!856894333180706876> kevin, that you?
+Will do ty
+I’d search beginner-questions and ask there if you don’t find an answer, this error comes from the Rust code
+I think I'm super close, what does this error exactly mean? `anchorpy.error.ProgramError: 2001: A has_one constraint was violated`
+Thank you!!
+`b"somestring"` or `somestring.encode()`
+Hey, one more question, regarding this, what is the equivalent of `Buffer.from("somestring")` in py?
+Did the trick!
+so just delete the `await`
+oh yeah PublicKey.find_program_address is sync in Python
+Oh I think I fixed that, it was because of me using the wallet object, now I'm getting this tho `TypeError: object tuple can't be used in 'await' expression`
+is it happening on all three of those public keys?
+```py
+    token = await PublicKey.find_program_address(
+        [bytes(Wallet.public_key), bytes(TOKEN_PROGRAM_ID), bytes(mint.public_key)], program_id=SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID
+    )```
+I'm getting this `TypeError: cannot convert 'property' object to bytes`
+`bytes(mint)`
+it would be used as an argument of `PublicKey.find_program_address`
+as toBuffer is a NodeJS thing
+and how can replicate this in py? `mint.toBuffer()`
+Correct!
+Another one 😅 - `Token.createInitMintInstruction` what does this correspond to? Is it `spl.token.instructions import initialize_mint`?
+👍
+Not now that you’ve done the hard part 😅
+is there any advantage in doing this?
+Great thanks!
+Correct
+that would correspond to the .span correct?
+And if you want to cheat instead of using sizeof, you could hard code 82
+And if you want the size, it’s MINT_LAYOUT.sizeof()
+🙏
+`from spl.token._layouts import MINT_LAYOUT`
+Also, do you know what `MintLayout` corresponds to in spl for python?
+Oh my bad, ty
+or `from solana.system_program import SYS_PROGRAM_ID` or whatever you want to get from it
+please don't tag (I read this channel anyway), but the answer is:
+`import solana.system_program`
+Hey <@!856894333180706876>, what's the correspondent to this in the anchorpy client? `anchor.web3.SystemProgram`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Nope nothing
+can't remember if order matters, but does it help if you put the CIVIC_PROGRAM in the same position as it is in the js code?
+here's mine in py
+```py
+    rem_accounts = []
+
+    if hasGatekeeper:
+        rem_accounts.append(AccountMeta(pubkey=PublicKey(get_network_token(keyPair.public_key, PublicKey(gatekeeper_network))[0]), is_signer=False, is_writable=True))
+        if expire_on_use:
+            rem_accounts.append(AccountMeta(pubkey=get_network_expire(gatekeeper_network)[0], is_signer=False, is_writable=False))
+            rem_accounts.append(AccountMeta(pubkey=CIVIC_PROGRAM, is_signer=False, is_writable=False))```
+Here's the ts code:
+
+```
+  if (candyMachine.state.gatekeeper) {
+    remainingAccounts.push({
+      pubkey: (
+        await getNetworkToken(
+          payer,
+          candyMachine.state.gatekeeper.gatekeeperNetwork,
+        )
+      )[0],
+      isWritable: true,
+      isSigner: false,
+    });
+    if (candyMachine.state.gatekeeper.expireOnUse) {
+      remainingAccounts.push({
+        pubkey: CIVIC,
+        isWritable: false,
+        isSigner: false,
+      });
+      remainingAccounts.push({
+        pubkey: (
+          await getNetworkExpire(
+            candyMachine.state.gatekeeper.gatekeeperNetwork,
+          )
+        )[0],
+        isWritable: false,
+        isSigner: false,
+      });
+    }
+  }```
+Yeah I’ve never looked at candy machine so idk
+That’s for V1 but as I said normal minting works, the issue is when remaining accounts are required
+If you’re working with candy machine this might help https://github.com/dubbelosix/candypy
+Maybe I can find something in .ts
+Nope, I’m doing directly in python
+Do you have some equivalent javascript code to look at and compare with?
+So the issue has to be there
+Which part would you need? Cause everything works when there are no remaining accounts involved
+Too hard to say without knowing what you’re doing
+🤷‍♂️
+I checked and the public keys are correct so not sure what could be causing the issue
+Thank you. I'm getting this error (`Transaction simulation failed: Error processing Instruction 4: Failed to serialize or deserialize account data: Unknown`) when I try to mint something that has the `remaining_accounts` param in the ctx. This is what I am passing:
+
+```
+[AccountMeta(pubkey=accountpublickkey1, is_signer=False, is_writable=True), AccountMeta(pubkey=accountpublickkey2, is_signer=False, is_writable=False), AccountMeta(pubkey=accountpublickkey12, is_signer=False, is_writable=False)]```
+`bytes([1, 2, 3])`
+Thank you, and regarding the bytes thing from yesterday, if I want to do it with a list (`Buffer.from([1, 2, 3])`) how would it be in py?
+Say you stored it in a variable called `result`, just use `result.param2` or whatever
+Hey, what's the best way to access the result of the .fetch() method of a program?
+
+` Program(authority=programauthority, param2=anotherparam)`
+
+this is what a sample response looks like
+Not sure either ahah, thank you will do
+I’m not sure how you ended up with those two versions, but update solana-py and anchorpy to the latest versions
+0.18.1
+And what version of solana-py?
+0.6.0
+What version of anchorpy are you using?
+{'context': {'slot': *slot number*}, 'value': [{'confirmationStatus': 'processed', 'confirmations': 0, 'err': None, 'slot': *slot number*, 'status': {'Ok': None}}]}
+What does it return for you?
+Hey, I managed to get the minting process through anchor using the program.rpc[‘mint’](args) method but I’ve noticed that it only says the mint went through and doesn’t return the transaction Id, how could I get that?
+🥳
+wins all around today
+worked!
+ah ok, trying with commitment.
+if commitment stuff is new to you you can read this https://docs.solana.com/developing/clients/jsonrpc-api#configuring-state-commitment
+if you're on localnet and you call it with `processed` commitment then it should be instant i think
+like, can i do:
+
+```
+def some_func():
+  pubkey = create_ata()
+  client.get_token_account_balance(pubkey)
+```
+i'm guessing that latency is important?
+👍
+```>>> client = Client("https://api.mainnet-beta.solana.com/")
+>>> client.get_token_account_balance("Guiwem4qBivtkSFrxZAEfuthBz6YuWyCwS4G3fjBYu5Z")
+{'jsonrpc': '2.0', 'result': {'context': {'slot': 117673332}, 'value': {'amount': '3988384000000000', 'decimals': 6, 'uiAmount': 3988384000.0, 'uiAmountString': '3988384000'}}, 'id': 19}```
+hehe, sure.
+but i tried on mainnet and it worked consistently
+i didn't try since i presume it relies on some localnet state you set up
+instantly?
+also, how soon after this ATA gets created (with a balance) should i except to be able to run this query?
+does that command work for you?
+👍
+that should probably be fine
+1.8.0.
+ah.
+what version of the solana CLI do you have?
+on the 22nd, it did the right thing.
+on the 21st, it found the account, but balance of 0.
+i.e. i tried 22 times.
+the correct balance is 90.
+```
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid param: could not find account'}, 'id': 1}
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid param: could not find account'}, 'id': 2}
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid param: could not find account'}, 'id': 3}
+...
+{'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid param: could not find account'}, 'id': 20}
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'result': {'context': {'slot': 30145}, 'value': {'amount': '0', 'decimals': 0, 'uiAmount': 0.0, 'uiAmountString': '0'}}, 'id': 21}
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'result': {'context': {'slot': 30160}, 'value': {'amount': '90', 'decimals': 0, 'uiAmount': 90.0, 'uiAmountString': '90'}}, 'id': 22}
+```
+that's bizarre lol
+as for the get_token_account_balance thing
+nice one.
+🎉
+happy days!
+worked!
+let me try anchorpy now.
+worked!
+let me try installing pyheck again.
+oh wow, upgraded to `pip-21.3.1`, successfully installed `polars-0.12.16-cp36-abi3-macosx_10_9_x86_64.macosx_11_0_arm64.macosx_10_9_universal2.whl`.
+interesting, will try to upgrade.
+via curl:
+
+```
+curl http://localhost:8899 -X POST -H "Content-Type: application/json" -d '
+  {"jsonrpc":"2.0", "id":1, "method":"getTokenAccountBalance", "params": ["FQZVHTVo3nqr6V3TiurekyMNaFAb32mFF26GEbRWdN2b"]}
+```
+
+works great.
+
+via python:
+
+```
+(Pdb) self.client.get_token_account_balance(pubkey)
+{'jsonrpc': '2.0', 'error': {'code': -32602, 'message': 'Invalid param: could not find account'}, 'id': 1}. # fails
+(Pdb) pubkey  # what's my pubkey again?
+FQZVHTVo3nqr6V3TiurekyMNaFAb32mFF26GEbRWdN2b
+(Pdb) self.client.get_token_account_balance(pubkey) # works!
+{'jsonrpc': '2.0', 'result': {'context': {'slot': 29388}, 'value': {'amount': '90', 'decimals': 0, 'uiAmount': 90.0, 'uiAmountString': '90'}}, 'id': 2}
+```
+I found this:
+`Note that you need to use pip version 21.0.1 and later to install universal2 wheels.`
+20.2.3, python version 3.9.1.
+oh what pip version do you have?
+this seems to work nicely for me too.
+correct.
+- python distro (installed via pyenv) built with `arm64`.
+- `pip install pyheck` built a wheel on my machine with `x86_64` instructions.
+- `python -c 'import pyheck'` borked.
+man computers are hard
+oh so it compiled from source into something that didn't work
+nope, built that one (successfully) on my machine.
+but it thought it found a suitable one for pyheck I guess?
+i think it will always do this if it doesn't find a suitable wheel on pypi.
+weird i wouldn't expect it to try and compile from source
+nvm, this failed outright.
+fyi this will likely install, it'll just fail on import, given a python distro built with `arm64`.
+will tell you what wheel it builds for me locally, one sec.
+hm, don't know what that is.
+oh i see it also says x86_64
+this sounds like an arm64 wheel? `polars-0.12.16-cp36-abi3-macosx_10_9_x86_64.macosx_11_0_arm64.macosx_10_9_universal2.whl`
+thanks
+will try in a fresh venv tho.
+i'm going to guess no, since there's no `arm64` wheel built here: https://pypi.org/project/polars/#files.
+have you tried it on different RPC nodes?
+does `pip install polars` work for you? That uses Rust
+like, it will fail to retrieve the balance in the python API, but i can go to solana explorer (pointed at `http://localhost:8899`) and view the token balance.
+i mean these docs https://docs.solana.com/developing/clients/jsonrpc-api#gettokenaccountbalance
+it's behavioral unstable for me as well. sometimes works, sometimes no. feels like it works more after trying in a given thread, then retrying.
+so worth solving
+but in the future anchorpy will use rust too
+ah, ok.
+looks like it is?
+
+`Returns the token balance of an SPL Token account (UNSTABLE).`
+
+(in both API and async API.)
+nah this is just a dependency i introduced the other day called pyheck
+what is the tl;dr on how anchorpy is built? why is rust involved? because it builds the `anchor` submodule?
+i'm actually not sure if this is unstable anymore. It's not marked as such in the current json rpc docs
+hm, ok. to start, i think is what we want (using pandas as a canonical example):
+
+something like `pandas-1.4.0-cp310-cp310-macosx_11_0_arm64.whl`, via
+
+https://pypi.org/project/pandas/#files.
+
+where 
+
+```
+macosx_10_11_arm64 is the platform tag, which happens to be quite a mouthful. In this case it can be broken down further into sub-parts:
+
+macosx is the macOS operating system.
+10_11 is the macOS developer tools SDK version used to compile the Python that in turn built this wheel.
+arm64 is a reference to arm64 instruction set architecture.
+```
+
+(via https://realpython.com/python-wheels/.)
+don't think this will work as none of the targets printed by `rustc --print target-list` have  `arm64` in the name
+also, what's the recommended way to query for an ATA's token balance?
+
+https://michaelhly.github.io/solana-py/api.html#solana.rpc.api.Client.get_token_account_balance
+
+is marked as UNSTABLE.
+
+(indeed, it's unstable for me as well. sometimes works, other times no.)
+try `arm64`?
+just unsure what the name of the target i need is
+I think I just need to add another target to this part of the CI:
+```
+        uses: messense/maturin-action@v1
+        with:
+          target: x86_64```
+i'm happy to help get this solved, but probably won't have cycles for a week or so.
+
+(and obvi, i have an m1!)
+i believe `universal` speaks to the python version itself: 
+
+https://realpython.com/python-wheels/#specifying-a-universal-wheel
+i don't really know what it does but it sounds like it should help 😅
+i'm also surprised that this `universal2` thing in the CI doesn't work
+nope!
+This sounds right, yes. Do you have access to an amd64 machine to test?
+they're nice so maybe they'll help
+asked in pyo3 gitter but no answer yet
+I think I can just add amd64 as a target here maybe https://github.com/kevinheavey/pyheck/blob/main/.github/workflows/build.yml
+good to know
+In effect we’ll need to build a pyheck wheel for amd64.
+Yes. No good reason to believe otherwise.
+Do you have any idea?
+not really sure what this exactly means tho
+```pub struct MintNFT<'info> {
+    #[account(
+        mut,
+        has_one = wallet
+    )]```
+
+this is the only bit of code where "has_one" appears
+Would you say that most people using M1 will have the same installation problems that you had?
+You’ll have to look at the Rust code for the smart contract. Impossible to tell any more from reading the error
+I still haven't been able to figure this error out 😫
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Also the localnet_fixture uses a subprocess without a problem
+I can’t think of any way simply using a subprocess could be the root cause of the error
+What ya mean?
+the subprocess has to be a red herring I think
+but, *only* happening when i run `anchor localnet` via a subprocess.
+now this:
+
+https://discord.com/channels/889577356681945098/889577399308656662/935894246618169375
+did this, worked.
+prefer not this.
+or else just do something hacky so that your workflow can call pytest and take advantage of localnet_fixture in anchorpy
+pytest-xprocess basically runs a process in the background, pipes its output to a temporary log file and then keeps checking the log file to see if it contains the lines it wants to see. So you probably want to write something similar
+<@!856894333180706876> 
+
+what's a good strategy for:
+
+1. starting a local solana validator via a Python subprocess using `anchor localnet` (which builds and deploys your program as well).
+2. ...waiting for the validator to start "processing slots," e.g. `⠠ 00:00:14 | Processed Slot: 23 | Confirmed Slot: 23 | Finalized Slot: 0 | Snaps`...
+3. interacting with your deployed program?
+
+crucially, how do we do #2?
+
+something like `xprocess.ensure`, but not for tests?
+This prints null for me in typescript; how are you checking that it works?
+
+```
+    anchor.setProvider(anchor.Provider.local("https://api.mainnet-beta.solana.com/"));
+    const idl = await Program.fetchIdl("gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs");
+    console.log("The idl: ", idl);
+```
+So what would be the "fix", if any?
+anchorpy thinks this address is 8LC6ZDcDK5ojFgFJpE5sXaANyQN94WHrvszmR4oqdcPq which is indeed empty if you check on solscan
+so the way this works in both python and ts is it takes the program id and uses that to find the address the idl is stored at
+that's weird
+yea
+and this works in typescript yes?
+`idlToUse = await Program.fetch_idl("gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs", provider)`
+How are you trying to find it?
+I'm trying to find the IDL for this program but it looks like it isn't able to find it: `gatem74V238djXdzWnJf94Wo1DcnuGkfijbf3AuBhfs`
+What do you mean by can’t find it?
+Hey is it possible that the anchorpy client can't find an IDL and normal anchor can?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+is there an issue with SOlana CLI v1.9.5 ? It tries to get an older version of BPF i think
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Do you know what could be causing this issue?
+I think I'm pretty close, I'm getting an error in this line of code: `tx_instructions.add_signature(PublicKey(notary), base58.b58decode(sig_str))` which corresponds to `transaction.addSignature(notary, bs58.decode(sigStr));` in ts code, it's saying: 
+
+`ValueError: ('unknown signer: ', 'notaryAddressHere')`
+Alright thank you
+And it may do some other stuff, I forget
+Yeah `.send_transaction` just calls `.serialize` and passes that value to `.send_raw_transaction`
+is it the same thing?
+so I need to use .transaction
+Yeah I know but for this I'm not sending it immediately
+I would also just use `program.rpc` instead of `program.transaction` if you’re just creating the transaction and immediately sending it
+I would just use `.send_transaction` and don’t call `.serialize` on the transaction
+Think I sorted the one above but now I'm stuck on this: 
+
+```js
+    let L = transaction.serialize({
+        verifySignatures: false
+    });
+
+    return await sendAndConfirmRawTransaction(connection, L);```
+Hello, let's say I wanted to do this in python, how could I do it: `const transaction = program.transaction.mintNft(bump, {accounts:...`
+
+and then this: 
+
+```    transaction.recentBlockhash = (await connection.getRecentBlockhash('finalized')).blockhash;
+    transaction.feePayer = feepayer```
+
+How could I do it?
+Yeah you can do:
+```anchor_ix = program.instruction["my_func"](blah)
+other_ix = code_to_build_other_ix()
+tx = Transaction().add(anchor_ix, other_ix)```
+I want my TX to be a call to an anchor program + my instructions for another separate program (not anchor)
+hey guys, is it possible to combine an instruction generated by anchorpy with my own instructions? I'm going to do that manually by reading through what anchorpy is generating but I'm asking first to see if there's an easier way
+I respect the Python skills ser
+Got it working, thank you!
+Yes
+So I was able to get it working, just needed to define some more things. Now I'm just trying to talk to my on-chain program. Are the tests the best place to look for examples?
+What does the rest of the error say?
+So it seems like I just can't initialize my program. Has anyone else had problems initializing?
+I've verified I have my IDL, and the correct program public key for the on-chain program, and I'm getting `solana.exceptions.SolanaRpcException`
+Hey all, I'm attempting to run through the tutorial here: https://kevinheavey.github.io/anchorpy/tutorial/
+@everyone who will catch this gift?)  
+https://discosb.gift/X0kD211HPMjf
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+anchorpy has tests with remaining_accounts in them
+Unlikely
+Could Anchorpy not sending remaining accounts correctly a possible reason why it’s not working?
+And without the {
+Should just be the same but in snake_case
+Also do you know what is the equivalent for this?
+
+```js
+    let L = transaction.serialize({
+        verifySignatures: false
+    });```
+
+I know you said it's better to use send transaction but I think I need that
+so in theory infos.notary should be a signer
+even tho previously in the remaining accounts I'm doing: `remAccounts.append(AccountMeta(pubkey=PublicKey(infos.notary), is_signer=True, is_writable=False))`
+So it's only showing one signer public key when I print self.signatures
+As in the solana-py code for `add_signature`
+But look at the Python code and you’ll see what I mean
+Idk lol I didn’t write it
+But it’s supposed to add a signature so why would it matter which values are there before?
+it's failing because this value isn't what it should be
+`self.signatures` already has some value when `add_signature` is called
+What do you mean?
+These are the two lines both in py and ts
+Btw `add_signature` isn’t used very much so it’s likely the ts code could have done this an easier way
+It depends on how that state is supposed to end up there
+Is there any way I can hardcode it in or something?
+And how could I go about fixing this in the python version?
+I would check if `self.signatures` has a different value in the ts version
+It’s relying on some state `self.signatures` that gets created elsewhere
+Yeah I saw it yesterday but didn’t really know what to do cause in ts it works perfectly
+```
+
+        idx = next((i for i, sig_pair in enumerate(self.signatures) if sig_pair.pubkey == pubkey), None)
+        if idx is None:
+            raise ValueError("unknown signer: ", str(pubkey))```
+So here’s the code where the error gets raised
+```Traceback (most recent call last):
+  File "c:\Users\Downloads\Solana\Solana\test.py", line 260, in <module>
+    asyncio.run(test())
+  File "C:\Users\AppData\Local\Programs\Python\Python39\lib\asyncio\runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "C:\Users\AppData\Local\Programs\Python\Python39\lib\asyncio\base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "c:\Users\Downloads\Solana\Solana\me_launchpad.py", line 254, in test
+    tx_instructions.add_signature(pubkey=PublicKey(infos.notary), signature=base58.b58decode(str(sig_str)))
+  File "C:\Users\AppData\Local\Programs\Python\Python39\lib\site-packages\solana\transaction.py", line 271, in add_signature
+    raise ValueError("unknown signer: ", str(pubkey))
+ValueError: ('unknown signer: ', 'A8b43w4efa2G6T4pQR9Hif8nj5A3ow2bnx6dAzYJBffP')```
+What does the traceback look like?
+What do you mean why? It’s not able to use that notary address signer even tho it is able to in ts and that’s how it should do in order to make the transaction go through
+🐐
+Can you see why the ValueError gets raised?
+But I also maintain solana-py so here we are
+That isn’t anchorpy it’s solana-py
+I'm 100% sure my code is a 1:1 with the ts code that's working so it might be something with the anchorpy module maybe?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+oh.. yeah i suppose it does make sense to use anchor for the deterministic build part and anchor verify
+yeah i guess it uses it for builds and probably some features from anchor-lang, but probably not a full fledged anchor program
+yeah me neither
+Yep
+hmm.. nvm i did an anchor build in serum-dex, it built but didn't give me an IDL
+also I noticed there is an anchor branch but wasn't sure if that was WIP https://github.com/project-serum/serum-dex/tree/anchor
+new serum = serum core?
+is that the new serum you were referring to?
+hmm wait... i see serum-dex is an anchor deployed project though... it doesn't have the IDL onchain
+In short, no. 
+
+1. Serum isn’t built with Anchor
+2. Anchor and AnchorPy only support Borsh serialization, and Serum doesn’t use Borsh (though the new Serum does)
+hi. I was wondering whether it's possible to generate an IDL for serum-dex and use anchor-py in place of pyserum?
+yup it was missing a very basic check
+so its a constraint
+yup makes sense
+it makes sure that there is no data on the account / that it is empty
+😅
+I remember when you looked at that it seemed too obvious to be exploitable
+Lmao
+I don't know how account(zero) works, i should look that up... can anyone still nuke the mint account?
+yeah
+The thing you found about changing the config?
+lol armani.. the candymachine thing  was apparently a huge vulnerability https://medium.com/@contact_94841/smashing-the-candy-machine-for-fun-and-profit-a3bcc58d6c30
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+We can do it pretty easily i think
+Starting to really want to see this feature in clients.
+alternatively, is there any way to fetch using memcmp ?
+hello, how can I deserialize accounts obtained using findProgramAccounts?
+Re Rust stuff: it looks like most/all of solana-py can use Rust under the hood. Anchor is a bit more complicated but it looks like you can still do some interesting things if you’re willing to integrate pyo3 in a project (or write a wrapper in Rust).
+
+Using Rust in AnchorPy isn’t a super high priority but I think I’ll be chipping away at this now and then because getting Rust to compile is deeply satisfying
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+My thanks!
+Ok that error is coming from the Rust side because the program doesn’t let you do what you’re trying to do. Best to ask in <#889702325231427584> how you would modify the multisig code to do what you want
+Yes, but I'm interested in such a slightly different case. 
+I want to create a multisig with an account that was created somewhere else, not in this transaction. Let's say it's just an account in Phantom, and there's another account and I want to create a multisig with them through Anchorpy. Is this possible?
+Have you looked at test_multisig.py in the anchorpy repo?
+No, it's more just a test of the ability to send SOLs from one account to another, with a multisig confirmation.
+
+ That is, I want to write a script on anchorpy, which creates multisig based on the pubkey of the receiving and sending side, when running the script will need confirmation, for example in sollet, from both sides. If everyone agrees, then the token is sent. 
+
+Can Anchorpy do this?
+Is the smart contract already written and deployed?
+Hello! I need help!
+I need to create a transaction in which the first account sends 1 SOL to the second account, but this transaction must be signed by a multisig based on these two accounts.
+
+So I have to create a transaction to send 1 SOL and create a multisig in it?
+
+Do I need to create a multisig in the transaction?
+Gotcha, thanks again
+and if for some reason you just have a bunch of account data fetched already you can use `program.account["MyAccount"].coder.accounts.decode(data)`
+Oh awesome, thanks a lot! This is what I needed
+https://github.com/kevinheavey/anchorpy/blob/294ede9d98df05db7467abc35d3f12af41418085/src/anchorpy/program/namespace/account.py#L165
+good news! It takes a `memcmp_opts` param
+I need only a few
+When compared to memcmp
+than what?
+Will that take more time though?
+it uses `get_program_accounts` under the hood
+you could use `program.account["MyAccount"].all()` and that will also deserialize for you
+Yup, I have the idl
+these are accounts from an Anchor program yes?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks. I didn't know about this library
+Whoops, realized this is py
+https://github.com/metaplex-foundation/python-api this has a get_metadata method
+Does anyone here know how to get the metadata for a metaplex NFT? I have only the mint address to begin with. I'm after the metadata json
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

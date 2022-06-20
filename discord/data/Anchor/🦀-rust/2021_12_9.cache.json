@@ -1,0 +1,635 @@
+{
+    "total_results": 18,
+    "messages": [
+        [
+            {
+                "id": "918479496120791040",
+                "type": 0,
+                "content": "they also share a direct tokio channel, the client and the server",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T12:29:36.399000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918479214494228520",
+                "type": 0,
+                "content": "yes, if you look inside program test, you would find that ever program test context comes with its own local server and rpc client",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T12:28:29.254000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918475891984719943",
+                "type": 0,
+                "content": "got some more info in the Solana discord about program_test:\n```the main difference in my view is that with program-test, you can run many many tests concurrently in totally isolated environments, since everything works within the same process with banks-server https://github.com/solana-labs/solana/blob/b0be0881a77428f207dc3554b584972462ba2442/banks-server/src/banks_server.rs#L311.  if you're using JS, you're likely running against solana-test-validator, and isolating two different tests is impossible unless you run a new validator for each one and assign ports.  otherwise, it makes for quicker dev cycles, since everything stays in Rust```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T12:15:17.106000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918462517217488906",
+                "type": 19,
+                "content": "ah, yeh, maybe that part isn't implemented. But logically it should work eventually",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T11:22:08.313000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918459091561623572"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918459091561623572",
+                "type": 19,
+                "content": "Tried, but didn't work",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T11:08:31.573000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918427629609164800"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918429788224499713",
+                "type": 19,
+                "content": "I guess these are the differences in ts vs rust afaics, but I am guessing many of these are also obvious to you \n- the validator runs externally in-process, maybe (in rust tests) its an even further streamlined validator (banksclient) in comparison to the standalone node, \n- ckds made the rust tests like 20x faster (not sure if this improvement also benefits the TS tests), see https://github.com/solana-labs/solana/commit/bea181eba9e0fb5c8be6fa8880fae2c85cc8aea9\n- then there is node + mocha runner, and also ts->js transpiling\n- also mocha has some max timeout, so the test keeps on running and exits with 0 once that max timeout is finished",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T09:12:05.113000+00:00",
+                "edited_timestamp": "2021-12-09T10:29:40.122000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918427211843907594"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918427629609164800",
+                "type": 19,
+                "content": "Anchor assumes your program should own the loader account. You might try adding the `owner` constraint to indicate what program does actually own the account",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "679936424971468859",
+                        "username": "0xHaddock",
+                        "avatar": "2988978494e386a5debdd6b7699954ec",
+                        "discriminator": "9993",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T09:03:30.459000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918382378660024321"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918427211843907594",
+                "type": 19,
+                "content": "We were just curious to understand more about how running tests using rust actually works and what it's doing that makes it so much faster",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "837011211795038260",
+                        "username": "microwavedcola",
+                        "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                        "discriminator": "8705",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T09:01:50.856000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918427073977155624"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918427073977155624",
+                "type": 19,
+                "content": "? dont follow, whats the context",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "837011211795038260",
+                    "username": "microwavedcola",
+                    "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                    "discriminator": "8705",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T09:01:17.986000+00:00",
+                "edited_timestamp": "2021-12-09T09:01:27.834000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918426875267796992"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918426875267796992",
+                "type": 19,
+                "content": "<@837011211795038260>",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "837011211795038260",
+                        "username": "microwavedcola",
+                        "avatar": "e8a5de58c57bbdf82e0ef2a4c1a1271c",
+                        "discriminator": "8705",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T09:00:30.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918310708951789639"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918382378660024321",
+                "type": 0,
+                "content": "`Loader::<ZeroCopyBasedAccount>::try_from()` worked. Context based deserialization is not implemented yet?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T06:03:41.792000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918378673575444510",
+                "type": 0,
+                "content": "How to decode a zero copy account inside a third party program? My program B imports program A crate, and tries to decode two accounts belonging to A. The regular account is decoded properly, but the zero-copy one  gives an `account is not owned by the executing program` error. \n\nInside program B context:\n```rs\n// non-zero copy, works\npub first_state: Box<Account<'info, RegularAccount>>,\n\n// zero copy, error\npub second_state: Loader<'info, ZeroCopyBasedAccount>,\n\n// where NonZeroCopyAccount and ZeroCopyBasedAccount are owned by program A\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T05:48:58.431000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918310708951789639",
+                "type": 0,
+                "content": "but for real does program_test send data over the network or does it interact with the program directly?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-09T01:18:54.402000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918233554863927337",
+                "type": 0,
+                "content": "here:",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "918233554574512168",
+                        "filename": "Screen_Shot_2021-12-08_at_8.12.09_PM.png",
+                        "size": 3304,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/918233554574512168/Screen_Shot_2021-12-08_at_8.12.09_PM.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/918233554574512168/Screen_Shot_2021-12-08_at_8.12.09_PM.png",
+                        "width": 204,
+                        "height": 61,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-08T20:12:19.434000+00:00",
+                "edited_timestamp": "2021-12-08T20:12:24.511000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918233495724249168",
+                "type": 19,
+                "content": "sorry but there is a function in discord that hsa a magnifying glass",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-08T20:12:05.334000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918232772005462056"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918233406968565801",
+                "type": 0,
+                "content": "fair",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-08T20:11:44.173000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918233368989155388",
+                "type": 19,
+                "content": "please use Discord search",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-08T20:11:35.118000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "918232772005462056"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "918232772005462056",
+                "type": 0,
+                "content": "cc: <@!856894333180706876> \n\nDoes anyone have much experience with running program tests directly in rust?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-08T20:09:12.786000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "1b6a71095a1aa3047723102f754d2662"
+}

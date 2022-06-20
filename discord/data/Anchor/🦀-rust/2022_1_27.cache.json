@@ -1,0 +1,670 @@
+{
+    "total_results": 19,
+    "messages": [
+        [
+            {
+                "id": "936300412221399080",
+                "type": 0,
+                "content": "(In solana, every account is owned by a program, and *only* that program can directly mutate the account's data or spend its money\u2014so, because the user account is owned by the system program, you have to ask the system program to do the money spending for you)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:43:33.894000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936300218385846292",
+                "type": 0,
+                "content": "You'll need to use the system_program's transfer instruction to move the user's money",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:42:47.680000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936300063704092693",
+                "type": 19,
+                "content": "Ah, you can't take the user's money like that, because the user account is owned by the system program",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:42:10.801000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936295937842749530"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936295937842749530",
+                "type": 19,
+                "content": "Perhaps a code snippet would help?\n\n```\npub mod hello {\n    use super::*;\n    pub fn init_house(ctx: Context<InitHouse>, bump: u8) -> ProgramResult {\n        // Debit from_account and credit to_account\n        **ctx.accounts.user.try_borrow_mut_lamports()? -= 10000;\n        **ctx.accounts.base_account.to_account_info().try_borrow_mut_lamports()? += 10000;\n        Ok(())\n    }\n}\n\n#[derive(Accounts)]\n#[instruction(bump: u8)]\npub struct InitHouse<'info> {\n  #[account(init, payer = user, space = 9000, seeds = [], bump = bump)]\n  pub base_account: Account<'info, BaseAccount>,\n  #[account(mut)]\n  pub user: Signer<'info>,\n  pub system_program: Program<'info, System>,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:25:47.119000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936293261423812648"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936293442294775828",
+                "type": 0,
+                "content": "Basically that error means what it says, just need to figure out which account it's talking about (could be the provider.wallet if it's misconfigured, or maybe your trying to pay for an account initialization with an account that doesn't have any money, etc.)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:15:52.134000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936293261423812648",
+                "type": 19,
+                "content": "Is your `Anchor.toml` using the wrong wallet? Helps to see the *full* program log",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T16:15:09.011000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936288212106760234"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936288212106760234",
+                "type": 0,
+                "content": "Getting this error when trying to run `anchor test` on localnet any ideas? \n\n     ```     Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: instruction spent from the balance of an account it does not own\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T15:55:05.160000+00:00",
+                "edited_timestamp": "2022-01-27T15:57:01.709000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936288116455665664",
+                "type": 19,
+                "content": "thanks!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T15:54:42.355000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936286063524216904"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936286063524216904",
+                "type": 19,
+                "content": "You're somehow using an instruction that your actual rust program doesn't support (maybe you forgot to redeploy it?)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T15:46:32.898000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936263163555512420"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936263163555512420",
+                "type": 0,
+                "content": "Hello! Has anyone encountered this issue before?\n\n```\nTransaction simulation failed: Error processing Instruction 0: custom program error: 0x65 \n    Program E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC invoke [1]\n    Program log: Custom program error: 0x65\n    Program E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC consumed 1852 of 200000 compute units\n    Program E7kymufw32w3eYiX7sf3DiBUjbdMtte7BHmJcixunERC failed: custom program error: 0x65\nProgramError: 101: Fallback functions are not supported\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T14:15:33.120000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936240516423630849",
+                "type": 0,
+                "content": "Alright, thanks!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T12:45:33.623000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936240380079382548",
+                "type": 19,
+                "content": "there isnt a great deal of difference afaik. `#[access_control(\u2026)]` does allow you to do more complex validation such as a calculation, etc\n\ndepends how and what youre trying to accomplish. you could just store the pubkeys of each address you need in a global state and validate against that",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "848333406849073202",
+                    "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                    "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                    "discriminator": "0001",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T12:45:01.116000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936238117793460264"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936238117793460264",
+                "type": 19,
+                "content": "Thanks! Your thread is really detailed. I didn't know about the `#[access_control(\u2026)]` thing, and I wonder about what the difference with `constraint` is BTW.\nAlso, I have several PDAs because the state is divided in several parts (others PDAs are lists where I can add & remove elements). Where would you store all the bump seeds? Also, what's the advantages to store the seed?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "848333406849073202",
+                        "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                        "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                        "discriminator": "0001",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T12:36:01.745000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936219135015260232"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936219135015260232",
+                "type": 19,
+                "content": "i do yes. no security issue afaik as long as they are validated. you can store a bump in a state account. although its not specific to the bump, you can see how to store the bump in a global state account in a short thread: https://twitter.com/0xDEADBEEFx/status/1486331068085157894",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "848333406849073202",
+                    "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                    "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                    "discriminator": "0001",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "rich",
+                        "url": "https://twitter.com/0xDEADBEEFx/status/1486331068085157894",
+                        "description": "Another small Anchor thread on the access_control macro \u2693\ufe0f \n\n\ud83e\udd14 Problem: You may want to limit an instruction based on an account's data (i.e. global state). \n\nIn this example, we'll init a state account representing our global program state and store an is_halted flag.\n\n\ud83e\uddf5 1/9",
+                        "color": 1942002,
+                        "timestamp": "2022-01-26T13:31:55.984000+00:00",
+                        "reference_id": "936219135015260232",
+                        "author": {
+                            "name": "0xDEADBEEF \ud83e\udd80 (@0xDEADBEEFx)",
+                            "url": "https://twitter.com/0xDEADBEEFx",
+                            "icon_url": "https://pbs.twimg.com/profile_images/1436413633408479233/XQwgYKDL_bigger.jpg",
+                            "proxy_icon_url": "https://images-ext-1.discordapp.net/external/ECafYwfEBkyFHwWcjhcH0P6iaq5oi87eBvH7QUDSuJk/https/pbs.twimg.com/profile_images/1436413633408479233/XQwgYKDL_bigger.jpg"
+                        },
+                        "image": {
+                            "url": "https://pbs.twimg.com/media/FKCACAvWUAIWMUq.jpg:large",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/ynlHI797BCZyz5IRYiDo1Akr2K50qyQ9nzJlIV5dOOE/https/pbs.twimg.com/media/FKCACAvWUAIWMUq.jpg%3Alarge",
+                            "width": 1738,
+                            "height": 2048
+                        },
+                        "footer": {
+                            "text": "Twitter",
+                            "icon_url": "https://abs.twimg.com/icons/apple-touch-icon-192x192.png",
+                            "proxy_icon_url": "https://images-ext-1.discordapp.net/external/bXJWV2Y_F3XSra_kEqIYXAAsI3m1meckfLhYuWzxIfI/https/abs.twimg.com/icons/apple-touch-icon-192x192.png"
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T11:20:35.898000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936218438614003763"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936218438614003763",
+                "type": 0,
+                "content": "Hey guys, I need a small bit of advice: do you store the bump seeds inside your program's state? Is there a security issue if I pass them as a data parameter each time? If you store them, where do you store them? All in the main state? Each of them in its account?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T11:17:49.863000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936089115907227849",
+                "type": 0,
+                "content": "Thx!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T02:43:56.927000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936088929231306772",
+                "type": 19,
+                "content": "I believe a transaction must fit in 1232 bytes. https://docs.solana.com/proposals/transactions-v2",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.solana.com/proposals/transactions-v2",
+                        "title": "Transactions v2 - On-chain Address Lookup Tables | Solana Docs",
+                        "description": "Problem",
+                        "reference_id": "936088929231306772"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "616045157925650453",
+                        "username": "khalilnafis.sol",
+                        "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                        "discriminator": "1303",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T02:43:12.420000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "936047999098966067"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936047999098966067",
+                "type": 0,
+                "content": "Anyone know the max amount of data you can send in along with a tx?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-27T00:00:33.916000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "936018008592220242",
+                "type": 0,
+                "content": "I'm looking into supporting multisig token transfer CPIs from my instruction. I'd like to support both multi-sig and regular transfers from the same instruction if possible. I'm running into Rust lifetime trouble when making the token transfer CPI call because `remaining_accounts` has a different lifetime than `accounts` in the instruction `Context` object.\n\nSince the number of signers is variable, I'm attempting to pass the multi sig accounts in `ctx.remaining_accounts` when calling the instruction.\n\n```\n#[derive(Accounts)]\npub struct MyInstruction<'info> {\n    #[account(address = token::ID)]\n    pub token_program: Program<'info, Token>,\n    pub vault: Account<'info, TokenAccount>,\n    pub owner_account: Account<'info, TokenAccount>,\n    pub authority: UncheckedAccount<'info>,\n}\n```\n\nI get the other accounts from the accounts struct above. The `authority` in this example would be the multisig account address, which is the owner of the `owner_account` token account.\n\nFrom my understanding, the multisig signer pubkeys need to be added to `signer_pubkeys` in the transfer, and the signer `account_infos` passed in `remaining_accounts` need to be added to `invoke`. \n\n```\n    invoke(\n        &transfer(\n            token_program.key,\n            token_owner_account.to_account_info().key,\n            token_vault.to_account_info().key,\n            position_authority.key,\n            // signer pubkeys here\n            amount,\n        )?,\n        &[], // slice with account_infos from both accounts and remaining_accounts\n    )\n```\n\nThe issue I'm running into is that the account infos slice cannot contain account_infos with different lifetimes from `ctx.accounts` and `ctx.remaining_accounts`\n\nCan someone advise on whether I'm going down the right path for supporting multisig transfers? Or whether there is a better way to implement this in Anchor?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "300012267829723138",
+                    "username": "tmoc",
+                    "avatar": "65016b47c6c8359997db88d02cd7d335",
+                    "discriminator": "2207",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-26T22:01:23.622000+00:00",
+                "edited_timestamp": "2022-01-26T22:03:05.755000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "b9576460e017d310071ab801707e94cc"
+}

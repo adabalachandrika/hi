@@ -1,0 +1,650 @@
+{
+    "total_results": 20,
+    "messages": [
+        [
+            {
+                "id": "945712402270412850",
+                "type": 0,
+                "content": "Hi! Helpme please, how can I transfer NFT from one account to another via Rust? I came up with creating instruction `transfer_checked` and the invoking it via `invoke`. I've successfully created instruction but cannot invoke it because it requires &[AccountInfo] but I receive only public keys from test script in terst/*.js\n\nHere is code sample:\n\n```rust\npub fn try_transfer_nft(ctx: Context<TransferNFt>,\n                            token_program: Pubkey,\n                            mint_nft: Pubkey,\n                            source: Pubkey,\n                            destination: Pubkey) -> ProgramResult {\n        let base_account = &mut ctx.accounts.base_account;\n        let owner_user = &mut ctx.accounts.user;\n\n        msg!(\"signer rust {:?}\", owner_user.key.clone());\n        msg!(\"program rust {:?}\", token_program.clone());\n        msg!(\"mint rust {:?}\", mint_nft.clone());\n        msg!(\"destination rust {:?}\", destination.clone());\n\n        let transfer_nft_instruction = transfer_checked(\n            &token_program.clone(),\n            &source.clone(),\n            &mint_nft.clone(),\n            &destination.clone(),\n            &owner_user.key.clone(),\n            &[&owner_user.key.clone()],\n            1,\n            0,\n        )?;\n\n        msg!(\"Calling the token program to transfer nft...\");\n\n        anchor_lang::solana_program::program::invoke(\n            &transfer_nft_instruction,\n            &[\n                // here must be AccountInfo params?\n            ],\n        )?;\n\n        Ok(())\n    }\n```\n\nAccounts:\n\n```rust\n#[account]\npub struct BaseAccount {\n    pub events: Vec<EventStruct>\n}\n\n#[derive(Accounts)]\npub struct TransferNFt<'info> {\n    #[account(mut)]\n    pub base_account: Account<'info, BaseAccount>,\n    #[account(mut)]\n    pub signer: Signer<'info>,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "205796791004692480",
+                    "username": "whoami333",
+                    "avatar": "e623c63263639cd8975a5de031e20a9f",
+                    "discriminator": "4958",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T16:03:27.188000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945486318538997760",
+                "type": 19,
+                "content": "Sick",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T01:05:04.626000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945486290458144848"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945486290458144848",
+                "type": 19,
+                "content": "The mint has a `.supply` field",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "430802284742574101",
+                        "username": "Mark Antony",
+                        "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                        "discriminator": "2393",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T01:04:57.931000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945486166050873345"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945486244782174238",
+                "type": 0,
+                "content": "is there a method on the token mint?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T01:04:47.041000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945486166050873345",
+                "type": 0,
+                "content": "How can I query for the total supply of an spl-token?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "430802284742574101",
+                    "username": "Mark Antony",
+                    "avatar": "b1831778b027788bd79a1ae82fc90e79",
+                    "discriminator": "2393",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T01:04:28.270000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945480739091279894",
+                "type": 0,
+                "content": "and understand like bump seed vs. the bump data input to solana functions",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:42:54.382000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945480558006394972",
+                "type": 0,
+                "content": "I guess I need to read a bit more about bumps",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:42:11.208000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945480435834716211",
+                "type": 0,
+                "content": "If the same bump works for both addresses that's just luck, you can't rely on it.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:41:42.080000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945480345023828028",
+                "type": 19,
+                "content": "That doesn't sound right\u2014you don't get to choose the bump, you calculate it by using `findProgramAddress`. So in general two different addresses might have two different bumps.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "371810607403630603",
+                        "username": "Gugg",
+                        "avatar": null,
+                        "discriminator": "9321",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:41:20.429000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945479737931870248"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945479797704884346",
+                "type": 0,
+                "content": "but I guess I can  input 2x bumps?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:39:09.938000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945479737931870248",
+                "type": 0,
+                "content": "I just have multiple accounts being init'ed from the same bump",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-22T00:38:55.687000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945455584625438721",
+                "type": 19,
+                "content": "Sure, what have you tried so far?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "371810607403630603",
+                        "username": "Gugg",
+                        "avatar": null,
+                        "discriminator": "9321",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T23:02:57.090000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945451746480750612"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945451849484501022",
+                "type": 0,
+                "content": "but all the anchor examples have one bump seed input max",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T22:48:06.563000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945451806987784223",
+                "type": 0,
+                "content": "I guess each would need a unique bump if the bump seed is different?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T22:47:56.431000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945451746480750612",
+                "type": 0,
+                "content": "so if I init multiple accounts in one tx can I input multiple bump seeds?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "371810607403630603",
+                    "username": "Gugg",
+                    "avatar": null,
+                    "discriminator": "9321",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T22:47:42.005000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945401960109047839",
+                "type": 19,
+                "content": "So, for example Raydium's instructions that I've taken from their github I would be able to simply unpack their instructions with a function like unpack. I am looking to unpack instructions for programs deployed using anchor and match the correct instructions using the IDL. Would this be possible?\n\n```\nimpl AmmInstruction {\n    /// Unpacks a byte buffer into a [AmmInstruction](enum.AmmInstruction.html).\n    pub fn unpack(input: &[u8]) -> Result<Self, ProgramError> {\n        let (&tag, rest) = input\n            .split_first()\n            .ok_or(ProgramError::InvalidInstructionData)?;\n        Ok(match tag {\n            0 => {\n                let (nonce, _rest) = Self::unpack_u8(rest)?;\n                Self::Initialize(InitializeInstruction { nonce })\n            }\n\n            3 => {\n                let (max_coin_amount, rest) = Self::unpack_u64(rest)?;\n                let (max_pc_amount, rest) = Self::unpack_u64(rest)?;\n                let (base_side, _rest) = Self::unpack_u64(rest)?;\n                Self::Deposit(DepositInstruction {\n                    max_coin_amount,\n                    max_pc_amount,\n                    base_side,\n                })\n            }\n            4 => {\n                let (amount, _rest) = Self::unpack_u64(rest)?;\n                Self::Withdraw(WithdrawInstruction { amount })\n \n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "125854656244088832",
+                    "username": "Abuba",
+                    "avatar": "cfb0b7175ffed48777e16dff4f298cb7",
+                    "discriminator": "0113",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T19:29:52.009000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945400252482084924"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945400657542803457",
+                "type": 19,
+                "content": "I want to unpack instructions retrieved and index those information, so i would need to unpack and match them with the idls defined.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "125854656244088832",
+                    "username": "Abuba",
+                    "avatar": "cfb0b7175ffed48777e16dff4f298cb7",
+                    "discriminator": "0113",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T19:24:41.453000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945400252482084924"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945400252482084924",
+                "type": 19,
+                "content": "Not that I know of. Why do you want to go the IDL route?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "125854656244088832",
+                        "username": "Abuba",
+                        "avatar": "cfb0b7175ffed48777e16dff4f298cb7",
+                        "discriminator": "0113",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T19:23:04.879000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945399987381080064"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945400249583804436",
+                "type": 0,
+                "content": "For example on ts, I could do a program.coder.events.decode, but if I want to decode this event, would it just be a simple Borsh deserialize?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "125854656244088832",
+                    "username": "Abuba",
+                    "avatar": "cfb0b7175ffed48777e16dff4f298cb7",
+                    "discriminator": "0113",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T19:23:04.188000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "945399987381080064",
+                "type": 19,
+                "content": "Hi, when you mention other program's crate are there any crates that you know of that can ease this process if we want to read IDLs in Rust instead?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "125854656244088832",
+                    "username": "Abuba",
+                    "avatar": "cfb0b7175ffed48777e16dff4f298cb7",
+                    "discriminator": "0113",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-21T19:22:01.674000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945338377694236772"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "95b9ac391e2ac3b342ed69147fbbe3fe"
+}

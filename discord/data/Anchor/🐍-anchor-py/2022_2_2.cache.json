@@ -1,0 +1,382 @@
+{
+    "total_results": 12,
+    "messages": [
+        [
+            {
+                "id": "938417665805013082",
+                "type": 0,
+                "content": "When I try to send with program.provider.send(tx_instructions) it returns invalid transaction: index out of bounds",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T12:56:46.485000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938392100658098206",
+                "type": 0,
+                "content": "Basically:\n\nThis is what happens when I print tx_instructions.signatures\n```py\n[SigPubkeyPair(pubkey=4wroyY5MVemmoajaMpSfapvxdYUzTmHnzRm3JLRiMXjV, signature=b\"\\xa4\\xad1\\x92\\x94\\xf40\\xa3\\xefu\\xb3\\x8a\\xe3~>\\xb8]\\x1a\\x08'\\xe0\\x92/\\x8b\\xdad\\x12\\x82\\x04\\xc9\\x0c\\xf8\\xd2|\\xe0\\x80\\xc9x\\xd8\\xee\\x96\\xcb|R\\xec\\x93K}\\x9d\\x1b\\x9fl1\\xba\\x1d\\xcd\\xcfR\\x18\\x16\\xe5\\xbcc\\x01\"), SigPubkeyPair(pubkey=GZ4G7AbJd7CRpSeTs8k6NWfd1HDBdYG3n5bXHdY4b3yK, signature=b'\\xf1\\x84E\\np\\x94\\x12V\\xb58\\xb1\\x93\\xcaR\\x01\\xc4\\x08\\xd0\\x14i\\xed\\xdc\\xa5\\t\\xc7\\x90\\xd0}il\\xff\\xa9sV\\x9d\"\\xfd\\xc4\\x84n\\x82\\x80\\xf6u\\x92\\xf6\\xf7>\\x98\\xac\\x1c}-\\n6>\\xba\\x88\\xe89\\xf2\\xfa\\xb0\\x0b'), SigPubkeyPair(pubkey=71R43w8efa2H6T3pQR7Hif8nj5A3ow2bnx6dAzYJBffP, signature=b\"C\\xf1\\x87\\xdbB\\x92N\\xf7\\x17\\xfbv\\xedm\\xe3\\x8c[Xx9\\xf7m\\xde\\xc1qgC;\\xa9\\xcc\\x00\\xdbe\\xfb'\\x91>^\\xff\\xb4\\xaak\\xaf\\x16\\xbedtd2g\\xb3g;\\xa2\\xda6\\x06\\xd1\\xb1Ud\\x9e\\xe3\\xce\\x08\")]```\n\nThis is what happens when, inside the `transactions.py` file, I print `self.signatures` (right before submitting the transaction)\n```py\n[SigPubkeyPair(pubkey=4wroyY5MVemmoajaMpSfapvxdYUzTmHnzRm3JLRiMXjV, signature=None), SigPubkeyPair(pubkey=GZ4G7AbJd7CRpSeTs8k6NWfd1HDBdYG3n5bXHdY4b3yK, signature=None), SigPubkeyPair(pubkey=71R43w8efa2H6T3pQR7Hif8nj5A3ow2bnx6dAzYJBffP, signature=None)]```",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T11:15:11.279000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938387689403744327",
+                "type": 19,
+                "content": "I think I managed to get around the big error (aka partial sign cancelling other signatures) by doing this:\n\n```py\ntx_instructions.signatures.extend([SigPubkeyPair(pubkey=PublicKey(infos.notary), signature=b\"C\\xf1\\x87\\xdbB\\x92N\\xf7\\x17\\xfbv\\xedm\\xe3\\x8c[Xx9\\xf7m\\xde\\xc1qgC;\\xa9\\xcc\\x00\\xdbe\\xfb'\\x91>^\\xff\\xb4\\xaak\\xaf\\x16\\xbedtd2g\\xb3g;\\xa2\\xda6\\x06\\xd1\\xb1Ud\\x9e\\xe3\\xce\\x08\")])```\n\nThe issue is that, when I print `tx_instructions.signatures` in the code everything looks code, when I print it in the signatures in the transactions.py file signatures are equal to None. Do you know how I could work around this?",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T10:57:39.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "899315715381796904",
+                    "guild_id": "889577356681945098",
+                    "message_id": "938365849008476180"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938365934421295144",
+                "type": 0,
+                "content": "Maybe you can make a minimal reproducible example?",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T09:31:12.762000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938365849008476180",
+                "type": 0,
+                "content": "It looks fine and it works in tests",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T09:30:52.398000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938365783300534292",
+                "type": 0,
+                "content": "Yes I already checked",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T09:30:36.732000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938354313909133334",
+                "type": 0,
+                "content": "so yeah I think it does make sense, could you please check if there's an issue with the module not signing?",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T08:45:02.216000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938351667424944129",
+                "type": 0,
+                "content": "But this way it returns the correct key: `program.provider.wallet.payer.public_key`",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T08:34:31.245000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938351523631611924",
+                "type": 19,
+                "content": "This way it returns: `AttributeError: 'Provider' object has no attribute 'payer'`",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-02T08:33:56.962000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "899315715381796904",
+                    "guild_id": "889577356681945098",
+                    "message_id": "938152285018685490"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938177587266592829",
+                "type": 0,
+                "content": "Error",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "166357729336623105",
+                    "username": "JohnnyB",
+                    "avatar": "3251d5552766b28582fcf5336af48758",
+                    "discriminator": "8548",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-01T21:02:47.301000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938152285018685490",
+                "type": 19,
+                "content": "does `program.provider.payer` look how you expect it to look?",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "314065112984190976",
+                        "username": "Ciro",
+                        "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                        "discriminator": "0001",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-01T19:22:14.775000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "899315715381796904",
+                    "guild_id": "889577356681945098",
+                    "message_id": "938151961579114506"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "938151961579114506",
+                "type": 19,
+                "content": "Also what does this mean",
+                "channel_id": "899315715381796904",
+                "author": {
+                    "id": "314065112984190976",
+                    "username": "Ciro",
+                    "avatar": "95f037bfb29e9a1e5f68bb37b633cada",
+                    "discriminator": "0001",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-01T19:20:57.661000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "899315715381796904",
+                    "guild_id": "889577356681945098",
+                    "message_id": "938113474184241163"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "01d0b9ddd190c55653df645c6c886d27"
+}

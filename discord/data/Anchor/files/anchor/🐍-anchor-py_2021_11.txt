@@ -1,0 +1,486 @@
+thanks for the advice!  I think I understand it now 🙌🏽  I will do the phantom popup -> payment and have a Django view or endpoint to receive requests
+you can give it a try by fake connecting to google.com as well and testing out the javascript snippets they have in the browser console
+
+the phantom website has examples for both signing a message as well as sending a txn
+for payments, it can be a phantom pop up and you generate the payment txn or the instruction.. i suppose you need solana py for this part... and then there's a phantom pop up asking them to sign that txn.. and you have the frontend send over the txnid to the server which verifies the information in that txn - payment status etc
+both can be done from the frontend... for login, you just need signature verificiation, which can actually be done just with pyNaCl
+i dont think either of them require anchor-py or solana-py
+sign up should be relatively easy... even guarded signup where you want them to have a specific token to let them in... in terms of payments, depending on if you want escrow like contract-interaction where they get a digital good immediately upon payment, vs a traditional ecommerce payment where they pay first, get a receipt and then wait for goods delivery... the second case is easier
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+import pdb: drake_no.jpg
+1/0: drake_yes.jpg
+Much of Python itself is unpythonic
+Sounds unpythonic to me.
+And by unpythonic I mean I don’t like it
+Yeah I decided that just adding solana-py to the anchorpy namespace would be unpythonic
+So if there's stuff missing you probably need to file an issue on solanapy GitHub
+Anchor.web3 is a TS library. Solanapy is supposed to be a copy of it
+is there any extra stuff anchor.web3 in ts has that's missing in solanapy
+are we keeping anchor.web3 out of anchorpy to keep it  simpler and continue using solanapy?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+also.. might belong in beginner questions.. whats the difference between accounts and remaining_accounts ?
+tyvm !!!!
+```
+accounts: Accounts = field(default_factory=dict)
+    remaining_accounts: List[AccountMeta] = field(default_factory=list)
+    signers: List[Keypair] = field(default_factory=list)
+    instructions: List[TransactionInstruction] = field(default_factory=list)
+    options: Optional[TxOpts] = None
+```
+yup i see it
+```
+    await program.rpc["initialize"](
+        1234,
+        ctx=Context(
+            accounts={
+                "myAccount": my_account.public_key,
+                "user": program.provider.wallet.public_key,
+                "systemProgram": SYS_PROGRAM_ID,
+            },
+            signers=[my_account],
+        ),
+    )
+```
+like you can also pass an `instructions` pass to the `Context` above
+ah!
+it lives in the `Context` object
+is there and equivalent for that in anchorpy? I looked at rpcfn and I don't see that option
+so the anchor client in js seems to be taking "instructions" as a fourth argument... (args, accounts, signers, instructions)
+Cooking up some nice breaking changes for v0.4
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+no worries heh
+ah! those were the breaking changes 😂
+yeah I'm also about to release v0.4.0 which changes the camelCase to snake_case lol
+i'll def get it reviewed by you haha.. will spend some time cleaning it up and organizing it better
+I'll put a link somewhere or even include the code in the docs if it makes sense there
+examples are very welcome!
+ah i see!
+not doing the upload to arweave etc... i dont like that the typescript version has them coupled together so tightly 😅
+`accounts` is for the finite set of accounts that appear in the IDL for that instruction, while `remaining_accounts` is for anything else (afaik)
+could serve as some examples for people wanting to use anchorpy!
+i'll clean it up and push it to github
+thank you <@!856894333180706876>  !!!!!!
+AAAAAAAAA I deployed candymachine with anchorpy and minted my first NFT on devnet (also with an anchorpy client!!)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+works like a charm 🙂
+cool! checking it out now!
+also `Program.at`
+oh hahah this is awesome.. going to upgrade and check
+`Program.fetch_idl`
+as of 13 hours ago yes
+hmm... i guess its part of the account data
+```
+let idlAccount = decodeIdlAccount(accountInfo.data.slice(8));
+    const inflatedIdl = inflate(idlAccount.data);
+    return JSON.parse(utf8.decode(inflatedIdl));
+```
+so I'll try and get it there, but if someone knows an easier/obvious way I'm missing, that would be awesome 🙂
+the structure of the ts and py seems slightly different
+is there an equivalent for
+```
+anchor.Program.fetchIdl
+```
+in anchorpy 😅
+v0.3.0 is out! https://github.com/kevinheavey/anchorpy/releases/tag/0.3.0
+Adds some missing features and fixes. Also we have many more tests now which is nice.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks <@!856894333180706876> !!!!
+signature deduping AND the txn sig being printed!
+both of them work
+yup!
+trying it now 🙂
+Published 0.4.2 with the tx signature fix and the deduping of tx signers <@!499334426828865547>
+I'll use a set
+yeah your example is confusing if the user is supposed to just know not to pass the signer even though it looks like they should
+ah!
+i do that part slightly differently from anchor-ts
+a list(set()) could solve it i suppose, but not if anchor.ts doesnt have it
+we could change it to dedupe there
+ah i see
+so in anchorpy `.send` has this `all_signers = [self.wallet.payer] + signers`
+works
+signers = []
+failed
+signers=[main_key]
+right
+```
+provider = Provider(async_client, Wallet(payer=main_key))
+```
+just the same payer keypair again
+so what were you putting in the `signers` arg that didn't work?
+i can just add a comment
+i dont mind having it empty, but it might confuse new comers 😅
+ohh.. i vaguely remember it.. but im not sure haha
+we don't have that in solana-py
+oh i have seen something in web3.js to dedupe signatures now that you mention it
+ah i havent used anchor-ts
+yes, I think this is how anchor-ts works too?
+i didnt think solana would have a problem with duplicate signature accounts haha
+oh is that intended behavior?
+it does indeed
+meaning if i include the signer in the list, it errors out .. i'm guessing that's because the provider already has the signature of the payer
+is what works
+```
+    result = await candyprog.rpc["initialize_config"]({
+        "uuid": cmuuid,
+        "max_number_of_lines": num_lines,
+        "symbol": nft_symbol,
+        "seller_fee_basis_points": seller_basis,
+        "is_mutable": is_mut,
+        "max_supply": max_supply,
+        "retain_authority": True,
+        "creators": creator_array
+    },
+        ctx=Context(
+            accounts={
+                "config": PublicKey(config_pubkey),
+                "authority": main_key.public_key,
+                "payer": main_key.public_key,
+                "rent": PublicKey(SYSVAR_RENT_PUBKEY),
+            },
+            signers=[]
+        )
+    )
+```
+but
+which requires _IdlAccount(name="payer", is_mut=True, is_signer=True)
+```
+_IdlInstruction(
+    name="initialize_config",
+    accounts=[
+        _IdlAccount(name="config", is_mut=True, is_signer=False),
+        _IdlAccount(name="authority", is_mut=False, is_signer=False),
+        _IdlAccount(name="payer", is_mut=True, is_signer=True),
+        _IdlAccount(name="rent", is_mut=False, is_signer=False),
+    ],
+    args=[_IdlField(name="data", type=_IdlTypeDefined(defined="ConfigData"))],
+)
+```
+so the IDL im using for example is candymachines "initalize_config_account"
+was there in previous version as well
+also, there's a second weird problem i see.. not sure if its intentional
+jsut got very used to checking txn status in explorer heh
+i'm gonna change solana-py to send back the tx signature
+ohhh
+which isn't very useful
+ahh it's because I started using solana-py to send the tx and solana-py is sending back the result of `getSignatureStatuses`
+{'context': {'slot': 95525210}, 'value': [{'confirmationStatus': 'confirmed', 'confirmations': 1, 'err': None, 'slot': 95525209, 'status': {'Ok': None}}]}
+but now iim getting
+I used to get the txn id
+<@!856894333180706876>  did the return type change when calling an anchor fn?
+but yeah, will let you know 🙂
+so just installed pycharm on my gaming pc to not deal with rosetta and m1 anymore
+oh i usually use vim on mac, but m1 + solana = more glass than i can handle lol
+oh let me know how the testing stuff works in PyCharm if that's a feature you use
+snake case <a:uwuheart:892158608517771284>
+i just did another ugprade and its fine 🙂
+yeah you're good
+i released 0.4.1 earlier today that should fix it i think
+i just did another upgrade
+lol
+ah fixed
+i can install it manually but i did an upgrade
+some dependency issue?
+```
+  File "C:\Users\User\PycharmProjects\candypy\venv\lib\site-packages\anchorpy\pytest_plugin.py", line 7, in <module>
+    from pytest import fixture
+ModuleNotFoundError: No module named 'pytest'
+
+```
+hey <@!856894333180706876>
+released 0.4.0! https://twitter.com/dj_d_sol/status/1461895734974898177
+ooo kk
+currently writing the changelog
+<@!856894333180706876>  is the breaking change out?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yeah you can give a function dynamic annotations but Python type checkers won’t understand so you need to write that stuff to a file
+it's not that bad though... still leagues above ~~construct~~  struct and slightly better than borshpy
+ah yeah... that part is a bit manual right now
+i see, i haven't actually tried yet i just looked at tests/
+Not sure what exactly you’re looking for, but the types stuff works like anchor-ts except it can’t do the magic where it tells you the type of each arg for RPC functions. I’m pretty sure that’s impossible with Python type hints.
+The solution will be to generate Python clients automatically using the IDL. This is possible but also will be a pain so it’ll take a while
+Just sample code
+https://github.com/dubbelosix/candypy/blob/master/anchor_commands/initialize_candy_machine.py
+Once you get the IDL you can just see the types .. instructions are idl.instructions and types at idl.types
+
+Yes
+see types
+Are you talking about just being able to see the types or type checking ?
+pip install anchorpy
+It does .. anchorpy
+Does Anchor offers a python client? Where's that
+This might be impossible to solve though, just an idea
+I had a quick look at anchorpy, is there a way to type things in a similar way typescript does with the idl types?
+I feel like not having types through the idl makes it very difficult to navigate.
+WIP!!!! Might have messed up the readme half asleep but def wanted to get it out before sleeping
+too sleepy now haha... but will def write a more comprehensive doc
+only sample code. not meant to be used for production use, but has some good example of anchor contract interaction
+https://github.com/dubbelosix/candypy
+pre instructions and post instructions for anchor rpcfn
+oooo nice
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I’d replace the %s with f-strings
+Also I guess it lets people see some type information with `typing.get_type_hints(program.type["Creator"])`
+Protects against typos
+I’d encourage using the dataclasses `program.type["Creator"]` and `program.type["ConfigData"]` instead of passing the raw dicts
+Oh man this is great
+<@!856894333180706876> https://dubbelosix.gitbook.io/solana-anchorpy-basics/ would love some feedback whenever you have time 🙏 
+do let me know if you want it structured in a different way
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+What does it print?
+if any one can help plz
+but both not working or maybe i'm doing something wrong
+and this
+i use this
+on Solana.py
+Guys i`m trying to get balance of specific account with specific token
+Adds `Program.fetch_raw_idl` to fetch an IDL from the chain as a simple JSON rather than an `Idl` instance
+Just made a smol release
+i'll push the changes to the repo and then edit the gitbook
+old habits haha.. but i'll make those changes
+will do!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Scammer was like "... actually, python, you're cool"
+this is the only channel im active in and i weirdly have a notification in literally every other channel in this discord except this one 😆
+interesting day
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I will lose sleep over this bigz, I must know what you saw
+What IDL is it?
+Interesting
+im getting this when trying to load an idl, this have to do with being on python 3.10? thanks
+
+```RuntimeError: dictionary changed size during iteration```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+making a pr now
+looks like an underlying library needs a small fix for python 3.10
+sent the full stack trace, hope its just me being dumb
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yeah that’s what my PR is lol
+quick hack in sumtypes.py", line 117, in _get_constructors
+`def _get_constructors(klass):
+    for k, v in list(vars(klass).items()):
+        if type(v) is _Constructor:
+            yield k, v`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+you got it 100%
+The idea would be you have a Python server sending transactions to a client for it to sign?
+Interesting, I’ll check later but I think the answer is there isn’t an easy way. But it sounds like it’d be a useful feature
+lkike say if i wanted to deliver it down to a js client for signing
+is there a way to turn the instruction returned into a json representation?
+thank yoiu for the assistance!
+got it
+i found the actual test file, in the test folder
+oh i didnt realize it would be in that one
+https://github.com/kevinheavey/anchorpy/blob/main/docs/tutorial.md
+I’ll be adding more examples
+Oh, well it’s in the example in the docs about testing
+nothing else
+there is just this tutorial with initialize()
+no it isnt
+It’s in the docs
+but hey, i cant talk shit, my docs are terrible
+would be nice to have that example not hidden in a test somewhere 😉
+Yup
+so a bit of a break in style
+Yup
+like this
+
+so with js its just another argument, in python it's a kwarg
+I’ll change the error message though, it doesn’t exactly make sense now I’m reading it
+it's this weird ctx= kwarg
+yeah i figured it out
+Try leaving out the `{}` in the args
+the API seems very different than normal anchor js
+with accounts and stuff
+but then I have no idea how to actually pass in hashes
+i also managed to get it asking for treasuryMint, one of trhe accounts, if I remove the hash
+<@!134416332509675520> when you have a minute 🙂
+also this thing doesnt seem to have a preloaded keypair for use as feepayer like js does
+ArgsError: ("Provided incorrect args to instruction=createAuctionHouse. Expected [IdlField(name='bump', type='u8'), IdlField(name='feePayerBump', type='u8'), IdlField(name='treasuryBump', type='u8'), IdlField(name='sellerFeeBasisPoints', type='u16'), IdlField(name='requiresSignOff', type='bool'), IdlField(name='canChangeSalePrice', type='bool')]", 'Received (8, 8, 8, 400, True, True, {})')
+program.instruction["createAuctionHouse"](8, 8, 8, 400, True, True, {})
+One sec
+Can you post your code?
+Anybody have one
+There aren’t any examples of using this with arguments
+Ok this is gonna be dumb but when I pass in numbers into arguments for a rpc call it says it’s expecting an IdlField instead
+Examples are very welcome at this time! It’ll save me effort when adding to the docs
+Think you could shorten this using `Program.at` instead of `fetch_idl`
+If it can help someone, this is how u fetch candy machine data with anchorpy ```provider = Provider.local('https://api.mainnet-beta.solana.com')
+program_id = PublicKey("cndyAnrLdpjq1Ssp1z8xxDsB8dxe7u4HL5Nxi2K5WXZ")
+candyMachineId = PublicKey("")
+    
+idl = await Program.fetch_idl(program_id, provider)
+    
+program = Program(idl, program_id, provider)
+data = await program.account['CandyMachine'].fetch(candyMachineId)```
+nevermind i had to upgrade python from 3.8 to 3.10 (Anaconda is stuck at 3.8)
+i can't install with pip
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+will ask the candymachine guys hehe...seems weird to let anyone modify the config.. i can make myself one of the creators 😅  perhaps they address it later..i'll go through the whole process first
+If that account is owned by the program executing, then yes.
+ah i see..so if a program allows it, its hypothetically possible for any account to modify any accounts data
+I'm not sure about this specific program, but yes it's up to the program to do account authorization.
+I guess candymachine allows it because config is_mut is True and is_signer is False?
+```
+IdlInstruction(
+    name="initializeConfig",
+    accounts=[
+        IdlAccount(name="config", is_mut=True, is_signer=False),
+        IdlAccount(name="authority", is_mut=False, is_signer=False),
+        IdlAccount(name="payer", is_mut=True, is_signer=True),
+        IdlAccount(name="rent", is_mut=False, is_signer=False),
+    ],
+    args=[IdlField(name="data", type=IdlTypeDefined(defined="ConfigData"))],
+)
+
+```
+it doesn't seem to require account #1's signature to modify the data held in account #1
+^ account#1 is the config account... it doesn't seem to matter who signs it (account #2), but they can modify the config.. is that normal? I m testing with multiple signers...
+might be more of a candy machine / anchor question than anchorpy strictly... but is it up to a program to ensure that only the correct accounts can modify the metadata? I'm playing with the initializeConfig instruction and it seems like anyone can modify the config accounts metadata
+I like breaking changes. 😉
+this will also have some breaking changes to what's returned by `.fetch`, so if that impacts anyone here, congrats on being early
+ok after Lisbon I'll release 0.4.0 and it'll look more like `order_type = program.type["OrderType"].Limit()`
+ah nice... im going through the candy machine workflow
+there is something wrong when enums are represented by a string without spaces
+I think I need to make passing enums easier 🤔
+this guy did https://discord.com/channels/889577356681945098/899315715381796904/905245638646693909
+has anyone tried interacting with candymachine with anchorpy?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+Do you have the traceback?
+
+Hmm how did you construct the keypairs?
+now im stuck with that lmao whats wrong with these keypairs
+thanks!
+`mint_nft(ctx=contx)` since it appears your function doesn’t take any positional arguments
+So in your case it would just be
+`fn(*args, ctx=ctx)`
+
+i'm trying to mint an nft from candy, already created the list of accounts and instructions
+anyone can help me on how to pass the *args and context to a instructionFn?
+makes sense
+createconfig account
+initialize config
+add nfts
+set date and price
+
+and optionally update date and price
+im actually separating them out in my code haha
+yup
+I guess there should be an `init` instead of creating the account in instructions
+i still havent tested it fully 😅 ... the config might not matter since the creator array is also there in the metadata json..should see if it makes a difference if i change with another key mid mint or something
+hmm yeah
+1-> create config account, allocate space + pay the lamports for rent
+2-> update the config data with some basic metadata
+3-> addlines to the config for name-> nft pairs
+interesting
+I guess you can pass it any config
+oh actually yeah
+thats the vanilla create account instruction
+thats what i meant by the typescript code is batching them together but it doesnt need to be
+not anchorProgram.rpc.initializeConfig
+no.. anchor.web3.SystemProgram.createAccount is wht creates the new account
+the instructions creates a new account
+```ts
+await anchorProgram.rpc.initializeConfig(
+      {
+        uuid,
+        ...configData,
+      },
+      {
+        accounts: {
+          config: config.publicKey,
+          authority: payerWallet.publicKey,
+          payer: payerWallet.publicKey,
+          systemProgram: anchor.web3.SystemProgram.programId,
+          rent: anchor.web3.SYSVAR_RENT_PUBKEY,
+        },
+        signers: [payerWallet, config],
+        instructions: [
+          anchor.web3.SystemProgram.createAccount({
+            fromPubkey: payerWallet.publicKey,
+            newAccountPubkey: config.publicKey,
+            space: size,
+            lamports:
+              await anchorProgram.provider.connection.getMinimumBalanceForRentExemption(
+                size,
+              ),
+            programId: programId,
+          }),
+
+```
+the candymachine-cli code in typescript bundles them all under the upload command and groups together the initializeConfig and a vanilla create_config_account... but the initializeConfig requires the config account to exist
+it just updates the data in an already created config account
+hmm no
+but that creates a new account
+it just sets the name, symbol, creator array and a bunch of things
+you can call initializeconfig multiple times
+which call are use using to update the config? I only see IntializeConfig
+thanks a lot, helpful!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I’m not clear on what that is and what its use case is. So it’s a regular web server but you sign in by sending a transaction from your wallet?
+here are some web3 related but seems to only apply to ETH 
+- https://github.com/Bearle/django-web3-auth
+- https://web3py.readthedocs.io/en/stable/
+hey guys, I'm curious how we can use anchor-py or solana-py in a Django project.  Looking into integrating it to a Django backend ecommerce site with web3 Solana payments.  do you guys know if there are examples of anchor-py or solana-py in ecommerce or related projects?
+Resolved, the problem occurred because I passed the payer as Keypair in the accounts of the Context
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I found a related python integration but I think it's not free. I'll check it out further https://github.com/BL0CK-X/the-blockchain-api
+yes, a web server backend with payments integrated with something like https://solpayments.com/
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

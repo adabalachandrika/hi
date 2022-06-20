@@ -1,0 +1,2806 @@
+{
+    "total_results": 81,
+    "messages": [
+        [
+            {
+                "id": "931616056722726923",
+                "type": 0,
+                "content": "How is it possible for there to be padding on a struct of alignment `1`? I don't understand this - if the alignment is `1` it's impossible to ever have padding, right?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T18:29:36.512000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931605861011423272",
+                "type": 19,
+                "content": "Is there an issue opened for that? I am interested in digging into the IDL generation, so it could be a good way in.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:49:05.665000+00:00",
+                "edited_timestamp": "2022-01-14T17:51:07.362000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "931598681902284830",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931603086496124948"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931603196584030290",
+                "type": 0,
+                "content": "We could also have other default implements, e.g., `json` that does everything automagically.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:38:30.416000+00:00",
+                "edited_timestamp": "2022-01-14T17:38:45.965000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931603086496124948",
+                "type": 19,
+                "content": "yea so we need something like a \"serialization\" field in the idl. In this case `custom` or something. Then the client would have to implement the coder interface and use that when constructing the client.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:38:04.169000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "931598681902284830",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931602740398936114"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931602740398936114",
+                "type": 0,
+                "content": "I guess what I was wondering about above was how this would work via the IDL itself\u2014F\u00e9lix has an anchor program with a custom (non-derived) AnchorSerialize/Deserialize impl, which then doesn't show up in the IDL. But even if it did show up there, I'm not sure how it could work in a fully automagic way since you'd have to somehow encode potentially arbitrary serialization stuff into the IDL, right?",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:36:41.653000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931600306691768390",
+                "type": 0,
+                "content": "And you can do this for any program now.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:27:01.412000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931600262072782900",
+                "type": 0,
+                "content": "For example, we now have an anchor generated client for the SPL token program.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:26:50.774000+00:00",
+                "edited_timestamp": "2022-01-14T17:26:56.635000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931600062709133342",
+                "type": 0,
+                "content": "Though might need some rust side changes to make the entire toolchain  work as expected.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:26:03.242000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599841803526155",
+                "type": 0,
+                "content": "This can be done on the client now that we have `Coder` as an interface.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:25:10.574000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599667991568445",
+                "type": 0,
+                "content": "Custom impls of AnchorSerialize/Deserialize, yeah",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:24:29.134000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599601243418676",
+                "type": 0,
+                "content": "What's the goal? Custom serialization formats for programs?",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:24:13.220000+00:00",
+                "edited_timestamp": "2022-01-14T17:24:19.282000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599506989002802",
+                "type": 0,
+                "content": "You can express that just fine in rust, but how would you communicate that to arbitrary clients? They need to somehow do the right thing when you do `program.account.thatWeirdAccount.fetch`",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:23:50.748000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599464865607691",
+                "type": 4,
+                "content": "arbitrary (de)serialization",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:23:40.705000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931599343474049135",
+                "type": 0,
+                "content": "Like, suppose you want a special number that is actually 1 + whatever its encoding looks like. So if the byte representation is 0, that actually means 1, etc.",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:23:11.763000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931598926916747305",
+                "type": 0,
+                "content": "I'm not aware of how the whole thing works",
+                "channel_id": "931598681902284830",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:21:32.448000+00:00",
+                "edited_timestamp": "2022-01-14T17:22:49.113000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931598681902284830",
+                "type": 19,
+                "content": "Mm, I haven't really thought about this much but I would think that custom serialization stuff just doesn't make sense with how the IDL works. How would you encode the custom stuff so that it can also run on the (arbitrary!) client too?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T17:20:34.032000+00:00",
+                "edited_timestamp": null,
+                "flags": 32,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931586106535862363"
+                },
+                "thread": {
+                    "id": "931598681902284830",
+                    "guild_id": "889577356681945098",
+                    "parent_id": "889584618372734977",
+                    "owner_id": "368075764010319872",
+                    "type": 11,
+                    "name": "arbitrary (de)serialization",
+                    "last_message_id": "931617168561434645",
+                    "thread_metadata": {
+                        "archived": true,
+                        "archive_timestamp": "2022-01-15T18:43:31.268000+00:00",
+                        "auto_archive_duration": 1440,
+                        "locked": false
+                    },
+                    "message_count": 16,
+                    "member_count": 4,
+                    "rate_limit_per_user": 0,
+                    "flags": 0,
+                    "member_ids_preview": [
+                        "368075764010319872",
+                        "501570363566587905",
+                        "134416332509675520",
+                        "915682383905316864"
+                    ]
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931586106535862363",
+                "type": 19,
+                "content": "Thanks. Do you think it's doable to look for a handmade impl?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:30:35.831000+00:00",
+                "edited_timestamp": "2022-01-14T16:30:45.565000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931585821134430228"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931585821134430228",
+                "type": 19,
+                "content": "https://github.com/project-serum/anchor/blob/master/lang/syn/src/idl/file.rs#L381",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:29:27.786000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931583193931468872"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931585656818401350",
+                "type": 19,
+                "content": "Oh derp I posted the wrong thing\u2014think there's some similar hard-coding going on though for IDL stuff",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:28:48.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931583193931468872"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931583976999637032",
+                "type": 0,
+                "content": "Is there a way to add the type to the IDL by hand, otherwise?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:22:08.110000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931583836360413184",
+                "type": 0,
+                "content": "I plan to just look for an impl with the type and trait from the tokens: `impl AnchorDeserialize for Type`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:21:34.579000+00:00",
+                "edited_timestamp": "2022-01-14T16:21:42.264000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931583193931468872",
+                "type": 0,
+                "content": "<@!134416332509675520> Can I have a bit of mentoring to fix that? Are you sure that the code is related? The derive it's looking for is `Accounts`.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:19:01.412000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931583189162541177",
+                "type": 0,
+                "content": "I try to stick to the \"stay **safe**, dude\" lane for now, but good to know yes \ud83d\udc4d",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:19:00.275000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931582858311647243",
+                "type": 0,
+                "content": "Also, that may interest you if you dab in unsafe/pointer code, but there is a `NonNullPtr` type.",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:17:41.394000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931582670201307196",
+                "type": 19,
+                "content": "Yes, but you can imagine an addition (for example) that returns a result. Maybe they'll write that one day \ud83d\ude1b",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:16:56.545000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "931581299796377700",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931582228759203940"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931582424742248459",
+                "type": 0,
+                "content": "Thanks for the info though. There are so many little things that keep on coming back in discussions and are bugging me, I just want to shoot some down randomly sometimes",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:15:58.023000+00:00",
+                "edited_timestamp": "2022-01-14T16:16:12.486000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931582228759203940",
+                "type": 0,
+                "content": "Got it. I mean that makes sense, I don't even think it'd be possible to statically checks that since... you don't know what numbers are going to be used haha",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:15:11.297000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931582010084958258",
+                "type": 0,
+                "content": "Oh I see. I don't think there is an API do do the operations. You must do the math with the inner number, and then try to construct the type again.",
+                "channel_id": "931581299796377700",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:14:19.161000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931581299796377700",
+                "type": 19,
+                "content": "If by that you mean instantiation that makes sense to me. I was more wondering if there is some kind of limitation to operations on this type post instantiation, like\n```rust\nlet mut a: NonZeroU64 = 2; // checks ok\na = a.checked_sub(2); // a would be 0 then\n```\n(the code might be incorrect but hopefully you get the idea)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:11:29.815000+00:00",
+                "edited_timestamp": "2022-01-14T16:12:09.921000+00:00",
+                "flags": 32,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931580319168102480"
+                },
+                "thread": {
+                    "id": "931581299796377700",
+                    "guild_id": "889577356681945098",
+                    "parent_id": "889584618372734977",
+                    "owner_id": "368075764010319872",
+                    "type": 11,
+                    "name": "nonzero",
+                    "last_message_id": "931583189162541177",
+                    "thread_metadata": {
+                        "archived": true,
+                        "archive_timestamp": "2022-01-15T16:24:57.786000+00:00",
+                        "auto_archive_duration": 1440,
+                        "locked": false
+                    },
+                    "message_count": 6,
+                    "member_count": 2,
+                    "rate_limit_per_user": 0,
+                    "flags": 0,
+                    "member_ids_preview": [
+                        "368075764010319872",
+                        "915682383905316864"
+                    ]
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931580319168102480",
+                "type": 19,
+                "content": "Both. It's impossible to build this type with a zero in safe Rust.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:07:36.015000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931579669365522435"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931579669365522435",
+                "type": 19,
+                "content": "Interesting. For this use case would the safety kick in only during deserialization, or does the type somehow carries static math checks even after that?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:05:01.090000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931578861060235375"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931578861060235375",
+                "type": 19,
+                "content": "```rust\npub struct Rational {\n    pub numerator: u64,\n    pub denominator: NonZeroU64,\n}\n```\nfor example. If I'm sure that the denominator is never 0, I don't have to write further checks about that.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:01:48.375000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931578581937713152"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931578581937713152",
+                "type": 19,
+                "content": "Side question on this discussion: what is the reason behind having dedicated types for non-zero integers? Is it some kind of way to avoid optimization when serializing or something like that?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T16:00:41.827000+00:00",
+                "edited_timestamp": "2022-01-14T16:01:07.917000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931571984716943471"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931572169916420178",
+                "type": 0,
+                "content": "Cool \ud83d\ude01",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "654656389683347475",
+                    "username": "hersh4786",
+                    "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                    "discriminator": "5250",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:35:13.082000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931572116350976000",
+                "type": 0,
+                "content": "Maybe in a few months \ud83d\ude05",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:35:00.311000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931571984716943471",
+                "type": 19,
+                "content": "It is my usecase as well \ud83e\udd23 \nI pushed a PR, FYI https://github.com/near/borsh-rs/pull/66\nIf it's accepted, once it's published, and once anchor bump their version of borsh, you can have this type.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://github.com/near/borsh-rs/pull/66",
+                        "title": "Implemented (de)serialization for nonzero integer by Boiethios \u00b7 Pu...",
+                        "color": 1975079,
+                        "reference_id": "931571984716943471",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/1a14ca589c786181d89796d1861f9f77805d7af2f64699f8d61a4b84a91dddbd/near/borsh-rs/pull/66",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/3CkeUFWoluK8NKiYYfKIk3CzZQ0b1Q1Roms6YkOwNq4/https/opengraph.githubassets.com/1a14ca589c786181d89796d1861f9f77805d7af2f64699f8d61a4b84a91dddbd/near/borsh-rs/pull/66",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "654656389683347475",
+                        "username": "hersh4786",
+                        "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                        "discriminator": "5250",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:34:28.927000+00:00",
+                "edited_timestamp": "2022-01-14T15:34:50.287000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931571646450511902"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931571646450511902",
+                "type": 0,
+                "content": "I just used u64 in place of NonZeroU64, cause it wasn't necessary in my case to use a NonZero one",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "654656389683347475",
+                    "username": "hersh4786",
+                    "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                    "discriminator": "5250",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:33:08.278000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931570904796917810",
+                "type": 19,
+                "content": "Which type that hasn't a (de)serialization did you use for information?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "654656389683347475",
+                        "username": "hersh4786",
+                        "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                        "discriminator": "5250",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:30:11.454000+00:00",
+                "edited_timestamp": "2022-01-14T15:32:35.436000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931570834089324574"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931570834089324574",
+                "type": 0,
+                "content": "I just used the normal u64 lol",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "654656389683347475",
+                    "username": "hersh4786",
+                    "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                    "discriminator": "5250",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:29:54.596000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931570733509902366",
+                "type": 0,
+                "content": "I suspect it's not that hard to implement that stuff, though. I may have a shot at it.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:29:30.616000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931570630762037318",
+                "type": 19,
+                "content": "Thanks. <@!654656389683347475> , you got your answer.\nIs there any alternative?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "654656389683347475",
+                        "username": "hersh4786",
+                        "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                        "discriminator": "5250",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:29:06.119000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931569801569112126"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931570015658971177",
+                "type": 19,
+                "content": "No, because the inner struct thing probably really does want a different alignment (not sure what you're supposed to do in this situation)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:26:39.467000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931569777103749160"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931569911636066365",
+                "type": 19,
+                "content": "AFAIR, \"packed\" means that there can be no padding (like no space between an `u8` and a following `u64` to align the latter on the memory address), without reordering the fields, which fits the non-copy deserialization.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:26:14.666000+00:00",
+                "edited_timestamp": "2022-01-14T15:27:11.512000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931568140746375248"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931569801569112126",
+                "type": 19,
+                "content": "Because of this unfortunately: https://github.com/project-serum/anchor/blob/master/lang/syn/src/idl/file.rs#L342",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/blob/master/lang/syn/src/idl/file.rs",
+                        "title": "anchor/file.rs at master \u00b7 project-serum/anchor",
+                        "description": "\u2693 Solana Sealevel Framework. Contribute to project-serum/anchor development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "931569801569112126",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/2bd293f409e0b6b566652728c88e46984d60fa514af781cf818ba85ae225d68a/project-serum/anchor",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/NKne-xcDs6DTVViPYlhaGzBe-ojKBs56JgYAF4mgWKQ/https/opengraph.githubassets.com/2bd293f409e0b6b566652728c88e46984d60fa514af781cf818ba85ae225d68a/project-serum/anchor",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:25:48.424000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931568834282930227"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931569777103749160",
+                "type": 19,
+                "content": "can confirm, the test prints that the alignment is `1`. So that begs the question: if alignment is 1, shouldn't that mean the example above is _always_ aligned?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:25:42.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931568140746375248"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931568848346439680",
+                "type": 0,
+                "content": "welcome back alan",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:22:01.158000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931568834282930227",
+                "type": 0,
+                "content": "<@!134416332509675520> Hey, do you know why a handmade implementation of (de)serialization breaks the IDL? We're two to have this issue.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:21:57.805000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931568192508289124",
+                "type": 0,
+                "content": "```.rs\n#[test]\nfn alignment() {\n    eprintln!(\"{:?}\", align_of::<StateAccount>());\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:19:24.794000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931568140746375248",
+                "type": 19,
+                "content": "The alignment of that struct is actually 1, because `zero_copy` uses `repr(packed)` under the hood (I'm fuzzy on alignment stuff though, so not actually sure why it does that): https://doc.rust-lang.org/nomicon/other-reprs.html#reprpacked",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://doc.rust-lang.org/nomicon/other-reprs.html",
+                        "title": "Other reprs - The Rustonomicon",
+                        "description": "The Dark Arts of Advanced and Unsafe Rust Programming",
+                        "color": 16777215,
+                        "reference_id": "931568140746375248"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T15:19:12.453000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931559783276875816"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931563269674631228",
+                "type": 0,
+                "content": "My bad - didn't read up the thread. You're chewing some glass here.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "732815411808174111",
+                    "username": "Magnum6",
+                    "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                    "discriminator": "6523",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:59:51.099000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931559783276875816",
+                "type": 19,
+                "content": "Bump!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:45:59.877000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931459000841678878"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931559736975954001",
+                "type": 19,
+                "content": "These are `zero_copy` account structs which are supposed to only allow POD types - so bool is technically not allowed.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "732815411808174111",
+                        "username": "Magnum6",
+                        "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                        "discriminator": "6523",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:45:48.838000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931461043664859156"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931550217696849921",
+                "type": 0,
+                "content": "is it good idea to box every Account<>",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "717956950737813594",
+                    "username": "0xDeep",
+                    "avatar": "a3644875c3375e839010db1ed0f04bf4",
+                    "discriminator": "8581",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:07:59.265000+00:00",
+                "edited_timestamp": "2022-01-14T14:14:31.475000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931550142463631410",
+                "type": 0,
+                "content": "hmm make sense :))",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "717956950737813594",
+                    "username": "0xDeep",
+                    "avatar": "a3644875c3375e839010db1ed0f04bf4",
+                    "discriminator": "8581",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:07:41.328000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931550033332027422",
+                "type": 19,
+                "content": "Just to get rid of stack space warnings (no functional difference, it's purely to alleviate stack space pressure)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "717956950737813594",
+                        "username": "0xDeep",
+                        "avatar": "a3644875c3375e839010db1ed0f04bf4",
+                        "discriminator": "8581",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T14:07:15.309000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931545086062387321"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931545857600389170",
+                "type": 0,
+                "content": "That's what they do in Polkadot/Substrate, for example: https://github.com/paritytech/scale-info",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/paritytech/scale-info",
+                        "title": "GitHub - paritytech/scale-info: Info about SCALE encodable Rust types",
+                        "description": "Info about SCALE encodable Rust types. Contribute to paritytech/scale-info development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/a407cd747aeb542ab051d239a5e345a63ffbf7dd1813f9fbabde945493e3d1bd/paritytech/scale-info",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/tsR6Qe9a92B2Yp50e1ccH7dJTsFqyRsz_vmUgjQpka4/https/opengraph.githubassets.com/a407cd747aeb542ab051d239a5e345a63ffbf7dd1813f9fbabde945493e3d1bd/paritytech/scale-info",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T13:50:39.737000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931545494273015839",
+                "type": 19,
+                "content": "Well, I hope for both of us that we get an answer. I don't like this IDL magic, I'd prefer a trait to implement the IDL.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "654656389683347475",
+                        "username": "hersh4786",
+                        "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                        "discriminator": "5250",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T13:49:13.113000+00:00",
+                "edited_timestamp": "2022-01-14T13:49:43.901000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931540394657857627"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931545086062387321",
+                "type": 0,
+                "content": "<@!134416332509675520> is there any particular reason, you did `Box<>` `offer_makers_taker_tokens` but not `offer_takers_taker_tokens`.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "717956950737813594",
+                    "username": "0xDeep",
+                    "avatar": "a3644875c3375e839010db1ed0f04bf4",
+                    "discriminator": "8581",
+                    "public_flags": 64
+                },
+                "attachments": [
+                    {
+                        "id": "931545085424861184",
+                        "filename": "Screenshot_2022-01-14_at_7.16.19_PM.png",
+                        "size": 265313,
+                        "url": "https://cdn.discordapp.com/attachments/889584618372734977/931545085424861184/Screenshot_2022-01-14_at_7.16.19_PM.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/889584618372734977/931545085424861184/Screenshot_2022-01-14_at_7.16.19_PM.png",
+                        "width": 1324,
+                        "height": 564,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T13:47:35.788000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931540394657857627",
+                "type": 19,
+                "content": "I have the same issue",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "654656389683347475",
+                    "username": "hersh4786",
+                    "avatar": "dc0f7e9f69d161b79fad7b3a34d0dffc",
+                    "discriminator": "5250",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T13:28:57.270000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931259614090108938"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931497569882894347",
+                "type": 0,
+                "content": "is this id for storage key?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T10:38:47.048000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931493353948864533",
+                "type": 0,
+                "content": "what declare_id do?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T10:22:01.891000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931487833494020096",
+                "type": 0,
+                "content": "<@!368075764010319872> remove and reinstall fixed.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T10:00:05.712000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931482458090786816",
+                "type": 19,
+                "content": "Thanks for the answer! But I ended up using `to_account_info()`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "189432646323929089",
+                    "username": "alaaaa",
+                    "avatar": "b0b3d9869131a7c0c7fe63c0b6f0bbcb",
+                    "discriminator": "3586",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "448034961652449283",
+                        "username": "fanatid",
+                        "avatar": "c5a0058cfdd3117925de7da79f4e0734",
+                        "discriminator": "8814",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:38:44.116000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "930831276393517057"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931482173540802602",
+                "type": 0,
+                "content": "reinstalled twice",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:37:36.274000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931482083342311424",
+                "type": 0,
+                "content": "no fix",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:37:14.769000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931482023128875059",
+                "type": 0,
+                "content": "tried.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:37:00.413000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931481304527163454",
+                "type": 19,
+                "content": "I think you need to install the Solana CLI tools: https://docs.solana.com/cli/install-solana-cli-tools",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.solana.com/cli/install-solana-cli-tools",
+                        "title": "Install the Solana Tool Suite | Solana Docs",
+                        "description": "There are multiple ways to install the Solana tools on your computer",
+                        "reference_id": "931481304527163454"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "554585077603106826",
+                        "username": "pynix",
+                        "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                        "discriminator": "4304",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:34:09.085000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931479502977138700"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931479502977138700",
+                "type": 0,
+                "content": "how to fix this.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:26:59.562000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931479481586188329",
+                "type": 0,
+                "content": "BPF SDK path does not exist:",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:26:54.462000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931479411151241296",
+                "type": 0,
+                "content": "I cancel the first anchor build cause sdk not found.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:26:37.669000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931479248294780929",
+                "type": 0,
+                "content": "hello",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "554585077603106826",
+                    "username": "pynix",
+                    "avatar": "82ec0576cfbf6f186b5a97b0b7c2b4bd",
+                    "discriminator": "4304",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:25:58.841000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931473749348327444",
+                "type": 0,
+                "content": "Is here not the right place to ask them? What is the appropriate channel?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T09:04:07.790000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931470587069616128",
+                "type": 0,
+                "content": "Please, is there anyone here who can answer my questions?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T08:51:33.844000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931461043664859156",
+                "type": 19,
+                "content": "No reason you can't use bools in struct.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "732815411808174111",
+                    "username": "Magnum6",
+                    "avatar": "68d19cdda4a005e9231d3c460b9ab720",
+                    "discriminator": "6523",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T08:13:38.519000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931385061113225327"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931459000841678878",
+                "type": 19,
+                "content": "if any experienced rust dev could explain , confused about the same unless our concepts of alignment is wrong all together. will read up on this today and share if anything sheds light on how this all really works.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T08:05:31.472000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931388918333579344"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931458586134061056",
+                "type": 19,
+                "content": "could you share the way you have defined your struct including the attribute macros used ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "111233596173373440",
+                        "username": "DanML",
+                        "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                        "discriminator": "8094",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T08:03:52.598000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931373993510977556"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931388918333579344",
+                "type": 0,
+                "content": "I have a fun example of packed struct confusion. From what I gather, this should be aligned, but it's not. Can anyone figure out why?\n\n```#[account(zero_copy)]\npub struct StateAccount {\n    pub arr: [CustomStruct; 50], \n    pub fake_field: u32,\n    pub val1: u16,\n    pub val2: u16,\n}\n\n#[derive(AnchorSerialize, AnchorDeserialize, Clone, Default, Copy)]\npub struct CustomStruct {\n  pub val3: u32,\n  pub val4: u8,\n  pub val5: u8,\n  // zero_copy requires proper alignment with no padding. \n  pub val6: u8,\n  pub val7: u8\n}\n```\nIt seems to me that `CustomStruct` would have an alignment of `4 bytes` and no padding, while `StateAccount` would have an alignment of `4 bytes` and also have 0 padding. But I get `reference to packed field is unaligned` for `state_account.arr`.\n\nPerhaps the array or the use of a struct is throwing this off, or I am just calculating wrong?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T03:27:02.500000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931385061113225327",
+                "type": 0,
+                "content": "More conversation topics: My structs use bools, but bools aren't POD types, so I'm thinking I should convert all of my bools to `u8`s and just use values of `0` and `1`. That's pretty annoying and would make the code less clean.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T03:11:42.867000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931373993510977556",
+                "type": 19,
+                "content": "I wish I understood this more too, consider this a big \u261d\ufe0f +1 for more conversation about struct alignment, `zero_copy` and packed fields.\n\nI just made changes to my `zero_copy` state accounts and both are now unaligned - getting `reference to packed field is unaligned`.\n\nMy solution to this problem is to move fields around and insert fake, unused fields like `u8`s and `u32`s to try to find a configuration which does not produce this warning.\n\nIt's so concerning. once the warnings go away my project (so far) has run without hiccups. But when the warnings are there all the data serialization is fucked up and my variables come in as different numbers. \nReally worrying for production. I really hope no warnings = definitively no chance for bad serialization.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "111233596173373440",
+                    "username": "DanML",
+                    "avatar": "b0e72a69e8487b30ff7117ccb3ff6a21",
+                    "discriminator": "8094",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-14T02:27:44.145000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931292151713775696"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931292151713775696",
+                "type": 0,
+                "content": "repr(C)]\u00a0Structs\n\nThe alignment of the struct is the alignment of the most-aligned\n\nCan anyone explain what is meant by most aligned with a concrete example ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T21:02:31.540000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931259614090108938",
+                "type": 0,
+                "content": "When I implement `AnchorDeserialize` and `AnchorSerialize` by hand, I get `IdlError: Type not found`: why?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-13T18:53:13.966000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "f353a314393585fda98153a693b91c81",
+    "threads": [
+        {
+            "id": "931598681902284830",
+            "guild_id": "889577356681945098",
+            "parent_id": "889584618372734977",
+            "owner_id": "368075764010319872",
+            "type": 11,
+            "name": "arbitrary (de)serialization",
+            "last_message_id": "931617168561434645",
+            "thread_metadata": {
+                "archived": true,
+                "archive_timestamp": "2022-01-15T18:43:31.268000+00:00",
+                "auto_archive_duration": 1440,
+                "locked": false
+            },
+            "message_count": 16,
+            "member_count": 4,
+            "rate_limit_per_user": 0,
+            "flags": 0,
+            "member_ids_preview": [
+                "368075764010319872",
+                "501570363566587905",
+                "134416332509675520",
+                "915682383905316864"
+            ]
+        },
+        {
+            "id": "931581299796377700",
+            "guild_id": "889577356681945098",
+            "parent_id": "889584618372734977",
+            "owner_id": "368075764010319872",
+            "type": 11,
+            "name": "nonzero",
+            "last_message_id": "931583189162541177",
+            "thread_metadata": {
+                "archived": true,
+                "archive_timestamp": "2022-01-15T16:24:57.786000+00:00",
+                "auto_archive_duration": 1440,
+                "locked": false
+            },
+            "message_count": 6,
+            "member_count": 2,
+            "rate_limit_per_user": 0,
+            "flags": 0,
+            "member_ids_preview": [
+                "368075764010319872",
+                "915682383905316864"
+            ]
+        }
+    ],
+    "members": []
+}

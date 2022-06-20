@@ -1,0 +1,1654 @@
+ctrl+f every discord for information
+the solana way
+very true!
+hehe it's ok. I'm sure it's worth asking just so that we have it in search.
+there's something about formulating the question that helps finding the solution
+sorry i need to stop wasting your time, because i get these things like 2 seconds after i ask the question
+`serum_dex = { path = "../../../..", features = ["no-entrypoint"]}` fixed it
+yep
+lol
+Or make it not optional
+So you need to set it as a feature flag.
+Your dependency is optional.
+```
+ --> programs/close-markets/src/lib.rs:5:9
+  |
+5 | pub use serum_dex;
+  |         ^^^^^^^^^ no external crate `serum_dex`
+```
+now to tackle this one
+yeh, it was a path issue. I wasn't doing enough `../../`s
+changing to 
+`serum_dex = { path = "../../../..", features = ["no-entrypoint"], optional = true }`
+fixed it
+It needs to be `serum-dex/dex/`
+Dumb q. Are you sure the path is right?
+ok, maybe i'm missing some extra dependencies
+@ armani, if you have seen this before possibly
+`serum_dex` is the one causing the issue
+this is the Cargo.toml I'm trying to use
+```
+
+[dependencies]
+anchor-lang = "0.18.2"
+anchor-spl = {version = "0.18.2", features = ["dex"]}
+serum_dex = { path = "../..", features = ["no-entrypoint"], optional = true }
+```
+oh, never mind, still the same issue
+turns out all i need to do was run `cargo build --all` since i'd updated some of the serum code without building it lately
+Was stuck on this error for a few minutes today
+```
+ailed to obtain package metadata: Error during execution of `cargo metadata`: error: failed to get `local_serum_dex` as a dependency of package `close-markets v0.1.0 (/root/projects/serum-dex/dex/tests/close-markets/programs/close-markets)`
+
+Caused by:
+  failed to load source for dependency `local_serum_dex`
+
+Caused by:
+  Unable to update /root/projects/serum-dex/dex/tests/close-markets
+
+Caused by:
+  found a virtual manifest at `/root/projects/serum-dex/dex/tests/close-markets/Cargo.toml` instead of a package manifest
+```
+Hello peeps!
+Hope you are doing good!
+Not used to asking question out lod like this (usually I look) but I don't know how to handle this error as I'm not the creator of the full stuff for once.
+Not sure if the error is mine or other.
+
+I'm having a program thet I turnt into an rust SDK to be callable by anyone and trigger marinade function.
+
+Then when I import the SDK I get en error saying it can't compile anchor_lang because I haven't selected the good version of Solana.
+
+Not sure how to look into it::
+ a little help would be appreciated on where to look :)*
+(I'm wondering if you avoid this issue in the first function just based on how you're calling it?)
+Hmm, interesting. Yeah, in general if you've got `&'a AccountInfo<'b>`, you need `'b` to live at least as long as `'a` since otherwise you could have a still-alive `&'a` reference to a stale `AccountInfo<'b>`. In rust lifetime syntax that would be `'b: 'a` ('b lives at least as long as 'a). If you explicitly add that to the second function, do you get a different error?
+```.rs
+fn get_in_amount<'a, 'b: 'a, ....>
+```
+Thanks 🙌🏻
+CpiContext is just a thing that bundles up some of the stuff you have to pass to cross-program invocations (solana's way of letting you invoke another program)
+Not as far as I know (maybe actually, I'm just not sure)—I think the main tools are source-diving and looking through the tests!
+I want to `remaining_accounts.next()` in that helper given a condition
+but then
+```
+fn get_in_amount<'a, 'b, I: Iterator<Item = &'a AccountInfo<'b>>>(
+    in_amount: Option<u64>,
+    from_token_account: &AccountInfo,
+    remaining_accounts: &mut I,
+) -> Result<u64> {
+
+```
+is not, it complains `in type `&'a anchor_lang::prelude::AccountInfo<'b>`, reference has a longer lifetime than the data it references`
+I am having an absurd time with lifetimes,
+i have a function that has this signature
+```
+    fn check_and_get_pool_accounts_and_settings<'a, 'b, I: Iterator<Item = &'a AccountInfo<'b>>>(
+        program_id: &Pubkey,
+        account_iter: &mut I,
+    ) -> Result<PoolAccounts<I::Item>, ProgramError> {
+        let swap_account = next_account_info(account_iter)?;
+        if swap_account.owner != program_id {
+            return Err(ProgramError::IncorrectProgramId);
+....
+```
+and is completely happy
+Like what is CpiContext ?
+Great. Is there some useful resource/tutorials to learn in deep things used in it ?
+np!
+thanks for the tip!
+i basically never clone repos to view them anymore
+ikr it got added recently i think
+wow, wtf, that's a huge hidden feature
+idk if you know this but if you press `.` while on a repo on github it will launch vscode in browser and let you navigate the repo, i use it all the time when looking at spl stuff
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hi everyone, is there any clear doc to mint a NFT using anchor ? Or to create a SPL token ? The only thing I found is the rust crate page but I don't really understand it :c 
+Thanks for your help !
+Ah bummer. Thank you for your help! Cast and truncate it is.
+cool, was just worried it might affect compiled program size
+No, just a rust style thing
+is there any downside to using `use crate::state::*;` vs importing individual items from the state file, when coding an onchain program?
+Solana just doesn't support some float stuff 😦 https://docs.solana.com/developing/on-chain-programs/overview#float-support
+Though maybe that was a separate cause of the bug but the error was about an account being marked mutable that shouldn't be
+The IDL has given me the error a few times
+i think it only blows up when you in fact attempt to mutate it
+mmmmh, does it?
+Relevant code is: ```let attack_damage = player_metadata.curr_stats.attack * cur_move.stats_modifier.attack;
+    let attack_damage_rounded = attack_damage.floor();
+    if attack_damage_rounded <= opponent_metadata.curr_stats.health {
+        new_stats.health -= attack_damage_rounded;
+    } else {
+        new_stats.health = 0.0;
+    }``` with all variables being an f32.
+I'm seeing the following error when attempting to use the .round() or .floor language intrinsics for Rust ```Program failed to complete: ELF error: Unresolved symbol (floorf) at instruction #3036 (ELF file offset 0x5df8)```
+Is this something to do with the way Anchor handles linking or should I be asking in the Solana Discord?
+alright ty, got the answer i was looking for.
+Don't think I can explain it better than the rust book does: https://doc.rust-lang.org/book/ch15-02-deref.html#implicit-deref-coercions-with-functions-and-methods
+for example 
+"Escrow::unpack_unchecked(&escrow_account.try_borrow_data()?)" deref coercion happens.
+"Escrow::unpack_unchecked(escrow_account.try_borrow_data()?)" deref coercion does not happen(missing borrow operator)
+hey <@!134416332509675520>  any idea as to what is the thumb rule in rust w.r.t auto deref/deref coercion in what cases will it kick in ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Btw, in case you're interested, all this was due to the struct I'm manipulating being serialized in a way that does not allow deserialization. Changing from:
+
+```rust
+pub struct CliAccount {
+    #[serde(flatten)]
+    pub keyed_account: RpcKeyedAccount,
+    #[serde(skip_serializing)]
+    pub use_lamports_unit: bool,
+}
+```
+to
+```rust
+pub struct CliAccount {
+    #[serde(flatten)]
+    pub keyed_account: RpcKeyedAccount,
+    #[serde(skip_serializing, skip_deserializing)]
+    pub use_lamports_unit: bool,
+}
+```
+now makes it possible
+But it's great, at least I have a way forward now. Just got confused by this silence. Thanks man.
+Here I got absolutely **nothing**
+Mostly kidding, I don't think it's a Rust thing, maybe more of a serde thing. Generally `unwrap` panic well.... **panics**. I get a few lines of fireworks explaining what went wrong
+Ha, what do you mean by exagerates the concept of panic?
+Oh, huh, interesting—would have guessed you'd have Debug here, but got it
+Probably the frustration talking here, but Rust grossly exaggerates the concept of "panic"
+The crucial bit being `msg!` or `{:?}` ? If the latter I cannot, I'm guessing because the wrapper serde Result struct does not implement the Debug trait
+Ah, cool. Think you can probably also do `msg!("{:?}", result)`
+(i switched to this:
+```rust
+    let serialized = serde_json::to_string(&cli_account).unwrap();
+    println!("serialized = {}", serialized);
+    let result: serde_json::Result<CliAccount> = serde_json::from_str(&serialized);
+    match result {
+        Err(err) => {
+            println!("{}", err);
+        }
+        Ok(deserialized) => {
+            println!("{}", deserialized);
+        }
+    }
+```)
+bingo: `missing field `use_lamports_unit` at line 1 column 179`
+Although that kinda sucks.
+unwrap will panic if it didn't work (which it probably didn't, lol)
+We want to see what possible error state it's in
+No, you can just print it like that
+`serde::from_str` returns a Result. I will need an unwrap at some point isnt' it
+Ok yeah, definitely get rid of the unwrap then (it could still be panicking there, right?)
+I've got loads of stuff going on after that and want the execution to stop after this bit while I debug this
+And I would print the value itself, not just its type (that doesn't tell you much)
+Why not just get rid of all the unwraps
+You're also still unwraping something too right?
+Wait, what's the `exit(0)` for lol
+so it looks ok to me, up until radio silence
+Same here. Errors I can dig into, but silence treatment... After changing the end of the snippet to:
+```rust
+    let serialized = serde_json::to_string(&cli_account).unwrap();
+    println!("serialized = {}", serialized);
+    let deserialized: serde_json::Result<CliAccount> = serde_json::from_str(&serialized);
+    println!("deserialized");
+    print_type_of(&deserialized);
+    let unwrapped = deserialized.unwrap();
+    println!("unwrapped");
+    println!("deserialized = {:?}", unwrapped.keyed_account);
+    exit(0);
+```
+
+the extend of the logs is:
+```
+serialized = {"pubkey":"BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW","account":{"lamports":1,"data":["","base64"],"owner":"11111111111111111111111111111111","executable":false,"rentEpoch":0}}
+deserialized
+core::result::Result<solana_cli_output::cli_output::CliAccount, serde_json::error::Error>
+```
+I'm not sure how the execution could just stop unless it panics 🤔
+I was expecting to panic *because* of the unwrap actually. But no it does not. The execution simply stops. Let me try to remove it and see
+Like, is it panicking there?
+What happens if you get rid of the serde `unwrap()` and just log whatever its return value is?
+Hi, would anyone know what I am missing in the following snippet?
+```rust
+    let pubkey = Pubkey::from_str("BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW").unwrap();
+    let system_account = Account::new(1, 0, &system_program::id());
+    let cli_account = CliAccount {
+        keyed_account: RpcKeyedAccount {
+            pubkey: pubkey.to_string(),
+            account: UiAccount::encode(
+                &pubkey,
+                &system_account,
+                UiAccountEncoding::Base64,
+                None,
+                None,
+            ),
+        },
+        use_lamports_unit: false,
+    };
+
+    let serialized = serde_json::to_string(&cli_account).unwrap();
+    println!("serialized = {}", serialized);
+    let deserialized: CliAccount = serde_json::from_str(&serialized).unwrap();
+    println!("deserialized = {:?}", deserialized.to_string());
+```
+I am trying to serialize/deserialize a struct (CliAccount, defined here: https://github.com/solana-labs/solana/blob/b8837c04ec3976c9c16d028fbee86f87823fb97f/cli-output/src/cli_output.rs#L99), but the program simply exits without any complaint/error as soon as it hits serde_json::from_str(...).
+
+My assumption is was that this was possible since the struct is decorated with the serde `#[derive(Serialize, Deserialize)]`, but I guess I'm wrong. Would someone have pointers? Maybe a reason or an alternative?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+My bad, I'm using it on `Loader` type not `AccountInfo`
+At any rate, yeah, it's closing things the way anchor closes things internally (and isn't implemented for AccountInfos as far as I can tell, just Accounts)
+Ah, cool, I actually hadn't realized that was a public function! Good to know
+`account` variable is of type `Loader`. It comes from `AccountsClose` trait.
+
+https://github.com/project-serum/anchor/blob/423ddde30af8ba7de29e3de09a77e8a1254d9766/lang/src/lib.rs#L134
+Where is that `.close` function coming from?
+Is `account.close(destination)` safe, or should I explicitly clear out account data?
+
+The docs say-
+
+>  Some programs may attempt to deinitialize an account by setting its lamports to zero, with the assumption that the runtime will delete the account. This assumption may be valid between transactions, but it is not between instructions or cross-program invocations. To harden against this, the program should also explicitly zero out the account's data.
+
+Ref- https://docs.solana.com/developing/programming-model/transactions#multiple-instructions-in-a-single-transaction
+I usually look at https://github.com/project-serum/anchor/blob/7b86aed638ca2b86099ca0d839ddb264690c3c26/lang/derive/accounts/src/lib.rs
+Trying to wrap my head around attributes and macros
+Was looking at the tutorials and was wondering what kind of arguments can be used in the [account] attribute? Some of them used were init, has_one, mut
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Might not be exactly what you are doing, but maybe it can serve as a partial reference somehow.
+FYI: https://github.com/project-serum/anchor/blob/master/tests/pyth/programs/pyth/src/pc.rs#L96
+Found a convenient way to generate vanilla instructions using anchor, using `instruction::FunctionName`
+```
+        let mint_callback_ix = my_program::instruction::MintCallback {
+            some_variable: amount_0,
+        };
+        let ix = Instruction::new_with_bytes(
+            ctx.accounts.callback_handler.key(),
+            &mint_callback_ix.data(),
+            ctx.accounts.to_account_metas(None),
+        );
+```
+Hi, I would really need BTreeMap support to be added to Anchor. Is there any way I can help with that?
+So I'm confused why rust wants you to have it.
+No, but there's also no reason to use it in Anchor besides being able to skip specifying space.
+I specify space on the account. Will there be any consequences of using Default?
+Shouldn't need Default unless you aren't specifying space 🤔
+Thanks Alan! I got it working now. I had to also add Default and Copy otherwise the builder was complaining about them not being implemented.
+Right, not sure how to ask anchor to do the right thing here (but CPI'ing is still possible, just might have to do it manually)
+I'm trying the regular CPI way.
+
+```rs
+        let cpi_accounts = my_program::cpi::accounts::MyCallback {
+            token_program: ctx.accounts.token_program.to_account_info()
+        };
+```
+
+No error in auto-correct, but compilation fails. Looks like it tries to access the CPI stuff before it's compiled
+E.g. at worst you could build your own Instruction that calls your program (will be kind of painful, but it's of course possible—hopefully you can find some way that anchor does it for you, but I've never tried)
+I'm not sure anchor makes it easy, but you'd just call your own program using `invoke_signed` etc. (you might have some way to access anchor's auto-generated CPI stuff, but not actually sure about that)
+How to do that?
+You can also strictly speaking CPI to your own program
+That looks like you're just calling the other function directly 👍 No CPI
+Thanks, I was able to call the other instruction using
+
+```rs
+my_callback(Context::new(
+            &my_program::id(),
+            &mut MyCallback {
+                token_program: ctx.accounts.token_program.to_account_info()
+            },
+            &[]
+        ))?;
+```
+
+So this is the **direct self-recursion** talked about in the re-entrancy section, or there's a CPI based way too? I want the callback to be generic, i.e. pass arbitrary program address via context and the function will call there.
+That makes sense
+The inner ChainEntry type isn't an account type on its own
+Oh, sorry, misread, do this instead:
+```.rs
+#[derive(AnchorSerialize, AnchorDeserialize, Clone)]
+pub struct ChainEntry {
+  ...
+}
+```
+if I try to build this using `anchor build` the builder give me 2 errors: the trait `std::marker::Copy` is not implemented for `ChainEntry` and the trait `Default` is not implemented for `ChainEntry`
+So what goes wrong? Aside from not allocating any space?
+this is how I structured it
+`#[derive(Accounts)]
+pub struct InitializeChain<'info> {
+    #[account(init, payer = authority, space = 0)] // TODO: calculate space
+    pub chain_account: Account<'info, Chain>,
+    #[account(signer)]
+    pub authority: AccountInfo<'info>,
+}
+
+#[account]
+pub struct Chain {
+    pub entries: [ChainEntry; 8],
+    pub expiry_ts: i64, 
+}
+
+#[account]
+pub struct ChainEntry {
+    pub chain: Pubkey,
+}` I dont really use Default anywhere. Not sure If follow you.
+I would suggest just not using Default at all and specifying your `space =` manually (in general you kind of need to know how to)
+Hey Alan, do you have an example or some docs you can link to for this? I didn't manage to get it working yesterday.
+I think it's worth thinking about whether you actually need to do that (you've already in the contract and can just call other functions, already have all the necessary accounts, etc.)
+How to CPI another function in the same smart contract?
+Blistering barnacles.
+
+> Reentrancy not allowed unless caller is calling itself
+
+Solana style is to build monolithic contracts? How to implement use cases like flash swaps / flash loans then?
+
+https://github.com/solana-labs/solana/blob/350845c5134e47f14dfa11b20b294264d75dc7a7/program-runtime/src/invoke_context.rs#L279
+How to resolve `Cross-program invocation reentrancy not allowed for this instruction`? I have two programs A and B where the CPI flow is A -> B -> A. B implements a callback.
+So, totally possible to have an array of non-primitives, just takes a tiny bit of extra work
+So you can go derive Default on the nested type, or just implement `Default` from scratch (not deriving it) for your account struct
+That's in general because you're using Default on the `#[account]` here (not necessary in anchor, just a trick to avoid having to specify `space =`)
+It complains and says 'Default' is not implemented for the object in the array
+What goes wrong?
+Why not?
+your example is with a primitive data type, this will not work with an object.
+Is that pda_deposit_token_account an actual real already-initialized token account?
+im guessing I need some kind of different constraints on my InitializeEscrow struct?
+that is a gist with my contract code in it
+Hey all, trying to make a staking program but i'm getting this error: Error: 167: The given account is not owned by the executing program
+
+https://gist.github.com/littlejohntj/b7ebd1bbd42b544981a6fd4414d431e0
+No need to calculate/specify space
+```rust
+#[account]
+#[derive(Default)]
+pub struct MyAccountType {
+    pub my_field: [u8; 3],
+}
+```
+is an example of a valid account definition with an array of `u8` of fixed size 3
+So using Vec and just calculate some max space for the Vec would do it, I guess?
+is it possible to have an account struct with a fixed size array of some object without using the zero_copy and loader?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://doc.rust-lang.org/stable/reference/tokens.html#byte-and-byte-string-literals
+why is there a b outside the string literal
+`[account(mut,
+        seeds = [b"statev1".as_ref()],
+        bump = state.load()?.bump,
+        constraint = state.to_account_info().owner == program_id,
+    )]`
+
+what is b"statev1"
+Understood .. Thanks Capitan.
+Fine, thanks for the answer
+Basically I think reallocation is a tricky enough problem that I wouldn't want to rely on anchor doing it for me
+Maybe, but you need to put that data someplace in the meantime, which might overflow the stack/heap
+Even if I'm afraid that this “soon” can be in years
+Oh, nice.
+Yep, I'm talking about data in a PDA
+At any rate, solana is also going to let you change allocations soon-ish
+Is't it possible to reduce the balance to zero to delete the account, then allocate again and write the data back?
+Like, if it lives at a PDA, where should the new seeds be?
+Definitely true that reallocating the *amount* of storage might be doable, but the address part doesn't seem automatable to me.
+Won't you need to pick an entirely new address for that account though? How will you decide on it?
+If it's a `Vec` equivalent, there are several ways that can work with every kind of data. Only the strategy would change: double the allocated space each time, always add the same chunk size, etc.
+Nope, you'll have to do this manually (there isn't really any general way to do this, it's going to require some manual work)
+It's anchor specific (you need to ask anchor to re-deserialize the underlying AccountInfo's `.data`)
+I wanna store a list of things, and if possible, that the allocated space is reallocated when space is lacking
+Hello, does Anchor handle reallocation, for a list of things for example?
+how did you make it work, I tried the same but even have Issue with array on the account level
+`the trait BorshDeserialize is not implemented for [u8; 420]`
+So the reload method is Solana specific then? Or just a way in Rust to jog up the Box’s current value?
+No—you'll have to call `ctx.accounts.my_thing.reload()`
+Does `Box<Account<'info, TokenAccount>>` track balance changes across CPIs? I make a CPI to program B, which transfers out tokens by calling TokenProgram. Back inside program A, the token account variable returns a stale value.
+Thanks, I will have a look! 🙂
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Nevermind, I just updated my Solana CLI, and it works now
+Also, I get `error: process didn't exit successfully: `rustc -vV` (signal: 7, SIGBUS: access to undefined memory)` when I run `anchor build` on a newly initialized project, any idea why?
+Do you have any example about how to create a main state of the program using a PDA?
+just looking for an easy way to transfer some SOL from payer
+anybody got a system_program transfer inside using anchor?
+Hi all, I have this very annoying issue when developing.
+anchor test only works after the first time I do anchor build, if I do test then build and then test, I get an error with solana-test-validator (it just crashes without any errors). But if I run cargo clean, build and test then it works as expected. Any workarounds for this issue, I hate wasting time doing full builds all  the time. Thanks.
+Asking this here as well, as it may be rust-related:
+Awesome! thanks 🙂
+Since the attribute derives the borsh (de)serialization, I cannot write my own if needed
+What does `#[account]` do exactly? I have a type with `PhantomData`, and I'm not sure that the (de)serialization will be handled correctly.
+So here, Pubkey implements Copy (it's just a 32-bye array) but `Account` doesn't.
+This has to do with Rust's `Copy` trait I think. Do `let x = a.b.c` can't *move* `c` into `x` because it's still owned by `b`, so Rust tries to copy `c` instead.
+as long as it is a prob of the initializer account, why can we do borrow/non borrow/dereference for that prop but we can ONLY do reference to the account?
+it seems even like we can dereference it
+I dont quite understand why we have to make a reference to the account itself but we can skip that part when we are referencing parameters of that same account.
+However looking at this:
+Thanks for answering alan! 🙂
+The `&mut` here for the `user` seems unnecessary, it could just be `&`.
+Indeed, you could do `ctx.accounts.base_account.total_gifs = 0` (the &mut ref thing is kind of handy though if you're setting a bunch of fields, it's just shorter to type for multiple lines)
+What do you mean become a dangling reference? You have an exclusive reference to ctx.accounts.base_account, and you use it to set its .total_gifs to 0.
+Essentially  I think the question is, why are we using mutable references when ther ownership of ctx has already been passed to the function, it seems like it would not be nessecary?
+Same here, why do we want mutable references to the base_account and the user, but then later in the ItemStruct we no longer want that so we dereference the user again?
+
+Since ctx, is not borrowed here, using a mutable reference of ctx.accounts.base_account, wouldn't the end of the function drop ctx.accounts.base_account making the base_account.total_gifs become a dangling reference?
+What am I not understanding?
+
+I have a rust syntax question, can anyone help?
+
+For `memcpm`, I need to supply a `bs58` encoded value, but my value is a number, not as string.
+
+`bs58.encode(Buffer.from(`${aNumber}`)),` does not work
+
+This is in a test.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ah I thought it was owned by system program, thank's for that 🙂
+An account can *only* be mutated by its owning program. So at the end of the day someone would have to ask your program to mutate that account, so you just need that function to only agree to update things if they pay for it.
+I can't see what's stopping someone from replicating this code on their side and updating the counter ~(without transfering lamports)
+because I'm only passing my pubkey in the client side
+```    await program.rpc.increment({
+      accounts: {
+        counter: counter.publicKey
+      },
+    })```
+however, I get the impression that anyone can edit this account in they wrote their own rust script
+```pub fn increment(ctx: Context<Increment>) -> ProgramResult {
+    // user transers lamports otherwise error
+    let counter = &mut ctx.accounts.counter;
+    counter.count += 1;
+    Ok(())
+}
+```
+I want to create an account that can only be updated when a user transfers lamports
+ah! okay. So, I need to perform the `has_one` check manually in the instruction function for now.
+So if init was indeed needed, you'd run the `has_one` check on an allocated but not really initalized/set-up account, which won't work
+`has_one` definitely runs before your instruction function, and that's where you'd have to set any fields on the account data
+Do you think I should raise an issue on the Anchor repo to support this use-case?
+What is the order between `init_if_needed` & `has_one`?  If `has_one` check happens after `init_if_needed`, then I think handling this scenario might be possible.
+Since ordinarily `has_one` is meant to run before your instruction function.
+Mm... interesting question. Yeah, I'm not sure how you could use both of those attributes at the same time in a sensible way.
+A further question on this:
+
+As I have specified `init_if_needed`  & `has_one = user` on `deposit_receipt` , I suspect both of them together won't work.
+As when the account is initialized for the first time, it won't have the `user` field set.
+
+I have checked the `generate_constraint_has_one` code, and there is nothing to handle this scenario.
+
+Does this look like a use-case that should be supported by Anchor?
+thank you
+you're the best 🙂
+doh
+Gotta `return` it
+```        if &ctx.accounts.payer.key() != &correct_recipient_key {
+            Err(ErrorCode::InvalidRecipient.into())
+        }```
+```58 | /         if &ctx.accounts.payer.key() != &correct_recipient_key {
+59 | |             Err(ErrorCode::InvalidRecipient.into())
+   | |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `()`, found enum `std::result::Result```
+one last error yay
+beautiful
+rust-analyzer in vscode is what I use
+haha, do you have a plugin in mind?
+Rust is hard enough as it is
+Heh, you should get that configured, ngmi otherwise 😆
+it works for ts/js I think
+use std::str::FromStr
+you using vsc?
+hm... it doesn't do that for rust it seems
+Let your editor auto-complete it (it'll pull in some import)
+sorry I didn't think I'd asked it here haha
+```error[E0599]: no function or associated item named `from_str` found for struct `anchor_lang::prelude::Pubkey` in the current scope
+```
+Feel like I already responded to this lol, but it's `Pubkey::from_str("........").unwrap()`
+`        let correct_recipient_key = Pubkey("555yt8a7MtKExNzQMhQGQa5retoLuDxBpchVjgJFE9e3");`
+hey guys, I'm so stuck on getting a pubkey from base58 string in a pubkey using anchor
+Yeah, ID works too
+Also, Just to ensure, `id()`  would refer to the Program ID declared using `anchor_lang::prelude::declare_id("...")`. Right? Are there other ways to refer to that? I have seen some people using just `ID`, does that work?
+In this case, yeah, it happens to generate code that expects a Pubkey, not a &Pubkey (though I suppose it could have been written the other way around)
+One way you can double check this kind of thing is to search the anchor codebase for `generate_constraint_<constraint-name>`, so in this case, `generate_constraint_owner`, and take a look at what code will get generated by the macro
+I actually did not dive much into this. Maybe someone else could give you more precise info on that.
+yes, This worked.
+So, we need to give a `Pubkey` not a `&Pubkey` for `owner`?
+oh! thanks. That was it!!
+ah! let me check
+could this be what throws? `owner = &id(),`
+awesome thanks
+https://doc.rust-lang.org/rust-by-example/flow_control/match/destructuring.html
+has rust got something like the JS version  of:
+`let { param1, param2 } = someObject;`
+I have PDA related question with using Anchor framework.
+
+I have a `Deposit` instruction like this:
+```
+#[derive(Accounts)]
+#[instruction(deposit_receipt_bump: u8, lamports: Lamports)]
+pub struct Deposit<'info> {
+    // The user depositing the lamports.
+    #[account(mut)]
+    pub user: Signer<'info>,
+
+    // It is a PDA. It should be created only on the first deposit.
+    #[account(
+        init_if_needed,
+        seeds = [b"deposit_receipt".as_ref(), user.key.as_ref()],
+        bump = deposit_receipt_bump,
+        payer = user,
+        space = DepositReceipt::LEN,
+        owner = &id(),
+        has_one = user
+    )]
+    pub deposit_receipt: Account<'info, DepositReceipt>,
+    ...
+    ...
+}
+
+#[account]
+pub struct DepositReceipt {
+    // The user to which this deposit receipt belongs to
+    pub user: Pubkey,
+    ...
+    ...
+}
+```
+
+The  `deposit_receipt`  here is a PDA that I want to `init` only on the first deposit. This PDA would be owned by the current program. Also, I want to use the pubkey of the `user` as one of the seeds for this PDA. But, I get this error:
+```
+error[E0277]: can't compare `anchor_lang::prelude::Pubkey` with `&anchor_lang::prelude::Pubkey`
+  --> programs/solana-pool-drytoken/src/lib.rs:83:10
+   |
+83 | #[derive(Accounts)]
+   |          ^^^^^^^^ no implementation for `anchor_lang::prelude::Pubkey == &anchor_lang::prelude::Pubkey`
+   |
+   = help: the trait `PartialEq<&anchor_lang::prelude::Pubkey>` is not implemented for `anchor_lang::prelude::Pubkey`
+   = note: required because of the requirements on the impl of `PartialEq<&&anchor_lang::prelude::Pubkey>` for `&anchor_lang::prelude::Pubkey`
+   = note: this error originates in the derive macro `Accounts` (in Nightly builds, run with -Z macro-backtrace for more info)
+```
+
+Any pointers on how to achieve this?
+I might have that confused with another function. Anyway, I'd rather not call that function if possible, it costs too many compute units
+No, it works fine on-chain (it does use some compute, but it definitely works on-chain, anchor uses it for example)
+I meant this function* (`find_program_address`) Last time I tried to call it in BPF, it crashed.
+Which instruction?
+This instruction does not work in BPF, it's compiled only in native
+Yeah, you could also just re-calculate the bump inside your program, with `Pubkey::find_program_address`
+Thanks.
+Oh, so the caller must provide the bump seed in that case. But I think that it can be done transparently inside the instruction's constructor. That makes sense, I guess.
+It would look like (anchor pseudo-code):
+```.rs
+pub fn init_account(ctx: Context<Init>, state_bump: u8) {
+  ctx.account.state_account.bump = state_bump;
+  ...
+}
+
+#[derive(Accounts)]
+#[instruction(state_bump: u8)]
+pub struct Init<'info> {
+  #[account(init, seeds = [b"the-state".as_ref()], bump = state_bump, payer = the_payer, space = 8 + something)]
+  pub state_account: Account<'info, StateAccount>
+  ...
+}
+```
+That's counter intuitive
+Oh
+It's fine to store an account's own bump within the account itself 🙂
+I cannot store the bump seed of the main state account inside the main state account, can I? I mean, I cannot access it before reading this very account
+No chicken and egg problem 🤔
+Ah, the bump. Yeah, you can still store that just fine in the state account
+I'm talking about the seed to get an account off-curb. The last byte.
+You wouldn't need to store the state account's seeds anywhere (they're fixed/you don't need to remember them—just pick something hardcoded)
+Hmm, not sure I follow that, but whatever—why wouldn't that work with the static PDA thing I suggested above?
+Yes, we're storing all the seeds of our program PDAs inside the main state, so that we can get them back
+Hmm, not sure I understand 🤔 Which seeds are you talking about here? Seeds for other PDAs used by the program?
+I'm asking the question, because in our previous project (vanilla Solana), we were storing the PDAs seeds in a state (which is in a normal account). We couldn't have the state as a PDA because we couldn't store the seed anywhere. It's a kind of chicken & egg issue
+What have you tried so far? Generally this would just mean using a program-derived address with static/fixed seeds (e.g. `seeds = [b"the-state".as_ref()]`, or whatever), so it's not really any different than any other use of PDAs.
+Any insights about that?
+get to learn a little bit more everyday!
+Yeah, the struct itself is just some rust thing (it's just a struct in memory), you need to make sure you have some connection to the underlying AccountInfo in order for it to persist
+and have it update correctly on chain
+like it's probably not possible to do 
+```rust
+let amount = &mut ctx.accounts.usdc_account.amount
+amount += 100
+```
+It seems like you have to always make sure the account struct, e.g. `TokenAccount` is still wrapped in `Account` if you want to update the actual data on chain
+but you can't get a mutable reference to a variable on an account struct and expect it to update
+like you can get a mutable reference to an account and update values on it
+sometimes i get lost with accounts because stuff on them doesn't update properly
+great
+That sounds like it'll work to me (you need an exclusive reference since you're about to mutate the `Account` struct)
+```rust
+does_account_finish_empty(&mut *ctx.accounts.locked_f_usdc)?;
+```
+```rust
+fn does_account_finish_empty(token_account: &mut Account<TokenAccount>) -> ProgramResult {
+    token_account.reload()?;
+    if token_account.amount > 0 {
+        Err(ErrorCode::NonzeroTempAccount.into())
+    } else {
+        Ok(())
+    }
+}
+```
+ok, this appears to not give compile errors, remains to be seen if it actually does what i want it to.
+maybe i can pass in to functions as `Account<TokenAccount>`, that could work
+In a bunch of my functions there are temporary SPL token accounts. And I want to write a generic function that will check that these accounts are empty. But I wanted the logic for reloading the token accounts at the end of the program function to be done inside a dedicated function, to avoid accidentally forgetting to reload in one of the many program functions that would be using this at the far end.
+ok, answered my own question with the compiler, it's not possible
+```rust
+let this_token = &ctx.accounts.usdc_account
+```
+can i run `this_token.reload()` and expect it to reload the data? Or does this only work when calling `ctx.accounts.usdc_account.reload()?;`
+let's say i borrow a reference to a token account
+context.program_id
+Already did that, it was not.
+Thanks
+&ID or something like that
+How do we get our program ID inside our anchor program?
+Ran into same thing just now, super awkward indeed. 
+I was scratching my head cause I am doing everything the same as the CFO example
+try `ps aux | grep solana` to see if there is a local validator running in the background. if there is, kill the process with `kill <ProcessID>`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+When I declare a type inside a macro, it's not recognized (`Type not found`):
+```rust
+macro_rules! impl_set {
+    ( $Set:ident, $Item:ty ) => {
+        #[derive(Debug, Clone, AnchorDeserialize, AnchorSerialize)]
+        pub struct $Set {
+            data: Vec<$Item>,
+        }
+        // etc.
+    }
+}
+```
+and when I pull it out, everything is alright. I thought that the the macro-by-example substitution runs before the proc macros. It would make more sense that the other way around 🤔
+Oh, I see. Thanks.
+Ok, you need to instead do #[derive(AnchorDeserialize, AnchorSerialize, Clone)], not #[account] over the Validator struct (it's not an account type all by itself)
+Embedded:
+```rust
+#[account]
+#[derive(Debug)]
+pub struct ValidatorsSet {
+    data: Vec<Validator>,
+}
+```
+and this account is itself embedded.
+Is that an account type all by itself, or are you embedding it in some other account?
+<@!134416332509675520> I once again get the same error, but this time, it's about a "normal" type:
+```rust
+#[account]
+#[derive(Debug)]
+pub struct Validator {
+    address: Pubkey,
+}
+```
+Error:
+`IdlError: Type not found: {"type":{"defined":"Validator"}}`
+So what should the solution be if I want to change the ID dinamically based on environment variables at compile time?
+You can see this if you use `cargo expand` inside `programs/your-prog-name/`
+In this case the `declare_id!` macro happens to try to look at its input and see if it looks like a literal string. This input *doesn't* look like that (it's the raw `include_str!("...")`, which hasn't run yet), so declare_id just leaves it alone and doesn't do anything with it.
+The basic reason why this doesn't work is that when you say `declare_id!(include_str!("..."))`, you'd think the `include_str!` part would run first, like how function arguments get evaluated before their passed into a function... but that's not how macros work unfortunately; they get passed the raw, unevaluated text (or tokens, whatever) of their input.
+Can someone tell me why declare_id!("ABC...") works when passing a string, but when using declare_id!(include_str!("filename.txt")) it doesn't because it cannot convert &str to Pubkey?
+
+Or any solution for changing the declare_id! value at compile time ?
+Posting it here as it is most related to compile time rust and would love some opinions
+That should probably work yeah
+Got it. What about tuple structs?
+We're all just volunteers here
+But yeah, y'all can definitely make PRs!
+I'm guessing this would be pretty tough. For example, the IDL isn't just for typescript clients (e.g. python uses it too). So it has to be a lowest-common denominator description of how to interact with an account—maybe there's a way to support this kind of generics stuff but it's not super obvious to me how (not saying it's impossible though!)
+I work with <@!841586430136156190>, and our company let us contribute to open-source projects when needed, so if we can help with that… Same with the handling of tuple structs.
+I guess that I could write a macro, yes. That's less elegant, but if that's the only way… That's kinda weird, tho: both Rust and TS have generic code, so I'm sure there is a technical way to handle this kind of types.
+Yeah.
+You mean: monomorphize by hand?
+Heh 😛
+Only `Pubkey` to be fair 😆
+I assume they just monomorphize (how many different instantiations do you actually use for K here?)
+The K does not matter, it's only a typesystem thing, but I understand your point. What are my other options? I'm sure that some people use already generic collections with Anchor (like `Vec`)
+E.g. there's no way `await program.account.map.fetch(someMapAccount)` can know how to deserialize the account data (it doesn't know which K and T to pick)
+I don't think that will work with the way anchor's IDL stuff expects to work
+Hmm, let me think about whether I would expect that kind of use of generics to work
+So, is there something to know when dealing with generic type? Our type is as following:
+```rust
+#[account]
+#[derive(Debug)]
+pub struct Map<T, K>
+where
+    K: Debug + Clone + AnchorSerialize + AnchorDeserialize + Ord,
+    T: Debug + Clone + AnchorSerialize + AnchorDeserialize + HasKey<K>,
+{
+    data: Vec<T>,
+    marker: PhantomData<K>,
+}
+```
+Haha, yeah, I hear you
+I'm used to work with examples and documentations, not by flooding help channels, but sure, I also can do that 😛
+I think you'll have an easier time debugging this kind of thing by asking targeted questions here in the discord, for what it's worth, but you can take a look at, say, jet protocol for some inspiration
+The projects listed here are closed source afaik https://project-serum.github.io/anchor/getting-started/projects.html
+Right now I'm getting this error message: `Type not found: {"type":{"defined":"T"}}` and I suspect that it's linked to a generic account.
+Is there a U128 crate out somewhere? Benchmarks show that rust u128 has poor performance. Someone mentioned U128 on twitter as well.
+
+https://github.com/solana-labs/solana/issues/19549
+Not sure what you mean (they're are a lot of them)—can you say more about the specific issue you're having?
+Is there any real-world anchor example? I keep hitting errors, and without some doc or an example, it's hard to move forward.
+The check could only be performed when the account is initialized
+It's not mandatory to name the fields in Rust
+It's a tuple struct with one variant to be precise
+https://doc.rust-lang.org/rust-by-example/generics/new_types.html
+This looks like a mix of struct and fn declaration
+I'm not exactly expert in Rust, so it might be basic but what does this declaration do actually? I am used to seeing things like:
+```rust
+#[account]
+#[derive(.........)]
+pub struct MyStruct {
+    pub a_field: u64,
+}
+```
+If I add `AnchorSerialize`, for example, it conflicts with the implementation done by this attribute.
+It's done by the `account` attribute
+I believe you need these: `#[derive(AnchorSerialize, AnchorDeserialize, Clone)]` to declare that this is going to be serialized
+One of our accounts data is defined as
+```rust
+#[account]
+#[derive(Copy, Default, Eq, Ord, PartialEq, PartialOrd)]
+pub struct Lamports(pub u64);
+```
+and the tests fail with
+`IdlError: Type not found: {"name":"lamports","type":{"defined":"Lamports"}}`
+Did I forgot something?
+(edit: nevermind, it got discussed in <#899315988087054397> )
+ah wait, installed rust analyzer and now I'm bossing 🙂
+How do I ensure the user passes a token account with the correct mint?
+```    #[account(mut)]
+    pub user_token_account_address: Account<'info, TokenAccount>,
+    #[account(mut)]
+    pub program_token_account_address: Account<'info, TokenAccount>,```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Trying this now: https://discord.com/channels/889577356681945098/889577399308656662/910646465351811092
+I think I was getting caught up on the 8-byte discrimination / account(zero).
+I'm still figuring out how to pass in the additional account from the client:
+```
+await this.program.rpc.publishResponse({
+            accounts: {
+                responder: this.keypair.publicKey
+            },
+            remainingAccounts: [requester.publicKey],
+            signers: [this.keypair],
+        });
+```
+
+That's giving me a: "TypeError:  Cannot read properties of undefined (reading 'toString')" error.
+
+```
+pub fn publish_response(
+        ctx: Context<PublishResponse>,
+    ) -> ProgramResult {
+        msg!("Remaining accounts provided = {}", ctx.remaining_accounts.len());
+        let loader: Loader<Requester> = Loader::try_from_unchecked(ctx.program_id, &ctx.remaining_accounts[0]).unwrap();
+        let mut requester = loader.load_init()?;
+        requester.active_request = false;
+
+        Ok(())
+    }
+
+#[derive(Accounts)]
+pub struct PublishResponse<'info> {
+    pub responder: Signer<'info>,
+}
+```
+
+If I move the requester into the accounts, it doesn't show up in the loader and the message above prints: "Remaining accounts provided = 0"
+Is this true?
+The only reason I can see for this is that the definition of "pub struct TokenAccount(spl_token::state::Account)" takes all the content inside it's Account  (spl_token::state::Account struct) and spreads it's content inside the standard Account struct making every variable inside vault reachable directly without having to use vault.account.XXX, Now vault.XXX
+if the initial &vault.owner instead was &vault.account.owner I would understand what is going on but now I feel like something is wierd.
+However in 2. which is not in the definition of the struct passed to the instruction, but in the instruction itself. We use: .to_account_info() on the vault variable which should only be defined for the struct of the type in the upper right. which is the type defined in the standard anchor library
+after 1. we see that the owner is seemingly reachable through vault.owner which to me  makes the vault to be of type Account as defined to the down right (spl_token library)
+Hello I am stuck with something in regards to how an Account is constructed here
+Can you say more about what you're trying to do? If your program owns an account it can modify it at will, so whether you check any user-level ownership stuff is entirely up to your program. (And if your program *doesn't* own an account it can't modify it at all lol, not by itself—it'll have to ask whichever program *does* own it to do the modification.)
+Is there a good way to let someone modify an account they don't own? I've seen some mentions of "Account::try_from_unchecked" but I'm not sure how to use it in the context of a struct.
+
+```
+#[derive(Accounts)]
+pub struct ModifyAccount<'info> {
+    pub user: Loader<'info, UserAccount>,
+    pub admin: Signer<'info>,
+}
+```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Got this working:
+```
+use solana_sdk::pubkey::Pubkey;
+use std::convert::TryFrom;
+
+fn main() {
+    let solana_address = str::parse::<Pubkey>("SOLANA-ADDRESS").unwrap();
+    let sig_bytes = hex::decode("HEX-SIGNATURE").unwrap();
+    let raw_sig = ed25519::Signature::from_bytes(&sig_bytes).unwrap();
+    let sig = salty::signature::Signature::from(raw_sig);
+
+    let key = salty::signature::PublicKey::try_from(&solana_address.to_bytes()).unwrap();
+
+    let result = key.verify(b"MESSAGE-PLAINTEXT", &sig);
+
+    assert!(result.is_ok());
+}
+```
+I'm looking at the rust tweetnacl packages, but wondering if it can be done with the solana sdk
+Anyone using Rust to verify signed messages? All the examples I'm seeing are JS/tweetnacl-js
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+i want an anchor version
+it's a bit complex
+Any particular reason? It's the only solution I've found that doesn't require copying the entire structure for serialization into the account. BTreeMap would require rebuilding from scratch to work that way AFAIK.
+Gotcha, thanks a lot 🙂
+It will have to conform to some anchor traits, so can't just stick any random struct in there, no (see how anchor has to wrap the spl token stuff)
+How to read accounts belonging to other programs then? Will `Account` fail if I try to read an account struct from a third party project's SDK?
+but it knows that too
+you might be using an account from another anchor program
+actually that's wrong
+so if it's not one of those, it knows it's a program account
+Anchor only supports a very limited number of these `CpiAccount` data structs, basically just `Mint` and `TokenAccount`
+E.g. Account<'info, TokenAccount> checks it's owned by the spl token program, Account<'info, YourAccountThing> checks its owned by your program, etc.
+Account already does ownership checks for you
+As far as I can tell it works (works in the sense that it gives you a fresh frame and is way more ergonomic than an actual helper fn)
+Isn't `Account` a common wrapper for`CpiAccount` and `ProgramAccount`? Because `CpiAccount` is deprecated and points to `Account`. Should I add an `owner` check to ensure that the account belongs to my program?
+
+https://github.com/project-serum/anchor/blob/be4e946040efece1eaae29399bc4f1d8fdfbbb25/lang/src/cpi_account.rs#L12
+It's basically equivalent to calling a function (gives you a fresh stack frame), but yeah, you can run out (I think solana only supports 64 stack frames total)
+i have to read up on how memory shit works in solana and computer programming in general
+or does it just reset your stack
+lol, is this a hack? Like could you maliciously do this a bunch of times to crash solana
+I learned (I think, double checking it actually works) an interesting stack space trick. One way to get a fresh 4kb stack frame to play with is to use a helper function marked with `#[inline(never)]`; this works but is kind of awkward, since you'll have to pass arguments to that function, e.g. your `Context` (types could be obnoxious). What you seem to be able to do instead is use an `#[inline(never)]` closure though! That means no need to pass annoying argument types since you can just close over them:
+```.rs
+// need this at top of file...
+#![feature(stmt_expr_attributes)]
+
+// inside your ix function
+let helper = #[inline(never)] || -> ProgramResult {
+  // do stuff, can use ctx etc.
+  Ok(())
+};
+helper()?;
+```
+it will check your account is owned by the program and that the discriminator is correct for the account struct
+`Account` will know that you're talking about a program account
+Ownership check is definitely crucial though
+ProgramAccount is deprecated I believe
+If that's the case then ownership check is important. Not sure about `Account<'info,FeeState>`, but does `ProgramAccount<'info, FeeState>` check in the background?
+
+The docs say
+> Boxed container for a deserialized `account`. Use this to reference any account owned by the currently executing program.
+so do you think that PDA seeds checks that just use the program account's own data are effectively useless? e.g. they reference seeds and bumps directly from their own account data
+ah very good
+I don't think it's possible to assign program ownership *after* having already filled an account with data, since you can only assign program ownership once—but you must have already assigned it if you managed to fill it with data (the system program won't let you do that I don't think)
+i think the answer is yes
+i was thinking about this recently
+
+Let's say you omitted the seeds check, since it's only referencing its own seeds.
+
+Would it be possible for someone to
+- create an account
+- fill it with data that matches your program account struct
+- assign the ownership of the account to your program
+- pass in the fake fee_state account to your programs
+From a security perspective should we check for seeds each time a PDA is read? There are no external seeds. The PDA is created beforehand, with both bump and seeds stored inside.
+
+I wonder if the 8 bit discriminator stored by anchor is enough to prevent malicious accounts. It's an SHA256 hash of the account's rust name, i.e. `FeeState`. Source- https://project-serum.github.io/anchor/tutorials/tutorial-2.html#account-constraints-and-access-control
+
+```rs
+    #[account(
+        seeds = [&fee_state.fee.to_be_bytes()],
+        bump = fee_state.bump,
+    )]
+    pub fee_state: Box<Account<'info, FeeState>>,
+```
+I don't want to use the serum critbit library
+When I get some time I'll turn this into something more generic and easy to implement.
+https://github.com/atellix/slab-alloc
+There's a process to use critbit trees as an alternative hash-map system
+I haven't looked too closely. Might work for accounts to. We should do that.
+I tried to use btreemap on a struct before and ran into errors and thought this PR would solve that issue
+Oh, we're not using it in instruction data. Is this PR only for the IDL?
+I'm thinking small btreemap stores all the pointers and can be deserialised using regular anchor, and should be less than 2kb or something. And the large array of bids with details can be a 1000kb and use zero copy
+There's a decent amount of demand for btreemap and btreeset. Not sure if the PR also supports the set version though. 
+
+For us, the btreemap use case would be to act as an ordered tree that stores pointers to the indices of a zero copy array. So that we can store sorted bids in an auction program
+Im' curious what you are using a btreemap in ix data for?
+Yea we can add them.
+we can use it for the auction mechanism
+yeh
+🧸
+fine but this counts as foresight work
+as the resident borsh expert do you think you could add one
+<@!501570363566587905> it would be really cool to see these pull requests merged if possible, which will add btreemap support to anchor
+<https://github.com/project-serum/serum-ts/pull/181>
+<https://github.com/project-serum/anchor/pull/916>
+oh the anchor PR could do with a test too
+Can **the** project-serum dev do something?
+yup
+Ok, it looks like all they need is for 
+<https://github.com/project-serum/serum-ts/pull/181>
+to be accepted
+the body types what it wants
+sure, i know
+named after the soup
+it's annoying that they have to make a pull request to serum-ts to upgrade the borsh implementation there
+Borsch is the soup and borsh the library though
+oh cool
+https://github.com/project-serum/anchor/pull/916
+there's already a PR open for it
+borsch probably already supports serialization of btreemaps
+Does anyone know what kind of difficulty would be involved in adding Btreemap support to anchor
+Not sure how it works in the other case without specifying the same
+thanks
+wut wat, this works
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+install of solana 1.9.1 fixes this.  just need that bumped in the docker image when dropping next release.  
+
+I'm maintaining a docker image based off this to make sure my CI pipe stays alive and to add security tools (soteria, cargo audit). If interested https://hub.docker.com/repository/docker/glacialengineering/solana-build
+yea getting it as well <@!99911938955309056>
+well, this is on the verifiable build docker image...  So the current docker image that is out there wont work for now projects because cargo pulls in 1.9.1 solana stuff that requires a newer cli.
+
+I'm not familiar enough with rust and cargo but...
+- is there a way to build and force it to **not** use those 1.9.1 libraries?
+- should we bump cli tools version in the docker image?  I suppose this will get caught next release when the docker build fails.
+Think you need to have a fresher install of solana
+thats what you get if you use `projectserum/build:v0.18.2` and do a simple anchor init and anchor build.
+anyone else getting hit with `failed to download 'solana-frozen-abi v1.9.1'` lately?
+feature `edition2021` is required
+Also, is it possible to _not_ include an instruction in the IDL?
+Is there any way to factor out `seed = ...` and `bump = ...` into a function?
+Proposed a design for this here, haven't gotten the time to implement it atm
+https://github.com/project-serum/anchor/issues/971
+as always you come to the rescue Alan! 🙂 found it here https://github.com/project-serum/anchor/blob/423ddde30af8ba7de29e3de09a77e8a1254d9766/tests/misc/programs/misc/src/context.rs#L10.  Thanks a lot
+Yes, try searching the anchor repo for `mint::decimals` or `mint::authority`
+all not sure if this is the right spot. New to solana and anchor dev and going through the anchor tutorial examples. Kinda confused about one thing for now.. when you do a `anchor init AppName` and you ge the `declare_id!` - if I want to deploy this to `devnet` then that should be replaced. Is it with the public key of a keypair you gen locally or something else?
+Is it possible to create a new SPL token in anchor? If so, are there any examples on how to do this?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I should even push a PR, because it's always useful to have this piece of information
+Very easy to just add some additional logging in there
+Right, I would suggest using a local build of the anchor cli
+Ok, well, I'll need to see more of a repro I think, or just more info in general
+If I knew the missing file, that would be way easier.
+It's my company's code, so unfortunately, I cannot 🙁
+Can you post a github repo? I can run tests just fine on my local machine with code in separate modules
+Putting this function in a module is enough to break the tests. I don't even need to call it
+For this error, one thing you can always do to unstick yourself is to just edit the anchor cli source code and use a local build of it
+Can you post more of your code? I seem to be able to break things out into separate modules just fine, so not quite sure what you're doing
+In fact, only having this code in another module is enough to trigger this error:
+```rust
+pub fn initialize(ctx: Context<Initialize>) -> ProgramResult {
+    Ok(())
+}
+```
+`Error: could not find file`
+What error do you get? You can definitely delegate to another function
+What is the main difference between grabbing the price from the DEX order book or from pyth? Would pyth have a noticeable delay in the price vs the DEX?
+I cannot transfer the call to another function
+Why does this code prevent the tests to be run?:
+```rust
+pub fn initialize(ctx: Context<Initialize>, params: InitializeParams) -> ProgramResult {
+    crate::instructions::initialize::initialize(ctx, params)
+}
+```
+from a dex you could grab the bid, ask, or compute a mid - is that what you're looking for, or just an AMM price from an LP pair - thats simpler.
+
+Or even easier, grab a price from switchboard or pyth.  Depends your use case really
+Oh okay yeah that makes sense
+If the account is owned by your program, then solana's program ownership rules guarantee you that it was your program that wrote the account's data.
+instead of storing a string it is recommended to store it as an array of chars with a fixed size
+Is there any example to fetch the pricing of a pair from a DEX like Rayduim?
+If you check that the account's owner is your program, then only your program can modify it. So the account data cannot be altered by anything else than your program.
+How would you go about storing strings ? Can you assign a max length to a string ?
+❓  Question: How do I truly know an account with data has been created by my program and everything within the account have not been tampered with <@!134416332509675520>.
+This is likely the reason why it is not recommend to use neither a Vec or String in an account. You won't know the final memory allocation, so it's not possible to calculate rent if you want it to be rent exempt for 2 years. A Vec maximum length can never exceed the max size for an account. An accounts' max size is 10 megabytes.
+Hi, when an account struct includes a Vec<> how is memory allocated for that account (as I understand it, solana needs to know how much memory the account will use in advance)? Does the vector have a maximum length?
+I noticed some projects (like serum) use critbit trees. I am not super familiar with this type of tree, does someone understand them well? Would you not have memory issues given you get very little memory in a solana program if loading a list into memory (like serum loads bids/asks into memory, I would assume that would overflow if the lists were large).
+not sure if M1 throws that a loop tho
+If you have docker and just need a build asap, this should work
+`docker run -it --rm -v ${PWD}:/workdir glacialengineering/solana-build:0.19.0.1 anchor build`
+(i'm running on 2020 M1 so i built from source and tried binaries for solana fyi)
+maybe a clean install of solana might help but i'm unsure what all i need to delete for that
+just upgraded to 1.57, then cargo clean and anchor test, same results
+yea one sec
+Just for the heck of it, can you try using a newer rust? (I don't actually know why that would fix things, given that I thought upgrading solana was all you needed to do, but eh, worth a shot I guess)
+rustc 1.56.1 (59eed8a2a 2021-11-01)
+rustup 1.24.3 (ce5817a94 2021-05-31)
+What version of rust itself are you using?
+just did, same error
+Mm, kind of a desperate move but can you do `cargo clean` and then `anchor test` again?
+so i don't know why it's still erroring
+i mean i *think* i have solana 1.9.1 based on the cli outputs
+yeah that doesnt fix.  for me, the solution was solana 1.9.1 install
+Interesting, huh, I guess the "upgrade solana" trick isn't the whole story?
+i tried adding cargo-features=['edition2021'] to the Cargo.toml file as well, but no luck
+
+Can you show the terminal output when you get the error?
+which solana: /Users/spacemandev/Projects/solana/solana-1.9.1/bin/solana
+solana version: solana-cli 1.9.1 (src:devbuild; feat:4100269022)
+Hmm. What does `which solana` + `solana --version` say?
+were you able to figure out the edition2021 error ? i'm getting the same thing on a brand new anchor init and test; recently upgraded to solana 1.9.1 and anchor 0.19
+recently `invoke_unchecked` was introduced, however in the github thread discussing this feature there is fairly vague warning about potential hazards from using this , but it's not exactly clear *what* the dangers are.
+
+comment which mentions the warning: https://github.com/solana-labs/solana/issues/20311#issuecomment-930322586
+
+shouldnt the worst thing that happens be a runtime panic as i would imagine the solana runtime protects against any possible memory corruption errors or something along those lines
+brand new project; no lock file.
+Do you have a lock file? It shouldn't be pulling in 1.9.0.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This worked 🙂 Thank you.
+Hmm,  noticed this too. Guess I'll have to grunt those constraints manually
+No, Context::new just directly builds the struct
+Are context checks applied when I call another function in my program? Not CPI but direct call.
+
+```rs
+second_function(Context::new(
+            &my_program::id(),
+            &mut SecondFunction {
+                my_account: ctx.accounts.token_program.to_account_info()
+            },
+            &[]
+        ))?;
+```
+
+Inside context
+```rs
+#[derive(Accounts)]
+pub struct SecondFunction {
+    #[account(mut, seeds = [], bump = some_bump)]
+    pub my_account: UncheckedAccount<'info>,
+}
+```
+will this check seed constraint?
+I have no clue about how the whole thing works but I can have a look
+What you wrote above should work though, if you're in the mood to make a PR to fix the IDL part
+This is why I only ever use a single file 😈 Lol. Life is too short to deal with irritating file system shit (lol, I get that this is annoying though)
+That's what I do now, but it's a bit too much to have a file with a few module declarations. I like my files to have a bit of source code 😛
+^ this approach works fine at least
+I also don't think I've ever tried using an inline module before lol—what is it accomplishing here? Why not just make an `instructions` directory with a `mod.rs` in it, etc.?
+Ok, interesting. I agree it's a bit surprising the IDL gets so confused by that.
+Then I have `instructions/initialize.rs`
+In my lib.rs:
+```rust
+pub mod instructions {
+    mod initialize;
+    pub use initialize::*;
+}
+```
+Hmm, can you post some code showing the module structure? I'm curious what it looks like
+Api is weird to use unfortunately: you have to invoke it as a separate instruction from the client (can't CPI to it from within your rust code)
+I doubt this will work in an easy way (even if you get something compiling you'll blow your compute budget). There's an entire weird on-chain program though, `anchor.web3.Ed25519Program`, that will verify signatures for you
+Has anyone tried validating sha256 signatures onchain? I'm having trouble getting a rust openssl library working with solana
+I'm not sure that I can modify the code to keep my structure
+It's an inline module.
+Just found the source of the issue:
+```rust
+let possible_file_paths = vec![
+    parent_dir.join(format!("{}.rs", item.ident)),
+    parent_dir.join(format!("{}/mod.rs", item.ident)),
+    parent_mod_dir.join(format!("{}.rs", item.ident)),
+    parent_mod_dir.join(format!("{}/mod.rs", item.ident)),
+];
+```
+That code assumes that any module has a <name>.rs file or <name>/mod.rs file, but my module has neither of both.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+this can be fixed by using more recent BPF sdk. But docker has very old 1.8.0
+anchor 0.19.0 docker image problem: ```error: failed to download `solana-frozen-abi v1.9.1`
+
+Caused by:
+  unable to get packages from source
+
+Caused by:
+  failed to parse manifest at `/root/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-frozen-abi-1.9.1/Cargo.toml`
+
+Caused by:
+  feature `edition2021` is required
+```
+Thanks
+You need an import, `use std::str::FromStr;`
+```const key = new web3.PublicKey("")```How can I do this in Rust
+
+I'm trying with `let key = Pubkey::from_str("")` but it giving me this error
+
+```no function or associated item named `from_str` found for struct `anchor_lang::prelude::Pubkey` in the current scope
+
+function or associated item not found in `anchor_lang::prelude::Pubkey```
+I have also create an issue with my expectations about this ^^ : https://github.com/project-serum/anchor/issues/1192
+<@!134416332509675520> I have raised a PR for this. If anyone can review it, would be really helpful: https://github.com/project-serum/anchor/pull/1190
+I'm also looking for a way to check RSA signature on-chain. Looks like most of rsa libraries for rust can't be compiled in bpf mode.
+I'm tried: 
+openssl = "0.10.38",
+rsa = "0.5.0"
+ring = "0.16.20"
+rsa_sign = "0.1.2"
+1. Opt level 3 seems to be the default for release
+2. LTO (link time optimization) = fat tries to optimise all crate imports
+3.  `codegen-units`: higher value helps with parallel compilation
+Thanks <@!679936424971468859> for sharing this. I had not given this a thought at all and it's quite essential I'd say.
+edit: found it https://doc.rust-lang.org/book/ch14-01-release-profiles.html seems to be the case.
+What exactly does it do (im still relatively new to rust). Does it increase the size of the build and make it faster at runtime?
+NVM found it. Brought down 110k to 70k, pretty decent. Laptop turns into aircraft though
+
+```
+[profile.release]
+lto = "fat"
+codegen-units = 1
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
+```
+Anyone has the cargo config to optimize Anchor builds? Remember seeing it earlier but can't find
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+yeah, the docker needs the solana version bumped up.  im not able to submit a PR right now but the docker image is in the `./docker` folder
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Not as far as I know
+Any way to call instructions using anchor client without pulling in the program code as a dependency? i.e. like how anchor-ts uses the IDL to not depend on the rust program code directly
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+There is no library that allows you to make use of the IDL as in TS, but you can import the rust crate directly, if ever that works for your use case?
+Is there an anchor client for rust?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+tyty, someone was telling me that you could and it really confused me because it didn't make any sense
+And you can't declare a generic variable (not totally sure what you mean), only a variable with a well-defined type (which might be a previously declared generic I guess, but you can't just randomly do `let foo: T = ...;`)
+The line `let test: T = "test";` won't work
+I have a question regarding generics:
+
+```
+struct Data<T> {
+        value:T,
+}
+
+let test: T = "test";
+```
+
+That struct makes sense because T is being defined as a generic of Data, so the data type of T can be a generic
+
+but how is T being defined for test
+
+How can I declare a generic variable? What do I need to import?
+
+What if I wanted to declare something like:
+
+```
+let test: T = func_name()...await?;
+```
+
+I want to use Multisig program with  anchor-client, there is a remainning_account needed, how can I fill it on a RequestBuilder?
+if you have the state struct you can deserialize is after querying the account
+(I'd like to avoid the on-chain code and this code sharing a repo, if at all possible)
+Similarly, is there a way to deserialize accounts using the IDL with rust? Or do I need to implement anchor_lang::AccountDeserialize for the struct?
+You can easily create the solana_sdk's `Instruction` object with the generated code there.
+Does this kind of thing count? https://github.com/project-serum/anchor/blob/master/client/example/src/main.rs#L157
+I might have missed your point though
+You get the account and arguments struct for each, that's enough
+The generated Rust code doesn't allow to crate the instructions easily AFAIK
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yes, I have the same results.
+I managed to integrate RSA decrypt function in a program, but it blows the compute budget!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Storage writes are expensive in EVM. Generally you use a temporary variable for calculations, and finally write the result to storage. Was considering this pattern in anchor earlier
+This state in anchor is still ultimately stored on-chain, anchor just lets you play around with it as an in-memory struct during your program.
+What are ethereum memory variables?
+Interesting. Can avoid ethereum like memory variables this way
+You can see how Account does it here: https://github.com/project-serum/anchor/blob/master/lang/src/account.rs#L103
+Batched at the end.
+How do account writes work behind the scenes? Account data is modified each time I change a variable, or writes are batched at the end?
+Yea
+Though it would be a great addition
+Unfortunately this isn't supported yet
+Is there a way to assign account variables in one go, via the account struct?
+
+```rs
+ctx.accounts.fee_state.bump = fee_state_bump;
+ctx.accounts.fee_state.fee = fee;
+ctx.accounts.fee_state.tick_spacing = tick_spacing;
+
+// want this
+ctx.accounts.fee_state = FeeState {
+    bump,
+    fee,
+    tick_spacing
+};
+```
+
+The second way is cleaner but throws an error
+
+> expected struct `Box<anchor_lang::Account<'_, fee::FeeState>>` found struct `fee::FeeState`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hey all, I am trying to understand if it is possible to transfer native SOL tokens between two accounts in anchor rust, something like:
+```
+token::transfer(
+    CpiContext::new(
+        PROGRAM_ACCOUNT,
+        anchor_spl::token::Transfer {
+            from: source_user_info,
+            to: destination_user_info,
+            authority: source_user_info,
+        },
+    ),
+    1,
+)?; 
+```
+https://stackoverflow.com/questions/70528742/how-to-transfer-sol-in-anchor-smart-contract-instruction
+Any help is very appreciated. Thanks!
+you could forward the non migrated txns to the old program
+You could basically just fall back to mango's old entrypoint function.
+Maybe one thing you could do is use anchor's support for a fallback function. You can use an instruction function with the usual low-level solana entrypoint signature and anchor will fall back to it if the incoming instruction's sighash (or lack thereof) didn't match any other known instruction sighashes:
+```.rs
+pub fn fallback(program_id: &Pubkey, accounts: &[AccountInfo], data: &[u8]) -> ProgramResult {
+  ...
+}
+```
+has anyone here done a gradual migration to anchor? from plain solana program...thinking of how to do it with mango...gradual migration would be more sustainable than big bang rewrite
+anyone knows if there is an *async* RPC client in rust?
+so you will be able to have more room for computation
+one feature coming up is having 1mil compute budget for an instruction (assuming no more instructions in the same txn)
+then you can decide what to do
+so it allows you to profile it
+to mock the environment and allocate as much compute budget as you want
+you can try with solana-test-program
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Any way to disable preflight check on anchor client?
+ahh
+Ah, my guess is that it won't work but you could give it a shot? I wouldn't be surprised too if you run out of compute budget (people are busting out newton's method to calculate square roots lol 😬)
+Ah had a doubt about the floating points ops. So you think https://docs.rs/probability/0.15.5/probability/distribution/trait.Distribution.html#tymethod.distribution this crate for probability is probably a no go?
+Not sure about the full list, but: no mutable global state of any kind (mutable static vars), float operations are surprisingly limited
+hi all, what if any are the restrictions on what kinds of open source crates we can use in our contracts?
+that is to interact with 1 single endpoint though
+so create a struct with the same structure + hardcode the sighash, howver sighahs probably can be calculated
+What i do is replicate anchor bits
+I think I can get by by importing from another workspace for now
+There's no current anchor support for this, so you'd have to (somehow) do it manually
+(the stub generation, for rust)
+https://twitter.com/RangoSparr/status/1476572009899302912
+Anyone know how I'd go about doing this?
+You'll have to do the lamport movement yourself, manually as above
+Then you can't use the system program either, because it's owned by your program:
+```.rs
+fn transfer_from_account_we_own(
+    src: &mut AccountInfo, // we better own this account though
+    dst: &mut AccountInfo,
+    amount: u64,
+) -> ProgramResult {
+    **src.try_borrow_mut_lamports()? = src
+        .lamports()
+        .checked_sub(amount)
+        .ok_or(ProgramError::InvalidArgument)?;
+    **dst.try_borrow_mut_lamports()? = dst
+        .lamports()
+        .checked_add(amount)
+        .ok_or(ProgramError::InvalidArgument)?;
+    Ok(())
+}
+```
+Ohh, I see. It is an account created by my program
+How you would do so depends on which program owns the source account (is it a user wallet? an account owned by your program? etc.). If it's a user wallet, then https://solanacookbook.com/recipes/basic-transactions.html#sending-sol
+Native (non-wrapped) sol isn't a token, so you can't use the token program to transfer it
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+The way anchor does this internally is to use the `Account::try_from_unchecked` function, which ignores the discriminator (the discriminator will get written at the end of the instruction)
+I want to init and set parameters of a program account passed through `remaining_accounts`.
+
+- Account creation using `create_account` works properly
+- How do I deserialize and change the account fields? `Account::try_from` panics. It shows `Invalid account discriminator` when I comment out this line and try to decode account on client side.
+
+```rs
+let space: u64 = 100;
+let rent = Rent::get()?;
+let lamports = rent.minimum_balance(space as usize);
+
+// create_account works properly
+let ix = create_account(
+    ctx.accounts.payer.key,
+    &ctx.remaining_accounts[0].key,
+    lamports,
+    space,
+    ctx.program_id
+);
+solana_program::program::invoke_signed(
+    &ix,
+    &[
+        ctx.accounts.payer.to_account_info(),
+        ctx.remaining_accounts[0].to_account_info(),
+        ctx.accounts.system_program.to_account_info()
+    ],
+    &[&[
+        ctx.accounts.my_state.some_address.as_ref(),
+        &[bump]
+    ]]
+)?;
+
+// panics here
+let my_decoded_account: Account<'info, MyAccount> = Account::try_from(&ctx.remaining_accounts[0].to_account_info()).unwrap();
+```
+Which is something people often ask for
+Just that they can load up a local net with Solana data at specific points in time or with certain data
+Not sure what the POC thing is
+Ok, yeah, that's what solana does by default I think (don't have to think about costs of writes).
+you mean the poc thing they have for pen testing?
+Is this something we could add to anchor possibly?
+Neodyne seem to have some kind of setup for recreating blockchain state
+Idl parser can’t yet parse consts for array sizes
+my only guess would be that 'deriving' happens before assigning the variable but would that be workaroundable?
+would like to use `const` to declare array like that:
+```
+const SIZE: u16 = 100; // UPDATE IN ARRAYS AS WELL!
+
+#[account(zero_copy)]
+#[derive(PartialEq, Debug)]
+pub struct Oracle {
+    pub data: [Record; SIZE as usize],
+```
+but throws: 
+`'called `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }', lang/syn/src/idl/mod.rs:143:76`
+any ideas?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Yea, it came up when I searched
+i just remember armani telling someone they needed to run `exit` in order for their account data to actually be updated
+ah ok, this is the other (semi-secret) type of anchor account serialization where you do all the internal anchor steps manually in the program function
+It's not zero copy. I didn't mention this earlier, but account initialization happens in a loop.
+This is what you have to call after updating a zero copy account to make sure it writes the changes you made?
+`error: Invalid attribute
+  --> programs/ido-start/src/lib.rs:20:15
+   |
+20 |     #[account(associated = authority, with = usdc_mint)]
+   |               ^^^^^^^^^^
+
+error: could not compile `ido-start`
+
+To learn more, run the command again with --verbose.`
+I have this error, anybody please help me
+How changed from associated in anchor 0.5.0 to current version?
+Thanks a lot! `Invalid account discriminator` still remained on client side, but it went away on calling `my_decoded_account.exit(ctx.program_id)?`
+reason am asking is if i do & (account.data.try_borrow? ) which is & Ref<&mut u8> return &mut u8 ? cause it says only for the operator * deref is implemented if so then how does the above code work with '&'
+cqfd does deref trait kicks in when you do &T or *T ?
+kinda messed up
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This would theoretically solve that problem https://github.com/project-serum/anchor/pull/1070
+That's pretty much what I was thinking. It "loads" but really it only does work when you access part of the account because it has to deserialise that section of bytes
+Part of the point of zero_copy is that it doesn't do much 😛
+But actually, the load itself doesn't really do any work, so I wouldn't expect this to be expensive
+Yeah, the anchor macros will repeat each of those `address = ` expressions (they're just embedded into some other code as written). Not sure if there will be an easy way to get around that.
+Just comment out each call to load, one at a time, and see the effect it has on compute cost
+You could run some tests to see how much compute it takes up
+Is zero copy deserialization inefficient when using context based constraints? Here the account is loaded 4 times- thrice in the context and once in the function.
+
+```rs
+#[derive(Accounts)]
+pub struct ZeroCpyTest<'info> {
+    pub my_account: Loader<'info, MyAccount>,
+
+    #[account(
+        address = my_account.load()?.first
+    )]
+    pub first: UncheckedAccount<'info>,
+
+    #[account(
+        address = my_account.load()?.second
+    )]
+    pub second: UncheckedAccount<'info>,
+
+    #[account(
+        address = my_account.load()?.third
+    )]
+    pub third: UncheckedAccount<'info>,
+}
+
+pub fn my_function(ctx: Context<ZeroCpyTest>) -> ProgramResult {
+    let my_account = &mut ctx.accounts.my_account.load_mut()?;
+```
+can anybody here get the anchor-debug feature flag to work? this is a more rust specific question, not obvious to me why after explicitly enabling the feature the log still doesnt work,
+```
+#[cfg(feature = "anchor-debug")]
+::solana_program::log::sol_log(#log);
+```
+
+current workaround is to use a fork with the feature checking commented out https://github.com/microwavedcola1/anchor/commit/e34bd34cd08261b9d54290db2bcc84cbd168acb1
+great! thank's for the tip <@!886273867293802556>
+in rust->ts
+yeah snake case is changed to camel btw
+I think I'll need to pass something more, cuz the program should identify the owner of the post by uid
+hummmm, got it
+and systemProgram
+so your RPC call needs to match what you have there, so instead of 'baseAccount' and 'user', it would be 'from' and 'to'
+hey! it's this way
+
+```#[derive(Accounts)]
+pub struct SendSol<'info> {
+    #[account(mut)]
+    from: Signer<'info>,
+    #[account(mut)]
+    to: AccountInfo<'info>,
+    system_program: Program<'info, System>,
+}```
+what does your `SendSol` look like
+does anyone know how to do that and help, please?
+I did it so far:
+
+```await program.rpc.sendSol(2, {
+    accounts: {
+      baseAccount: baseAccount.publicKey,
+      user: provider.wallet.publicKey,
+    },
+  });```
+I'm just trying to understand how can I inform the `from` and `to` in my js test
+Yo guys, how you're doing?
+just trying to implement a `buy me a coffee` in list of gifs posted.
+
+I did this code bellow so far:
+
+```pub fn send_sol(ctx: Context<SendSol>, amount: u64) -> ProgramResult {
+        let ix = anchor_lang::solana_program::system_instruction::transfer(
+            &ctx.accounts.from.key(),
+            &ctx.accounts.to.key(),
+            amount,
+        );
+        anchor_lang::solana_program::program::invoke(
+            &ix,
+            &[
+                ctx.accounts.from.to_account_info(),
+                ctx.accounts.to.to_account_info(),
+            ],
+        )
+    }```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+is your  `payer` account declared as mutable?
+```rust
+#[account(mut)]
+pub payer: Signer<'info>,
+```
+How to initialize an account in a CPI call? I'm trying to call `my_function()` on program B from program A
+
+```rs
+let cpi_accounts = MyFunction {
+    payer: ctx.accounts.minter.to_account_info(),
+    my_state: ctx.accounts.my_state.to_account_info(),
+    system_program: ctx.accounts.system_program.to_account_info()
+};
+program_b::cpi::my_function(
+    CpiContext::new_with_signer(
+        ctx.accounts.program_b.to_account_info(),
+        cpi_accounts,
+        &[&seeds[..]]
+    ), bump
+)?;
+```
+
+`program_b#my_function()` initializes an account:
+
+```rs
+#[account(
+    init,
+    seeds = [
+    ],
+    bump = bump,
+    payer = payer
+)]
+pub my_state: Loader<'info, MyState>,
+```
+
+This gives `Cross-program invocation with unauthorized signer or writable account` error. I believe a `SystemProgram` call to transfer lamports to `my_state` is failing. Error goes away if I transfer lamports beforehand by appending a javascript instruction:
+
+```ts
+  const lamportsIx = SystemProgram.transfer({
+    fromPubkey: owner,
+    toPubkey: myState,
+    lamports: web3.LAMPORTS_PER_SOL
+  })
+```
+
+How do I init `my_account` without the lamport transfer step?
+If crate have features which allow exclude it then yes, it's possible
+Is it possible to ignore sub-dependencies when compiling? I'm trying to use the ZCash ECC library (https://crates.io/crates/bn/0.4.3), but it depends on `rand = "0.3.14"` (https://crates.io/crates/rand/0.3.14). I just want to use the ECC arithmetic operations (add, mul, pairings), and I don't need any of the functions that use randomness. Is it possible to prune these functions that depend on rand, or do I have to fork the repo and remove them myself?
+
+I tried to use the `getrandom` trick from the Solana docs (https://docs.solana.com/developing/on-chain-programs/developing-rust#depending-on-rand), but the version of `rand` that the ZCash library uses is very old, it doesn't depend on `getrandom`, it uses `libc` directly
+gotcha yeah that makes sense
+If you have the IDL, you can create a dummy rust contract that will give you the same API.
+usuaally projects will at least open source the interface
+looking at a bunch of closed source programs - the NFT marketplaces
+Are you using a closed source program or something?
+If you wanted such a thing, we'd have to create a new client generator that reads the IDL and re-does with the macro does, but spitting out a .rs file.
+No. Currently the macros generate all the types needed for CPI/client eneration.
+https://project-serum.github.io/anchor/tutorials/tutorial-3.html#defining-a-puppet-program 
+looking through the CPI examples, it looks like the underlying program is required for CPI calls. Is there any documentation to be able to run CPI calls with just an IDL/entrypoint?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+1.9 probably
+https://jstarry.notion.site/Transaction-Fees-f09387e6a8d84287aa16a34ecb58e239#6c4bae9a910641028cc4f3a747be7a6d
+hey, do you know when this will happens?
+it's a bug i run into sometimes, where i forget to set some serum account as mut
+if you need an account to be mutable for CPI purposes then you would have to mark it as mut in the anchor constraints
+I think one thing that would be tough is that you might receive an account while being embedded in a bigger transaction, where you might not need mutable access to the account but some later instruction does—it will still show up with `is_mutable` set to true, even if you didn't ask for it/need it.
+maybe in solana classic program this doesn't raise an error like it should
+in anchor at least it should error if an account is passed in as mutable that isn't defined as mutable in the contract / program
+you guys seem to be talking about mutability like it's something defined by the instructions rather than the program itself
+Hmm yea
+And you might not pass it as any other explicit account
+provider.wallet has to be mutable because it's the thing paying for the tx fees
+How about making `provider.wallet` read-only by default? Devs will need to  explicitly mark signer accounts as mutable.
+Hurrah
+That looks like a bug you fixed
+Yeah, definitely a slightly odd thing in solana that you might be granted mutable access to an account even if you forgot to ask for it (and then it's easy to not realize you've done so)
+I think its a good idea to explicitly mark signers as mutable for the benefit of 3rd party composers. `provider.wallet` may work out of the box, but not smart contracts making a CPI.
+
+I had to change metaplex SDK code to explicitly make the payer mutable, from `AccountMeta::new_readonly(payer, true)` to `AccountMeta::new(payer, true)`
+This must be a new thing that signers are automatically marked as mutable
+But yeah, in general transferring lamports will require the source and the destination to both be mutable, so if it's working then they're both mutable (somehow).
+Is the source account the provider.wallet? If so it was automatically marked as mut (and automatically signs too) because it's the tx fee payer.
+Resolved, thanks!
+
+Question. I can transfer lamports inside program A even if signer is not marked mutable. Then why different behavior in CPI to program B?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+they also share a direct tokio channel, the client and the server
+yes, if you look inside program test, you would find that ever program test context comes with its own local server and rpc client
+got some more info in the Solana discord about program_test:
+```the main difference in my view is that with program-test, you can run many many tests concurrently in totally isolated environments, since everything works within the same process with banks-server https://github.com/solana-labs/solana/blob/b0be0881a77428f207dc3554b584972462ba2442/banks-server/src/banks_server.rs#L311.  if you're using JS, you're likely running against solana-test-validator, and isolating two different tests is impossible unless you run a new validator for each one and assign ports.  otherwise, it makes for quicker dev cycles, since everything stays in Rust```
+ah, yeh, maybe that part isn't implemented. But logically it should work eventually
+Tried, but didn't work
+I guess these are the differences in ts vs rust afaics, but I am guessing many of these are also obvious to you 
+- the validator runs externally in-process, maybe (in rust tests) its an even further streamlined validator (banksclient) in comparison to the standalone node, 
+- ckds made the rust tests like 20x faster (not sure if this improvement also benefits the TS tests), see https://github.com/solana-labs/solana/commit/bea181eba9e0fb5c8be6fa8880fae2c85cc8aea9
+- then there is node + mocha runner, and also ts->js transpiling
+- also mocha has some max timeout, so the test keeps on running and exits with 0 once that max timeout is finished
+Anchor assumes your program should own the loader account. You might try adding the `owner` constraint to indicate what program does actually own the account
+We were just curious to understand more about how running tests using rust actually works and what it's doing that makes it so much faster
+? dont follow, whats the context
+<@837011211795038260>
+`Loader::<ZeroCopyBasedAccount>::try_from()` worked. Context based deserialization is not implemented yet?
+How to decode a zero copy account inside a third party program? My program B imports program A crate, and tries to decode two accounts belonging to A. The regular account is decoded properly, but the zero-copy one  gives an `account is not owned by the executing program` error. 
+
+Inside program B context:
+```rs
+// non-zero copy, works
+pub first_state: Box<Account<'info, RegularAccount>>,
+
+// zero copy, error
+pub second_state: Loader<'info, ZeroCopyBasedAccount>,
+
+// where NonZeroCopyAccount and ZeroCopyBasedAccount are owned by program A
+```
+but for real does program_test send data over the network or does it interact with the program directly?
+here:
+sorry but there is a function in discord that hsa a magnifying glass
+fair
+please use Discord search
+cc: <@!856894333180706876> 
+
+Does anyone have much experience with running program tests directly in rust?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

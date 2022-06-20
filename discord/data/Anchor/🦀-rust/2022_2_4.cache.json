@@ -1,0 +1,221 @@
+{
+    "total_results": 7,
+    "messages": [
+        [
+            {
+                "id": "939096326635937863",
+                "type": 0,
+                "content": "Even if it is zero cost, shouldn't it return `-> Result<&mut Self, ProgramError>`? So we couldn't user `buf` anymore",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "788122420765917184",
+                    "username": "inoursweetz",
+                    "avatar": "438039d5014a59611a9639eb8617f87d",
+                    "discriminator": "6273",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T09:53:31.836000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939054020629245982",
+                "type": 0,
+                "content": "mmmh so is it zero copy or is it not",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T07:05:25.298000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939053974961684510",
+                "type": 0,
+                "content": "...",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T07:05:14.410000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939053960222871563",
+                "type": 0,
+                "content": "actually it says below \"// Copy out the bytes into a new, owned data structure.\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T07:05:10.896000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939053807579594783",
+                "type": 19,
+                "content": "I see, thank you! But isn't this unsafe, as nothing stops us from mutating `buf` afterwards, which is aliased with `Self`?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "788122420765917184",
+                    "username": "inoursweetz",
+                    "avatar": "438039d5014a59611a9639eb8617f87d",
+                    "discriminator": "6273",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T07:04:34.503000+00:00",
+                "edited_timestamp": "2022-02-04T07:05:01.232000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "939051877503496222"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939051877503496222",
+                "type": 19,
+                "content": "```\n                // This trait is useful for clients deserializing accounts.\n                // It's expected on-chain programs deserialize via zero-copy.\n                #[automatically_derived]\n                impl #impl_gen anchor_lang::AccountDeserialize for #account_name #type_gen #where_clause {\n                    fn try_deserialize(buf: &mut &[u8]) -> std::result::Result<Self, ProgramError> {\n```\nBecause in the zero copy case it mutates directly the underlying buf?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788122420765917184",
+                        "username": "inoursweetz",
+                        "avatar": "438039d5014a59611a9639eb8617f87d",
+                        "discriminator": "6273",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T06:56:54.337000+00:00",
+                "edited_timestamp": "2022-02-04T06:57:00.260000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "939051224358084619"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "939051224358084619",
+                "type": 0,
+                "content": "Good day!\nWhy exactly `fn try_deserialize(buf: &mut &[u8]) -> Result<Self, ProgramError> {` method takes `&mut &[u8]` and not `&[u8]`? I don't see how can this be useful",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "788122420765917184",
+                    "username": "inoursweetz",
+                    "avatar": "438039d5014a59611a9639eb8617f87d",
+                    "discriminator": "6273",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-02-04T06:54:18.615000+00:00",
+                "edited_timestamp": "2022-02-04T06:54:33.806000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "992803df1936ad614926d7a4d8fd3152"
+}

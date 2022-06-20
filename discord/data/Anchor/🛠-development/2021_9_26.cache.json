@@ -1,0 +1,1510 @@
+{
+    "total_results": 43,
+    "messages": [
+        [
+            {
+                "id": "891725340060287017",
+                "type": 19,
+                "content": "It all gets clearer when you think of solana as an operating system and accounts as the memory required for a certain program execution.\nThe PDA to be created is just another pointer to a certain region in memory, a predictable pointer address actually.  When creating a PDA account what you are saying to the solana operating system is to Allocate the memory space at this address for you. \n\nSo why would it be weird for a still non allocated memory pointer to be passed to the program ? It is at the end a region of memory the program execution will use thus is needs to be specify for the program to be allowed access and not get a segfault from the kernel.\n\nThis way of framing solana has been helpful to me.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T16:38:08.526000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891707936949284945"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891715460331110501",
+                "type": 0,
+                "content": "I remember reading somewhere a macro to get current programId, like key!() or something, cannot find it back <:pepeThink:844646497911046164>",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "443079510053748743",
+                    "username": "Acammm",
+                    "avatar": "e5c0f2305d711a7c3ac8b1ee080d0958",
+                    "avatar_decoration": null,
+                    "discriminator": "3260",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T15:58:53.015000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891707936949284945",
+                "type": 19,
+                "content": "Yep. Definitely kind of a funny thing to get used to. For me it's helpful to think of this in terms of the low-level solana entrypoint signature you/anchor has to implement, `(program_id: &Pubkey, accounts: &[AccountInfo], data: &[u8]) -> ProgramResult`. *Any* account your program wants to interact with needs to arrive via that `&[AccountInfo]` slice\u2014which in the case of account creation is quite odd to think about, because `AccountInfo` gives you access to the account's lamports, its data, etc. I thought that was super confusing at first, since, like, you haven't even created the account yet, so what data are you looking at \ud83e\udd14? The answer is that this is just how solana works, you get passed a kind of uninitialized version of the account(info), and it's only when you subsequently pass it along via CPI to the system_program that the account gets \"created\" (really, \"initialized\", with the right lamports + data allocation + owner).",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "885907313179906179",
+                        "username": "thomasr",
+                        "avatar": "e009771ef08c874a33ede91fc5908dbe",
+                        "avatar_decoration": null,
+                        "discriminator": "0306",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T15:28:59.301000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891695844804395008"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891698082469802004",
+                "type": 19,
+                "content": "Yes",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "885907313179906179",
+                        "username": "thomasr",
+                        "avatar": "e009771ef08c874a33ede91fc5908dbe",
+                        "avatar_decoration": null,
+                        "discriminator": "0306",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T14:49:49.810000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891695844804395008"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891697844908617748",
+                "type": 19,
+                "content": "To me the reason is that if the account you create is a PDA then the program needs to create it, so this one requires the seed and nonce.\nThis is how i do it : \n```\n    #[account(\n    seeds = [\"init\".as_bytes()],\n    bump = initaccount_nonce,\n    )]\n    meta_data: ProgramAccount<'info, MetaData>,\n```\n\nHere is another way to do so : \nhttps://github.com/project-serum/anchor/blob/master/tests/cashiers-check/programs/cashiers-check/src/lib.rs#L106",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "826825640946827336",
+                        "username": "imprfekt",
+                        "avatar": "0c7f55fad5ef3f16715a4512229139fe",
+                        "avatar_decoration": null,
+                        "discriminator": "1337",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T14:48:53.171000+00:00",
+                "edited_timestamp": "2021-09-26T14:51:14.454000+00:00",
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891642311983906918"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891695844804395008",
+                "type": 19,
+                "content": "Interesting - so, for new accounts, a program cannot create one _unless_ the intended address for the new account is passed in with the transaction headers?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "885907313179906179",
+                    "username": "thomasr",
+                    "avatar": "e009771ef08c874a33ede91fc5908dbe",
+                    "avatar_decoration": null,
+                    "discriminator": "0306",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T14:40:56.309000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891422322727190549"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891689355998015570",
+                "type": 19,
+                "content": "is this possible? or all Account<> passed to the anchor method has to be initialized?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "505408791010082836",
+                    "username": "jerry",
+                    "avatar": "e57fcacce7e75a516d5c6a7b49957cea",
+                    "avatar_decoration": null,
+                    "discriminator": "0860",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T14:15:09.257000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891627326398406656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891643167483527179",
+                "type": 0,
+                "content": "Perhaps I'm missing some macro attribute in the Initialize struct",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "826825640946827336",
+                    "username": "imprfekt",
+                    "avatar": "0c7f55fad5ef3f16715a4512229139fe",
+                    "avatar_decoration": null,
+                    "discriminator": "1337",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T11:11:37.057000+00:00",
+                "edited_timestamp": "2021-09-26T11:13:41.386000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891643029088268348",
+                "type": 0,
+                "content": "In standard rust (without Anchor) I'd do this during the PDA creation, just passing the `total_amount` as a parameter\n``` &system_instruction::create_account(\n            &issuer.key,\n            &pda.key,\n            total_amount + cluster_rent.minimum_balance(struct_size),\n            struct_size as u64,\n            &pid,\n        ),\n        &[issuer.clone(), pda.clone(), system_program.clone()],)?;\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "826825640946827336",
+                    "username": "imprfekt",
+                    "avatar": "0c7f55fad5ef3f16715a4512229139fe",
+                    "avatar_decoration": null,
+                    "discriminator": "1337",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T11:11:04.061000+00:00",
+                "edited_timestamp": "2021-09-26T11:11:16.205000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891642311983906918",
+                "type": 0,
+                "content": "How does one transfer lamports from user `provider.wallet` to pda? I have the following code:\n\n```\n#[derive(Accounts)]\npub struct Initialize<'info> {\n    #[account(init, payer = issuer)]\n    pub pda: Account<'info, CustomAccStruct>,\n    #[account(mut)]\n    pub issuer: Signer<'info>,\n    pub system_program: Program<'info, System>,\n}\n\n pub fn initialize(ctx: Context<Initialize>,\n                  total_amount: u64) -> ProgramResult {\n        let pda = &mut ctx.accounts.pda;\n        **ctx.accounts.pda.issuer.try_borrow_mut_lamports()? -= total_amount;\n        **pda.to_account_info().try_borrow_mut_lamports()? += total_amount;\n\n        Ok(())\n    }\n```\nAnd I'm getting ` Instruction 0: instruction spent from the balance of an account it does not own\n`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "826825640946827336",
+                    "username": "imprfekt",
+                    "avatar": "0c7f55fad5ef3f16715a4512229139fe",
+                    "avatar_decoration": null,
+                    "discriminator": "1337",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T11:08:13.090000+00:00",
+                "edited_timestamp": "2021-09-26T11:08:51.190000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891627326398406656",
+                "type": 0,
+                "content": "I am trying to pass an uninitialized mint to my program for CPI with:\n`\n#[account(zero)]\npub mint: Account<'info, Mint>\n`\nbut the program crashes. Does anyone what should I do?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "505408791010082836",
+                    "username": "jerry",
+                    "avatar": "e57fcacce7e75a516d5c6a7b49957cea",
+                    "avatar_decoration": null,
+                    "discriminator": "0860",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T10:08:40.248000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891600308793376838",
+                "type": 19,
+                "content": "ya i got it working it was a problem with the way i named the library in `[lib]` in Cargo.toml",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "438874996614365185",
+                    "username": "jbogle",
+                    "avatar": "75044f344034a76ee77967b3456a8222",
+                    "avatar_decoration": null,
+                    "discriminator": "5816",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "706541980032827454",
+                        "username": "danmt",
+                        "avatar": "c3cd900f47bd4fc5607b43531bdec197",
+                        "avatar_decoration": null,
+                        "discriminator": "3989",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T08:21:18.749000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891596804372693022"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891596804372693022",
+                "type": 19,
+                "content": "Were you able to get around it? In my case it was due to declare_id not being correct, you have to use the publicKey from the keypair that anchor uses",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "706541980032827454",
+                    "username": "danmt",
+                    "avatar": "c3cd900f47bd4fc5607b43531bdec197",
+                    "avatar_decoration": null,
+                    "discriminator": "3989",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "438874996614365185",
+                        "username": "jbogle",
+                        "avatar": "75044f344034a76ee77967b3456a8222",
+                        "avatar_decoration": null,
+                        "discriminator": "5816",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T08:07:23.230000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891576123165671444"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891595993303351296",
+                "type": 0,
+                "content": "Anyone one over here who has interacted with metaplex core contracts via cpi ? is it possible to do that to interact with a non-anchor program from anchor as for a anchor program the cpi feature exposes all methods not sure how would it go from interaction on an anchor smart contract let say t o a metaplex contract.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "avatar_decoration": null,
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T08:04:09.856000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891595589270249552",
+                "type": 19,
+                "content": "Thanks!! I actually got around this by building the anchor-cli locally just like you stated. <@134416332509675520> helped me out",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "706541980032827454",
+                    "username": "danmt",
+                    "avatar": "c3cd900f47bd4fc5607b43531bdec197",
+                    "avatar_decoration": null,
+                    "discriminator": "3989",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "103986638320861184",
+                        "username": "davoclavo",
+                        "avatar": "d0f49d5060205269bd1a195055855925",
+                        "avatar_decoration": null,
+                        "discriminator": "2968",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T08:02:33.527000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891464383174156288"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891576123165671444",
+                "type": 19,
+                "content": "Iim actually still getting this `The given account is not owned by the executing program` error but ive double checked my declare_id, anchor.toml programIds match and printed the one being used from the test and its all the same, but i still get that error running `anchor test`\n\n^ well i solved this by updating the `[lib]` `name` it was incorrect before since i had updated it. But now i changed it back and it still works so not sure what happened there I think maybe i had the old name still in the cargo build cache or something",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "438874996614365185",
+                    "username": "jbogle",
+                    "avatar": "75044f344034a76ee77967b3456a8222",
+                    "avatar_decoration": null,
+                    "discriminator": "5816",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "706541980032827454",
+                        "username": "danmt",
+                        "avatar": "c3cd900f47bd4fc5607b43531bdec197",
+                        "avatar_decoration": null,
+                        "discriminator": "3989",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T06:45:12.446000+00:00",
+                "edited_timestamp": "2021-09-26T07:22:08.346000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "889595475630637077"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891571924671545364",
+                "type": 0,
+                "content": "like tokens I used to hold yesterday",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "330774061787381762",
+                    "username": "crypto_is_good",
+                    "avatar": "f0eb5fe19b4396398d9c22922bf99952",
+                    "avatar_decoration": null,
+                    "discriminator": "2624",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T06:28:31.447000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891571867045998612",
+                "type": 0,
+                "content": "has anyone ever ran into an issue where `getParsedTokenAccountsByOwner` returned old data",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "330774061787381762",
+                    "username": "crypto_is_good",
+                    "avatar": "f0eb5fe19b4396398d9c22922bf99952",
+                    "avatar_decoration": null,
+                    "discriminator": "2624",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T06:28:17.708000+00:00",
+                "edited_timestamp": "2021-09-26T06:28:24.609000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891571666797350962",
+                "type": 0,
+                "content": "hi everyone!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "330774061787381762",
+                    "username": "crypto_is_good",
+                    "avatar": "f0eb5fe19b4396398d9c22922bf99952",
+                    "avatar_decoration": null,
+                    "discriminator": "2624",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T06:27:29.965000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891563352709562398",
+                "type": 0,
+                "content": "<@!134416332509675520> <@731429096013168642> thank you both for helping me figuring this out! Storing the data in PDA or in the user account\u2019s data is probably what I am looking for. I believe the official docs has some examples for PDA, and will try to see if marinade.finance is open source to look into it as an example, or if you know of more simplified example, that would be great. Again thank you both so much for helping out!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "731429096013168642",
+                        "username": "LMT-luciotato",
+                        "avatar": "1e50ba3d714f3cffbc4cb037170087a9",
+                        "avatar_decoration": null,
+                        "discriminator": "1019",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T05:54:27.732000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891537598990921759",
+                "type": 0,
+                "content": "that feel when you spent ~2 days trying to fix a \"bug\" in your rust program but turns out it was your JS test that was wrong <:NotLikeThis:783371553727053865>",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "142293856061227008",
+                    "username": "Bosris",
+                    "avatar": "1ac8b3d929c518ce4673312ab33892a0",
+                    "avatar_decoration": null,
+                    "discriminator": "1840",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T04:12:07.567000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490747646349382",
+                "type": 0,
+                "content": "Ok, cool (lol, this has been kind of fun to debug, I'm ok with a slightly weird setup for now \ud83e\udd20)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:05:57.336000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490741233270784",
+                "type": 0,
+                "content": "I'd swap out for x86 if you can (for solana development).",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:05:55.807000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490608500338698",
+                "type": 0,
+                "content": "No guarantees the validator is going to work as expected with the m1.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:05:24.161000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490515520991294",
+                "type": 19,
+                "content": "That sounds likely related.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:05:01.993000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891490459791278161"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490459791278161",
+                "type": 0,
+                "content": "Other peculiarities of my setup: I'm on an M1 mac and building solana from source (idk, maybe debug builds are super slow?).",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:04:48.706000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490338643001394",
+                "type": 0,
+                "content": "Nope, my tests are spinning up their own validator. Is that what you mean?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:04:19.822000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490168450719764",
+                "type": 19,
+                "content": "Any chance you're running against devnet/mainnet and not localhost? Not sure what else it could be. \ud83e\udd14",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:03:39.245000+00:00",
+                "edited_timestamp": "2021-09-26T01:03:49.827000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891489985063161886"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891490137794543636",
+                "type": 0,
+                "content": "Currently my misc tests are all passing, but I'm not sure why \ud83d\ude35\u200d\ud83d\udcab",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:03:31.936000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891489985063161886",
+                "type": 0,
+                "content": "Does anyone else run into `Transaction was not confirmed in 30.00 seconds.` errors when running tests? I asked about this a few days ago + thought I had fixed it, but it turns out I hadn't and I'm honestly pretty puzzled about what the validator is doing when it gets stuck like this. I've tried tailing the `.anchor/test-ledger` logs (some txs retry over and over then give up), wiresharking `localhost:8899` and `localhost:8900` , reading the solana rpc source (don't understand it yet).",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T01:02:55.522000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891488555535314995",
+                "type": 0,
+                "content": "Example here https://github.com/project-serum/anchor/blob/b1ef7431eca809dbca41601008fa220e19b8dee7/tests/swap/Anchor.toml#L8-L10",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T00:57:14.696000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891488046283894895",
+                "type": 19,
+                "content": "Haven't tried that myself but looks like this is the commit that added it (includes an example Anchor.toml file): https://github.com/project-serum/anchor/commit/b3803aec03fbbae1a794c9aa6a789e6cb58fda99",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/commit/b3803aec03fbbae1a794c9aa6a789e6cb58fda99",
+                        "title": "cli: Specify programs to embed into local validator genesis via Anc...",
+                        "description": "\u2026r.toml",
+                        "color": 1975079,
+                        "reference_id": "891488046283894895",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/331c4f9addd48b156dd3f64b22850fe9751644bc614966ac78392ca47f5f19f5/project-serum/anchor/commit/b3803aec03fbbae1a794c9aa6a789e6cb58fda99",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/kI0jpMqKGjRjJ9RHfyHuN9dvu4Y9Nj2OhCZWKAEgamw/https/opengraph.githubassets.com/331c4f9addd48b156dd3f64b22850fe9751644bc614966ac78392ca47f5f19f5/project-serum/anchor/commit/b3803aec03fbbae1a794c9aa6a789e6cb58fda99",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "141059180969721856",
+                        "username": "rohan.kapur",
+                        "avatar": "08a30a05974c8fdf3b6bf647971daef8",
+                        "avatar_decoration": null,
+                        "discriminator": "0616",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-26T00:55:13.281000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891467192204415016"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891467276375707719",
+                "type": 0,
+                "content": "i saw it once in an `anchor.toml` file maybe? i dont remember the syntax",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "141059180969721856",
+                    "username": "rohan.kapur",
+                    "avatar": "08a30a05974c8fdf3b6bf647971daef8",
+                    "avatar_decoration": null,
+                    "discriminator": "0616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T23:32:41.349000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891467192204415016",
+                "type": 0,
+                "content": "how do i specify for a program binary i have to be included in localnet at genesis?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "141059180969721856",
+                    "username": "rohan.kapur",
+                    "avatar": "08a30a05974c8fdf3b6bf647971daef8",
+                    "avatar_decoration": null,
+                    "discriminator": "0616",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T23:32:21.281000+00:00",
+                "edited_timestamp": "2021-09-25T23:32:56.550000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891464383174156288",
+                "type": 19,
+                "content": "There is a test in the tests/misc with a trailing comma in the `seeds` attribute, which was a bug has already been fixed on master (and the test was added), but I am not sure if a new release > 0.16.1 with this bug fix has been tagged. \nEither ignore that test until a new release comes out, or build your anchor cli from your checked out source in master with\n`cargo install --path cli --locked`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "103986638320861184",
+                    "username": "davoclavo",
+                    "avatar": "d0f49d5060205269bd1a195055855925",
+                    "avatar_decoration": null,
+                    "discriminator": "2968",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "706541980032827454",
+                        "username": "danmt",
+                        "avatar": "c3cd900f47bd4fc5607b43531bdec197",
+                        "avatar_decoration": null,
+                        "discriminator": "3989",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T23:21:11.556000+00:00",
+                "edited_timestamp": "2021-09-25T23:21:52.259000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "890718018907308052"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891440212427808788",
+                "type": 19,
+                "content": "A secondary option, if you need to create random keys/can't use PDAs, is to do so but make the account program owned AND store the user account in the account-data, later you can use a RPC call, getProgramAccounts filtering by the offset in the account data to get all the accounts related to a specific user. That's how we do TicketAccounts (Delayed-Usntake) in Marinade.Finance",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "731429096013168642",
+                    "username": "LMT-luciotato",
+                    "avatar": "1e50ba3d714f3cffbc4cb037170087a9",
+                    "avatar_decoration": null,
+                    "discriminator": "1019",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T21:45:08.801000+00:00",
+                "edited_timestamp": "2021-09-25T21:45:49.469000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891423468925636618"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891439574511939625",
+                "type": 19,
+                "content": "The first approach would be to create a PDA, for example using the user account as seed",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "731429096013168642",
+                    "username": "LMT-luciotato",
+                    "avatar": "1e50ba3d714f3cffbc4cb037170087a9",
+                    "avatar_decoration": null,
+                    "discriminator": "1019",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T21:42:36.710000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891423468925636618"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891434935108395039",
+                "type": 19,
+                "content": "`anchor <command> --provider.cluster <slug | url>`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "401799781271470092",
+                        "username": "DoctorBlocks",
+                        "avatar": "fa1b79ced9e75bbe7e497be3bcc9b282",
+                        "avatar_decoration": null,
+                        "discriminator": "2714",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T21:24:10.590000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891432656066199583"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891432656066199583",
+                "type": 0,
+                "content": "Is there a way to customize the RPC_URL used by the anchor-cli?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "401799781271470092",
+                    "username": "DoctorBlocks",
+                    "avatar": "fa1b79ced9e75bbe7e497be3bcc9b282",
+                    "avatar_decoration": null,
+                    "discriminator": "2714",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T21:15:07.224000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891426214554763304",
+                "type": 19,
+                "content": "Not totally sure I'm answering your question in a good way, but if the account is a regular/non-program-derived account, then yeah, I think you'll just have to remember the keypair info (e.g. if you want to sign for it, you'll need to know the private key). But for program-derived addresses, the \"seeds\" for the account (which basically name it) will be something meaningful, e.g. a static string, or, I don't know, some other account's public key.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T20:49:31.448000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891423468925636618"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891423468925636618",
+                "type": 0,
+                "content": "Thanks for explaining that. It definitely helps to verify my understanding. The challenge I am trying now to learn how to overcome is: what are the best practices to reference back an already created account? Do people serialize and store it somewhere? Like centralized backend or in browser?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T20:38:36.839000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891422322727190549",
+                "type": 19,
+                "content": "Yep. Definitely feels a bit weird at first that the client has to specify *all* of the accounts the program will need to use (e.g. that's why you need to explicitly pass in the `system_program` when creating an account). In fact, about the account life cycle, when creating an account you have to pass in the (address of the) account you're creating \ud83d\ude43 The account starts off in an uninitialized state (zero lamports and empty data, owned by the system program), and then e.g. `system_program::create_account` updates it to have some amount of lamports + the right allocation of data, plus possibly a new owner.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T20:34:03.564000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "891419194447495168"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "891419194447495168",
+                "type": 0,
+                "content": "a n00b question, all states are stored on accounts. For the program to be able to modify the account state, it has to be the owner of that account right?\nNow I am trying to make sense of the life cycle of the account (who create, store and reference later). So any pointers would be really great.\n\nWhat I see from some of the examples so far, the client creates an account, and passes to our program, our program then mutate this account. Later on if we want to use the state stored in the said account, the client will have to find a way to reference back to this account and pass it again to the program. Is my understanding right?\nSomehow this doesn't feel right to me but I didn't manage yet to find better explanation. And would really appreciate some pointers",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-09-25T20:21:37.724000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "220a38e451d1539daee9348dd96f2568"
+}

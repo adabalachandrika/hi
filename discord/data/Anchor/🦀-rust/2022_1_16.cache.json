@@ -1,0 +1,208 @@
+{
+    "total_results": 7,
+    "messages": [
+        [
+            {
+                "id": "932264576219750460",
+                "type": 0,
+                "content": "```rust\n#[program]\npub mod test {\n    use super::*;\n    pub fn initialize(ctx: Context<Initialize>, x: bool, a: String, b: String) -> ProgramResult {\n        msg!(\"a: {}, b: {}\", a, b);\n        Ok(())\n    }\n}\n#[derive(Accounts)]\n#[instruction(a: String)]\npub struct Initialize {}\n```\nI am getting  `Error: 102: The program could not deserialize the given instruction`\nWhat is wrong here?\n\nSolved:  You can access the instruction\u2019s arguments with the #[instruction(..)] attribute. You have to list them in the same order as in the instruction but you can omit all arguments after the last one you need.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "295862671155396609",
+                    "username": "Sushant",
+                    "avatar": null,
+                    "discriminator": "8681",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-16T13:26:35.609000+00:00",
+                "edited_timestamp": "2022-01-16T13:48:29.183000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931991974263816223",
+                "type": 0,
+                "content": "been reading rust for rustaeceans and the nomicon",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T19:23:22.238000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931991938066939964",
+                "type": 0,
+                "content": "ahaaa got it",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T19:23:13.608000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931991841371471872",
+                "type": 0,
+                "content": "https://doc.rust-lang.org/rust-by-example/scope/borrow/alias.html",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T19:22:50.554000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931991814616006688",
+                "type": 19,
+                "content": "Aliasing is the term for immutably borrowing a variable. It's called aliasing because you are really just creating a new variable/giving an additional name pointing to the same underlying data (= alias).",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T19:22:44.175000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "931989282099429426"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931989282099429426",
+                "type": 0,
+                "content": "was reading some rust material a bit confused by some lingo can anyone explain what is meant by alias,aliasing in rust context ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T19:12:40.376000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "931978945799266424",
+                "type": 0,
+                "content": "LOL my mainnet wallet had 0 SOL \ud83d\ude42",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "616045157925650453",
+                    "username": "khalilnafis.sol",
+                    "avatar": "f10d3461f04fffe83b9bcce52e7c56ff",
+                    "discriminator": "1303",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-01-15T18:31:36.010000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "487b56ae4a1c8926954952366e5f489b"
+}

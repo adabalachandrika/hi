@@ -1,0 +1,160 @@
+{
+    "total_results": 5,
+    "messages": [
+        [
+            {
+                "id": "904157416449536050",
+                "type": 0,
+                "content": "So in words, the function above says: try grabbing the first 8 bytes of input (bail if there aren't enough); `and_then` try to convert that slice into a `[u8; 8]`; assuming that went `ok`, make a u64 from those 8 bytes.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-30T23:58:46.514000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "904156569279795231",
+                "type": 0,
+                "content": "`.and_then` exists on Rust's `Option` type and runs the body of the closure if the thing on the left is `Some(something)` rather than `None`.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-30T23:55:24.533000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "904156380477399120",
+                "type": 19,
+                "content": "The syntax is rust's way of writing a closure (an anonymous function).",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-30T23:54:39.519000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "904156158640656404"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "904156158640656404",
+                "type": 0,
+                "content": "what is the syntax `|slice|` placed in the `and_then()` function",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-30T23:53:46.629000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "904155861738459206",
+                "type": 0,
+                "content": "`fn unpack_amount(input: &[u8]) -> Result<u64, ProgramError> {\n        let amount = input\n            .get(..8)\n            .and_then(|slice| slice.try_into().ok())\n            .map(u64::from_le_bytes)\n            .ok_or(InvalidInstruction)?;\n        Ok(amount)\n    }`\n\ncan anyone describe what exactly is going on here?\n\".and_then(|slice| slice.try_into().ok())\"",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-30T23:52:35.842000+00:00",
+                "edited_timestamp": "2021-10-30T23:52:48.759000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "a9ef102fc57d82aa38eb138f7f74b617"
+}

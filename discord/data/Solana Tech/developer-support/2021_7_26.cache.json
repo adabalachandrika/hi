@@ -1,0 +1,4408 @@
+{
+    "total_results": 128,
+    "messages": [
+        [
+            {
+                "id": "869265589133246535",
+                "type": 0,
+                "content": "anyone know why I cannot get the SOL in devnet?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "606173799695646720",
+                    "username": "0xRH",
+                    "avatar": "9410b6ed1aa32008d5e68fde1ef02304",
+                    "avatar_decoration": null,
+                    "discriminator": "6886",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "869265587061276692",
+                        "filename": "unknown.png",
+                        "size": 96487,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/869265587061276692/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/869265587061276692/unknown.png",
+                        "width": 1128,
+                        "height": 92,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T17:11:06.623000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869245981965840452",
+                "type": 0,
+                "content": "is there a repository with a working sample program that can be compiled and deployed, the one that you know for a fact must work after deployment? so i could test and experiment?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:53:11.910000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869244556309323837",
+                "type": 0,
+                "content": "initialize works. it creates an account via system_instruction::create_account(), then increment works as well",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:47:32.007000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869244438050922526",
+                "type": 0,
+                "content": "`cargo test-bpf` passes",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:47:03.812000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243857483747368",
+                "type": 0,
+                "content": "```#[derive(Clone, Debug, BorshSerialize, BorshDeserialize, PartialEq)]\npub enum CounterInstruction {\n    Initialize(u8),\n    Increment,\n}\n\npub fn initialize(\n    funding_address: &Pubkey,\n    storage_address: &Pubkey,\n    bump_seed: u8,\n) -> Instruction {\n    Instruction::new_with_borsh(\n        program_id(),\n        &CounterInstruction::Initialize(bump_seed),\n        vec![\n            AccountMeta::new(*funding_address, true),\n            AccountMeta::new(*storage_address, false),\n            AccountMeta::new_readonly(system_program::id(), false),\n        ],\n    )\n}\n\npub fn increment(storage_address: &Pubkey) -> Instruction {\n    Instruction::new_with_borsh(\n        program_id(),\n        &CounterInstruction::Increment,\n        vec![AccountMeta::new(*storage_address, false)],\n    )\n}\n``` a very simple instruction",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:44:45.394000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243793747103744",
+                "type": 0,
+                "content": "funder is loaded with `read_keypair_file`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:44:30.198000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243680630923264",
+                "type": 0,
+                "content": "```    let (storage_address, bump_seed) =\n        Pubkey::find_program_address(&[br\"Let me count you in\"], &program_id);\n\n    let client = RpcClient::new(\"https://api.devnet.solana.com\".to_string());\n\n    let mut tx = Transaction::new_with_payer(\n        &[\n            instruction::initialize(&funder.pubkey(), &storage_address, bump_seed),\n            instruction::increment(&storage_address),\n            instruction::increment(&storage_address),\n            instruction::increment(&storage_address),\n        ],\n        Some(&funder.pubkey()),\n    );\n\n    let (recent_blockhash, _) = client.get_recent_blockhash().unwrap();\n\n    tx.sign(&[&funder], recent_blockhash);\n    let sig = client.send_and_confirm_transaction(&tx).unwrap();\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:44:03.229000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243414519107624",
+                "type": 0,
+                "content": "Ok.  Then the instruction is being constructed wrong",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "585868308419444749",
+                    "username": "trent.sol",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9709",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:42:59.783000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243284617318450",
+                "type": 0,
+                "content": "it's the address returned by `solana program deploy`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:42:28.812000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243208289386576",
+                "type": 0,
+                "content": "it shows that this is an executable address",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:42:10.614000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243157898989618",
+                "type": 19,
+                "content": "What about it?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "585868308419444749",
+                    "username": "trent.sol",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9709",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:41:58.600000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869243018581008456"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869243018581008456",
+                "type": 19,
+                "content": "https://explorer.solana.com/address/3qHxEb34JYiE6DaQ8YYvBZgnmrGsVERq8vwmgK28dCbB?cluster=devnet",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/address/3qHxEb34JYiE6DaQ8YYvBZgnmrGsVERq8vwmgK28dCbB?cluster=devnet",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters",
+                        "reference_id": "869243018581008456"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "585868308419444749",
+                        "username": "trent.sol",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "9709",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:41:25.384000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869242690951331860"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869242690951331860",
+                "type": 19,
+                "content": "It means there is an instruction in the transaction that specifies a program id that is not a program",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "585868308419444749",
+                    "username": "trent.sol",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9709",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:40:07.271000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869236629737459823"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869242521363054662",
+                "type": 19,
+                "content": "No.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "585868308419444749",
+                    "username": "trent.sol",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9709",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "606173799695646720",
+                        "username": "0xRH",
+                        "avatar": "9410b6ed1aa32008d5e68fde1ef02304",
+                        "avatar_decoration": null,
+                        "discriminator": "6886",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:39:26.838000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869235095721087046"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869236629737459823",
+                "type": 0,
+                "content": "`Transaction simulation failed: This program may not be used for executing instructions` what exactly does this error mean?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:16:02.165000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869235095721087046",
+                "type": 0,
+                "content": "the devnet is dead now?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "606173799695646720",
+                    "username": "0xRH",
+                    "avatar": "9410b6ed1aa32008d5e68fde1ef02304",
+                    "avatar_decoration": null,
+                    "discriminator": "6886",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T15:09:56.427000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869216984372478023",
+                "type": 0,
+                "content": "I'm getting this issue for a devnet RPC method, only happening on devnet though\n\n```\ncurl https://api.devnet.solana.com -X POST -H \"Content-Type: application/json\" -d '\n  {\n  \"jsonrpc\": \"2.0\",\n  \"id\":1,\"method\":\"getProgramAccounts\",\n  \"params\":[\n    \"TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA\",\n    {\n      \"filters\":[{\"memcmp\":{\"offset\":32,\"bytes\":\"6PDPBGqzVH3oodaDYeLGkJqh2WHnWAqwGkAfL27s1EFa\"}},{\"dataSize\":165}],\n      \"commitment\": \"recent\",\n      \"encoding\":\"base58\"\n    }\n  ]\n}\n'\n```\n\n```\n{\"jsonrpc\":\"2.0\",\"error\":{\"code\":-32600,\"message\":\"Encoded binary (base 58) data should be less than 128 bytes, please use Base64 encoding.\"},\"id\":1}\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "683883229270507530",
+                    "username": "yangerlee",
+                    "avatar": "c01dde373a1cb8704db15d3463afbaad",
+                    "avatar_decoration": null,
+                    "discriminator": "3235",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:57:58.345000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869215792267399228",
+                "type": 0,
+                "content": "Mint test token doesn't work for me using Sollet on devnet, gives error 'cannot read property '_bn' of undefined'",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "834255910247333968",
+                    "username": "SOL_DEV_WILL",
+                    "avatar": "977c807bf10444a56cc6f78bc0bc101f",
+                    "avatar_decoration": null,
+                    "discriminator": "9328",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:53:14.125000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869215071069429820",
+                "type": 0,
+                "content": "thanks...",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:50:22.178000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869214910142353459",
+                "type": 0,
+                "content": "hi all, is there any guidance on how long rpc calls should subscribe for? for example i subscribe to a log that has \"new_orders\". How bad is it to assume that rpc call will continue notifying?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808635736541888543",
+                    "username": "teddytomas",
+                    "avatar": "96d00f44fa40fdbb8bf01d14fa307b13",
+                    "avatar_decoration": null,
+                    "discriminator": "3827",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:49:43.810000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869211101345222706",
+                "type": 0,
+                "content": "Hi is there any way to forbid unauthorized transfer to my program owned account? Or is there a way to return any unauthorized transfer to my program owned account?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "817241470057971773",
+                    "username": "0xAB | SolStreet.finance",
+                    "avatar": "22ff328fbd5f9794fa298cd84a4926ff",
+                    "avatar_decoration": null,
+                    "discriminator": "7672",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:34:35.722000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869208902183559188",
+                "type": 19,
+                "content": "thank you, at least now i'm somewhat back on track, so much .. so much time wasted",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:25:51.401000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869206362146619463"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206402953007104",
+                "type": 0,
+                "content": "the command is still there",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:15:55.538000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206362146619463",
+                "type": 19,
+                "content": "I think it is old way of doing this",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:15:45.809000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869206283914477619"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206283914477619",
+                "type": 0,
+                "content": "damn it, i was looking at `solana deploy`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:15:27.157000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206160597725195",
+                "type": 19,
+                "content": "solana program deploy --help",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:14:57.756000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869206024568057906"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206057598205962",
+                "type": 19,
+                "content": "better precreate or you can copy it and use",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:14:33.199000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869205712067252294"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869206024568057906",
+                "type": 0,
+                "content": "`help` doesn't mention `--program-id` argument",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:14:25.324000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869205769457901579",
+                "type": 19,
+                "content": "--program-id <PROGRAM_ID>",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:13:24.501000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869205449973575770"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869205712067252294",
+                "type": 0,
+                "content": "i see, but i still don't understand. so i have to pre-create the program id address prior to deployment?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:13:10.818000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869205646921310228",
+                "type": 19,
+                "content": "for first run keypair file path needed, for next runs pubkey or keypair",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:12:55.286000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869205449973575770"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869205614457393222",
+                "type": 0,
+                "content": "```                                           testnet, devnet, localhost]\n    -k, --keypair <KEYPAIR>                Filepath or URL to a keypair\n        --output <FORMAT>                  Return information in specified output format [possible values: json, json-\n                                           compact]```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:12:47.546000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869205449973575770",
+                "type": 19,
+                "content": "`or input parameter`, parameter to keypair file or the program address?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:12:08.330000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869204053526188043"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869204053526188043",
+                "type": 19,
+                "content": "solana deploy may use <program_name>_keypair.json near your .so file or input parameter. But if there are no key it generates random one and saves it to .json",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:06:35.391000+00:00",
+                "edited_timestamp": "2021-07-26T13:07:35.981000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869203787707994132"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203787707994132",
+                "type": 0,
+                "content": "that's what i don't understand now, what is the relation between that what `solana deploy` returns and the arbitrary id i declare in the program",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:05:32.015000+00:00",
+                "edited_timestamp": "2021-07-26T13:06:01.864000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203781643030529",
+                "type": 19,
+                "content": "maybe something like solana_program::declare_id!(\"3qHxEb34JYiE6DaQ8YYvBZgnmrGsVERq8vwmgK28dCbB\"); and use crate::ID",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:05:30.569000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869203267509436456"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203267509436456",
+                "type": 0,
+                "content": "at first i thought i needed it only for tests",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:03:27.990000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203120943693894",
+                "type": 0,
+                "content": "yes, i've started wondering",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:02:53.046000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203066681966622",
+                "type": 19,
+                "content": "but you are trying to call 3qHxEb34JYiE6DaQ8YYvBZgnmrGsVERq8vwmgK28dCbB",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:02:40.109000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869202967373430864"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869203048369627186",
+                "type": 0,
+                "content": "just a function i've introduced before i discovered `declare_id!` macro",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:02:35.743000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869202967373430864",
+                "type": 19,
+                "content": "lib.rs: ```pub fn program_id() -> Pubkey {\n    Pubkey::from_str(\"AcmeCounter11111111111111111111111111111111\").unwrap()\n}\n\nsolana_program::declare_id!(\"AcmeCounter11111111111111111111111111111111\")```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:02:16.432000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869202809646624889"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869202809646624889",
+                "type": 19,
+                "content": "what is program_id()",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:01:38.827000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869202456884699218"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869202456884699218",
+                "type": 0,
+                "content": "<@!365207867365654539> sorry to bother you again, but did you see any wrongness in what i've pasted as a response?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T13:00:14.722000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869201138262638612",
+                "type": 0,
+                "content": "Hi everyone!\nI have a problem with Neon-evm performance test.\nSolana runs on a virtual machine with 36 cores and 68 Gb of RAM.\nSolana version 1.6.9.\nThe performance test runs on another virtual machine.\nThe test sends 1000 transactions with delay of 1 millisecond. TCP client is used.\nTransaction execution spends about 14000 compute units.\n\nIn the first case, transactions are signed by different solana accounts.\nThe performance is about 150-200 transactions per block.  \nTransactions are executed in parallel.\n\nIn the second case, transaction are signed by a single sender.\nThe performance is about 60 transactions per block.\nTransactions are executed sequentially.\n\nWhy is number of the transactions in block so small in the first case?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "867654397270032395",
+                    "username": "valik",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0930",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T12:55:00.338000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869189888040378398",
+                "type": 0,
+                "content": "where instructions are: ```#[derive(Clone, Debug, BorshSerialize, BorshDeserialize, PartialEq)]\npub enum CounterInstruction {\n    Initialize(u8),\n    Increment,\n}\n\npub fn initialize(\n    funding_address: &Pubkey,\n    storage_address: &Pubkey,\n    bump_seed: u8,\n) -> Instruction {\n    Instruction::new_with_borsh(\n        program_id(),\n        &CounterInstruction::Initialize(bump_seed),\n        vec![\n            AccountMeta::new(*funding_address, true),\n            AccountMeta::new(*storage_address, false),\n            AccountMeta::new_readonly(system_program::id(), false),\n        ],\n    )\n}\n\npub fn increment(storage_address: &Pubkey) -> Instruction {\n    Instruction::new_with_borsh(\n        program_id(),\n        &CounterInstruction::Increment,\n        vec![AccountMeta::new(*storage_address, false)],\n    )\n}\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T12:10:18.076000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869189774437666846",
+                "type": 19,
+                "content": "```    let (storage_address, bump_seed) =\n        Pubkey::find_program_address(&[br\"Let me count you in\"], &program_id);\n\n    eprintln!(\"funder = {:#?}\", funder.pubkey());\n\n    let client = RpcClient::new(\"https://api.devnet.solana.com\".to_string());\n    println!(\"{:#?}\", client.get_account(&program_id).unwrap());\n\n    let mut tx = Transaction::new_with_payer(\n        &[\n            instruction::initialize(&funder.pubkey(), &storage_address, bump_seed),\n            instruction::increment(&storage_address),\n            instruction::increment(&storage_address),\n            instruction::increment(&storage_address),\n        ],\n        Some(&funder.pubkey()),\n    );\n\n    let (recent_blockhash, _) = client.get_recent_blockhash().unwrap();\n\n    tx.sign(&[&funder], recent_blockhash);\n    let sig = client.send_and_confirm_transaction(&tx).unwrap();\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T12:09:50.991000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869184668531048519"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869184668531048519",
+                "type": 19,
+                "content": "how do you make Instruction {  program_id: ..,   accounts,   data }?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:49:33.648000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869183751962386452"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183978660319282",
+                "type": 0,
+                "content": "```    let client = RpcClient::new(\"https://api.devnet.solana.com\".to_string());\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:46:49.170000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183751962386452",
+                "type": 0,
+                "content": "`solana deploy ...` = ```Program Id: 3qHxEb34JYiE6DaQ8YYvBZgnmrGsVERq8vwmgK28dCbB```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:45:55.121000+00:00",
+                "edited_timestamp": "2021-07-26T11:46:11.277000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183736690913330",
+                "type": 0,
+                "content": "I think it is not about versions",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:45:51.480000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183647255764992",
+                "type": 0,
+                "content": "solana-{program,program-test,sdk,client} is 1.7.8, but i've juggled from 1.7.6 to 1.7.8",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:45:30.157000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183616054341683",
+                "type": 0,
+                "content": "solana deploy output?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:45:22.718000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183543731953725",
+                "type": 0,
+                "content": "```[dependencies]\nborsh = \"0.9.0\"\nborsh-derive = \"0.9.0\"\nnum-traits = \"0.2.14\"\nnum-derive = \"0.3.3\"\nsolana-program = \"1.7.8\"\nthiserror = \"1.0.26\"\n\n[dev-dependencies]\nsolana-program-test = \"1.7.8\"\nsolana-sdk = \"1.7.8\"\nsolana-client = \"1.7.8\"\n\n[features]\ntest-bpf = []```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:45:05.475000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183436101943306",
+                "type": 0,
+                "content": "`solana cluster-version` = 1.7.7",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:44:39.814000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183347799232572",
+                "type": 0,
+                "content": "```\n...\nRPC URL: https://api.devnet.solana.com\nWebSocket URL: wss://api.devnet.solana.com/ (computed)\n...```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:44:18.761000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183209424965672",
+                "type": 0,
+                "content": "`Error: 9Xy8H3jAxwYDmwjBDN14e8m8mmNK8DraafA36E8XkxEA is not a BPF program`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:43:45.770000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183179527950386",
+                "type": 0,
+                "content": "i get",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:43:38.642000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183175383982161",
+                "type": 0,
+                "content": "`solana program show 9Xy8H3jAxwYDmwjBDN14e8m8mmNK8DraafA36E8XkxEA` this is a test address in devnet",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:43:37.654000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869183141041037313",
+                "type": 0,
+                "content": "solana config get",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:43:29.466000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869182980646637568",
+                "type": 19,
+                "content": "if all is OK maybe need to wait. Or check is it the same cluster",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:42:51.225000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869182545017851925"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869182833980215326",
+                "type": 19,
+                "content": "if you try to use some address for program id not from deploy command for example",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:42:16.257000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869182426763628604"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869182545017851925",
+                "type": 0,
+                "content": "i am completely, and utterly, just LOST, i am out of options of how to understand it",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:41:07.363000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869182426763628604",
+                "type": 0,
+                "content": "<@!365207867365654539> could you define correct address? what is the address that is returned by `solana deploy` command? i get feedback from `solana program show`, it correctly displays authority, program id, program data address, length etc., also rpc client obtains this `Account { lamports: 1141440 data.len: 36 owner: BPFLoaderUpgradeab1e11111111111111111111111 executable: true rent_epoch: 163 data: 0200000093250785736707e63882ee4cc82a368ace8f8a7c96159ccdebe604cab9249afb }` when i `get_account`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:40:39.169000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869181627002155038",
+                "type": 19,
+                "content": "deploy your program to correct address and wait some time (around 30 sec)",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:37:28.491000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869180049427943435"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869180049427943435",
+                "type": 0,
+                "content": "how to solve `Transaction simulation failed: Attempt to load a program that does not exist`?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T11:31:12.368000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869163605319368754",
+                "type": 0,
+                "content": "Can anybody help me to sort out the error.......npm run start\n\n> helloworld@0.0.1 start /home/ubuntu/Desktop/example-helloworld\n> ts-node src/client/main.ts\n\nLet's say hello to a Solana account...\n(node:4653) Warning: N-API is an experimental feature and could change at any time.\nReferenceError: URL is not defined\n    at new Connection (/home/ubuntu/Desktop/example-helloworld/node_modules/@solana/web3.js/src/connection.ts:2027:15)\n    at Object.<anonymous> (/home/ubuntu/Desktop/example-helloworld/src/client/hello_world.ts:96:16)\n    at Generator.next (<anonymous>)\n    at fulfilled (/home/ubuntu/Desktop/example-helloworld/src/client/hello_world.ts:26:58)\n    at <anonymous>\nnpm ERR! code ELIFECYCLE\nnpm ERR! errno 255\nnpm ERR! helloworld@0.0.1 start: `ts-node src/client/main.ts`\nnpm ERR! Exit status 255\nnpm ERR! \nnpm ERR! Failed at the helloworld@0.0.1 start script.\nnpm ERR! This is probably not a problem with npm. There is likely additional logging output above.\n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/ubuntu/.npm/_logs/2021-07-26T10_00_41_924Z-debug.log",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T10:25:51.787000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869154643324846080",
+                "type": 19,
+                "content": "but yeah you can get examples in JS. For rust version need more thinking",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:50:15.081000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869154242676547595"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869154599636992000",
+                "type": 0,
+                "content": "some times work , \u0131 cant understand",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "856184913313398814",
+                    "username": "oksana",
+                    "avatar": "969da1c272387519f008af1f5e5ab061",
+                    "avatar_decoration": null,
+                    "discriminator": "9380",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:50:04.665000+00:00",
+                "edited_timestamp": "2021-07-26T09:50:12.977000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869154508398280794",
+                "type": 0,
+                "content": "any idea ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "856184913313398814",
+                    "username": "oksana",
+                    "avatar": "969da1c272387519f008af1f5e5ab061",
+                    "avatar_decoration": null,
+                    "discriminator": "9380",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:49:42.912000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869154482699788309",
+                "type": 0,
+                "content": "hi  , \u0131 have problem.   \n\n``` name = \"get\"\n    let newAbi = JSON.parse(abi).find((e) => e.name == name);\n\n    const accountInfo = await connection.getAccountInfo(contractStorageAccount);\n\n    let length = Number(accountInfo.data.readUInt32LE(4));\n    let offset = Number(accountInfo.data.readUInt32LE(8));\n\n    let encoded = accountInfo.data.slice(offset, length + offset);\n    let returns = web3.eth.abi.decodeParameters(newAbi.outputs, encoded.toString('hex'));\n    console.log(returns)```\n\nits my error\n```Unhandled Rejection (Error): Returned values aren't valid, did it run Out of Gas? You might also see this error if you are not using the correct ABI for the contract you are retrieving data from, requesting data from a block number that does not exist, or querying a node which is not fully synced.```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "856184913313398814",
+                    "username": "oksana",
+                    "avatar": "969da1c272387519f008af1f5e5ab061",
+                    "avatar_decoration": null,
+                    "discriminator": "9380",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:49:36.785000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869154242676547595",
+                "type": 0,
+                "content": "I understood how to deploy helloworld program and got its program id after deploying it on devnet but how to interact with it?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:48:39.559000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869153861351407636",
+                "type": 19,
+                "content": "JS is popular for FE. But it is not required to make FE. You can use CLI",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:47:08.644000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869153728853327892"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869153728853327892",
+                "type": 19,
+                "content": "is javascript also requied/",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:46:37.054000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869153245443006484"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869153650889588776",
+                "type": 19,
+                "content": "ok sir",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:46:18.466000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869153245443006484"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869153245443006484",
+                "type": 19,
+                "content": "rust is enough",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:44:41.800000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869152869796958248"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869152869796958248",
+                "type": 19,
+                "content": "Sir to start as blockchain developer on Solana platform which all languages we must know?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:43:12.239000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869151516005654540"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869151516005654540",
+                "type": 0,
+                "content": "I did the tutorials not too long ago, they should be working. Try to figure out where you got it wrong",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:37:49.470000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869151282500341791",
+                "type": 19,
+                "content": "So far i am successful till deploying helloworld program and got its program id...but when i use npm run start i get error",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:36:53.798000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869151000005603328"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869151222865727488",
+                "type": 0,
+                "content": "sdk for rust client",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:36:39.580000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869151214334537738",
+                "type": 19,
+                "content": "Oh i see, i missed it. Thanks a lot brother",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:36:37.546000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869150995303780382"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869151000005603328",
+                "type": 19,
+                "content": "Have you tried to do this tutorials ? https://project-serum.github.io/anchor/getting-started/introduction.html",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://project-serum.github.io/anchor/getting-started/introduction.html",
+                        "title": "Introduction | \u2693 Anchor",
+                        "color": 4108156,
+                        "reference_id": "869151000005603328"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:35:46.446000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869150797089345587"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869150995303780382",
+                "type": 19,
+                "content": "wrong crate. https://docs.rs/solana-program/1.7.8/solana_program/system_instruction/fn.create_account.html this",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.rs/solana-program/1.7.8/solana_program/system_instruction/fn.create_account.html",
+                        "title": "create_account in solana_program::system_instruction - Rust",
+                        "description": "API documentation for the Rust `create_account` fn in crate `solana_program`.",
+                        "reference_id": "869150995303780382"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:35:45.325000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869150616310677545"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869150797089345587",
+                "type": 19,
+                "content": "Ok....for example i have deployed helloworld program in Solana blockchian and got its program id....now i want to interact with it...can you please tell me how should i use invoke command?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:34:58.067000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869150471774945341"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869150616310677545",
+                "type": 19,
+                "content": "Ok thanks, i thought this should not be done this way because given the documentation : https://docs.rs/solana-sdk/1.7.8/solana_sdk/account/index.html\nThe create accounts method are deprecated and only testing methods are left available",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.rs/solana-sdk/1.7.8/solana_sdk/account/index.html",
+                        "title": "solana_sdk::account - Rust",
+                        "description": "API documentation for the Rust `account` mod in crate `solana_sdk`.",
+                        "reference_id": "869150616310677545"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "365207867365654539",
+                        "username": "Roman Sumin",
+                        "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                        "avatar_decoration": null,
+                        "discriminator": "9694",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:34:14.966000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869148459729584198"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869150471774945341",
+                "type": 19,
+                "content": "invoke command",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:33:40.506000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869150139661570098"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869150139661570098",
+                "type": 19,
+                "content": "Like in Ethereum we can call any function of on-chain smart contract using geth commands...so do we have such facility in Solana?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:32:21.324000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869149819548086322"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869149819548086322",
+                "type": 19,
+                "content": "This is pretty vague, do you have a more specific question ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:31:05.003000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869149397030666250"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869149397030666250",
+                "type": 0,
+                "content": "can anyone help to understand how to interact with a on-chain program in solana.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:29:24.267000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869148903147192360",
+                "type": 0,
+                "content": "Is it possible for contract to know what cluster is running it? Has solana some config sysvar with cluster information?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:27:26.516000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869148459729584198",
+                "type": 19,
+                "content": "Creating account requires signature but only program can sing PDA. You must call create account from your contract code not from JS",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "365207867365654539",
+                    "username": "Roman Sumin",
+                    "avatar": "f24edfc7e61ec541e79ff616710bee9d",
+                    "avatar_decoration": null,
+                    "discriminator": "9694",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "avatar_decoration": null,
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:25:40.797000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869142389355335681"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869142389355335681",
+                "type": 0,
+                "content": "Hi everyone, i'm having some trouble using PDA to create a deterministic way to access an account. What i want is for my user to easily find an account that hold some data. For that i will need to \"allocate\" the memory from the client side using a standard account as to transfert lamport for rent but i also want this account to be have a PDA address so as a user i cant \"sign\" on the behalf of a program.\n\nThis is the code i have for now but ofc it fails :\n```\n        const program = anchor.workspace.Basic1;\n        const tx = new anchor.web3.Transaction();\n\n        let programAddr = await anchor.web3.PublicKey.createProgramAddress([Buffer.from(\"bonjour\")], program.programId)\n        tx.add(\n            anchor.web3.SystemProgram.createAccount({\n                fromPubkey: provider.wallet.publicKey,\n                newAccountPubkey: programAddr,\n                space: 8 + 8,\n                lamports: await provider.connection.getMinimumBalanceForRentExemption(\n                    8 + 8\n                ),\n                programId: program.programId,\n            })\n        )\n        await provider.send(tx); // invalid signature\n```\n\nWhat am i missing here ? Is it even possible ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "avatar_decoration": null,
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T09:01:33.507000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869128052330860544",
+                "type": 19,
+                "content": "what node version are you running? first link on google - https://github.com/GoogleChrome/lighthouse/issues/8909",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "avatar_decoration": null,
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/GoogleChrome/lighthouse/issues/8909",
+                        "title": "ReferenceError: URL is not defined \u00b7 Issue #8909 \u00b7 GoogleChrome/lig...",
+                        "description": "Getting this error in my CI after updating to version 5.0.0, I think it has to do something with 94800e1 /usr/lib/node_modules/lighthouse/lighthouse-core/lib/url-shim.js:35 class URLShim extends UR...",
+                        "color": 1975079,
+                        "reference_id": "869128052330860544",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/c9d87a2b688809780d1cc9ef43fe8ce3eab2211f3d4d3b30ba822a764ae34adb/GoogleChrome/lighthouse/issues/8909",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/_UfxSfkKbtPqsp-uw6-mlAu7VC30GFFtJWZblaztYac/https/opengraph.githubassets.com/c9d87a2b688809780d1cc9ef43fe8ce3eab2211f3d4d3b30ba822a764ae34adb/GoogleChrome/lighthouse/issues/8909",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "865540866559180810",
+                        "username": "Manish1234",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7063",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T08:04:35.294000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869119230870712362"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869119230870712362",
+                "type": 0,
+                "content": "I am having problem in interacting with helloworld program in solana. When i use command npm run start i get error as referenceError: URL is not defined...can any one help me?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "865540866559180810",
+                    "username": "Manish1234",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7063",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T07:29:32.094000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869117023425290262",
+                "type": 0,
+                "content": "Which field match with `authorizedPubkey` here(https://solana-labs.github.io/solana-web3.js/modules.html#DelegateStakeParams) among here(https://solana-labs.github.io/solana-web3.js/modules.html#CreateStakeAccountWithSeedParams) ?  Does `authorizedPubkey` using in delegate match with `basePubkey, fromPubkey, authorized.staker, authorized.withdrawer` or  another new pubkey?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "805789975814733845",
+                    "username": "hyunsun",
+                    "avatar": "7ba7160b69ac36c7f50d8187dc5c55fd",
+                    "avatar_decoration": null,
+                    "discriminator": "6948",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T07:20:45.798000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869114217788223539",
+                "type": 0,
+                "content": "Has anyone run into an issue where the rate of signatureSubscribes > the rate of unsubscribing here? https://github.com/solana-labs/solana-web3.js/blob/b5e4a4dcb29e785fc1c3a4132b364fca3d859902/src/connection.ts#L2620\n\nWe have this problem and past a certain point, we breach some rpc limit from our provider.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "117243115676499972",
+                    "username": "xjcaa",
+                    "avatar": "f34a35b26f6499a7d2cf748098a91f05",
+                    "avatar_decoration": null,
+                    "discriminator": "1364",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-web3.js/blob/b5e4a4dcb29e785fc1c3a4132b364fca3d859902/src/connection.ts",
+                        "title": "solana-web3.js/connection.ts at b5e4a4dcb29e785fc1c3a4132b364fca3d8...",
+                        "description": "Solana JavaScript SDK. Contribute to solana-labs/solana-web3.js development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/15416dec01dcd705603bbcd8df156857431f055aa0d20ab748936ec1b8d3dfe3/solana-labs/solana-web3.js",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/aq31Rfn_2dmubPmX78mMzoq1TSEW_FwzK3e0HxjLr-c/https/opengraph.githubassets.com/15416dec01dcd705603bbcd8df156857431f055aa0d20ab748936ec1b8d3dfe3/solana-labs/solana-web3.js",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T07:09:36.882000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869105470252666911",
+                "type": 19,
+                "content": "And then how to check how much  liquidity when new market is added ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "827392906624892959",
+                    "username": "Rao sahab",
+                    "avatar": "32d03400a2c1dcff39b0d2e002cf072d",
+                    "avatar_decoration": null,
+                    "discriminator": "4035",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T06:34:51.307000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869105217025757205"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869105217025757205",
+                "type": 19,
+                "content": "<@831450660146642974>",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "827392906624892959",
+                    "username": "Rao sahab",
+                    "avatar": "32d03400a2c1dcff39b0d2e002cf072d",
+                    "avatar_decoration": null,
+                    "discriminator": "4035",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "avatar_decoration": null,
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T06:33:50.933000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869078427616034876"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869102957608706068",
+                "type": 0,
+                "content": "I need some hints on how to get all token mint address that belongs to a mint authority",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "369306771816448003",
+                    "username": "ytho",
+                    "avatar": "994fa3afef57c3d0a73aea9494760f77",
+                    "avatar_decoration": null,
+                    "discriminator": "6474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T06:24:52.246000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869098941642326036",
+                "type": 19,
+                "content": "Nice one thanks",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "834255910247333968",
+                    "username": "SOL_DEV_WILL",
+                    "avatar": "977c807bf10444a56cc6f78bc0bc101f",
+                    "avatar_decoration": null,
+                    "discriminator": "9328",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "707604162673639504",
+                        "username": "ilmoi",
+                        "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                        "avatar_decoration": null,
+                        "discriminator": "5651",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T06:08:54.765000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869093531619299339"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869094047489343519",
+                "type": 19,
+                "content": "Thank u: )",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "805789975814733845",
+                    "username": "hyunsun",
+                    "avatar": "7ba7160b69ac36c7f50d8187dc5c55fd",
+                    "avatar_decoration": null,
+                    "discriminator": "6948",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "avatar_decoration": null,
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:49:27.908000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869093960579158097"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869093960579158097",
+                "type": 19,
+                "content": "https://solana-labs.github.io/solana-web3.js/classes/StakeProgram.html#deactivate",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "805789975814733845",
+                        "username": "hyunsun",
+                        "avatar": "7ba7160b69ac36c7f50d8187dc5c55fd",
+                        "avatar_decoration": null,
+                        "discriminator": "6948",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:49:07.187000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869093769952235582"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869093769952235582",
+                "type": 0,
+                "content": "How to undelegate using solana web3? https://solana-labs.github.io/solana-web3.js/index.html",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "805789975814733845",
+                    "username": "hyunsun",
+                    "avatar": "7ba7160b69ac36c7f50d8187dc5c55fd",
+                    "avatar_decoration": null,
+                    "discriminator": "6948",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:48:21.738000+00:00",
+                "edited_timestamp": "2021-07-26T05:48:32.039000+00:00",
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869093531619299339",
+                "type": 19,
+                "content": "for testing - not sure if there is a tutorial but I learned by rebuilding the tests in this repo -> https://github.com/Bonfida/token-vesting\n\nThey do all 3 categories:\n- unit tests (nothing too interesting)\n- integration tests (you'll need to learn some quirks of how bpf testing works)\n- fuzzing (also some quirks for doing it in rust + even more if you're  on a mac)\n\nnote that the fuzzer they use, honggfuzz doesn't run on latest mac osx right now. so you have to run it from inside a docker container. See readme here - https://github.com/ilmoi/rebuild-token-vesting",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "707604162673639504",
+                    "username": "ilmoi",
+                    "avatar": "f0814434562dc7752375131b7ab1b1ab",
+                    "avatar_decoration": null,
+                    "discriminator": "5651",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/Bonfida/token-vesting",
+                        "title": "GitHub - Bonfida/token-vesting: A Vesting Contract for the Solana B...",
+                        "description": "A Vesting Contract for the Solana Blockchain. Contribute to Bonfida/token-vesting development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "869093531619299339",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/c098e16fd4f95c666eeae4055ad07b47d224d715f7b577e1066c35727036c419/Bonfida/token-vesting",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/OozxLfz8SKmIdBre7Z6dQNv8YcPEWrr-QPoxty3AA7M/https/opengraph.githubassets.com/c098e16fd4f95c666eeae4055ad07b47d224d715f7b577e1066c35727036c419/Bonfida/token-vesting",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    },
+                    {
+                        "type": "article",
+                        "url": "https://github.com/ilmoi/rebuild-token-vesting",
+                        "title": "GitHub - ilmoi/rebuild-token-vesting: rebuild https://github.com/Bo...",
+                        "description": "rebuild https://github.com/Bonfida/token-vesting for fun and profit (learning) - GitHub - ilmoi/rebuild-token-vesting: rebuild https://github.com/Bonfida/token-vesting for fun and profit (learning)",
+                        "color": 1975079,
+                        "reference_id": "869093531619299339",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/12323862ac93d21836b02d004f42923e1d261a6e1cb2f72ae01ccfcf24a922f2/ilmoi/rebuild-token-vesting",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/DsnlTHrYfYaxVfPMdaKnkLsf4d-_9K-5gvymgCoJvKw/https/opengraph.githubassets.com/12323862ac93d21836b02d004f42923e1d261a6e1cb2f72ae01ccfcf24a922f2/ilmoi/rebuild-token-vesting",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "834255910247333968",
+                        "username": "SOL_DEV_WILL",
+                        "avatar": "977c807bf10444a56cc6f78bc0bc101f",
+                        "avatar_decoration": null,
+                        "discriminator": "9328",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:47:24.915000+00:00",
+                "edited_timestamp": "2021-07-26T05:48:37.900000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "869083275451322450"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869083275451322450",
+                "type": 0,
+                "content": "Is there any good tutorial on testing and debugging solana programs?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "834255910247333968",
+                    "username": "SOL_DEV_WILL",
+                    "avatar": "977c807bf10444a56cc6f78bc0bc101f",
+                    "avatar_decoration": null,
+                    "discriminator": "9328",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:06:39.654000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869082878892445717",
+                "type": 0,
+                "content": "```Transaction simulation failed: Error processing Instruction 1: invalid program argument \n    Program 11111111111111111111111111111111 invoke [1]\n    Program 11111111111111111111111111111111 success\n    Program DkhCGxQnQRh7e68ZQjjYABktGi1rG4HEMjdFL45TNQY6 invoke [1]\n    Program log: Instruction: CreateLockupSchedule\n    Program DkhCGxQnQRh7e68ZQjjYABktGi1rG4HEMjdFL45TNQY6 consumed 2073 of 200000 compute units\n    Program DkhCGxQnQRh7e68ZQjjYABktGi1rG4HEMjdFL45TNQY6 failed: invalid program argument```\nThere is problem with how I'm defining the processor function? Or maybe I am in passing wrong data in the transaction? Anyone can help?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "834255910247333968",
+                    "username": "SOL_DEV_WILL",
+                    "avatar": "977c807bf10444a56cc6f78bc0bc101f",
+                    "avatar_decoration": null,
+                    "discriminator": "9328",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T05:05:05.107000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869079058682613780",
+                "type": 0,
+                "content": "And how to check how much liquidity there",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "827392906624892959",
+                    "username": "Rao sahab",
+                    "avatar": "32d03400a2c1dcff39b0d2e002cf072d",
+                    "avatar_decoration": null,
+                    "discriminator": "4035",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T04:49:54.298000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869078960695292034",
+                "type": 0,
+                "content": "And how a market is added on serum dex, required two tokens to add markt ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "827392906624892959",
+                    "username": "Rao sahab",
+                    "avatar": "32d03400a2c1dcff39b0d2e002cf072d",
+                    "avatar_decoration": null,
+                    "discriminator": "4035",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T04:49:30.936000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869078427616034876",
+                "type": 0,
+                "content": "After adding market  on serum, can someone remove it, please ans. as  i have invested much more in new project on  solana Blockchain",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "827392906624892959",
+                    "username": "Rao sahab",
+                    "avatar": "32d03400a2c1dcff39b0d2e002cf072d",
+                    "avatar_decoration": null,
+                    "discriminator": "4035",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T04:47:23.840000+00:00",
+                "edited_timestamp": "2021-07-26T04:48:12.393000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869022720535445604",
+                "type": 0,
+                "content": "Do failed transactions get refunded fees or are they still payed?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "818203379469778988",
+                    "username": "JoeyDonut",
+                    "avatar": "546fc9aefd3dcbbfbb0bce2cb375c103",
+                    "avatar_decoration": null,
+                    "discriminator": "7750",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T01:06:02.237000+00:00",
+                "edited_timestamp": "2021-07-26T01:06:17.488000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869007970715979796",
+                "type": 0,
+                "content": "I am working with react native and running on an ios simulator... what web interface?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-26T00:07:25.606000+00:00",
+                "edited_timestamp": "2021-07-26T00:07:37.286000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869004901445926912",
+                "type": 0,
+                "content": "only for you web interface",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:55:13.835000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "869004883989250178",
+                "type": 0,
+                "content": "you don't https for the test validator",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:55:09.673000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868999339991773255",
+                "type": 0,
+                "content": "I have found some resources on how to enable https on localhost, but when I run solana-test-validator, it sets up the local network for me and I am not seeing anything on how I can enable https for that network. Anyone have any idea how to make that work?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:33:07.881000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868991749152981033",
+                "type": 0,
+                "content": "Or do I have to do something else to enable it",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:02:58.084000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868991636250714152",
+                "type": 0,
+                "content": "can I just manually change the url of my local network in my terminal from http://localhost:8899 to https://localhost:8899 ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:02:31.166000+00:00",
+                "edited_timestamp": "2021-07-25T23:02:39.827000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868991238320308244",
+                "type": 0,
+                "content": "you need to enable https",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:00:56.292000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868991219869560862",
+                "type": 0,
+                "content": "Yes",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:00:51.893000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868991019188912168",
+                "type": 19,
+                "content": "I saw that, but didn't understand... is my localhost url the problem?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "avatar_decoration": null,
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T23:00:04.047000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "868989891537698816"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868989891537698816",
+                "type": 19,
+                "content": "https://stackoverflow.com/a/46468377/3889246 HTTPS plz",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://stackoverflow.com/a/46468377/3889246",
+                        "title": "How to use SubtleCrypto in chrome (window.crypto.subtle is undefined)",
+                        "description": "This is really embarassing\n\non virtually any site on the internet, \n\nwindow.crypto.subtle\r\nreturns\n\nSubtleCrypto {}\n  __proto__: SubtleCrypto\r\nin the chrome console (v61 (Official Build) (64-bit))",
+                        "reference_id": "868989891537698816",
+                        "provider": {
+                            "name": "Stack Overflow"
+                        },
+                        "thumbnail": {
+                            "url": "https://cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=73d79a89bded",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/VbfwnzN2MM794XNccNxDzrB1YeuPrxR53y11bwRfflY/%3Fv%3D73d79a89bded/https/cdn.sstatic.net/Sites/stackoverflow/Img/apple-touch-icon%402.png",
+                            "width": 316,
+                            "height": 316
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T22:55:35.194000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "868988316580708372"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868988316580708372",
+                "type": 0,
+                "content": "Hey guys, I am following this tutorial https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/ and trying to replicate the UI in a react native application. I have gotten the  section where the escrow is initialized to work. I am now working on accepting the trade. \n\nconst PDA = await PublicKey.findProgramAddress([Buffer.from(\"escrow\")], programId);\n\nThis line is producing the following error: undefined is not an object (evaluating '__globalThis.crypto.subtle')\n\nI am having trouble figuring out why this is happening, does anyone know what this means? Any direction would be grealy appreciated.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/",
+                        "title": "Programming on Solana - An Introduction | paulx",
+                        "description": "Learn the fundamentals of Programming on Solana by building an escrow"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T22:49:19.695000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868961370941583410",
+                "type": 0,
+                "content": "with the output of `cargo build-bpf --dump` how would i trace `Access violation in stack frame 0 at address 0x1ffffffe0 of size 8 by instruction #4984` in the file? i tried searching for `0x1ffffffe0` which gave me nothing, but i found `   21739    85 10 00 00 e0 ff 00 00    call 0xffe0 ; <<T as core::convert::From<T>>::from>`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T21:02:15.354000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868954067135758346",
+                "type": 0,
+                "content": "https://samy.pl/poisontap/",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T20:33:13.991000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868953687748391022",
+                "type": 0,
+                "content": "theres a lot more to security than just adding a bajillion layers of encryption",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T20:31:43.538000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868953648758161458",
+                "type": 19,
+                "content": "just because you have good crypto doesnt mean you're safe. if you walk out of a room and leave your computer locked and booted up, i can walk by, plugin a usb drive and the next time you're on your computer and access your keys steal them \ud83d\ude1b",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "417857235079790592",
+                    "username": "post",
+                    "avatar": "81f89efd82caf5b89011ebde626e6a98",
+                    "avatar_decoration": null,
+                    "discriminator": "4936",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T20:31:34.242000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "868847516144246785"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868953467882991666",
+                "type": 19,
+                "content": "Thanks!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "123213288589885440",
+                    "username": "gaboesquivel",
+                    "avatar": "9ee65a46c924865d8b457a10e7e58232",
+                    "avatar_decoration": null,
+                    "discriminator": "2517",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "854082797743636491",
+                        "username": "DevTode",
+                        "avatar": "1d2d1c9d190d10b50f9a837e290f1b20",
+                        "avatar_decoration": null,
+                        "discriminator": "5800",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T20:30:51.118000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "868892951026208838"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868940912594653265",
+                "type": 0,
+                "content": "does anyone know the latest status of on-chain SPL token metadata (not NFT related, just normal SPL tokens)? i couldn't find any issues in the repo (e.g. get token name/description, not just decimals)",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "122531133190701057",
+                    "username": "mm",
+                    "avatar": "f06400e3975cc64f30f9e74b67c0093a",
+                    "avatar_decoration": null,
+                    "discriminator": "4265",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T19:40:57.704000+00:00",
+                "edited_timestamp": "2021-07-25T19:41:23.275000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868938911903285288",
+                "type": 0,
+                "content": "hi, i am working on a solana token and i would like to add a \"royalties\" function to this token.  for each transaction, part of the token would go to the buyer and the other to a particular Wallet.  I can't find any documentation to develop this so if anyone has an idea, I'm up for it.  thank you",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "773167231260819456",
+                    "username": "georgy",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "9358",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T19:33:00.702000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "868929340807741500",
+                "type": 0,
+                "content": "Hey guys I was looking at the dapp scaffold example and I noticed for the endpoint you can specify a url. Is there a way to use different urls for the RPC and Websocket?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "818203379469778988",
+                    "username": "JoeyDonut",
+                    "avatar": "546fc9aefd3dcbbfbb0bce2cb375c103",
+                    "avatar_decoration": null,
+                    "discriminator": "7750",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-07-25T18:54:58.775000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "19821212b2237fa7728399e9260e4ad3"
+}

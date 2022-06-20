@@ -1,0 +1,103 @@
+although i think my python days are further & further behind me
+❤️
+welcome to the jungle
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+good idea
+That's fine. Just skip the state tests.
+misc is unfortunate because it uses `state` and I skipped implementing that
+That''s a good 80/20 I think.
+Probably don't neeed all of them. I'd start with tutorials + `misc`.
+grinding through translating the Anchor tests 😅
+Oh lit
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+thanks!
+think I figured it out
+yes
+the default one just uses localnet
+oh yeah in that case you do need to pass a different Provider
+no
+are you using a `solana-test-validator`?
+weird
+oh
+`httpcore.ConnectError: All connection attempts failed`
+my connections are failing for some reason
+the `__init__` method of `Program` has a `provider` param. Is there something in particular you're trying to achieve by passing a different Provider?
+btw how do I pass RPC provider to program?
+did a pull from git
+I was using the latest I think
+also I pushed a new version with a bugfix three hours ago, so please use that if not already
+yeah this seems like the right behaviour, except maybe it could be clearer when it's ok to use `create_workspace`
+yes fixed
+Just guessing 😁
+Haven't deployed it so metadata.address is not populated maybe?
+NFT for the first anchor-py support question imo
+is something wrong with my idl?
+```.local/lib/python3.9/site-packages/anchorpy/workspace.py", line 32, in create_workspace
+    program = Program(idl, PublicKey(metadata.address), Provider.local(url))
+AttributeError: 'NoneType' object has no attribute 'address'```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+i'm not sure what voting does
+you are all welcome to vote for AnchorPy at the hackathon https://devpost.com/software/anchorpy
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+that way you really have to mean it
+votes should be sent as ethereum transactions
+if you bot yourself enough you get $10k and a shoutout by  everyone in the solana team
+lets goo
+anchor py
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+got the tests working in CI  🐍 🐍 🐍  now to add more tests
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ok thanks
+currently 3.9 and up
+Great 👍
+some take longer to add because they need code from other Solana libraries
+the shortest answer is all the tests that you can see here https://github.com/kevinheavey/anchorpy/actions/runs/1378799746
+but I'm adding more
+Which python versions is anchorpy available to?
+Im looking into lockup
+Which tests can I currently run with anchorpy?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+google just doesn't think the AnchorPy GitHub repo exists at all 🤔  it can pull up the docs but not the repo
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I'm about to release 0.3.0 with support for the `at` constructor like anchor-ts has. But based on your example you're just looking to set the RPC url in code, then you want something like:
+
+```
+from anchorpy import Program, Provider
+provider = Provider.local('https://api.mainnet-beta.solana.com')
+program = Program(idl, program_id, provider)
+
+```
+that was very polite of you to direct the question at a hypothetical "anyone"
+anyone have some nice anchorpy examples? for reading accounts on mainnet? i've been doing this
+
+```# use mainnet
+os.environ['ANCHOR_PROVIDER_URL'] = 'https://api.mainnet-beta.solana.com'
+```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

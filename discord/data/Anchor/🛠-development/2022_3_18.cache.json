@@ -1,0 +1,4847 @@
+{
+    "total_results": 155,
+    "messages": [
+        [
+            {
+                "id": "954430942825554031",
+                "type": 0,
+                "content": "Ah, ok, that makes sense. Thanx again!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "736679966497964184",
+                    "username": "julizamt",
+                    "avatar": "841cbf189a3dc2dd32b6f046e927b112",
+                    "discriminator": "9220",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:27:49.239000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954430257694388295",
+                "type": 0,
+                "content": "But if anchor doesn't know the seeds for an address there's no way to automagically figure out the bump (it's impossible)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:25:05.891000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954430111959097414",
+                "type": 0,
+                "content": "Like with `#[account(seeds = [the, seeds], bump)]` over that `staker` account (I think, actually not 100% sure that works) [edit: think it should work]",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:24:31.145000+00:00",
+                "edited_timestamp": "2022-03-18T17:26:21.835000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954430027989123072",
+                "type": 0,
+                "content": "Is there already a sample program in the repo that can do airdrops? \nUser Clicks button => Receives a token\nI want to add this to my app so users can get fake USDC on Devnet",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "772795977580544011",
+                    "username": "marius",
+                    "avatar": "0611fa20fdf980b4cfda0baef31d14a5",
+                    "discriminator": "7365",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:24:11.125000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954429955389927514",
+                "type": 19,
+                "content": "How are you telling anchor about that bump? (Anchor can't guess the bumps, you have to tell it how to find them)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "736679966497964184",
+                        "username": "julizamt",
+                        "avatar": "841cbf189a3dc2dd32b6f046e927b112",
+                        "discriminator": "9220",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:23:53.816000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954429693841518623"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954429693841518623",
+                "type": 0,
+                "content": "Hi! I'm trying to get the bump out an account I'm passing in a context like this: \n` pub fn unstake(ctx: Context<Unstake>,\n        amount: u64\n    ) -> ProgramResult {\n        let staker_bump = *ctx.bumps.get(\"staker\").unwrap();\n        ctx.accounts.unstake(staker_bump,amount)\n    } `\nThis is the ctx:\n`#[derive(Accounts)]\npub struct Unstake<'info>{\n    #[account(mut)]\n    pub user:  Signer<'info>,\n\n    #[account(mut)]\n    pub stake_master: Box<Account<'info,StakeMaster>>,\n\n    #[account(mut)]\n    pub staking_pool: Account<'info, StakingPool>,\n\n    #[account(mut)]\n    pub staker: Account<'info,Staker>,\n\n    #[account(\n        mut,\n        constraint = ata_stake_funds.owner == user.key(),\n        constraint = ata_stake_funds.mint == staking_pool.pool_token,\n    )]\n    pub ata_stake_funds: Box<Account<'info,TokenAccount>>,\n\n    #[account(\n        mut,\n        constraint = ata_user_stake.owner == user.key(),\n        constraint = ata_user_stake.mint == staking_pool.pool_token,\n    )]\n    pub ata_user_stake: Box<Account<'info,TokenAccount>>,\n\n    #[account(mut,signer)]\n    pub user_deposit: Account<'info,Deposit>,\n\n    /// Token program.\n    pub token_program: Program<'info, Token>,\n}`\n\nBut I'm having this error:\n` Transaction simulation failed: Error processing Instruction 0: Program failed to complete \n    Program 2y7MviVmnCudJJpxB3P1ZnB2Hh1ykrgXvgp9aoLzJVqi invoke [1]\n    Program log: Instruction: Unstake\n    Program log: panicked at 'called `Option::unwrap()` on a `None` value', programs/staking_mock/src/lib.rs:83:58\n    Program 2y7MviVmnCudJJpxB3P1ZnB2Hh1ykrgXvgp9aoLzJVqi consumed 20679 of 200000 compute units\n    Program failed to complete: BPF program panicked\n    Program 2y7MviVmnCudJJpxB3P1ZnB2Hh1ykrgXvgp9aoLzJVqi failed: Program failed to complete `\n\nWhat I'm missing here?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "736679966497964184",
+                    "username": "julizamt",
+                    "avatar": "841cbf189a3dc2dd32b6f046e927b112",
+                    "discriminator": "9220",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:22:51.458000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954428267098685511",
+                "type": 0,
+                "content": "it's probably on someone's todo list in a github issue somewhere",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:17:11.296000+00:00",
+                "edited_timestamp": "2022-03-18T17:17:21.140000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954428106058371082",
+                "type": 0,
+                "content": "i was also just sanity checking that it hadn't already been removed and somehow i was using an outofdate version",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:16:32.901000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954427937287995432",
+                "type": 0,
+                "content": "yep",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:15:52.663000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954426760076873778",
+                "type": 19,
+                "content": "Mm, yeah, I guess anchor could default to using the newer spl instructions? E.g. https://github.com/solana-labs/solana-program-library/blob/master/token/program/src/instruction.rs#L382 (the old ones require an explicit rent account)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-program-library/blob/master/token/program/src/instruction.rs",
+                        "title": "solana-program-library/instruction.rs at master \u00b7 solana-labs/solan...",
+                        "description": "A collection of Solana-maintained on-chain programs - solana-program-library/instruction.rs at master \u00b7 solana-labs/solana-program-library",
+                        "color": 1975079,
+                        "reference_id": "954426760076873778",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/12a1cc1beaf7e1c7a7f6924dbaaf138fed697bb0b78a9aba72c4d7561ee944d1/solana-labs/solana-program-library",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/YIF9PIA9GaMEAqgdaYI4DizcCDJZa2kzLyeS-Mwz2fs/https/opengraph.githubassets.com/12a1cc1beaf7e1c7a7f6924dbaaf138fed697bb0b78a9aba72c4d7561ee944d1/solana-labs/solana-program-library",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "248066053161222144",
+                        "username": "donderper",
+                        "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                        "discriminator": "9738",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:11:11.994000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954425478549241906"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954425502360297482",
+                "type": 0,
+                "content": "surely this requirement has been removed by now?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:06:12.131000+00:00",
+                "edited_timestamp": "2022-03-18T17:06:42.720000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954425478549241906",
+                "type": 0,
+                "content": "V22.1 is still telling me that i need to add rent as a sysvar if initing a token account",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "248066053161222144",
+                    "username": "donderper",
+                    "avatar": "7bbcef47e8d4e8218218afd2680ed5a6",
+                    "discriminator": "9738",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:06:06.454000+00:00",
+                "edited_timestamp": "2022-03-18T17:06:18.982000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954424002200338542",
+                "type": 0,
+                "content": "Thank you Alan !",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:00:14.465000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954423980499042376",
+                "type": 0,
+                "content": "I was scared about some security issu \ud83d\ude04",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T17:00:09.291000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954423918154891314",
+                "type": 0,
+                "content": "Ok perfect ! This is exactly what i'm doing x)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:59:54.427000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954423565598470144",
+                "type": 0,
+                "content": "You have to be kind of careful though, if you want to persist any changes you'll have to manually run its exit handler, `hmm.exit(ctx.program_id)?;`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:58:30.371000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954423436296454164",
+                "type": 19,
+                "content": "```.rs\nlet hmm: Account<Thing> =\n         Account::try_from(&ctx.accounts.thing_account_info)?;\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "117720371548913670",
+                        "username": "TyLo",
+                        "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                        "discriminator": "5468",
+                        "public_flags": 512
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:57:59.543000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954423175754678362"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954423175754678362",
+                "type": 0,
+                "content": "Hey \ud83d\ude42 \nDo we know what is the safest way to deserialize an accountInfo to an Account<'info, SOME_TYPE> from within a program ? \ud83d\ude42",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "117720371548913670",
+                    "username": "TyLo",
+                    "avatar": "a_2e33ae1ae7702b645131cd2b12cc0708",
+                    "discriminator": "5468",
+                    "public_flags": 512
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:56:57.425000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954420421170716672",
+                "type": 19,
+                "content": "so we can see the local tx be it via testing or not on the explorer ? that is cool, so something similar to what tenderly offers on ethereum but is quite limited and requires more setup.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "185605576162672641",
+                        "username": "anteneko",
+                        "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                        "discriminator": "1997",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:46:00.681000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954418840920547398"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954418908792750102",
+                "type": 0,
+                "content": "If you do that, you need to `anchor test --skip-local-validator` or similar",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:40:00.102000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954418840920547398",
+                "type": 19,
+                "content": "Glad it helped! `--detach` is invaluable. If yo'ure ever testing outside of anchor, you can run `solana-test-validator` to spin it up and then run your tests in another shell",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "289342420359839746",
+                        "username": "degensamurai",
+                        "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                        "discriminator": "5819",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:39:43.920000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954413134980976640"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954416964380553258",
+                "type": 19,
+                "content": "Yeahhhhhhhhh I had to rewrite some of the backend stuff I was using",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "398866053427625984",
+                    "username": "0xBanana",
+                    "avatar": "b77b26817f2fb4b70c7a451de8e07bae",
+                    "discriminator": "3976",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "816460488086126642",
+                        "username": "regohiro.eth",
+                        "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                        "discriminator": "3133",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:32:16.518000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954416355573104700"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954416355573104700",
+                "type": 19,
+                "content": "Had the same issue. It looks like .toBuffer is only available in NodeJs.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "398866053427625984",
+                        "username": "0xBanana",
+                        "avatar": "b77b26817f2fb4b70c7a451de8e07bae",
+                        "discriminator": "3976",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:29:51.367000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "945424573246078976"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954413134980976640",
+                "type": 19,
+                "content": "Thanks for this, didnt know about `--detach`, improves debugging :).  Ignore my previous query. My test was set up incorrectly.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "185605576162672641",
+                        "username": "anteneko",
+                        "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                        "discriminator": "1997",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:17:03.518000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954408852609183824"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954409371251666985",
+                "type": 0,
+                "content": "Let me try that.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:02:06.175000+00:00",
+                "edited_timestamp": "2022-03-18T16:06:41.993000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954409121342439495",
+                "type": 0,
+                "content": "`http://localhost:8899`, I believe",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:01:06.592000+00:00",
+                "edited_timestamp": "2022-03-18T16:01:17.692000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954409002685595658",
+                "type": 0,
+                "content": "go to explorer.solana.com (or your preferred explorer), at the top right click `mainnet-beta` and it opens a menu, click `custom RPC` and put in the IP address + port that you're given when you run `solana config get`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:00:38.302000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954408852609183824",
+                "type": 0,
+                "content": "yep! So without seeing what your ts file looks like, when you're calling the `send()` functoin, it returns a tx id, you can log that or whatever your preferred way of retrieving the id is. Then, if you run `anchor test --detach` it will keep the local validator spinning after the tests complete",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T16:00:02.521000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954408613215109211",
+                "type": 19,
+                "content": "Wasnt aware that you can view anchor test related tx via the explorer.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "185605576162672641",
+                        "username": "anteneko",
+                        "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                        "discriminator": "1997",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:59:05.445000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954407863072211035"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954407863072211035",
+                "type": 0,
+                "content": "Are you looking at the transaction logs in the explorer?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:56:06.597000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954407455939502081",
+                "type": 0,
+                "content": "Will dig a bit more and report back, just wanted to see if anyone else has experienced this.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:54:29.529000+00:00",
+                "edited_timestamp": "2022-03-18T15:56:04.463000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954407428181622794",
+                "type": 0,
+                "content": "Yeah not sure, havent gotten that far. I am running this locally, and finding this to be the case when running tests.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:54:22.911000+00:00",
+                "edited_timestamp": "2022-03-18T15:55:32.864000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954407316277592145",
+                "type": 0,
+                "content": "Solana won't let you destroy lamports, so it needs to be going somewhere",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:53:56.231000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954407244286525513",
+                "type": 19,
+                "content": "Where is the rent balance going to?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "289342420359839746",
+                        "username": "degensamurai",
+                        "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                        "discriminator": "5819",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:53:39.067000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954397912908038174"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954397912908038174",
+                "type": 0,
+                "content": "Ive asked this before but wondering if others facing same issue:\n\n1. Using the  `close` attribute with a `Box<Account<'info, MyAccount>>` with destination set to an `UncheckedAccount`\n2. The account is closed but I am finding that the rent balance is not returned to the specified destination.\n\nIf no one else has experienced this, I will create a reproducible example and share.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "289342420359839746",
+                    "username": "degensamurai",
+                    "avatar": "16fe0b8e3cdfead91b27dd3b099ea076",
+                    "discriminator": "5819",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T15:16:34.293000+00:00",
+                "edited_timestamp": "2022-03-18T15:58:30.158000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954350533202833408",
+                "type": 0,
+                "content": "And it happens to start at 1 for whatever reason: https://github.com/solana-labs/solana/blob/master/sdk/program/src/instruction.rs#L735",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T12:08:18.091000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954350037687754853",
+                "type": 0,
+                "content": "So the [1] part is the current invocation depth",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T12:06:19.951000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954349990740897862",
+                "type": 19,
+                "content": "That happens here: https://github.com/solana-labs/solana/blob/master/program-runtime/src/stable_log.rs#L19",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana/blob/master/program-runtime/src/stable_log.rs",
+                        "title": "solana/stable_log.rs at master \u00b7 solana-labs/solana",
+                        "description": "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. - solana/stable_log.rs at master \u00b7 solana-labs/solana",
+                        "color": 1975079,
+                        "reference_id": "954349990740897862",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/bb23bd4931ea419c2287e57c7d8a001f8882a4b7b664df7837f17ddfce00540f/solana-labs/solana",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/EyHbrZI--0eW4OThPzaOzxAIdlv_NTMbE_OnYBsfaGo/https/opengraph.githubassets.com/bb23bd4931ea419c2287e57c7d8a001f8882a4b7b664df7837f17ddfce00540f/solana-labs/solana",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "665112704553320473",
+                        "username": "advo",
+                        "avatar": "ed7ff3b2b24549266f7c7596a3680194",
+                        "discriminator": "5468",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T12:06:08.758000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954346738951548928"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954347325982130216",
+                "type": 19,
+                "content": "https://discord.com/channels/889577356681945098/889702325231427584/954012922407956500",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:55:33.430000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954345499413082122"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954346738951548928",
+                "type": 19,
+                "content": "also what does invoke [1] and invoke [2]  mean?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "665112704553320473",
+                    "username": "advo",
+                    "avatar": "ed7ff3b2b24549266f7c7596a3680194",
+                    "discriminator": "5468",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:53:13.471000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954345499413082122"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954345722701033482",
+                "type": 0,
+                "content": "I gonna to build spl token mint contract.\nAnd in other contract I want to call mint function. so, many contract can use same spl token. \nhow to call function of other contract from my contract? Is it possible?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "796385050572488724",
+                    "username": "JB | Coinmeca",
+                    "avatar": "f7563ad09efaa664c2fac064cb938930",
+                    "discriminator": "8431",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:49:11.178000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954345499413082122",
+                "type": 0,
+                "content": "another error..\nTransaction simulation failed: Error processing Instruction 0: invalid program argument \n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT invoke [1]\n    Program log: Instruction: Exchange\n    Program 11111111111111111111111111111111 invoke [2]\n    Transfer: `from` must not carry data\n    Program 11111111111111111111111111111111 failed: invalid program argument\n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT consumed 11718 of 1400000 compute units\n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT failed: invalid program argument\n\ndoes this mean my escrow can't contain data?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:48:17.942000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954345362779430942",
+                "type": 0,
+                "content": "Woah! thanks man!!",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:47:45.366000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954344657062625310",
+                "type": 0,
+                "content": "So note that the original error message, `Cross-program invocation with unauthorized signer or writable account`, has an annoying \"or\" in it",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:44:57.110000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954344367060033571",
+                "type": 19,
+                "content": "`9WxZjnCADFatkzeRYdppd2B2uyDkDgVZww9JtA3s7fwH's writable privilege escalated` means that you forgot to mark the destination account as mutable/writable",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:43:47.968000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954343408636403752"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954343408636403752",
+                "type": 0,
+                "content": "9WxZjnCADFatkzeRYdppd2B2uyDkDgVZww9JtA3s7fwH seems to the issue. But i don't get it. We are transferring from vault to 9Wx address. Why do we need it to be the signer?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:39:59.462000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954340552936144957",
+                "type": 0,
+                "content": "See the issue?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:28:38.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954339734522560542",
+                "type": 0,
+                "content": "Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account \n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT invoke [1]\n    Program log: Instruction: Exchange\n    9WxZjnCADFatkzeRYdppd2B2uyDkDgVZww9JtA3s7fwH's writable privilege escalated\n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT consumed 11403 of 1400000 compute units\n    Program 8BQunCRwyBZ3EaPP4bmCraTWhVvazrajNR3CtTM7P5rT failed: Cross-program invocation with unauthorized signer or writable account",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:25:23.485000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954339308406452235",
+                "type": 19,
+                "content": "Try posting the full program log (lol \ud83d\ude1b) and you'll see another line giving you more info",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:23:41.891000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954338756083736626"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954338756083736626",
+                "type": 0,
+                "content": "Yea. seems to work. But giving another issue now. I'll go figure out \ud83d\ude04 thanks!\n\n Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: Cross-program invocation with unauthorized signer or writable account",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:21:30.207000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954337638922477568",
+                "type": 19,
+                "content": "Do you have a `pub system_program:: Program<'info, System>` in your derive(Accounts)?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:17:03.855000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954330949506707457"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954337592239865896",
+                "type": 0,
+                "content": "yes. use anchor_lang::solana_program::system_instruction::transfer;",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:16:52.725000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954337454763171890",
+                "type": 0,
+                "content": "yes. when i comment this chunk out, the error go away",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:16:19.948000+00:00",
+                "edited_timestamp": "2022-03-18T11:16:26.280000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954337325578612757",
+                "type": 0,
+                "content": "And is that `transfer` the regular `system_instruction::transfer`?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:15:49.148000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954337274454229002",
+                "type": 19,
+                "content": "Are you sure that's where the error is coming from? Like, if you comment out that whole chunk does the error go away?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "510254645944516610",
+                        "username": "justinlee",
+                        "avatar": null,
+                        "discriminator": "7425",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T11:15:36.959000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954330949506707457"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954330949506707457",
+                "type": 0,
+                "content": "Hi. I'm getting this error when I run this.\n```Error: failed to send transaction: Transaction simulation failed: Error processing Instruction 0: An account required by the instruction is missing```\n\n           ```for i in winning_accounts {\n                let ix = transfer(&ctx.accounts.vault.key(),&i.key, share);\n                invoke_signed(\n                &ix,\n                    &[\n                        ctx.accounts.vault.to_account_info().clone(),\n                        i.clone(),\n                    ],&[&[b\"pubkey\", &[ctx.accounts.vault.bump]]]\n                )?;\n            };```\n\nAnyone know what's going on?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "510254645944516610",
+                    "username": "justinlee",
+                    "avatar": null,
+                    "discriminator": "7425",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T10:50:28.974000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954315694785314826",
+                "type": 19,
+                "content": "I think that works, yeah",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "760084003394420736",
+                        "username": "phqb",
+                        "avatar": null,
+                        "discriminator": "2173",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T09:49:51.965000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954277633724669992"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954277633724669992",
+                "type": 0,
+                "content": "Suppose my program A has an instruction `#[derive(Accounts)] pub struct InstructionA {}`, I want to CPI this instruction from `InstructionB` of program B. Currently I redeclared all accounts of `InstructionA` inside `InstructionB`. Can I use the entire `InstructionA`  struct as a field inside `InstructionB`? For an example: \n```\n#[derive(Accounts)]\npub struct InstructionB<'info> {\n    pub ix_a: InstructionA<'info>,\n    pub another_account: AccountInfo<'info>,\n}\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "760084003394420736",
+                    "username": "phqb",
+                    "avatar": null,
+                    "discriminator": "2173",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T07:18:37.501000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954253716352020520",
+                "type": 0,
+                "content": "Is there a way to make anchor process IDL primitives like errors coming from an external library?   Most of our application logic is in a library and so far I can not find a way to expose ErrorCode enum  (I.e. have anchor include error enum in the IDL)... Other than manually copying the error.rs file from the library  into the program...",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "420118755993976834",
+                    "username": "aspect",
+                    "avatar": "6293b348cd284c15caab6c7a1db11ac6",
+                    "discriminator": "8718",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T05:43:35.155000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954203056159985735",
+                "type": 0,
+                "content": "nvm",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "892560437047078922",
+                    "username": "ellipticcurves",
+                    "avatar": null,
+                    "discriminator": "0371",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T02:22:16.824000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954202910013685790",
+                "type": 0,
+                "content": "was able to figure out the above",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "892560437047078922",
+                    "username": "ellipticcurves",
+                    "avatar": null,
+                    "discriminator": "0371",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T02:21:41.980000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954201417332187177",
+                "type": 0,
+                "content": "running into a `WalletSignTransactionError` and not sure what it could be",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "892560437047078922",
+                    "username": "ellipticcurves",
+                    "avatar": null,
+                    "discriminator": "0371",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T02:15:46.097000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954201372956434452",
+                "type": 0,
+                "content": "has anyone seen `y.pubkey is undefined` when trying to sign a message with an anchor wallet?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "892560437047078922",
+                    "username": "ellipticcurves",
+                    "avatar": null,
+                    "discriminator": "0371",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T02:15:35.517000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954178397188276224",
+                "type": 19,
+                "content": "Not sure if Armani or Paul have plans to or not. I'll hopefully have an actual apartment again at some point though lol and can start doing more streams too",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:44:17.667000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954176319019700296"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954176319019700296",
+                "type": 0,
+                "content": "Btw any plans to re record the anchor deep dive which got deleted  in the near future ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:36:02.193000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954176229437747240",
+                "type": 0,
+                "content": "Will have to try that one out",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:35:40.835000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954176013967958036",
+                "type": 19,
+                "content": "Mm, good question, not sure\u2014maybe",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:34:49.463000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954175792814895164"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954175792814895164",
+                "type": 0,
+                "content": "Since it calculates this bump will it be available via ctx.bump even if there is no init, since It calculated the canonical bump?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:33:56.736000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954174648004804638",
+                "type": 0,
+                "content": "To double check you aren't being a goof and using non-canonical bumps",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:29:23.792000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954174602337210378",
+                "type": 19,
+                "content": "It recalculates the (canonical! \ud83d\ude1b) bump using find_program_address",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:29:12.904000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954174271305949184"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954174271305949184",
+                "type": 19,
+                "content": "Care to explain what this does , so instead of doing seeds=[], bump = from instruction just writing bump what does it do ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:27:53.980000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954174014853611520"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954174042372448296",
+                "type": 0,
+                "content": "If am not wrong big improvements were made on the js side",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:26:59.398000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954174014853611520",
+                "type": 0,
+                "content": "Rust syntax is just `bump,` instead of `bump =` \ud83d\ude42",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:26:52.837000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173985908736023",
+                "type": 0,
+                "content": "Actually both",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:26:45.936000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173910545490050",
+                "type": 19,
+                "content": "You mean rust syntax or js syntax?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:26:27.968000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954173677174390804"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173677174390804",
+                "type": 0,
+                "content": "Also haven't caught up to the syntax and recent changes in a chor versions, any repo out there which uses the latest version and shows what changed ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:25:32.328000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173321392554014",
+                "type": 0,
+                "content": "With a canonical bump approach u just need to always call find program address off chain. To get the correct pda address",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:24:07.503000+00:00",
+                "edited_timestamp": "2022-03-18T00:24:27.279000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173290459594802",
+                "type": 0,
+                "content": "Yeah",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:24:00.128000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173283039866940",
+                "type": 0,
+                "content": "Yeah, or have some implicit agreement to use the second available bump rather than the first, etc.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:23:58.359000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173194170941450",
+                "type": 0,
+                "content": "It requires to store it somewhere",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:23:37.171000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173167029616660",
+                "type": 0,
+                "content": "Yeah, the client would need to know \"this program is weird, gotta use a non-canonical bump for some weird reason\"",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:23:30.700000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173157328179250",
+                "type": 0,
+                "content": "If u call find program address it's gonna give u the address with canonical bump but if u had used a non canonical bump",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:23:28.387000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954173058271313950",
+                "type": 0,
+                "content": "But on the client side",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:23:04.770000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954172996162039809",
+                "type": 19,
+                "content": "That isn't really very different from storing the canonical bump though",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:22:49.962000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954172901177851904"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954172940906291321",
+                "type": 0,
+                "content": "Is this a acceptable explanation ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:22:36.788000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954172901177851904",
+                "type": 0,
+                "content": "For instance if you decide to use non-canonical bumps let say for the same seeds u generated u know the canonical bump is taken so you manually create one with a non-canonical bump but then you need to store this somewhere to use it later on",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:22:27.316000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954172589163569192",
+                "type": 0,
+                "content": "In my mind , the reason canonical bump is important to use is because then you don't need to store full pubkeys of pdas onchain or off chain, on the client side using a base seed + combination of let say wallet addresses u call find program address and it gives u the pda address to pass for let say Alice to the escrow program, and by going one step more and storing bump in the account struct u can seamlessly sign for it",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:21:12.926000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169943161720884",
+                "type": 0,
+                "content": "This is why you can't use the same seeds for two separate accounts (assuming you're using findProgramAddress\u2014if you really want to be weird and use non-canonical bumps then go for it lol)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:10:42.070000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169772642304060",
+                "type": 0,
+                "content": "There's no checking whatsoever about whether the address is already in use etc.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:10:01.415000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169668569006100",
+                "type": 0,
+                "content": "Here's the important part: https://github.com/solana-labs/solana/blob/master/sdk/program/src/pubkey.rs#L439",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana/blob/master/sdk/program/src/pubkey.rs",
+                        "title": "solana/pubkey.rs at master \u00b7 solana-labs/solana",
+                        "description": "Web-Scale Blockchain for fast, secure, scalable, decentralized apps and marketplaces. - solana/pubkey.rs at master \u00b7 solana-labs/solana",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/f31c4dd107fb2e91fbd4552c93d8c4cda6bc23d374a5896c8fe9c11b1cd62390/solana-labs/solana",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/qDPSj5Cy3K3BH94K7b-O_mIh5kZZcZctM4FU9h6FYLg/https/opengraph.githubassets.com/f31c4dd107fb2e91fbd4552c93d8c4cda6bc23d374a5896c8fe9c11b1cd62390/solana-labs/solana",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:09:36.602000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169518509396039",
+                "type": 0,
+                "content": "On it chief.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:09:00.825000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169477711396994",
+                "type": 0,
+                "content": "I think you should really go read the implementation of `findProgramAddress/find_program_address`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:08:51.098000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169379115896895",
+                "type": 19,
+                "content": "No, I think this where you're confused: given a single choice of seed, there's *only one* canonical bump",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:08:27.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954169148294979584"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169318860542023",
+                "type": 0,
+                "content": "And then gives the second escrow pda a bump of 254 etc",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:08:13.225000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169148294979584",
+                "type": 0,
+                "content": "<@134416332509675520>  one last question, let say I use the same base seed \"escrow\" the. For multiple accounts the differentiator will be the canonical bump, so everytime I call find program address does it check if the off the curve address it found for say bump of 255 already exists and is taken by someone or not \n?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:07:32.559000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954169005114023956",
+                "type": 19,
+                "content": "https://github.com/project-serum/anchor/blob/v0.18.2/ts/src/error.ts#L87",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/blob/v0.18.2/ts/src/error.ts",
+                        "title": "anchor/error.ts at v0.18.2 \u00b7 project-serum/anchor",
+                        "description": "\u2693 Solana Sealevel Framework. Contribute to project-serum/anchor development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "954169005114023956",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/72b34d9a04b448b4231e5d7bb1e750cb1d1a6ff3878722b66069ad27b77f078c/project-serum/anchor",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/Hp8WHXDf1mXEon0tKrh4UA_QiLPM-7QeCHiWKX22VTc/https/opengraph.githubassets.com/72b34d9a04b448b4231e5d7bb1e750cb1d1a6ff3878722b66069ad27b77f078c/project-serum/anchor",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "712332112128376885",
+                        "username": "bejaxer",
+                        "avatar": "797946a8430b2f71855026966069e403",
+                        "discriminator": "9328",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:06:58.422000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954168781264015461"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954168781264015461",
+                "type": 0,
+                "content": "`custom program error: 0xa7`\n<@!134416332509675520> , could you let me know this error detail?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "712332112128376885",
+                    "username": "bejaxer",
+                    "avatar": "797946a8430b2f71855026966069e403",
+                    "discriminator": "9328",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:06:05.052000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167966390427748",
+                "type": 0,
+                "content": "Sad the deep dive Armani and paulx did on twitch got deleted I missed out on real gold \ud83d\ude2d\ud83d\ude2d\ud83d\ude2d",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:50.771000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167882235916288",
+                "type": 0,
+                "content": "So if you wanted to store it you needed to do it in the init instruction",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:30.707000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167824417456148",
+                "type": 0,
+                "content": "Yeah",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:16.922000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167814409846824",
+                "type": 0,
+                "content": "Ctx.bumps should be empty",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:14.536000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167789457911848",
+                "type": 19,
+                "content": "Yep, that's right",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:08.587000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954167714937708544"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167785880166483",
+                "type": 0,
+                "content": "But when u call that account in a non init state",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:02:07.734000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167714937708544",
+                "type": 0,
+                "content": "Also could you explain the ctx.bumps recently added to anchor I assume it only stores bumps of all the init accounts, in that call ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:01:50.820000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167694645657670",
+                "type": 0,
+                "content": "I think eventually anchor itself might just store it for you, automagically, but that doesn't happen yet",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:01:45.982000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167589599313961",
+                "type": 19,
+                "content": "Doesn't really matter how you do it, you can stick it wherever you want \ud83d\ude1b",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:01:20.937000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954167498037674015"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167498037674015",
+                "type": 0,
+                "content": "The recommended way of handling this case.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:59.107000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167444719665192",
+                "type": 0,
+                "content": "That was my original question sorry if I phrased it wrong what is the design pattern arnd it",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:46.395000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167346648469544",
+                "type": 0,
+                "content": "Yeah, exactly",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:23.013000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167331683201034",
+                "type": 0,
+                "content": "Storing the bump is purely about doing less computation",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:19.445000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167329959325736",
+                "type": 0,
+                "content": "But that is compute heavy",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:19.034000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167270547030071",
+                "type": 19,
+                "content": "Mm, if you use the canonical bump (aka if you use findProgramAddress), you don't strictly speaking *need* to store the bump anywhere (because you an always just re-calculate it using `find_program_address` inside your program",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-18T00:00:04.869000+00:00",
+                "edited_timestamp": "2022-03-18T00:00:08.747000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954167103135547422"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954167103135547422",
+                "type": 0,
+                "content": "Which I believe u get when u do init, so that is when you also store the bump in a account field for future use cases  I imagine ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:59:24.955000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166962185986048",
+                "type": 0,
+                "content": "If I ever wanted to use it to sign for the pda",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:51.350000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166929411702854",
+                "type": 0,
+                "content": "Do I not have to store it somewhere",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:43.536000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166894531837962",
+                "type": 0,
+                "content": "Let say find program returns 255 as canonical bump",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:35.220000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166875607146597",
+                "type": 0,
+                "content": "Canonical bump == use findProgramAddress",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:30.708000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166820452044800",
+                "type": 0,
+                "content": "You should just always always use `findProgramAddress`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:17.558000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166777770807338",
+                "type": 19,
+                "content": "No, it should *always* use the canonical bump",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:58:07.382000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954166727523069972"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166727523069972",
+                "type": 0,
+                "content": "But to start off a good pda design should never have a canonical bump, and entirely rely on unique seeds no ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:57:55.402000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166387696341082",
+                "type": 0,
+                "content": "But it's very unexpected/weird",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:56:34.381000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166312714788864",
+                "type": 0,
+                "content": "And it would work fine",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:56:16.504000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166299007799316",
+                "type": 0,
+                "content": "Just to be annoying/sneaky",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:56:13.236000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166254757892127",
+                "type": 0,
+                "content": "You could write your own function, `findSneakyProgramAddress`, that instead of taking the first bump that works instead takes the *second* bump that works",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:56:02.686000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166123119652944",
+                "type": 0,
+                "content": "But that's not the only bump that could produce an off-curve address, an address eligible to act as a PDA",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:55:31.301000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954166047915790366",
+                "type": 0,
+                "content": "Ok, the canonical bump is the one returned by `findProgramAddress`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:55:13.371000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165941300785162",
+                "type": 19,
+                "content": "Yes",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:54:47.952000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954165753823772693"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165906416758784",
+                "type": 0,
+                "content": "That might involve the user's key, sure",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:54:39.635000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165861097291786",
+                "type": 0,
+                "content": "Mm, I would think of it more generally as \"pda seeds should be unique, so figure out a way to make them unique\"",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:54:28.830000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165767216193587",
+                "type": 0,
+                "content": "So essentially a good design will always have pdas that take on the property of the user",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:54:06.447000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165753823772693",
+                "type": 19,
+                "content": "Are you comfy with this material? https://discord.com/channels/889577356681945098/889702325231427584/939324164890845265",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:54:03.254000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954165554850189393"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165554850189393",
+                "type": 0,
+                "content": "Ok could you clear the canonical,non-canonical term pls",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:53:15.815000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165523422273597",
+                "type": 0,
+                "content": "The basic point of seeds is to have unique seeds per account",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:53:08.322000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165432657510400",
+                "type": 0,
+                "content": "The only way to use the same seeds for multiple addresses is, yeah, to use non-canonical bumps, which is super unexpected",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:46.682000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165350486908928",
+                "type": 0,
+                "content": "Paulx",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:27.091000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165338071785543",
+                "type": 0,
+                "content": "Which one?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:24.131000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165324062818314",
+                "type": 0,
+                "content": "The escrow example",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:20.791000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165289266847754",
+                "type": 0,
+                "content": "What example are you looking at to get that idea?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:12.495000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165250041712640",
+                "type": 19,
+                "content": "Mm, you essentially never have multiple accounts use the same seeds",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:52:03.143000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954165117023563887"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954165117023563887",
+                "type": 0,
+                "content": "Also,  what is the design pattern o. Where to store the bump for the pda accounts, for example the seed escrow is stored inside the program state but multiple escrow will have the same seed but different bumps, so where are these bumps stored.",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:51:31.429000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954164639917277185",
+                "type": 19,
+                "content": "Not sure if there's actually any attack per-se about using non-canonical bumps, they're just a super unexpected thing to do",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "445019022338031618",
+                        "username": "aaraN",
+                        "avatar": "d629786f19bee49e084593d5705df36b",
+                        "discriminator": "5789",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:49:37.678000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954157741482590228"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954157741482590228",
+                "type": 0,
+                "content": "Was looking at Armani thread on footguns attacks and was confused about the importance of using a canonical bump instead of a user passed bump which might not be canonical",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "445019022338031618",
+                    "username": "aaraN",
+                    "avatar": "d629786f19bee49e084593d5705df36b",
+                    "discriminator": "5789",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T23:22:12.963000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954150150996119623",
+                "type": 19,
+                "content": "Mm, good question \ud83e\udd14",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "185605576162672641",
+                        "username": "anteneko",
+                        "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                        "discriminator": "1997",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T22:52:03.250000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954137524639510569"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954137524639510569",
+                "type": 0,
+                "content": "Looking at the difference between `transfer` and `transfer_checked`, it looks like after calling `transfer` and then searching the token's mint address on the explorer, the mint transfer history doesn't include that transaction. `transfer_checked` takes the mint as a parameter and after calling it and querying the mint address, you can see the transaction on the mint's history.\n\nIs there a reason that `transfer_checked` is not the default in Anchor?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "185605576162672641",
+                    "username": "anteneko",
+                    "avatar": "ab45f28a24529d9e9a94829b09a5c3dc",
+                    "discriminator": "1997",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T22:01:52.892000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954122746881769483",
+                "type": 19,
+                "content": "Any actual account type (not a pubkey, at least currently)",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "607628761063489561",
+                        "username": "b\u201dburak\u201d",
+                        "avatar": null,
+                        "discriminator": "3537",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T21:03:09.600000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954118269143482369"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954119531146649702",
+                "type": 19,
+                "content": "ty! It worked",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "282567322605060097",
+                    "username": "Famozin",
+                    "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                    "discriminator": "1167",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:50:22.909000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954114984080711780"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954118269143482369",
+                "type": 19,
+                "content": "Omg its worked. You are perfect sir. taker type is `Signer<'info>` . Which type `associated_token::authority` must be ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "607628761063489561",
+                    "username": "b\u201dburak\u201d",
+                    "avatar": null,
+                    "discriminator": "3537",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:45:22.024000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954117731249188924"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954117731249188924",
+                "type": 19,
+                "content": "Just do `associated_token::authority = taker` maybe?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "607628761063489561",
+                        "username": "b\u201dburak\u201d",
+                        "avatar": null,
+                        "discriminator": "3537",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:43:13.780000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954116173996367892"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954116422282387476",
+                "type": 0,
+                "content": "`181 | #[derive(Accounts)]\n    |          ^^^^^^^^ method cannot be called on `&anchor_lang::prelude::Pubkey` due to unsatisfied trait bounds\n    |\n   ::: /Users/hbb/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-program-1.10.0/src/pubkey.rs:71:1\n    |\n71  | pub struct Pubkey(pub(crate) [u8; 32]);\n    | ---------------------------------------\n    | |\n    | doesn't satisfy `_: AsRef<anchor_lang::prelude::AccountInfo<'_>>`\n    | doesn't satisfy `anchor_lang::prelude::Pubkey: anchor_lang::Key`\n    |\n    = note: the following trait bounds were not satisfied:\n            `anchor_lang::prelude::Pubkey: AsRef<anchor_lang::prelude::AccountInfo<'_>>`\n            which is required by `anchor_lang::prelude::Pubkey: anchor_lang::Key`\n            `&anchor_lang::prelude::Pubkey: AsRef<anchor_lang::prelude::AccountInfo<'_>>`\n            which is required by `&anchor_lang::prelude::Pubkey: anchor_lang::Key`\n    = note: this error originates in the derive macro `Accounts` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nFor more information about this error, try `rustc --explain E0599`.``",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "607628761063489561",
+                    "username": "b\u201dburak\u201d",
+                    "avatar": null,
+                    "discriminator": "3537",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:38:01.698000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954116243126886481",
+                "type": 19,
+                "content": "Why i am giving error in this line ?",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "607628761063489561",
+                    "username": "b\u201dburak\u201d",
+                    "avatar": null,
+                    "discriminator": "3537",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:37:18.984000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954116173996367892"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954116173996367892",
+                "type": 0,
+                "content": "`#[account(associated_token::mint = taker_receive_token_account, associated_token::authority = taker.to_account_info().key )]\n    pub taker_receive_account: Account<'info, TokenAccount>,`",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "607628761063489561",
+                    "username": "b\u201dburak\u201d",
+                    "avatar": null,
+                    "discriminator": "3537",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:37:02.502000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954114984080711780",
+                "type": 19,
+                "content": "https://github.com/project-serum/anchor/blob/master/lang/syn/src/codegen/program/common.rs#L17",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/project-serum/anchor/blob/master/lang/syn/src/codegen/program/common.rs",
+                        "title": "anchor/common.rs at master \u00b7 project-serum/anchor",
+                        "description": "\u2693 Solana Sealevel Framework. Contribute to project-serum/anchor development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "reference_id": "954114984080711780",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/72b34d9a04b448b4231e5d7bb1e750cb1d1a6ff3878722b66069ad27b77f078c/project-serum/anchor",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/Hp8WHXDf1mXEon0tKrh4UA_QiLPM-7QeCHiWKX22VTc/https/opengraph.githubassets.com/72b34d9a04b448b4231e5d7bb1e750cb1d1a6ff3878722b66069ad27b77f078c/project-serum/anchor",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "282567322605060097",
+                        "username": "Famozin",
+                        "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                        "discriminator": "1167",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:32:18.804000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954114345586028604"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954114345586028604",
+                "type": 19,
+                "content": "Do you have any example of the right way? I'm really confused about Anchor sighash \ud83d\ude05",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "282567322605060097",
+                    "username": "Famozin",
+                    "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                    "discriminator": "1167",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:29:46.575000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954114008485609582"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954114008485609582",
+                "type": 19,
+                "content": "That's unlikely to be the right way to calculate that sighash",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "282567322605060097",
+                        "username": "Famozin",
+                        "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                        "discriminator": "1167",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:28:26.204000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889577399308656662",
+                    "guild_id": "889577356681945098",
+                    "message_id": "954113765920620626"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "954113765920620626",
+                "type": 0,
+                "content": "Good afternoon. I'm having some issues to call a Anchor program using pure Rust\n```rust\n/*\n\"Program 2UTpyWLPHXHJEbtrVKYBCxV4uSVYPLL31n2B7Yiqj2sK invoke [1]\",\n\"Program log: Custom program error: 0x65\",\n\"Program 2UTpyWLPHXHJEbtrVKYBCxV4uSVYPLL31n2B7Yiqj2sK consumed 1307 of 200000 compute units\",\n\"Program 2UTpyWLPHXHJEbtrVKYBCxV4uSVYPLL31n2B7Yiqj2sK failed: custom program error: 0x65\"\n*/\nlet hello_ix = Instruction::new_with_bytes(program_id, \"95763bdcc47fa1b3\".as_bytes(), vec![]);\n```\nSolana program:\n```rust\n    pub fn hello(ctx: Context<Hello>) -> ProgramResult {\n        msg!(\"Hello, world\");\n        Ok(())\n    }\n```",
+                "channel_id": "889577399308656662",
+                "author": {
+                    "id": "282567322605060097",
+                    "username": "Famozin",
+                    "avatar": "227468021ed9721a4d94f3a509c3e98b",
+                    "discriminator": "1167",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-03-17T20:27:28.372000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "fdb5d6e2bc6a5ef774445c05f9af6395"
+}

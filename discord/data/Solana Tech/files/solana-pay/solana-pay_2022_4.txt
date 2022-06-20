@@ -1,0 +1,297 @@
+Thanks 🙏 I’ll look into this and confirm
+Just like in Phantom you cannot press Send (as it’s shown greyed) in Glow the slide button to pay “rebounds” in the end and does not perform the action. 
+This scenario only happens when you try to use the QR Code reader from the home of the wallet. If you go inside USDC, choose SEND and scan QR from there, it works perfectly well.
+<@!443041866493984769> / <@!492411676889710592> can you describe what the issue is in detail? I'll ping someone from Glow
+It might be worth reporting as a bug to Glow if you have any means to do that, I know Phantom used to not have this bug and are working on fixing it so I'd expect Glow would want to do the same!
+Thanks <@!492411676889710592>! Had the same issue with Glow, but I've just tried the workaround and it has worked flawlesly
+Assuming you're using Phantom, that's a bug in their app - they're working on it. As a workaround ATM you can click "Send", then click SOL or any token, then click the QR code in that UI and that should work
+Hello ppl! I've been trying to setup SolanaPay in the family business, but after implementing everything, I still got the SEND button greyed. Any idea or missing step in the docs? I've switched everything to mainnet already.
+I’m not super familiar with metaplex NFTs, but my understanding is that they’re built on top of an SPL token? If that’s the case then you can already use one as payment because Solana Pay already supports using an SPL token as payment
+In the future, do you think Solana pay can be used to accept NFTs as payment?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+While you can do this, you don't need to wait for more than 1 confirmation. This is a UX issue in Solflare that will be resolved soon.
+Probably best to find a way to abstract this from the customer. But at some level, Solana Pay is about eliminating intermediaries. A service model where you provide some kind of added value to merchants is probably the way to do this.
+At the end, the transactions goes to you anyway 🤔
+Why not just increase a bit the price of your product?
+We're interested in using solana pay for a product we're developing. Is it possible to charge a small fee on top of the solana pay transaction to our account? Seems like we'd have to do that with javascript locally somehow and add it to the total.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This should be something the wallet should help you with btw
+so you can then actually receive this token from others
+You must create yourself a token account for that specific token
+🔥 https://twitter.com/jessesexton01/status/1513357966866485250
+how was it resolved
+but it has been solved
+Yes
+When I scan the QR code I get the following error:
+
+```invalid link this contains a token that you don't own or we can't identify phantom```
+
+
+I airdropped sol to wallet. I'm using devnet.  I can see that I have Sol and Solana Explorer shows the balance
+
+This is what is in the solana point of sale:
+
+```label={label}
+                                    symbol="SOL"
+                                    icon={<SOLIcon />}
+                                    decimals={9}
+                                    minDecimals={1}
+                                    connectWallet=```
+
+Has anyone run into this issue>?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Honestly it might be an improvement in some ways
+whole team, just chatbots. code, machine generated
+jokes on them. solana is a gpt-4 beta scambot!
+Somebody is going to program a GPT-3 crypto scambot before long and then it's over for us
+Yeah they do that.  we're getting more sophisticated scammers finally
+lol. It took me a second to figure out that he was a scammer because he vaguely answered some other random question too
+i banned that one. unfortunately discord doesn't do the "delete messages from last 24hrs" if the user has already parted the server 😠
+Assuming you have some way of setting up subscriptions (on chain or not), you could use Solana Pay to pay for them.
+Yes, you can do this with wallet-adapter to connect Phantom (or other wallets) and send a transaction through the wallet for signing. Some applications use a "Check out with Solana Pay" branded experience for this.
+Soliciting people to DM you for help with Phantom, hmmmm?
+Oh yeh? Cause I'm looking at different streaming services who could benefit from this tech tbh and Spotify, Deezer and, Apple Music mostly come to mind
+gm guys, I’ve been meaning to ask this. Is it possible, when adding solana pay onto a product I’m developing, to create QR link for Spotify or Apple Music subs payments
+Because of this line:  ```const key = signer.publicKey.toString(); // publicKey is undefined```
+I'm getting a "Cannot read properties of undefined (reading 'toString')" when calling the "sendAndConfirmTransaction" method
+not for QR point of sale but just to send a sol transfer from wallet to wallet
+does someone knows if solana pay can be integrated in the web with phantom wallet?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Meaning? Could I just set these up the usual way but just find the web JS code behind them and tweak it a little bit ?
+Ok got it! Thank you! 🙂
+Solana Pay is mostly a way to create transactions IRL
+There isn't one :)
+Oh ok thank you, what’s the difference between just a normal solana transaction vs solana pay?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This is what I’ve eventually gathered.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+The current point of sale app is really just a proof of concept to demonstrate how Solana Pay works and can be used. It runs in a browser as an HTML page. I don't think webhooks make a lot of sense since there's no server side component to it.
+
+This is out of scope for what Solana Pay itself does, but you could design a system where some backend service did the polling or subscribing for transactions and then updated the frontend (also with polling or subscriptions).
+You should probably contact their support 😄
+Wrong channel
+Hello dear gents, what is the best way to measure RPC performance in terms of tx processing? is there an RPC call for that?
+I'm seeing CORS errors for `https://solanapay.genesysgo.net/`, which are preventing payment confirmations and recent transactions from working. Is this a known issue?
+I was really impressed with this project.
+I have a question, and if you look at the contents of "4.1 Retries" in the current solana docs, pos uses the polling strategy to check whether a transaction has been confirmed.
+Is there no way to implement this as a webhook?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+You can learn more in https://github.com/solana-labs/solana-pay#solana-pay
+Solana Pay is a protocol standard for wallets and apps to communicate each other in order to make payments, it's not something you "get"
+If I have the wallet do I automatically get this Sol-pay
+Until then, you can use a different RPC endpoint. Everyone's default config is busted
+Hopefully something we can fix without a code change, but we'll see
+They responded:
+
+> This might be due to recent auth changes. Pinging the team and will follow up in a dm.
+```
+Access to fetch at 'https://solanapay.genesysgo.net/' from origin 'https://solanapay.mintaro.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+```
+you can see it live https://solanapay.mintaro.app/#/new?label=Lucas%20Coffee&recipient=G1ij3JRUqZgcmEUMG5shSoS8SzFqsyYjnEauwrigzXud
+Do you happen to have an error message?
+Yeah, getting multiple reports of this, yours was the only one with any useful detail 😅
+Yeah, I imagine some inadvertent update on their end. The POS apps aren’t working
+This actually seems like a legit issue
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+It's completely program specific. That function I linked only covers the SPL Token program. The System program has some decoding functions but they are in web3.js
+Seems like it would be great to have some utils for that--at least for some common transaction types. Would the recommendation at least for SOL and SPL Token transfers be to import that function?
+The transaction you deserialize will contain instructions. Those instructions are specific to each program. You would need to look at the instruction's `programId` and then parse the data for each one.
+
+Here's an example of how SPL Token program instructions can be decoded: https://github.com/solana-labs/solana-program-library/blob/9123a80a6a5b5f8a378a56c4501f99df7debda55/token/js/src/instructions/decode.ts#L51
+
+However, this is specific to each program, and there's no general solution. This is a nontrivial thing that every wallet has to do to make sense of arbitrary transactions shown to the user.
+Since the transaction could be anything you would need to simulate it to see what (if any) SPL token or SOL transfers take place.
+I'm trying to implement the wallet side of the transaction request spec (https://github.com/solana-labs/solana-pay/blob/link-request/SPEC.md#specification-transaction-request). I'm getting the transaction back, decoding it from base64 and then deserializing it with `Transaction.from()`, but the resulting JSON still doesn't seem to contain human-readable information to verify and present to the user. How can I derive what's going on in the transaction (to, from, amount, anything else)? Thanks
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+You can see what accounts are being referenced, but that's it. Unless the wallet has a way to interpret the instruction data, it's just arbitrary bytes. And if the program is upgradable or closed source, then you can't really tell what you're signing anyway
+So in many cases you can't really tell what you're signing?
+Yep, unfortunately. And it also relies on program authors publishing decoding utilities (or at least IDLs to derive them)
+I get that. It just seems like every wallet would need to implement exactly the same thing ideally, right?
+It's also possible and pretty likely that other programs will call the token program internally.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+In the new spec, the current type is named a transfer request URL. Transaction requests URLs are the new type, `solana:<link>` where an HTTPS request is responded to with a serialized transaction object
+Hey Jordan, I am little bit confused, are we using "Transaction requests" interchangeably? Because I thought, encoding a URL and generating a QR code is the "transaction request" since that QR code contains transaction details and upon approval the amount will be transferred to requestor's wallet.
+Transaction requests, which are landing in the spec and SDK in the next few days, would allow you to set up recurring payments. You could use a program that handled subscriptions or streaming payments, token accounts that you delegate and trigger withdrawals from off chain, or some other mechanism. These are out of scope for Solana Pay at this time, but we're trying to stay aware of what solutions are being built in the ecosystem.
+I've tried again today and it worked. Might have been something temporal? Strange.
+Thanks <@!561345194528735242>
+Are recurring payments possible with solana pay at the moment?
+do you know when the zk token work will land? It seems an amazing addition to Solana
+yo if y'all want to join our telegram group for glow developer support — here it is 🙂 https://t.me/+lk5i0lkW555hMjFh
+Hey <@!443041866493984769> ! Glow founder here — any chance you can send me a QR code that has the issue so I can look into it? sorry for the inconvenience!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+The ToS (https://solanapay.com/tos) linked from the branding page (https://solanapay.com/branding) has some info
+Who owns brand copyright of solana pay?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+may I ask as junior? I want to connect Solana pay to my community and is there fast track to setup and go? Like best practice you use to connect it to DAO? Sorry if my question is too stupid I'm learning 🚀
+
+maybe in two words like setup this. than this and connect this. other things I will google to dive deeper, thank you)
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+not one..many.. check out yaku corp, portals, heavenland etc
+😐
+Please don't spam your question in multiple channels. Thanks.
+hey guys i have just started proper research in terms of the metaverse and everything
+ik that sandbox and decentraland are on the eth blockchain'
+is there one like  that for solana?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+Hey fellas, can anyone help here?
+hey, please is there any plans on solana-pay's roadmap to support usdc-Debit card conversions?
+
+or atleast debit card support?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Anyone here knows or can help point to the implementation of colatoral pay on solana? Like I buy a product by depositing the amount which then gets locked and generates interest till the original pay amount and then returns back the locked amount to the customer again?
+nvm read back, answered my question, this is for irl. Will look at other options, tips would be helpful.
+I looked at the current tuts and stopped because I wasn't sure if this was only geared towards pos and phone access.
+So I have a question. I'm wanting to implement a payment system for a dao where they're acting as a service. We want to charge based on two plans and solana pay looked promising. Is there a tutorial on how to implement this for a frontend where it uses a web3 wallet extension instead of qr code and phone?
+Try updating your package-lock.json and package.json using the files in branch 5 of the tutorial, and then run npm install again
+https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon/package-lock.json
+https://github.com/pointer-gg/solana-pay-tutorial/blob/5-coupon/package.json
+
+It fixed the "WalletSendTransactionError" for me
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+heyo, nice work on getting the payment app up. Hows it going now? Did Shopify remove the POC after some time or is it still running?
+https://github.com/step-finance/reward-pool
+the pointer.gg solana pay tutorial goes through both frontend using browser wallets and QR code using mobile wallet
+it also goes through how to set up Solana Pay using Transaction Request specifications 
+https://www.pointer.gg/tutorials/solana-pay-irl-payments/944eba7e-82c6-4527-b55c-5411cdf63b23
+thank you mate! Yes, that solved it for me too - found it earlier already 🙂
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+<@421696877814218752> 🙂 you left?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I'm creating a project that deals with networks and local businesses are apart of those networks. I'm trying to onboard a slightly rural city onto using solana pay. Any advice on how to make it easy to understand for merchants?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Cool. Please lmk if you run into any issues again.
+No problem! How you market is up to you, I just don't want devs to be confused in this channel
+Sorry about this, we chose the name well before Solana Pay was announced and unfortunately it happened to be unintentionally similar.
+You can use Solana Pay on a website. You may also just wish to use wallet-adapter to connect a wallet in the browser
+Especially of things named similarly to Solana Pay that don't have anything to do with it
+No promo <@958023453905133619>
+Awesome, much thanks
+That is a bummer. We are trying to use solana pay on our website.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+No
+Does Visa use solana?
+Nice to meet you!
+Hi!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hello Brian, just wanted to follow up with this. I was wondering if the update will be pushed this week? If so, do we know what day?
+or rather what's stopping people from mass adoption of crypto payments
+In your opinion, what are some key hurdles that Solana Pay has to get over before achieving mainstream adoption
+hey guys i'm currently writing a research piece on Solana Pay and would to chat with anyone who has experience with it or payments in general
+hello! What is the best way to make a recurring payment with solana pay?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Hey all, wanted to let you know that Phantom now supports Solana Pay tx requests via  `solana:<link>`. This also includes parital-signing in Solana Pay specifically. All this is made possible by our new deeplinking API which you can find here: https://docs.phantom.app/integrating/deeplinks
+
+Please let me know if you have any feedback or questions!
+oki!, I didn't know, I deleted the discord invitation.
+I love what you're working on, but no promo of other Discords please! This is a server wide policy
+🎉
+https://github.com/cryptoplease/cryptoplease-dart
+we added Solana Pay into the dart library here
+For Flutter Developer
+This is live in TestFlight now! Should go live to the public this week depending on app store review 🤞
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+awesome new tutorial using Solana Pay 😄 
+https://twitter.com/pointer_gg/status/1511443987697176583
+https://www.pointer.gg/tutorials/solana-pay-irl-payments/944eba7e-82c6-4527-b55c-5411cdf63b23
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Probably should have remembered that! Ty :) definitely the way to go! 
+
+FWIW in RN I’ve found react-native-qrcode-scanner good, but nothing specific to Solana pay there!
+What exactly do you mean by parsing QR Codes? Are you talking about a QR Scanner or what exactly? If you are using React Native you could try using a qr scanner library and then the uri you get parse it with @solana/pay as said in the previous message
+@solana/pay should be ok for that, https://github.com/solana-labs/solana-pay/blob/fb40bfc0a3a43824a4657b3d2a0ba67d3867c09f/core/example/index.ts#L37
+
+I'm not aware of a lib, but I've had good luck using the built-in `new URL` API. For transfer requests you get `solana` as protocol, recipient as `pathName` and a nice structure of all the optional params in `searchParams`
+does anyone know of an npm lib that lets your parse solana pay qr codes? none seem to work
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thank you!
+the result includes a confirmations field
+https://docs.solana.com/es/developing/clients/jsonrpc-api#getsignaturestatuses
+
+this might help you
+Hello there! Now that Solana is slow, I wanted to implement a way to see the confirmations of a transaction, like Solflare has. Is there an RPC call for that?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thank you!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

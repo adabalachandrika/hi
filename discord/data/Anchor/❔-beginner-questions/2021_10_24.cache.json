@@ -1,0 +1,3027 @@
+{
+    "total_results": 90,
+    "messages": [
+        [
+            {
+                "id": "901870368220926032",
+                "type": 0,
+                "content": "When I run `connection.getAccountInfo(watermelonMint.key);` I get a `null` object, although it should return an `AccountInfoObject`. Any idea why this is the case? When I look for the address associated with this mint on solana explorer, I get normal statistics (https://explorer.solana.com/address/7vLEZP5JHhKVg3HEGSWcFNaxAKg7L633uMT7ePqmn98V?cluster=devnet)\n\n```\nconsole.log(\"Watermelon mint is: \");\nconsole.log(watermelonMint);\n```\nreturns\n```\nMint {conn: Connection, key: PublicKey}\nconn: Connection {_commitment: undefined, _confirmTransactionInitialTimeout: undefined, _rpcEndpoint: 'https://api.devnet.solana.com', _rpcWsEndpoint: 'wss://api.devnet.solana.com/', _rpcClient: ClientBrowser, \u2026}\nkey: PublicKey\n_bn: BN {negative: 0, words: Array(11), length: 10, red: null}\n[[Prototype]]: Struct\n[[Prototype]]: Object\n``` \n\nany idea what could cause this?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "350632015852208140",
+                    "username": "David | qPools",
+                    "avatar": "19a8155e98df3f78d7a10548bc202b78",
+                    "avatar_decoration": null,
+                    "discriminator": "3335",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://explorer.solana.com/address/7vLEZP5JHhKVg3HEGSWcFNaxAKg7L633uMT7ePqmn98V?cluster=devnet",
+                        "title": "Explorer | Solana",
+                        "description": "Look up transactions and accounts on the various Solana clusters"
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T16:30:51.725000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901867550500093963",
+                "type": 0,
+                "content": "Perhaps we can revist migrations once/if we add versioning to accounts.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T16:19:39.928000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901867453821386793",
+                "type": 0,
+                "content": "I started down the path when first getting started but seemed not really necessary so I punted it.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T16:19:16.878000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901867305649189014",
+                "type": 19,
+                "content": "Yea maybe we should remove it until something better is built.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T16:18:41.551000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901855916759072839"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901855916759072839",
+                "type": 19,
+                "content": "The migrations feature is pretty bare-boned, `anchor migrate` will just call `migrations/deploy.js`'s export with a provider hooked up to the deploy cluster.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "816460488086126642",
+                        "username": "regohiro.eth",
+                        "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                        "avatar_decoration": null,
+                        "discriminator": "3133",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T15:33:26.228000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901831474821619732"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901831474821619732",
+                "type": 0,
+                "content": "Hello \nIs there any examples of how to write deploy scripts in the migration/deploy.ts?\nAnd how do I run the code?\n\nhttps://github.com/project-serum/anchor/blob/master/tests/cashiers-check/migrations/deploy.js",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T13:56:18.816000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901801922007285781",
+                "type": 19,
+                "content": "Found it. Import useWalletModal and setVisible to true.\nhttps://github.com/solana-labs/wallet-adapter/blob/master/packages/ui/react-ui/src/WalletModalButton.tsx#L11",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/wallet-adapter/blob/master/packages/ui/react-ui/src/WalletModalButton.tsx",
+                        "title": "wallet-adapter/WalletModalButton.tsx at master \u00b7 solana-labs/wallet...",
+                        "description": "Modular TypeScript wallet adapters and components for Solana applications. - wallet-adapter/WalletModalButton.tsx at master \u00b7 solana-labs/wallet-adapter",
+                        "color": 1975079,
+                        "reference_id": "901801922007285781",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/66a00b8c9c4936ab566e929ab433aa4801b7db93f4a1b5c975ee2ac022f2834e/solana-labs/wallet-adapter",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/9AzEaRNNxG3J8BYgaCNKVaHKpEJ2osrO8cwwB4TJl6w/https/opengraph.githubassets.com/66a00b8c9c4936ab566e929ab433aa4801b7db93f4a1b5c975ee2ac022f2834e/solana-labs/wallet-adapter",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T11:58:52.876000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901722532569301022"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901781894138568764",
+                "type": 0,
+                "content": "I think you do that on the client side. Haven't found an example that does wrapping in program side...",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:39:17.860000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901781553317834762",
+                "type": 0,
+                "content": "thank you so much! I need to read a bit about it to get better understand of how to make the wrapping work on the program side",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:37:56.602000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901781042640351262",
+                "type": 0,
+                "content": "Spl-token library offers wrapping feature.\nhttps://github.com/solana-labs/solana-program-library/blob/master/token/js/client/token.js#L596",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana-program-library/blob/master/token/js/client/token.js",
+                        "title": "solana-program-library/token.js at master \u00b7 solana-labs/solana-prog...",
+                        "description": "A collection of Solana-maintained on-chain programs - solana-program-library/token.js at master \u00b7 solana-labs/solana-program-library",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/31e36efaf51379b8cd28851610bae787b71545850031de5a4ef5c925d523bb53/solana-labs/solana-program-library",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/RtCdO8B182Kkyj__mdOmoc1A5Pz-RM3ynsyNwPO3LEk/https/opengraph.githubassets.com/31e36efaf51379b8cd28851610bae787b71545850031de5a4ef5c925d523bb53/solana-labs/solana-program-library",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:35:54.847000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901780749466865664",
+                "type": 0,
+                "content": "But I heard that wrapping sol is a better practice",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:34:44.949000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901780685394698301",
+                "type": 0,
+                "content": "that looks great and extremely simpler than I thought!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:34:29.673000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901780423544274944",
+                "type": 0,
+                "content": "Lamports transfer example\nhttps://github.com/cqfd/anchor/blob/lamport-transfer-example/examples/tutorial/basic-1/programs/basic-1/src/lib.rs#L21",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/cqfd/anchor/blob/lamport-transfer-example/examples/tutorial/basic-1/programs/basic-1/src/lib.rs",
+                        "title": "anchor/lib.rs at lamport-transfer-example \u00b7 cqfd/anchor",
+                        "description": "\u2693 Solana Sealevel Framework. Contribute to cqfd/anchor development by creating an account on GitHub.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/d98ebd0979ac3afd2cb3e38fbdc0f956e0d948485f7b53b115775597fa991e31/cqfd/anchor",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/DBInru5l2tm2FJ0YlVW2xOEZ4RwGGS8J2u16TFqafeE/https/opengraph.githubassets.com/d98ebd0979ac3afd2cb3e38fbdc0f956e0d948485f7b53b115775597fa991e31/cqfd/anchor",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:33:27.243000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901779997784674344",
+                "type": 0,
+                "content": "another question; I want to allow the user to deposit SOL tokens into the program alongside other data in the same transaction.\nI prefer this transaction to happen on the program side (and not on the frontend) so that the entire set of transactions happen or fail together atomically.\nDoes anyone have any reference for any sample (or open source) program that does something like this?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:31:45.734000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901778237062008843",
+                "type": 19,
+                "content": "okay. thank you ^_^",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "784251009202913321",
+                    "username": "Rachel18",
+                    "avatar": "6c7ca7b5a8db95187b314dd7a447f774",
+                    "avatar_decoration": null,
+                    "discriminator": "7693",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "848333406849073202",
+                        "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                        "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                        "avatar_decoration": null,
+                        "discriminator": "0001",
+                        "public_flags": 128
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:24:45.945000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901778069033979914"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901778069033979914",
+                "type": 19,
+                "content": "afaik you cant use windows, youd need to run a linux vm",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "848333406849073202",
+                    "username": "0xDEADBEEF \ud83e\udd80 | FABRIC",
+                    "avatar": "7399d4bc4034ca6b5f7ba86e55e10411",
+                    "avatar_decoration": null,
+                    "discriminator": "0001",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "784251009202913321",
+                        "username": "Rachel18",
+                        "avatar": "6c7ca7b5a8db95187b314dd7a447f774",
+                        "avatar_decoration": null,
+                        "discriminator": "7693",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:24:05.884000+00:00",
+                "edited_timestamp": "2021-10-24T10:24:19.643000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901777540362952746"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777900762718218",
+                "type": 0,
+                "content": "Got it! thank you so much!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:23:25.765000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777829576974338",
+                "type": 19,
+                "content": "ATA stands for associated token account. Your tokens live in ATA.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:23:08.793000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901777625167585321"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777625167585321",
+                "type": 19,
+                "content": "Thank you! and a follow up: what does ATA mean?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "816460488086126642",
+                        "username": "regohiro.eth",
+                        "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                        "avatar_decoration": null,
+                        "discriminator": "3133",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:22:20.058000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901777382657097738"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777540362952746",
+                "type": 0,
+                "content": "hello, super beginner question, can i use windows, or does anyone use windows?\nOr do I have to set up linux in a vm? My laptop is windows",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "784251009202913321",
+                    "username": "Rachel18",
+                    "avatar": "6c7ca7b5a8db95187b314dd7a447f774",
+                    "avatar_decoration": null,
+                    "discriminator": "7693",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:21:59.839000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777428156936233",
+                "type": 0,
+                "content": "owner of ATA",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:21:33.087000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901777382657097738",
+                "type": 19,
+                "content": "the owner of from account.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "444202002042454016",
+                        "username": "ahmedali",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1474",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:21:22.239000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901776553057353728"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901776553057353728",
+                "type": 0,
+                "content": "in the `Transfer` struct: https://docs.rs/anchor-spl/0.17.0/anchor_spl/token/struct.Transfer.html\nWhat does the \"Authority\" field represents?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "444202002042454016",
+                    "username": "ahmedali",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1474",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.rs/anchor-spl/0.17.0/anchor_spl/token/struct.Transfer.html",
+                        "title": "Transfer in anchor_spl::token - Rust",
+                        "description": "API documentation for the Rust `Transfer` struct in crate `anchor_spl`."
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T10:18:04.447000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901722532569301022",
+                "type": 0,
+                "content": "Hello\nIs there anyway to make custom connect wallet + select wallet button with wallet-adapter?\nIn other words, is there anyway to activate the connect wallet and select wallet popup but by function call? \n\nThe library gives us `<WalletMultiButton />` component but I only want the popup functionality part, not the button. \n\nThanks\n\nhttps://github.com/solana-labs/wallet-adapter",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "816460488086126642",
+                    "username": "regohiro.eth",
+                    "avatar": "0a5389b0900aae89af7af30526b7cfe0",
+                    "avatar_decoration": null,
+                    "discriminator": "3133",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/wallet-adapter",
+                        "title": "GitHub - solana-labs/wallet-adapter: Modular TypeScript wallet adap...",
+                        "description": "Modular TypeScript wallet adapters and components for Solana applications. - GitHub - solana-labs/wallet-adapter: Modular TypeScript wallet adapters and components for Solana applications.",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/66a00b8c9c4936ab566e929ab433aa4801b7db93f4a1b5c975ee2ac022f2834e/solana-labs/wallet-adapter",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/9AzEaRNNxG3J8BYgaCNKVaHKpEJ2osrO8cwwB4TJl6w/https/opengraph.githubassets.com/66a00b8c9c4936ab566e929ab433aa4801b7db93f4a1b5c975ee2ac022f2834e/solana-labs/wallet-adapter",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T06:43:24.959000+00:00",
+                "edited_timestamp": "2021-10-24T06:43:46.154000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901695218200502303",
+                "type": 0,
+                "content": "currently i'm having to either comment out tests or change the file path in `anchor.toml` to do this",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "505408791010082836",
+                    "username": "jerry",
+                    "avatar": "e57fcacce7e75a516d5c6a7b49957cea",
+                    "avatar_decoration": null,
+                    "discriminator": "0860",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T04:54:52.706000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901695098692173866",
+                "type": 0,
+                "content": "is there a way to run a single test file by specifying some flag with `anchor test`?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "505408791010082836",
+                    "username": "jerry",
+                    "avatar": "e57fcacce7e75a516d5c6a7b49957cea",
+                    "avatar_decoration": null,
+                    "discriminator": "0860",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T04:54:24.213000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901681674025328691",
+                "type": 0,
+                "content": "too dangerous",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T04:01:03.523000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901681662113505290",
+                "type": 0,
+                "content": "I am moving everything back to my bank account",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T04:01:00.683000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901681578969800705",
+                "type": 19,
+                "content": "he wants your liquidity \ud83d\ude1b",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "avatar_decoration": null,
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "avatar_decoration": null,
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T04:00:40.860000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901679064484560896"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901679200371621908",
+                "type": 0,
+                "content": ":-)",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:51:13.758000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901679064484560896",
+                "type": 0,
+                "content": "which protocol are you trying to break so i remove my money right now?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:50:41.360000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678927607652423",
+                "type": 0,
+                "content": "Cool",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:50:08.726000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678836759036005",
+                "type": 0,
+                "content": "and i do a fair amount of poking",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:47.066000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678807843495987",
+                "type": 0,
+                "content": "I will look into that",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:40.172000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678765518782474",
+                "type": 0,
+                "content": "Great",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:30.081000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678756937207839",
+                "type": 0,
+                "content": "Given assumptions about other txs sent in the same block",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:28.035000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678745688088576",
+                "type": 0,
+                "content": "you can run test transaction with `simulateTransaction`, that is always how i poke something i don't have source for",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:25.353000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678684140875796",
+                "type": 0,
+                "content": "Before sending?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:10.679000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678657586733086",
+                "type": 0,
+                "content": "Maybe you can just see what would happen if a certain tx cleared?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:49:04.348000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678557456134164",
+                "type": 0,
+                "content": "Maybe a sandbox is not even needed for that",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:40.475000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678553882558504",
+                "type": 0,
+                "content": "the program yes trivial, but it often comes with a lot of sattelite accounts",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:39.623000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678509997572107",
+                "type": 0,
+                "content": "So I can run test queries and see what would happen",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:29.160000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678481337884724",
+                "type": 19,
+                "content": "yes/no",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:22.327000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901678452078415972"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678452078415972",
+                "type": 0,
+                "content": "Ok new question, can I easily clone a contract in a sandbox local environment",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:15.351000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678428284137472",
+                "type": 0,
+                "content": "etherscan style",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:48:09.678000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678342040879214",
+                "type": 0,
+                "content": "no tick => bad look",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:47:49.116000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678295958061076",
+                "type": 0,
+                "content": "So that there is an incentive to do so",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:47:38.129000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678270205014077",
+                "type": 0,
+                "content": "also solscan",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:47:31.989000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901678209698005043",
+                "type": 0,
+                "content": "the problem is that it doesn't really show anywhere, so maybe your the solana explorer could query your service and add a tick if verified?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:47:17.563000+00:00",
+                "edited_timestamp": "2021-10-24T03:47:26.468000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901677306794360843",
+                "type": 0,
+                "content": "Even though it's quite straightforward.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:43:42.294000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901677269200805988",
+                "type": 0,
+                "content": "Though in reality, not many people seem to do that.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:43:33.331000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901677209364860949",
+                "type": 0,
+                "content": "In any language, it's going to be better to have the source, compile it yourself, and match the build artifact against whatever is deployed on chain. Which is what we can do with solan as well.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:43:19.065000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901677044386127912",
+                "type": 0,
+                "content": "Right",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:42:39.731000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901677016238145617",
+                "type": 19,
+                "content": "Sure you can probably do that, but it's going to be a pain and not give you easily readable code.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:42:33.020000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901676900194320425"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676900194320425",
+                "type": 0,
+                "content": "I'm not much of a knower about compiled languages but my understanding is that most binaries can be reverse engineered",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:42:05.353000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676705842888765",
+                "type": 0,
+                "content": "mmmh how would that reveal the logic?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:41:19.016000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676622262984724",
+                "type": 0,
+                "content": "Yeah but the instructions themselves are public info, just not human readable",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:40:59.089000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676522631491655",
+                "type": 19,
+                "content": "What's weird? You need the source to verify.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:40:35.335000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901676451764523038"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676451764523038",
+                "type": 0,
+                "content": "This seems like a really weird thing to me, transparency is an important component of smart contracts in my mind",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:40:18.439000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901676104891371520",
+                "type": 19,
+                "content": "Damn yeah I don't have the source. Maybe would be more accurate to say I want to sleuth, not audit",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "831450660146642974",
+                        "username": "Pikachoo",
+                        "avatar": "3778d8c6025afe096468846a546f4bfe",
+                        "avatar_decoration": null,
+                        "discriminator": "4505",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:38:55.738000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901675630939238420"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901675811483025428",
+                "type": 0,
+                "content": "You can use the anchor CLI for this via `anchor build --verifiable` or the docker image at `projectserum/build`. But the program you're verifiying must be built with the same image.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:37:45.784000+00:00",
+                "edited_timestamp": "2021-10-24T03:38:21.148000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901675630939238420",
+                "type": 19,
+                "content": "seems like the only sane approach right now is to audit a verifiable build",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "831450660146642974",
+                    "username": "Pikachoo",
+                    "avatar": "3778d8c6025afe096468846a546f4bfe",
+                    "avatar_decoration": null,
+                    "discriminator": "4505",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:37:02.739000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901629826560045107"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901675593488281660",
+                "type": 19,
+                "content": "I think all the current mechanisms people use boil down to building inside a docker image.\n\nSo if you have the source, you can build inside docker, and verify the resultant binary is equal to the expected one.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T03:36:53.810000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901645911728459806"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901646465452101683",
+                "type": 19,
+                "content": "https://github.com/solana-labs/solana/issues/12232 this is the only topic i know of that addresses this issue in depth. Ryoqun would be the person to ask about this in general though",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "avatar_decoration": null,
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana/issues/12232",
+                        "title": "No easy way to verify source of on-chain programs \u00b7 Issue #12232 \u00b7 ...",
+                        "description": "Problem Users need to verify programs that manage large amounts of on-chain capital against open-source implementations to trust there is no back-door in the program Proposed Solution TBD tag @jack...",
+                        "color": 1975079,
+                        "reference_id": "901646465452101683",
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/8fa1873aa9caad5d7b8602a898021811c6dd690e84113f717f70df99acbf20f3/solana-labs/solana/issues/12232",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/NcvGFxBEuRc38iTdCw2TNsSht8DUrrbWfllMy3IMNPk/https/opengraph.githubassets.com/8fa1873aa9caad5d7b8602a898021811c6dd690e84113f717f70df99acbf20f3/solana-labs/solana/issues/12232",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:41:09.145000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901646000706437150"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901646000706437150",
+                "type": 0,
+                "content": "At any rate much appreciated",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:39:18.341000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901645936583925761",
+                "type": 0,
+                "content": "<@867369388608061470>",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "867369388608061470",
+                        "username": "tomgeshury | Will Never Dm",
+                        "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                        "avatar_decoration": null,
+                        "discriminator": "3184",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:39:03.053000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901645911728459806",
+                "type": 0,
+                "content": "Are there any other tools ppl use to inspect program logic",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:38:57.127000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901645763422089266",
+                "type": 19,
+                "content": "none",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "avatar_decoration": null,
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:38:21.768000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901645700595605574"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901645700595605574",
+                "type": 19,
+                "content": "Yeah. I assume there are decompiler tools? Do you know of them?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "867369388608061470",
+                        "username": "tomgeshury | Will Never Dm",
+                        "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                        "avatar_decoration": null,
+                        "discriminator": "3184",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:38:06.789000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901641826602188820"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901645622808027147",
+                "type": 19,
+                "content": "Thanks",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "867369388608061470",
+                        "username": "tomgeshury | Will Never Dm",
+                        "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                        "avatar_decoration": null,
+                        "discriminator": "3184",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:37:48.243000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901641727780220948"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901641826602188820",
+                "type": 0,
+                "content": "but it wont give you the original code only the built code",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "avatar_decoration": null,
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:22:43.157000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901641727780220948",
+                "type": 19,
+                "content": "solana program dump <ACCOUNT_ADDRESS> <OUTPUT_FILEPATH>",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "867369388608061470",
+                    "username": "tomgeshury | Will Never Dm",
+                    "avatar": "bc56747e846467db4dc17a2da132b3f9",
+                    "avatar_decoration": null,
+                    "discriminator": "3184",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "127969511902019584",
+                        "username": "sock",
+                        "avatar": "90442973049480ac5f84e3c09be8d940",
+                        "avatar_decoration": null,
+                        "discriminator": "9105",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:22:19.596000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901637198003208272"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901637198003208272",
+                "type": 0,
+                "content": "rather how do I download the BPF",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T01:04:19.613000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901629826560045107",
+                "type": 0,
+                "content": "Given the address of an executable program, how do I view the actual smart contract itself so that I can audit it?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "127969511902019584",
+                    "username": "sock",
+                    "avatar": "90442973049480ac5f84e3c09be8d940",
+                    "avatar_decoration": null,
+                    "discriminator": "9105",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-24T00:35:02.124000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901607758443462667",
+                "type": 0,
+                "content": "basically, doing this with a PDA rather than state macro:\n```\n    #[state]\n    pub struct ExampleScheduled;\n\n    impl<'info> Scheduled<'info, IncrementUnsafe<'info>> for ExampleScheduled {\n        fn run_scheduled(ctx: Context<IncrementUnsafe<'info>>) -> ProgramResult {\n            let counter = &mut ctx.accounts.counter;\n            counter.count += 1;\n            msg!(&format!(\n                \"{{ \\\"increment\\\": \\\"{}\\\" \\\"{}\\\" \\\"{}\\\" }}\",\n                counter.key(),\n                counter.count,\n                counter.authority\n            ));\n            Ok(())\n        }\n    }\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134125322999169024",
+                    "username": "0xhari",
+                    "avatar": "0b21663bb69507ef936195acdbf05f6c",
+                    "avatar_decoration": null,
+                    "discriminator": "7112",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T23:07:20.675000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901607505153626152",
+                "type": 0,
+                "content": "if if `#[state]` is getting deprecated, is there an alternative way of implementing an `#[interface]`? since you need to `impl` it for some struct, all the examples set up a state struct and implement it for that\nif i use a PDA would i just implement it for the account struct that holds my bump?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "134125322999169024",
+                    "username": "0xhari",
+                    "avatar": "0b21663bb69507ef936195acdbf05f6c",
+                    "avatar_decoration": null,
+                    "discriminator": "7112",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T23:06:20.286000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901552893776261150",
+                "type": 0,
+                "content": "but i haven't tried it because I tried putting this in the Cargo.toml for `ido-pool` and it took effect but didn't reduce the build time:\n```\n[profile.release]\nopt-level = 0\noverflow-checks = false\nlto = false\nincremental = true\ncodegen-units = 256\n```",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T19:29:19.919000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901552591169806376",
+                "type": 19,
+                "content": "https://doc.rust-lang.org/cargo/reference/environment-variables.html\nlooks like you can `export CARGO_PROFILE_RELEASE_OPT_LEVEL=0` and do some other stuff",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://doc.rust-lang.org/cargo/reference/environment-variables.html",
+                        "title": "Environment Variables - The Cargo Book",
+                        "color": 16777215,
+                        "reference_id": "901552591169806376"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T19:28:07.772000+00:00",
+                "edited_timestamp": "2021-10-23T19:28:32.237000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901543955085279244"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901543955085279244",
+                "type": 19,
+                "content": "Not sure. If you find out let me know \ud83d\ude42",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "avatar_decoration": null,
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:53:48.769000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901543387239436379"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901543387239436379",
+                "type": 0,
+                "content": "do you know if there's any way to jam that info into the command line? Easier to run the Anchor tests from CI without editing them",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:51:33.384000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901543154111610931",
+                "type": 0,
+                "content": "ah",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:50:37.802000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901543138022273054",
+                "type": 19,
+                "content": "I think so!",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:50:33.966000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901542938142715915"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901543136449409134",
+                "type": 0,
+                "content": "You can set those profile settings inside your Cargo.toml, which will apply.",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:50:33.591000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901542938142715915",
+                "type": 19,
+                "content": "Ah so you don't want `cargo build-bpf` to compile release?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "avatar_decoration": null,
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:49:46.311000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901542214558187540"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901542214558187540",
+                "type": 0,
+                "content": "i just want it to compile faster for testing",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:46:53.795000+00:00",
+                "edited_timestamp": "2021-10-23T18:47:02.199000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901542033842405386",
+                "type": 19,
+                "content": "as in Cargo https://doc.rust-lang.org/book/ch14-01-release-profiles.html\nidk if it applies in BPF land",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:46:10.709000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901541809732354048"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901541809732354048",
+                "type": 19,
+                "content": "What does that mean?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "avatar_decoration": null,
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:45:17.277000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901541764551307264"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901541764551307264",
+                "type": 19,
+                "content": "I was thinking more like setting a dev profile",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "501570363566587905",
+                        "username": "armaniferrante | Will never DM",
+                        "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                        "avatar_decoration": null,
+                        "discriminator": "2513",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:45:06.505000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901541330449211474"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901541330449211474",
+                "type": 19,
+                "content": "What are you looking for? Some type of `watch` comand?",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "501570363566587905",
+                    "username": "armaniferrante | Will never DM",
+                    "avatar": "7a081b73d4de5c4f7e4f473f265731d2",
+                    "avatar_decoration": null,
+                    "discriminator": "2513",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "856894333180706876",
+                        "username": "LegalizeOnionFutures",
+                        "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                        "avatar_decoration": null,
+                        "discriminator": "1698",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:43:23.007000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889702325231427584",
+                    "guild_id": "889577356681945098",
+                    "message_id": "901540922205044776"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "901540922205044776",
+                "type": 0,
+                "content": "is there anything we can do when `anchor build`ing to make local development faster? None of the `cargo build-bpf` flags look proming",
+                "channel_id": "889702325231427584",
+                "author": {
+                    "id": "856894333180706876",
+                    "username": "LegalizeOnionFutures",
+                    "avatar": "6818b2cfdac0afa900ebd98f946a81cc",
+                    "avatar_decoration": null,
+                    "discriminator": "1698",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-10-23T18:41:45.674000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "64ea45f690b793547eccef58d004040f"
+}

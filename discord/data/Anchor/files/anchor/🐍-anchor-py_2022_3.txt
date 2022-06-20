@@ -1,0 +1,180 @@
+can you check at least one other encoding works? Like `"base64+zstd"`
+
+`jsonParsed` isn't always supported by the RPC server itself:
+```
+If "jsonParsed" is requested but a parser cannot be found, the field falls back to "base64" encoding```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+alright I've made a new release with `Provider.readonly` and a `commitment` param for `.fetch` https://github.com/kevinheavey/anchorpy/blob/0.8.0/CHANGELOG.md
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+<@!856894333180706876> updated the poetry.lock
+I've been testing it and it's been working from the fork I created.
+https://github.com/kevinheavey/anchorpy/pull/59
+<@!856894333180706876> I created a PR to upgrade `zstandard` to the next minor version up. We are trying to use it with mango-explorer and it won't compile because they need different versions of `zstandard`.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+released a new version there
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Awesome thx
+so `Buffer.from(anchor.utils.bytes.utf8.encode(vaultName))` just becomes `vault_name.encode()`
+pls no tag 😄  can find an example here https://github.com/kevinheavey/anchorpy/blob/b33a0ea2a619ab509e42126bc366921c851ec9d9/tests/test_misc.py#L283
+<@!856894333180706876> so I'm looking to generate PDAs based on some seed values I have. I'm wondering if anchorpy supports this. The corresponding typescript code would be as follows:
+```        const [mango_owner_pda] = await PublicKey.findProgramAddress(
+            [Buffer.from(anchor.utils.bytes.utf8.encode(MANGO_OWNER_PDA_SEED)), 
+            Buffer.from(anchor.utils.bytes.utf8.encode(vaultName))],
+            program.programId
+        );```
+awesome ty sir
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Also I’m curious to hear what you’re trying to achieve if that’s something you can share
+I’m guessing the error is not much to do with anchorpy
+So have never used pyarmor
+Interesting I’ve never encountered someone obfuscating Python code before
+why is this and does anyone know how to fix it?
+all modules used in the anchorpy module
+and so on
+but when I fix that it gives me `ModuleNotFoundError: No module named 'more_itertools'`
+`ModuleNotFoundError: No module named 'anchorpy'`
+it can't find any of the files related to it
+I'm receiving quite a lot of errors related to anchorpy when trying to compile it with pyarmor
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+looked in the official dc nobody really knew... do you know a magiceden dev server or maybe a good solana dev server?
+I’ve never looked at magic eden but maybe someone in their discord knows
+and maybe how to get them?
+Hello 👋  does somebody know what wallet_limit and lauch_stages_info are in the accounts instruction from magic eden mint?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I don’t know any of them 🤷‍♂️
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+lol
+got the answer I was looking for.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Also what problem are you trying to solve by making a .exe?
+I thought pyarmor was just for obfuscating Python code? Or does your tool for making the .exe use pyarmor under the hood?
+without error
+it crashes on anchorpy import
+I'm trying to compile my python files into an exe
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ok, I see. Thanks for explaining that detail for me. I didn't know. 
+(I could see the deprecation messages in the anchor build but I haven't got the context)
+Yeah I never implemented state because it’s been deprecated longer than most Solana developers have been alive
+ok, I found I can get the state methods through IDL `program.idl.state.methods` but it's not callable as a function 😕
+hi. I would like to kindly ask for help
+I go through the tutorial examples from Anchor `v0.23.0` and the `basic-4` example uses state macro definition
+https://github.com/project-serum/anchor/blob/v0.23.0/examples/tutorial/basic-4/programs/basic-4/src/lib.rs#L10
+I'm not able to find how can I access it and call the rpc method on it in anchor-py
+https://github.com/kevinheavey/anchorpy/blob/main/src/anchorpy/program/core.py#L96
+The generated IDL is like
+```
+{
+  "version": "0.1.0",
+  "name": "basic_4",
+  "instructions": [],
+  "state": {
+    "struct": {
+      "name": "Counter",
+      ...
+```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+yeap... trying to mint an nft
+Which I’m guessing is candy machine?
+This error comes from the Rust code of the program you’re interacting with
+why am i hitting this error?
+'Program log: Instruction: MintNft', 'Program log: Custom program error: 0x7d6'
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+wanted to get candy machine state same as in js
+```py
+async def get_candy_machine_state(connection, wallet, candy_machine_id):
+    provider = Provider(connection, wallet)
+
+    idl = await Program.fetch_idl(candy_machine_id, provider)
+
+candy_machine_id = "FqKF6r26wLDDGQtzL1Yj2ScnU9xaGDPeJRjz83E3J8v4"
+asyncio.run(get_candy_machine_state(connection, main_wallet, candy_machine_id))
+```
+```
+account_info = await actual_provider.connection.get_account_info(idl_addr)
+TypeError: object dict can't be used in 'await' expression
+``` any idea for this rror?
+sup all
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I’m guessing some type you’re using isn’t what it should be
+It’s a Python thing as opposed to an anchorpy thing
+Yeah that’s weird
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+gotcha
+You’ll need to pass the RPC url
+Yeah the AsyncClient defaults to localnet
+mainnet
+are you running a localnet?
+it does work when I use Provider.local()
+Am I doing something wrong?
+```
+provider = anchorpy.Provider(wallet=Keypair.generate(), connection=AsyncClient(None,'processed'))
+```
+
+Getting this error when fetching idl:
+`httpx.ConnectError: All connection attempts failed`
+yep that's the right course of action in the meantime
+I'll just generate a random keypair for now
+yea that would be great. That's what I'm using it for.
+for people who just want to use anchorpy to fetch data
+maybe i should add a readonly provider
+it's for sending transactions https://project-serum.github.io/anchor/tutorials/tutorial-0.html#starting-a-localnet
+why does anchorpy require this file?
+`FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\thijm\\.config\\solana\\id.json'`
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+i'll add a commitment param like in ts
+ah i see it does
+yeah but in this case I'd want to change commitment (and potentially other tranasaction options) for a given request (in my case for fetching). i believe the anchor ts client already has support for commitment override
+best way to do that depends on how you're initializing `anchorpy.Provider`
+you can change the commitment used by the underlying `AsyncClient`
+yeah was thinking just a new `readonly` constructor for the existing `Provider` class
+might be nicer to use the equivalent of NullSigner instead of having a separate new Provider type, I suspect you could just use a keypair of 0?
+any way to specify commitment when fetching accounts? if not does the program object have a way to decode account data, so that I can fetch with a commitment manually and then decode?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

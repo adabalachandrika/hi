@@ -1,0 +1,339 @@
+Good one
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+A `Dockerfile` template for rust programs which uses `sccache` to cache dependencies, and supports private repositories using ssh keys **without leaking them in the final image**.
+```docker
+# WARNING: BUILD THIS WITH --SQUASH OTHERWISE YOU MAY LEAK SSH KEYS
+FROM rust:1.53.0 as BUILDER
+RUN apt-get update && apt-get install -y libudev-dev
+RUN cargo install sccache
+ENV HOME=/home/root
+ENV SCCACHE_CACHE_SIZE="2G"
+ENV SCCACHE_DIR=$HOME/.cache/sccache
+ENV RUSTC_WRAPPER="/usr/local/cargo/bin/sccache"
+WORKDIR $HOME/app
+# Copy all files into the docker image
+ADD . .
+# Create the ssh directory, copy relevant files, authorize ssh host, and change permission
+RUN mkdir -p /root/.ssh && \
+    chmod 0700 /root/.ssh && \
+    cp ssh/id_rsa /root/.ssh && \
+    cp ssh/id_rsa.pub /root/.ssh && \
+    ssh-keyscan github.com > /root/.ssh/known_hosts && \
+    chmod 600 /root/.ssh/id_rsa && \
+    chmod 600 /root/.ssh/id_rsa.pub
+# Start the ssh mount
+RUN --mount=type=ssh ssh -q -T git@github.com 2>&1 | echo "started docker ssh mount"
+# Start the cache mount and build the cli
+RUN --mount=type=cache,target=/home/root/.cache/sccache cargo build --release --bin cli && cp target/release/cli /tmp/cli
+# Shred the ssh keys and remove them
+RUN shred /root/.ssh/id_rsa && shred /root/.ssh/id_rsa.pub && rm -rf /root/.ssh
+FROM rust:1.53.0 as runtime
+COPY --from=BUILDER /tmp/cli /usr/local/bin
+ENTRYPOINT ["/usr/local/bin/cli"]
+```
+
+You can build the image with the following command, **do not remove --squash or your ssh keys will be leaked**
+```make
+DOCKER_BUILDKIT=1 docker \
+    build \
+    -t rust-cli:latest \
+    --ssh \
+    --squash .
+```
+
+Requires you have `experimental` set to `true` in your docker daemon config file
+useful way to speed up compilation times in general, and for the aforementioned `Cargo.toml` config
+https://github.com/mozilla/sccache
+add this to your workspace `Cargo.toml` and you will save on program space and compute units. depending on what exactly you're doing you can get some wicked compute units saving.  It drastically increases build times though, so you'll want to implement some sort of caching solution
+
+```toml
+[profile.release]
+lto = "fat"
+codegen-units = 1
+[profile.release.build-override]
+opt-level = 3
+incremental = false
+codegen-units = 1
+```
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+```rust
+#[account]
+#[derive(Default)]
+```
+so for voting state you would have
+that seems pretty clean
+you could just have something to check `ctx.account.voting_state.crunchy == 0 `
+oh nice. i didn't know that was possible
+but maybe that is confusing to the user!
+that way you don't have to set the votes to start at 0
+you can use `default` on the vote struct
+one thing I wasn't sure on was whether I should refactor the voting functions down to just one function that takes an argument. I thought about having the user pass in a string for `crunchy` or `smooth` but wasn't sure about allocating space for the string and validating them
+ok, more stuff
+thanks!
+it really simplifies the classic voting tutorial that smith mcf did (also based on some classic ethereum tutorial)
+great example though
+i'll give that a try
+maybe this is bad practice though 🤷
+but i use `Buffer.from("my_variable")` all the time and nothing bad has happened
+maybe you need the extra encoding stuff because `-` is a special character
+https://github.com/bfriel/crunchy-vs-smooth-v2/blob/master/tests/crunchy-vs-smooth.js#L15
+awesome. thank you!
+yes
+oh interesting! so I can just remove it entirely?  `#[account(init, seeds = [b"vote-account".as_ref()], bump = vote_account_bump, payer = user]`
+you probably don't need to manually add `space`, anchor will calculate that for you automatically unless you use variable length types like String or Vec (which there's no real reason to anyway)
+thanks! I found your anchor visitors program in here which was very helpful for me. thanks for sharing!
+Seed stuff looks good to me! 🌱
+Oh I should add that the program above is deployed to devnet so you can try out the frontend using the steps in the readme
+Original walkthrough is here: https://www.brianfriel.xyz/learning-how-to-build-on-solana/ I will write a follow up post about using PDAs and will be sure to credit/thank anyone who provides feedback!
+gm - I decided to write a part 2 to my earlier anchor walkthrough. A lot of people specifically asked about using PDAs, so I took a stab at refactoring my basic app to use a PDA. Would anyone be up for doing a quick review of my code? Rust is not my native tongue so I am very open to feedback/criticism/best practices. Repo is here https://github.com/bfriel/crunchy-vs-smooth-v2
+(if anyone can answer these, lmk and I'll add to the doc)
+I still have some open questions, but at least things are much more clear. Specifically:
+
+* do we have to manually transfer lamports into a bazillion accounts that are being created so they don't get garbage collected?
+* there are four governance objects-- one for program upgrades, one for mints, one for token transfers. But what is the fourth one for?
+* If I want to manage a treasury of SOL, is there a governance I can use for that? Or do I have to wrap all the tokens?
+* Can a single token governance account manage associated token addresses, or is it one governance per token account? (should be easy to find out, I just didn't do it yet)
+hope someone finds them useful
+https://github.com/coffeemug/spl-governance-docs
+all, I wrote up some notes as I was working through figuring out how `spl-goverance` program works
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+This is cool, and the answers are 1) No, you don’t have to transfer lamports manually,  every time an account is created it’s allocated with rent exempt amount
+2) The governance types differ by the type of authority transferred or verified at creation time (upgrade, mint, owner for program, mint and token account accordingly) . They are provided as convenience for the most common use cases  and then the UI displays them differently (different icons, info and pre-canned instructions)  but other than that there is no difference and you could just use  governance account for everything. In fact I want to make that distinction UI side only in future versions
+3) You could use a treasury of SOL, but the UI doesn’t help with this use case yet, and you would have to manually create the relevant instructions without wrapping
+4) Yes, a governance can manage any number of authorities. You can have a single governance which manages program upgrades, tokens mints etc… The governance account PDA becomes the relevant authority which can sign transactions
+Regarding the tutorial:
+1) You can build just governance by running cargo build from /governance/program directory
+2) Any solana instruction can be used with governance. The instruction generator form displayed with (+)  shows some pre-canned instructions frequently used with the given governed asset as convenience. ex mint instruction for mints and upgrade for programs, but in general case any instruction could be used. 
+3) As best practise the governance program instance should be put under governance of the realm
+4) After realm is created the wallet which created it has the authority over it. This authority should be transferred to one of the governances using the ‘Set Realm Authority option’
+5) The oyster UI is MVP and we are working with MNGO on the new UI, the live version of it: https://dao-beta.mango.markets/realms  and github https://github.com/blockworks-foundation/governance-ui
+maybe <@!712412210814779454> could answer these
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Proposals at present can only be created using the MVP UI. We are currently working on supporting that in the new UI, should be coming soon
+I just have no idea how to create these proposals yet.
+oh man, Realms is so much slicker than what I've seen from Squads, which is the only other dao product I've seen so far.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+how much did it cost you to deploy the program to the mainet?
+Am still new to anchor I get this error when i try to vote.  Error: Error: failed to send transaction: Transaction simulation failed: Attempt to debit an account but found no record of a prior credit.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+It should be directly correlated to the binary size, but it is somewhat odd that the cli does not do a check with the right amount
+Not sure about the best way to estimate deploy costs
+I believe around 2.5 sol. I had around 5 in the wallet to make sure I had enough
+Do you have sol in your wallet? That error looks like your wallet has no sol in it. You will just need a tiny amount to pay transaction fee costs
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Another downside with the saber merkle is that they leave a pda out there for every claim forever; an account created when claiming to prevent dupes. So every claimer is essentially burning min-rent - and in my opinion we shouldn't make litterring accounts on the ledger a good habit..
+
+An improvement to that program would be a cleanup script. That expires the distributor and collects the rent from all the “marker” PDAs (if desired). This actually makes the airdrop a profitable event.
+This is indeed another solution. High transaction count to create and claim. Lots of onchain analysis to find unclaimed as well. Likely not an option once over 50k. 
+
+We should create a table with al the options with pros and cons. I don’t think it’s a matter of one size fits all.
+plus they can just reclaim the PDA rent after the event
+because i think the idea is that Saber or whomever, already has a list of accounts that are entitled to the airdrop based on whatever criteria they have decided
+but then if you create a pda token account why not push that directly to the user, is that for this end period reclaim phase?
+kind off
+yes that is what we talked about in comparison
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I just havnt gotten use to staring at code all day, I’d like to see my progress prior to deployment
+Hey, working on code for the first time. Is there any way to visually see my progress with the coding I’m doing on command line ?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks! I just shared to twitter https://twitter.com/bfriel_/status/1451566458694090759
+this is so so good, just got up to creating frontend section but my fave anchor tutorial so far ✌️
+If I wrote some code for a game and I want to know it’s executed right do I just wait for the program to tell me it’s right ?
+Sorry I’m trying to describe what I’m talking about best I can. Does everyone customize code just using command line ?
+sorry in advance for the weird wrapping on the code snippets. currently looking for a fix but the plugin I use isn't too customizable
+Hey all, I wrote up a new walkthrough to accompany my code changes above. Would anyone be up to quickly review it before I go sharing on twitter? Thanks for all the help thusfar! https://www.brianfriel.xyz/understanding-program-derived-addresses/
+not sure what you mean by this
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I just shared some of my favorite Anchor / Solana resources on Twitter https://twitter.com/pencilflip/status/1451949960065335302. Lots of overlap with yours <@!219700859729084416> 😛 If I'm missing something, add on to the thread!
+this is great ! Halfway through the first guide and loving it. Excited to get back at it tomorrow 🙂
+DM any additional resources you found useful for inclusion
+Here's my attempt to pull together the scattered resources on Anchor framework: 
+https://stasha.dev/girri/learning-anchor
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+amazing!
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+https://github.com/QuarryProtocol/quarry
+are there any open source projects built with Anchor?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+In case anyone wants some examples of using the spl token program from anchor, this was the result of a rust/anchor study group stream I just did: https://github.com/cqfd/anchor-token-studies. It's a messy grab bag but posting here in case it's helpful
+ah i mean, working with saber's or something similar
+isn't what saber released a merkle distributor?
+yeah this was kinda how i was thinking about it before running into saber's port from uniswap
+just found this thread. anyone actively working on a merkle distributor or similar rn?
+Well, here's a start https://medium.com/@genero_of_soul/how-to-not-lose-your-mind-or-how-to-standardize-your-flp-launch-5da23b0e5b3c
+Yeah I think I’ve got an idea. I’ll build a simple web app
+Thinking about making a guide on my method of writing down all necessary CLI commands for a smooth Fair Launch and copy+pasting. Would this be beneficial for the community? Maybe even a simple low-overhead static website that constructs the commands for you?
+havent seen but i already know i need this. u are awesome
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+👍 😆
+Yep, I ran it. You're most likely using a slightly out of date `anchor` cli. Try doing `anchor --version`, it will need to be 0.18 dot something.
+
+Did you run this script on your side?
+maybe it is from associated_token
+yeah, I tried that but same issue there.
+in the list of constraints you should place `init` first, that's what the error is telling you to do
+I don't understand where part should I modify
+`#[account(init, ... )]`
+Can you explain more detail?
+that has to do with the order of the constraints in the smart contract, place init first in the list
+
+I am spending two weeks for this. 😦
+and the mint (token address) is not imported into Phantom wallet, i think. Did you check it? or what is my wrong about this?
+
+Great. This can work with custom spl-token (I mean the token created by spl-token cli).
+https://discord.gg/5bHbdPVh 👀
+Where's the study group discord alluded to here? https://github.com/project-serum/anchor/issues/695
+<https://github.com/cqfd/anchor-token-studies/blob/main/programs/token-studies/src/lib.rs#L77-L78> beautiful stuff btw, thanks for doing the pull request for this
+(i know this was a live stream of course, just thinking out loud from the point of view of teaching people how to construct the necessary parts for the CPI call piece by piece)
+it also looks kind of confusing calling `anchor_spl::token::mint_to` in one shot but that's just me
+Heh, yeah, not sure how useful that is (guess one downside is there's nowhere to store the bump, so gotta keep passing it around). But kind of fun as a stream example.
+also haven't seen an empty seed before, good to know it's possible
+cool, i haven't seen a mint be its own authority before but i suppose there's no reason why not
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Morning guys!
+
+https://dev.to/emanuelferreira/how-to-mint-10000-nfts-on-opensea-487c
+Is their any nft marketplace that has it's code opensourced?
+alright ill go
+cause anchor..
+heh, get it, deep dive
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I argued semi-hard with anatoly as to why there couldn't just be an extra PDA associated with the token account to explicitly indicate the details of the order
+technically speaking the details for the order can be checked using the seeds but the seeds themselves aren't easily available
+it's storing all of the details about the orders off chain
+similarly with anatoly's "stateless orders" <https://github.com/solana-labs/solana-program-library/pull/2473/files>
+but i just find the offchain merkle stuff a little bit confusing
+yeh, it definitely ties up a bunch of capital / solana and also costs a little bit more in transaction fees to init all of the accounts
+This is quite nice as well, though less capital efficient potentially.
+My alternate design (less solana efficient) would be 
+- Get a list of public keys that are eligible for the airdrops
+- Create a PDA token account for every eligible pubkey, using the pubkey itself as the seed
+- Let users claim the airdrop by transferring it to their own ATA for the token
+  - close the PDA token account and retrieve the rent as part of the `user claim` function
+- After some arbitrary amount of time retrieve the rent and tokens from all the unclaimed PDA token accounts
+Sweet makes sense. Thanks for explaining.
+Yes. Pretty much.
+Ok got it. So the design is
+
+* Snapshot airdrop amounts off chain
+* Create merkle tree off chain
+* Submit merkle root on chain and transfer tokens into some vault
+* Claim rewards by providing a proof that you are part of the airdrop, transferring tokens to yourself
+
+Is that correct?
+Here is the verification function:
+<https://github.com/saber-hq/merkle-distributor/blob/11c5aaa782c28e8050be853aedeb3ec055c55886/programs/merkle-distributor/src/merkle_proof.rs#L8>
+The proofs are generated off-chain in this manner:
+```js
+  // keccak256(abi.encode(index, account, amount))
+  public static toNode(index: number, account: PublicKey, amount: BN): Buffer {
+    const buf = Buffer.concat([
+      new u64(index).toArrayLike(Buffer, "le", 8),
+      account.toBuffer(),
+      new u64(amount).toArrayLike(Buffer, "le", 8),
+    ]);
+    return Buffer.from(keccak_256(buf), "hex");
+  }
+```
+
+On claims. Clients supply the proof and it gets verified on chain
+No. We only submit the merkle root on chain.
+So snapshot off chain and then create a merkle tree on-chain of the airdrop-amount per account created by the snapshot?
+I read the words but don't understand. 😛
+https://github.com/saber-hq/merkle-distributor#rationale
+Is there a quick tldr explaining how it works?
+merkle-distributor
+We are using it on mainnet-beta for the recent Saber airdrop. Please let me know if you are interested in using our merkle-distributor for your airdrops and need help.
+Hey all. Here is a program you all can use for airdrops:
+https://github.com/saber-hq/merkle-distributor
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+metaplex
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Guys I think I found one of the best demo/example for js solana native. Most of your questions are answered here. 
+https://github.com/yihau/solana-web3-demo
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+I found a nice Anchor version of the comprehensive escrow tutorial on Paul's blog.
+The blog: https://paulx.dev/blog/2021/01/14/programming-on-solana-an-introduction/#instruction-rs-part-1-general-code-structure-and-the-beginning-of-the-escrow-program-flow
+The Anchor version: https://hackmd.io/@ironaddicteddog/anchor_example_escrow
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+although the bubble graph is pretty ugly, the information it communicates is good
+it's nice to see the size and number of the different voters too
+Though I kind of like the oyster one since it reflects more how the program is created.
+I think their GUI will be preferred once it has the ability to create proposals implemented.
+mango have their own version of the gui as well
+didn't occur to me (duh)
+actually looking at the gui code is great
+I essentially want to build my own gui on top of it
+Thanks
+Gotcha
+It's just the monorepo for the UIs asscoiated with the spl library.
+what is Oyster? I saw that in the Metaplex code and was really curious
+Otherwise, i'd just recommend to read the code.
+What are you trying to figure out? The oyster GUI and program works out of the box.
+wondering if anyone knows of any resources to get started, or wants to collaborate on making them maybe
+it has basically zero docs and is fairly complex, so it's hard to know where to begin
+has anyone spent any time getting the solana governance program to work/
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+

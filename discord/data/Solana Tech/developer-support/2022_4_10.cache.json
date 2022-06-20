@@ -1,0 +1,3656 @@
+{
+    "total_results": 108,
+    "messages": [
+        [
+            {
+                "id": "962780265997013063",
+                "type": 0,
+                "content": "I created a new walllet and a new token now I try to send my token to a phantom wallet but it gives me an error\nError: The recipient address is not funded. Add --allow-unfunded-recipient to complete the transfer??",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "942460471200583741",
+                    "username": "AlexSfr",
+                    "avatar": "6d65368529d87948e54fbe01fe83dfe7",
+                    "avatar_decoration": null,
+                    "discriminator": "0270",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T18:25:03.006000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962779623668736071",
+                "type": 0,
+                "content": "does the total used amount of compute units determine anything in a transaction? for example, if a transaction uses less compute units will it be processed faster?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "492698949673680897",
+                    "username": "brn",
+                    "avatar": "d9333e1061e9f8c889ffa6a227388c58",
+                    "avatar_decoration": null,
+                    "discriminator": "2301",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T18:22:29.863000+00:00",
+                "edited_timestamp": "2022-04-10T18:24:05.950000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962776811765395476",
+                "type": 0,
+                "content": "If I use this, then I get lots of messages:\n```go\nsub, err := client.LogsSubscribeMentions(\n        program,\n        rpc.CommitmentRecent,\n    )\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "122463008151568385",
+                    "username": "DanTheGoodman",
+                    "avatar": "8b2f543e99865350f97c6e82f9821666",
+                    "avatar_decoration": null,
+                    "discriminator": "1475",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T18:11:19.453000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962776575974191174",
+                "type": 0,
+                "content": "I am trying to use the websocket API to listen for all transfers by doing the following (in Go)... weird part is I am not getting any events for the account of the system program, which I feel like I should be getting lots\n```go\nprogram := solana.MustPublicKeyFromBase58(\"11111111111111111111111111111111\") // nft candy v2\n\n    sub, err := client.AccountSubscribe(\n        program,\n        \"\",\n    )\n    if err != nil {\n        panic(err)\n    }\n    defer sub.Unsubscribe()\n\n    log.Println(\"Waiting on program events...\")\n    for {\n        got, err := sub.Recv()\n        if err != nil {\n            panic(err)\n        }\n        spew.Dump(got)\n    }\n```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "122463008151568385",
+                    "username": "DanTheGoodman",
+                    "avatar": "8b2f543e99865350f97c6e82f9821666",
+                    "avatar_decoration": null,
+                    "discriminator": "1475",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T18:10:23.236000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962768900406263830",
+                "type": 0,
+                "content": "Has anyone ever had any issues trying to build code that uses the solana-rpc crate? I'm not sure why but I'm running into the following issue when trying to build my code that uses the crate:\n\n```error[E0614]: type `u64` cannot be dereferenced\n   --> /Users/x/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-gossip-1.9.13/src/cluster_info_metrics.rs:574:35\n    |\n574 |         .map(|(slot, num_votes)| (*slot, *num_votes))\n    |                                   ^^^^^\n\nerror[E0614]: type `usize` cannot be dereferenced\n   --> /Users/x/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-gossip-1.9.13/src/cluster_info_metrics.rs:574:42\n    |\n574 |         .map(|(slot, num_votes)| (*slot, *num_votes))\n    |                                          ^^^^^^^^^^\n\nerror[E0614]: type `u64` cannot be dereferenced\n   --> /Users/x/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-gossip-1.9.13/src/cluster_info_metrics.rs:580:43\n    |\n580 |                 .map(|(slot, num_votes)| (*slot, *num_votes)),\n    |                                           ^^^^^\n\nerror[E0614]: type `usize` cannot be dereferenced\n   --> /Users/x/.cargo/registry/src/github.com-1ecc6299db9ec823/solana-gossip-1.9.13/src/cluster_info_metrics.rs:580:50\n    |\n580 |                 .map(|(slot, num_votes)| (*slot, *num_votes)),\n    |                                                  ^^^^^^^^^^\n\nFor more information about this error, try `rustc --explain E0614`.\nerror: could not compile `solana-gossip` due to 4 previous errors\nwarning: build failed, waiting for other jobs to finish...\nerror: build failed```\n\nMaybe I'm missing a dependency? I can build https://github.com/ckamm/solana-accountsdb-connector just fine which uses solana-rpc. I tried a few different rust versions, but it didn't help",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "154711316135804928",
+                    "username": "dboures",
+                    "avatar": "7bd6a8a6ba91db14406bcbbd3cd19e2c",
+                    "avatar_decoration": null,
+                    "discriminator": "7142",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:39:53.238000+00:00",
+                "edited_timestamp": "2022-04-10T17:40:04.981000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962766475939184670",
+                "type": 0,
+                "content": "Btw in the last spl-token library, there are described `import splToken from \"@solana/spl-token\";`\nBut the new version, can't read \nHow can I fix the issue",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "900079726717198346",
+                    "username": "JackDev",
+                    "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                    "avatar_decoration": null,
+                    "discriminator": "3293",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:30:15.200000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962764156333875260",
+                "type": 19,
+                "content": "Does someone know about this?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "909819374439919636",
+                    "username": "lunap2p",
+                    "avatar": "c96da7f4ceebf92a3dce51ff835e77bd",
+                    "avatar_decoration": null,
+                    "discriminator": "7974",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:21:02.163000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962680594750386256"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962763604510249070",
+                "type": 19,
+                "content": "Could you please tell me more detail?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "900079726717198346",
+                    "username": "JackDev",
+                    "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                    "avatar_decoration": null,
+                    "discriminator": "3293",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:18:50.598000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962761013562839151"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962761960166940772",
+                "type": 0,
+                "content": "Hi, i hope you can help me.\nI get an dns error (11001) if i want to create a new token on the devNet \"spl-token create-token\".",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "812363398918438942",
+                    "username": "Smith15",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "5452",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:12:18.556000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962761272468844554",
+                "type": 0,
+                "content": "is it a good practice to approve a token delegate of amount 1 and after processing transaction **revoke the token delegate**?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "736598444805718146",
+                    "username": "ProNoob",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1031",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:09:34.596000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962761013562839151",
+                "type": 19,
+                "content": "if you want to increase the supply, you use mint to is a correct way.\nYou can't just increase the supply and don't issue any real tokens.\nyou need a token account to store these tokens.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "900079726717198346",
+                        "username": "JackDev",
+                        "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                        "avatar_decoration": null,
+                        "discriminator": "3293",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:08:32.868000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962759629627076658"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962759629627076658",
+                "type": 19,
+                "content": "Thanks for your offer\nWhat I mean, I just want to increase the supply",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "900079726717198346",
+                    "username": "JackDev",
+                    "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                    "avatar_decoration": null,
+                    "discriminator": "3293",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T17:03:02.912000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962723642444251186"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962754056433066004",
+                "type": 0,
+                "content": "Hey to all! Hope you can help me.\nIm searching info about spl token as nft.\nSo i need to create spl token with metadata (uri/img/info) that will shows on Collectible tab on wallet, i need it like mint pass (Phantom will show it like nft but it will be spl token). I tried to create spl-token with metaplex upload (config file/0.png/0.json) but no working. Token exist but not showing on collectible tab. I know that it is possible but there is no info....",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "531813989966151690",
+                    "username": "L | 2",
+                    "avatar": "8431fc8644de19ab81e31946396e8dc4",
+                    "avatar_decoration": null,
+                    "discriminator": "6056",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T16:40:54.159000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962752503450071080",
+                "type": 0,
+                "content": "Btw, how does solscan get live transactions data though? \ud83e\uddd0",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T16:34:43.899000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962736806376407111",
+                "type": 0,
+                "content": "Hm. Thanks for all the help!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:32:21.425000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962736558216208454",
+                "type": 0,
+                "content": "but yeah.. its kinda the opposite way",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:31:22.259000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962736462116319234",
+                "type": 0,
+                "content": "you can get all related accounts via the getTransaction - posting the signature you get from onLogs",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:30:59.347000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962736264598159400",
+                "type": 0,
+                "content": "Oh. I needed a way to get transaction live data of several wallets. I think that\u2019s not possible yet!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:30:12.255000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962735952923619338",
+                "type": 19,
+                "content": "onProgramAccountChange:  {\n  accountId: PublicKey {\n    _bn: <BN: 3da33af37113d077d9af8db1215e964a87f6ee8a09256b9de526057f2321ef55>\n  },\n  accountInfo: {\n    lamports: 1677360,\n    data: <Buffer 01 ab 20 cb 1d ba 0d 37 85 57 a5 7c 46 05 ff 7b e1 43 74 81 99 0d 02 43 fd e6 f9 df 93 44 60 e3 7e db 62 b6 c8 05 b0 88 69 ef bc d2 49 3b 01 13 29 e2 ... 63 more bytes>,\n    owner: PublicKey {\n      _bn: <BN: e3a23c291fffaa4a72de3b2aec2dfeb94876de77d52383d981a4e5a8daf61fc4>\n    },\n    executable: false,\n    rentEpoch: 294\n  }\n}",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:28:57.946000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962735359949672559"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962735656210161700",
+                "type": 19,
+                "content": "yeah... sounds about right.. you can use onProgramAccountChange for that case of catching the transaction",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:27:47.204000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962735359949672559"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962735359949672559",
+                "type": 0,
+                "content": "Okay. accountSubscribe doesn\u2019t return any result in regards of the transaction according to the example result I saw.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:26:36.570000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962735038850539540",
+                "type": 0,
+                "content": "To resume a deploy, pass the recovered keypair as the\n[BUFFER_SIGNER] to `solana program deploy` or `solana write-buffer'.\nOr to recover the account's lamports, pass it as the\n[BUFFER_ACCOUNT_ADDRESS] argument to `solana program close`.\n========================================================================\nError: Custom: Invalid blockhash",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "808672825585172531",
+                    "username": "fei",
+                    "avatar": "e97f656df6e6c3baa307a790d84a49cf",
+                    "avatar_decoration": null,
+                    "discriminator": "2817",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:25:20.014000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962734715167707207",
+                "type": 0,
+                "content": "but im not sure about that.. try and update \ud83d\ude42",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:24:02.842000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962734632300859462",
+                "type": 0,
+                "content": "im not sure normal user wallets have any logs related",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:23:43.085000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962734492139786331",
+                "type": 19,
+                "content": "Thanks. Does onLogs only trigger for programs or also for normal user wallets?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "937676704351133706",
+                        "username": "aMittelman",
+                        "avatar": "55def10f7e80966406e6b56073bceea5",
+                        "avatar_decoration": null,
+                        "discriminator": "3941",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:23:09.668000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962733781595328544"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962734226124460063",
+                "type": 0,
+                "content": "i think its pretty straight forward",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:22:06.245000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962734140774567966",
+                "type": 19,
+                "content": "I checked but couldn\u2019t find anything useful. Maybe I missed something.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "937676704351133706",
+                        "username": "aMittelman",
+                        "avatar": "55def10f7e80966406e6b56073bceea5",
+                        "avatar_decoration": null,
+                        "discriminator": "3941",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:21:45.896000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962733954467770398"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733954467770398",
+                "type": 19,
+                "content": "not sure.. maybe you should ask the devs here.. \n\nor you can read and see responses here:\nhttps://docs.solana.com/developing/clients/jsonrpc-api#accountsubscribe",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:21:01.477000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962733777677852732"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733781595328544",
+                "type": 19,
+                "content": "here a snippet for you:\n\nconnection.onLogs(escrowProgramId, async (logs, context) => {\n    console.log(\"Updated program logs   : \", logs, new Date().getTime()),\n      console.log(\"Updated program context: \", context, new Date().getTime());\n    const signatureStatus = await connection.getSignatureStatus(logs.signature);\n    console.log(\"Updated program sig: \", signatureStatus);\n\n    const transaction = await connection.getTransaction(logs.signature);\n    console.log(\"Updated program transaction: \", transaction);\n\n    // console.log(\n    //   \"Updated program info accountId: \",\n    //   updatedAccountInfo.accountId.toBase58()\n    // ),\n    // console.log(\n    //   \"Updated program info owner: \",\n    //   updatedAccountInfo.accountInfo.owner.toBase58()\n    // ),\n    // console.log(\n    //   \"Updated program info data: \",\n    //   Buffer.from(updatedAccountInfo.accountInfo.data)\n    // ),\n    (\"confirmed\");\n  });",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:20:20.261000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962733457887338557"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733777677852732",
+                "type": 0,
+                "content": "Okay. Is there any other simple method do directly listen to a wallets transactions and get the data from there?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:20:19.327000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733510303563836",
+                "type": 19,
+                "content": "yep... sounds good",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:19:15.580000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962733457887338557"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733457887338557",
+                "type": 0,
+                "content": "If not then I think I will have to listen to onLogs, get the signature and call getTransaction upon it.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:19:03.083000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733416292433970",
+                "type": 0,
+                "content": "i dont think so...",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:18:53.166000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733208355602453",
+                "type": 0,
+                "content": "I don\u2019t see onAccountChange returning the tx signature. Does it return any?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:18:03.590000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962733073601036368",
+                "type": 0,
+                "content": "ex. - \nUpdated program logs   :  {\n  signature: '3Tvi58X6oSoC2LhggFRaeGQuEM3Y1tuaWeyuaxNPSxDYcAbAmWwmKnNZFx4dEDozrKcmSEZMcqpKotpveTspN2Bf',\n  err: null,\n  logs: [\n    'Program GKb2g458CcFjmwwg1jwbkNsavr5hQf6Sujf75DPzmz3V invoke [1]',\n    'Program log: Calling the token program to transfer back the tokens to the initializer...',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]',\n    'Program log: Instruction: Transfer',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 2773 of 175550 compute units',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success',\n    'Program log: Calling the token program to transfer token account ownership back to initializer...',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]',\n    'Program log: Instruction: SetAuthority',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1900 of 169353 compute units',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success',\n    \"Program log: Calling the token program to close pda's temp account...\",\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]',\n    'Program log: Instruction: CloseAccount',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 1969 of 163956 compute units',\n    'Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success',\n    'Program log: Closing the escrow account...',\n    'Program GKb2g458CcFjmwwg1jwbkNsavr5hQf6Sujf75DPzmz3V consumed 38913 of 200000 compute units',\n    'Program GKb2g458CcFjmwwg1jwbkNsavr5hQf6Sujf75DPzmz3V success'\n  ]\n}",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:17:31.462000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962732725025001493",
+                "type": 0,
+                "content": "onLogs prints only the logs found on your program.... with the signature of the tx",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:16:08.355000+00:00",
+                "edited_timestamp": "2022-04-10T15:16:25.450000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962732529096486912",
+                "type": 0,
+                "content": "On which should I listen to get the transaction data?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:15:21.642000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962732402969559143",
+                "type": 0,
+                "content": "yes",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:14:51.571000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962732363459207168",
+                "type": 0,
+                "content": "Both?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:14:42.151000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962732158089330738",
+                "type": 19,
+                "content": "yes",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "410095697233313793",
+                        "username": "StealthGecko",
+                        "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                        "avatar_decoration": null,
+                        "discriminator": "6638",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:13:53.187000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962726963582214154"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962731495422844968",
+                "type": 19,
+                "content": "i tried it.. but it just prints all the logs... to use it i have to match the result which is a string.. i don't like that approach.. i would like to subscribe to a specific event.. like on Ethereum.. but i guess its not possible..",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T15:11:15.195000+00:00",
+                "edited_timestamp": "2022-04-10T15:11:42.733000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962723789806899280"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962726963582214154",
+                "type": 19,
+                "content": "I wanted to ask, does `.onLogs` or `.onAccountChange` trigger upon making a transaction?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T14:53:14.720000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962723789806899280"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962723789806899280",
+                "type": 19,
+                "content": "maybe https://docs.solana.com/developing/clients/jsonrpc-api#logssubscribe",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "937676704351133706",
+                        "username": "aMittelman",
+                        "avatar": "55def10f7e80966406e6b56073bceea5",
+                        "avatar_decoration": null,
+                        "discriminator": "3941",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T14:40:38.033000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962692555294769152"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962723642444251186",
+                "type": 19,
+                "content": "maybe https://solanacookbook.com/references/token.html#how-to-transfer-tokens\njust change the `mint` to your exist token mint\nand your token account",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "900079726717198346",
+                        "username": "JackDev",
+                        "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                        "avatar_decoration": null,
+                        "discriminator": "3293",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T14:40:02.899000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962703114102771742"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962718174049083422",
+                "type": 0,
+                "content": "Had to search over 400 + json",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "231761572819632138",
+                    "username": "Pique",
+                    "avatar": "6ff09309029bd8a44aabdc6e54b2c034",
+                    "avatar_decoration": null,
+                    "discriminator": "3193",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T14:18:19.132000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962718129732063273",
+                "type": 0,
+                "content": "Solved, a \" was missing",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "231761572819632138",
+                    "username": "Pique",
+                    "avatar": "6ff09309029bd8a44aabdc6e54b2c034",
+                    "avatar_decoration": null,
+                    "discriminator": "3193",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T14:18:08.566000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962713056121602068",
+                "type": 19,
+                "content": "what .json file you using? config.json or metadata file ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "531813989966151690",
+                    "username": "L | 2",
+                    "avatar": "8431fc8644de19ab81e31946396e8dc4",
+                    "avatar_decoration": null,
+                    "discriminator": "6056",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "231761572819632138",
+                        "username": "Pique",
+                        "avatar": "6ff09309029bd8a44aabdc6e54b2c034",
+                        "avatar_decoration": null,
+                        "discriminator": "3193",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T13:57:58.923000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "961580942340800523"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962703114102771742",
+                "type": 0,
+                "content": "Hello, nice to meet you\n```\nmint = await splToken.Token.createMint(connection, myKeypair, myKeypair.publicKey, null, 9, splToken.TOKEN_PROGRAM_ID)\n```\nIt's the function to create the mint token\nwe can send amount's tokens using mint.mintTo\nBtw I want to send the amount of the token based on the exist token\nHow can I use that instead of `mint = await splToken.Token.createMint(connection, myKeypair, myKeypair.publicKey, null, 9, splToken.TOKEN_PROGRAM_ID)`?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "900079726717198346",
+                    "username": "JackDev",
+                    "avatar": "25e8aff5f0b62e20ea754015f41ffd14",
+                    "avatar_decoration": null,
+                    "discriminator": "3293",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T13:18:28.561000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962692555294769152",
+                "type": 0,
+                "content": "is there a way to subscribe to a specific Event (log) same as in evm ?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "937676704351133706",
+                    "username": "aMittelman",
+                    "avatar": "55def10f7e80966406e6b56073bceea5",
+                    "avatar_decoration": null,
+                    "discriminator": "3941",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T12:36:31.145000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962690669569265714",
+                "type": 0,
+                "content": "or is there another way to store it globally",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "469920803467689984",
+                    "username": "Yusuf22",
+                    "avatar": "6202b307548ab7d49d783d2013458e43",
+                    "avatar_decoration": null,
+                    "discriminator": "2690",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T12:29:01.553000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962690591530045500",
+                "type": 0,
+                "content": "Is it possible to store `useWallet` globally with Redux? I tried it before but it complained that i did so",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "469920803467689984",
+                    "username": "Yusuf22",
+                    "avatar": "6202b307548ab7d49d783d2013458e43",
+                    "avatar_decoration": null,
+                    "discriminator": "2690",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T12:28:42.947000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962680594750386256",
+                "type": 0,
+                "content": "https://github.com/solana-labs/token-list/issues/24428\nWhen will manual merge be done?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "909819374439919636",
+                    "username": "lunap2p",
+                    "avatar": "c96da7f4ceebf92a3dce51ff835e77bd",
+                    "avatar_decoration": null,
+                    "discriminator": "7974",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T11:48:59.529000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962680336217677854",
+                "type": 0,
+                "content": "can you help me?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "909819374439919636",
+                    "username": "lunap2p",
+                    "avatar": "c96da7f4ceebf92a3dce51ff835e77bd",
+                    "avatar_decoration": null,
+                    "discriminator": "7974",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T11:47:57.890000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962668619618189312",
+                "type": 0,
+                "content": "is there an easy way to bulk update data accounts? (500+)",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "793009052879028254",
+                    "username": "Jack Robson",
+                    "avatar": "50ab165013a7566d3c7faaf272f7b660",
+                    "avatar_decoration": null,
+                    "discriminator": "9682",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T11:01:24.435000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962661309067972608",
+                "type": 19,
+                "content": "it worked thanks a lot \ud83d\ude42",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "693134543443722271",
+                    "username": "CptnPrice",
+                    "avatar": "290e87ccf22bf110ff7ac0e7bb7bb18c",
+                    "avatar_decoration": null,
+                    "discriminator": "0849",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T10:32:21.464000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962625989446340628"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962652155360202832",
+                "type": 19,
+                "content": "Nevermind I figured it out. Just multiply blocktime by 1000, and it'll give you the unix timestamp",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "520320809139568651",
+                    "username": "cloudberry",
+                    "avatar": "2e1e47c1258c733033979e32b4d061b7",
+                    "avatar_decoration": null,
+                    "discriminator": "6024",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T09:55:59.050000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962651664697938020"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962651664697938020",
+                "type": 0,
+                "content": "Does anyone know how to convert Blocktime to datetime?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "520320809139568651",
+                    "username": "cloudberry",
+                    "avatar": "2e1e47c1258c733033979e32b4d061b7",
+                    "avatar_decoration": null,
+                    "discriminator": "6024",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T09:54:02.067000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962639222798426142",
+                "type": 19,
+                "content": "Thanks",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "889911265332449290",
+                    "username": "salar.sadeghi95",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "6195",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "788215642070581289",
+                        "username": "chido",
+                        "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                        "avatar_decoration": null,
+                        "discriminator": "6488",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T09:04:35.687000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962639089952243713"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962639089952243713",
+                "type": 19,
+                "content": "as Donny said. also you can take a look at a previous discuss https://discord.com/channels/428295358100013066/517163444747894795/954958698919374848",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "889911265332449290",
+                        "username": "salar.sadeghi95",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "6195",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T09:04:04.014000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962632708889133106"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962638463306448937",
+                "type": 19,
+                "content": "ask anchor discord",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "785084693023424542",
+                    "username": "DonnySolana",
+                    "avatar": "25916f37b0890f6e135e96e84d1e6f9e",
+                    "avatar_decoration": null,
+                    "discriminator": "3301",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "889911265332449290",
+                        "username": "salar.sadeghi95",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "6195",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T09:01:34.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962632708889133106"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962632708889133106",
+                "type": 0,
+                "content": "how we can send transaction to program, in anchor rpc marked as depricated!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "889911265332449290",
+                    "username": "salar.sadeghi95",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "6195",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:38:42.650000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962627483537117194",
+                "type": 0,
+                "content": "yesh thank you",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "736598444805718146",
+                    "username": "ProNoob",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1031",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:17:56.829000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962627434539270184",
+                "type": 19,
+                "content": "I assume you're talking about a token account.\nto view status https://solanacookbook.com/references/token.html#how-to-get-a-token-account\nto revoke delegate https://solanacookbook.com/references/token.html#how-to-revoke-a-token-delegate",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "736598444805718146",
+                        "username": "ProNoob",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "1031",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:17:45.147000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962627120339767336"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962627120339767336",
+                "type": 0,
+                "content": "can i view and delete delegates of an account?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "736598444805718146",
+                    "username": "ProNoob",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1031",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:16:30.236000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962626847366078474",
+                "type": 0,
+                "content": "hey does anyone have idea about this error?\nAccept payment delegate should be none",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "736598444805718146",
+                    "username": "ProNoob",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "1031",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:15:25.154000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962626167498760202",
+                "type": 19,
+                "content": "yes. you can use an url directly when you new a connection object.\nhttps://solana-labs.github.io/solana-web3.js/classes/Connection.html#constructor",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "289763878877790210",
+                        "username": "AC | Avaulto.com",
+                        "avatar": "03be557da5ea12b5319dc3c2bff6bc26",
+                        "avatar_decoration": null,
+                        "discriminator": "3896",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:12:43.061000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962617908968714250"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962625989446340628",
+                "type": 19,
+                "content": "maybe https://github.com/solana-labs/solana-program-library/issues/3030",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788215642070581289",
+                    "username": "chido",
+                    "avatar": "f79f47aa50002d51034f2ef75106e02c",
+                    "avatar_decoration": null,
+                    "discriminator": "6488",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "693134543443722271",
+                        "username": "CptnPrice",
+                        "avatar": "290e87ccf22bf110ff7ac0e7bb7bb18c",
+                        "avatar_decoration": null,
+                        "discriminator": "0849",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T08:12:00.610000+00:00",
+                "edited_timestamp": null,
+                "flags": 4,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962614072715673660"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962614072715673660",
+                "type": 0,
+                "content": "I am getting this error while following the JS tutorial of creating tokens from official documentation of  Solana, any idea what could be the problem?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "693134543443722271",
+                    "username": "CptnPrice",
+                    "avatar": "290e87ccf22bf110ff7ac0e7bb7bb18c",
+                    "avatar_decoration": null,
+                    "discriminator": "0849",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "962614072065548288",
+                        "filename": "unknown.png",
+                        "size": 11466,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/962614072065548288/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/962614072065548288/unknown.png",
+                        "width": 661,
+                        "height": 98,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T07:24:39.440000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962577486540070942",
+                "type": 19,
+                "content": "Solana Starter Pack:\nhttps://docs.solana.com/introduction\nhttps://spl.solana.com/\nhttps://solanacookbook.com/ (also check concepts section for overview)\nhttps://soldev.app/ (tutorial, news, updates, aggregator)\ngreat detailed hello world walk through:\nhttps://kirima.vercel.app/post/gentleintrosolana\ngood starter tutorials:  has both native and anchor version:\nhttps://hackmd.io/@ironaddicteddog/solana-starter-kit#Account\n\nWith so many things to do having a sense of something you want to do before or after this is the next key.\nNFTs and Metaplex?  https://docs.metaplex.com/\n\nLots of SDKs and Githubs now open in the community between protocols.\nSolanaPay, Wallets, Governance, Games, NFTs, DeFI. \n\nSolana Program Library:\nhttps://github.com/solana-labs/solana-program-library\n\nSolana Bootcamp Series: (check channel for many more)\nhttps://youtu.be/O0uhZEfVPt8\n\ncc: <@517751601658724362>",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "785084693023424542",
+                    "username": "DonnySolana",
+                    "avatar": "25916f37b0890f6e135e96e84d1e6f9e",
+                    "avatar_decoration": null,
+                    "discriminator": "3301",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://docs.solana.com/introduction",
+                        "title": "Introduction | Solana Docs",
+                        "description": "What is Solana?",
+                        "reference_id": "962577486540070942"
+                    },
+                    {
+                        "type": "article",
+                        "url": "https://spl.solana.com/",
+                        "title": "Introduction | Solana Program Library Docs",
+                        "description": "The Solana Program Library (SPL) is a collection of on-chain programs targeting",
+                        "reference_id": "962577486540070942"
+                    },
+                    {
+                        "type": "link",
+                        "url": "https://solanacookbook.com/",
+                        "title": "Solana Cookbook | Home to Solana References",
+                        "description": "The Solana cookbook is a collection of useful examples and references for building on Solana",
+                        "reference_id": "962577486540070942",
+                        "thumbnail": {
+                            "url": "https://solanacookbook.com/cookbook-sharing-card.png",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/VsLGK7t1MWeOswwtxr9fxzNYQlc9t5Ksuukee8xyhBM/https/solanacookbook.com/cookbook-sharing-card.png",
+                            "width": 2400,
+                            "height": 1260
+                        }
+                    },
+                    {
+                        "type": "article",
+                        "url": "https://soldev.app/",
+                        "title": "SolDev - Library",
+                        "description": "Learn to Develop using Solana. Tutorials, SDK's, Frameworks, Developer Tools, Security, Scaffolds, and Projects implementations",
+                        "reference_id": "962577486540070942",
+                        "thumbnail": {
+                            "url": "https://soldev.app/banner.png",
+                            "proxy_url": "https://images-ext-1.discordapp.net/external/a8XlzSVgxGjMsHWeHO2kZg6J3OqtEPEGhGilcAzut40/https/soldev.app/banner.png",
+                            "width": 1438,
+                            "height": 561
+                        }
+                    },
+                    {
+                        "type": "link",
+                        "url": "https://kirima.vercel.app/post/gentleintrosolana",
+                        "title": "A Gentle Introduction to Solana.",
+                        "description": "This tutorial will teach you how to build and deploy your own programs on the fastest blockchain and the fastest growing crypto ecosystem in the world.",
+                        "reference_id": "962577486540070942"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "517751601658724362",
+                        "username": "LuckyD",
+                        "avatar": "ed3e50d7d1674cdbe8499c7fca314df6",
+                        "avatar_decoration": null,
+                        "discriminator": "9054",
+                        "public_flags": 0
+                    },
+                    {
+                        "id": "844926742317367318",
+                        "username": "!Raphael",
+                        "avatar": "0a4560ec2ec4cf095ce593a24219f86a",
+                        "avatar_decoration": null,
+                        "discriminator": "5265",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T04:59:16.616000+00:00",
+                "edited_timestamp": "2022-04-10T05:02:12.880000+00:00",
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962474068458750092"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962574476292284447",
+                "type": 19,
+                "content": "If you are using a file system wallet, the key pairs may be stored in plaintext in the .json file",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "788832460263129138",
+                    "username": "Irukandji",
+                    "avatar": "f56e330ccfbc5d12c8aad63d950769ee",
+                    "avatar_decoration": null,
+                    "discriminator": "8527",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "384835919284273152",
+                        "username": "shmurda",
+                        "avatar": "836fbdbb57b74eccbddf4e809f7809b5",
+                        "avatar_decoration": null,
+                        "discriminator": "2163",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T04:47:18.917000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962569580927127602"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962569580927127602",
+                "type": 0,
+                "content": "how do i get the keypair from an already existing wallet?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "384835919284273152",
+                    "username": "shmurda",
+                    "avatar": "836fbdbb57b74eccbddf4e809f7809b5",
+                    "avatar_decoration": null,
+                    "discriminator": "2163",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T04:27:51.771000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962548148436348958",
+                "type": 0,
+                "content": "",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "848051446943186964",
+                    "username": "beansandrice",
+                    "avatar": "cbe1e3a9e235de37ef9f73b92edd0392",
+                    "avatar_decoration": null,
+                    "discriminator": "9260",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "962548147580715038",
+                        "filename": "unknown.png",
+                        "size": 54229,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/962548147580715038/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/962548147580715038/unknown.png",
+                        "width": 817,
+                        "height": 612,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T03:02:41.867000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962548125313167401",
+                "type": 0,
+                "content": "I'm trying to get the solana anchor multisig UI example working against my localhost solana-test-validator, and this multisigClient.rpc.createMultisig method just doesn't do anything. No errors or network info to try and debug with. Been stuck on it all day lol.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "848051446943186964",
+                    "username": "beansandrice",
+                    "avatar": "cbe1e3a9e235de37ef9f73b92edd0392",
+                    "avatar_decoration": null,
+                    "discriminator": "9260",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T03:02:36.354000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962547784760840202",
+                "type": 0,
+                "content": "Is there a discord for Anchor?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "848051446943186964",
+                    "username": "beansandrice",
+                    "avatar": "cbe1e3a9e235de37ef9f73b92edd0392",
+                    "avatar_decoration": null,
+                    "discriminator": "9260",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T03:01:15.160000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962530276414722128",
+                "type": 0,
+                "content": "hey all, \n\nThe website on my NFT is wrong.. I'm trying to update it, would someone mind sharing the solana update command with me? I'm having a hard time finding it in the docs",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "900806757385916416",
+                    "username": "TheRealJonnyCash",
+                    "avatar": "8ba5337f8b213024b03573bcbceeb983",
+                    "avatar_decoration": null,
+                    "discriminator": "0418",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T01:51:40.845000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962523813667553290",
+                "type": 19,
+                "content": "`Software development kit`",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "960648151742685184",
+                    "username": "Khack",
+                    "avatar": "06c01006eccecebdc817877eaabc9dd9",
+                    "avatar_decoration": null,
+                    "discriminator": "5121",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "938434618686865418",
+                        "username": "mekanikacosmos",
+                        "avatar": "580f10226d2c940e75898031e9146b7d",
+                        "avatar_decoration": null,
+                        "discriminator": "0237",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T01:26:00.006000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962521527130157057"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962521527130157057",
+                "type": 0,
+                "content": "and please dont try to scam me thorugh DM. I can really tell if you're trying to scam me. I'm looking for some help to code using python SDK. I'm not really new on Solana or crypto world, I'm new in developing program in solana",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T01:16:54.853000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962510934201466940",
+                "type": 0,
+                "content": "Can anyone help me by giving some general intructions or hint?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T00:34:49.302000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962510747169083473",
+                "type": 0,
+                "content": "Then I tried to list an nft of mine through secondary market place by using magic eden api, but I'm a bit stuck and couldnt find any useful help that I can understand using python sdk",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T00:34:04.710000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962510032933650463",
+                "type": 0,
+                "content": "Now I'm trying to learn some basics.. Have tried doing some basics transaction using python SDK and successfully transferred some SOL",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T00:31:14.423000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962509610881785909",
+                "type": 0,
+                "content": "I'm new here.. Got introduced to solana from nfts",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T00:29:33.798000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962508385582985216",
+                "type": 0,
+                "content": "hello",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "938434618686865418",
+                    "username": "mekanikacosmos",
+                    "avatar": "580f10226d2c940e75898031e9146b7d",
+                    "avatar_decoration": null,
+                    "discriminator": "0237",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-10T00:24:41.664000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962494699086692382",
+                "type": 0,
+                "content": "it worked thank you <@134416332509675520>",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:30:18.549000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962494437844475974",
+                "type": 19,
+                "content": "Just try again I guess \ud83e\udd1e",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "753940251851882527",
+                        "username": "Kaleb",
+                        "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                        "avatar_decoration": null,
+                        "discriminator": "1654",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:29:16.264000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962494333414695012"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962494333414695012",
+                "type": 0,
+                "content": "now what?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:28:51.366000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962494299151409162",
+                "type": 19,
+                "content": "its installed",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [
+                    {
+                        "id": "962494298459373648",
+                        "filename": "unknown.png",
+                        "size": 101318,
+                        "url": "https://cdn.discordapp.com/attachments/517163444747894795/962494298459373648/unknown.png",
+                        "proxy_url": "https://media.discordapp.net/attachments/517163444747894795/962494298459373648/unknown.png",
+                        "width": 1340,
+                        "height": 160,
+                        "content_type": "image/png"
+                    }
+                ],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:28:43.197000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962493433992339476"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962493584450404372",
+                "type": 0,
+                "content": "But anchor here is just calling out to your existing solana build process, it's not doing anything special on its own",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:25:52.799000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962493486077198446",
+                "type": 0,
+                "content": "I would maybe just try reinstalling, not sure why it wouldn't be there",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:25:29.345000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962493433992339476",
+                "type": 19,
+                "content": "At least for me I really do have that directory you're missing, and I believe the solana installation process should have given you one too",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "753940251851882527",
+                        "username": "Kaleb",
+                        "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                        "avatar_decoration": null,
+                        "discriminator": "1654",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:25:16.927000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962492187420004423"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492971159273523",
+                "type": 0,
+                "content": "it would appear that i have",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:23:26.579000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492946488385576",
+                "type": 19,
+                "content": "```kaleb-mbair:tic-tac-toe kalebamarante$ solana --version\nsolana-cli 1.9.1 (src:b66e2ae3; feat:4100269022)```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "avatar_decoration": null,
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:23:20.697000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962492452659429417"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492508322013274",
+                "type": 0,
+                "content": "Are you sure you've installed solana itself correctly?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:21:36.230000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492452659429417",
+                "type": 19,
+                "content": "That actually sounds like a solana error, not an anchor error",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "avatar_decoration": null,
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "753940251851882527",
+                        "username": "Kaleb",
+                        "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                        "avatar_decoration": null,
+                        "discriminator": "1654",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:21:22.959000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962492187420004423"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492432304472136",
+                "type": 19,
+                "content": "Same here, really need somewhere to start from",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "517751601658724362",
+                    "username": "LuckyD",
+                    "avatar": "ed3e50d7d1674cdbe8499c7fca314df6",
+                    "avatar_decoration": null,
+                    "discriminator": "9054",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "844926742317367318",
+                        "username": "!Raphael",
+                        "avatar": "0a4560ec2ec4cf095ce593a24219f86a",
+                        "avatar_decoration": null,
+                        "discriminator": "5265",
+                        "public_flags": 64
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:21:18.106000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962474068458750092"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492261617266769",
+                "type": 0,
+                "content": "why do i keep getting this directory related errors with anchor?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:20:37.411000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492187420004423",
+                "type": 0,
+                "content": "```BPF SDK: /Users/kalebamarante/.local/share/solana/install/releases/1.9.1/solana-release/bin/sdk/bpf\ncargo-build-bpf child: rustup toolchain list -v\ncargo-build-bpf child: rustup toolchain link bpf /Users/kalebamarante/.local/share/solana/install/releases/1.9.1/solana-release/bin/sdk/bpf/dependencies/bpf-tools/rust\nerror: not a directory: '/Users/kalebamarante/.local/share/solana/install/releases/1.9.1/solana-release/bin/sdk/bpf/dependencies/bpf-tools/rust/bin'```",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:20:19.721000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962492170521182319",
+                "type": 0,
+                "content": "i ran anchor build in my project and got this...",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "753940251851882527",
+                    "username": "Kaleb",
+                    "avatar": "05daf38db3a8d17eb14b35d874eb0db9",
+                    "avatar_decoration": null,
+                    "discriminator": "1654",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T23:20:15.692000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962474068458750092",
+                "type": 0,
+                "content": "Hello. I am trying to understand the technology from scratch. Can somebody advise me where to begin and how to continue? I see a forest full of details and no starting point.",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "844926742317367318",
+                    "username": "!Raphael",
+                    "avatar": "0a4560ec2ec4cf095ce593a24219f86a",
+                    "avatar_decoration": null,
+                    "discriminator": "5265",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T22:08:19.824000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962471276075700224",
+                "type": 0,
+                "content": "After being merged",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "551469379473244175",
+                    "username": "n4p",
+                    "avatar": "c97ce952629c0e7922dcd83b83ba8989",
+                    "avatar_decoration": null,
+                    "discriminator": "6090",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T21:57:14.068000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962471221419724840",
+                "type": 0,
+                "content": "Silly question, but how long does it take before the Token List data updates and reflects with Solana supported wallets? eg. the logo, and ticker",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "551469379473244175",
+                    "username": "n4p",
+                    "avatar": "c97ce952629c0e7922dcd83b83ba8989",
+                    "avatar_decoration": null,
+                    "discriminator": "6090",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T21:57:01.037000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962458622267387954",
+                "type": 0,
+                "content": "rustc 1.6 and solana 1.10.7 are working with https://github.com/solana-labs/example-helloworld#quick-start\n\nwoohoo!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "613154207482249251",
+                    "username": "geoff_langenderfer",
+                    "avatar": "0715a00610e4dd583983d4d135f56374",
+                    "avatar_decoration": null,
+                    "discriminator": "0022",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T21:06:57.165000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962426791161634846",
+                "type": 19,
+                "content": "frank, maybe you have an idea about that",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "705697273480478762",
+                    "username": "Pierre",
+                    "avatar": "f8162e2c9540f51efa8f3d9b18883ced",
+                    "avatar_decoration": null,
+                    "discriminator": "7374",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "814228493302497301",
+                        "username": "fastfrank",
+                        "avatar": "9290bc0fd953ed503993644b0146ef27",
+                        "avatar_decoration": null,
+                        "discriminator": "8904",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T19:00:28.038000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "912056510887104512"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962424966979125298",
+                "type": 0,
+                "content": "hey guys, has anyone tested computation limits on Solana? Would it be possible to run machine learning computations on Solana at a comparable cost to running them on AWS?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "705697273480478762",
+                    "username": "Pierre",
+                    "avatar": "f8162e2c9540f51efa8f3d9b18883ced",
+                    "avatar_decoration": null,
+                    "discriminator": "7374",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:53:13.119000+00:00",
+                "edited_timestamp": "2022-04-09T18:53:31.959000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962424786384998440",
+                "type": 19,
+                "content": "Thanks so needs multiple transactions right? No way to do it atomically. (I\u2019m doing research how different blockchains handle this, forgive my ignorance)",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "662353523890978825",
+                    "username": "abro",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7506",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "182296047052259338",
+                        "username": "Shishka",
+                        "avatar": "547b7d22305da89c2bfbcb4fde9794cd",
+                        "avatar_decoration": null,
+                        "discriminator": "0001",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:52:30.062000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962424347660804096"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962424483879215184",
+                "type": 19,
+                "content": "famous fox fed has a tool, but maybe it's for nft's only",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "777118140492414976",
+                    "username": "0xEdouard",
+                    "avatar": "ad2cbbcbdf437c69c386a78a34f4d052",
+                    "avatar_decoration": null,
+                    "discriminator": "7824",
+                    "public_flags": 128
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "662353523890978825",
+                        "username": "abro",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7506",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:51:17.939000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962423560683544656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962424347660804096",
+                "type": 19,
+                "content": "Sure, get all token accounts, send them. Then send all sol last",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "182296047052259338",
+                    "username": "Shishka",
+                    "avatar": "547b7d22305da89c2bfbcb4fde9794cd",
+                    "avatar_decoration": null,
+                    "discriminator": "0001",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "662353523890978825",
+                        "username": "abro",
+                        "avatar": null,
+                        "avatar_decoration": null,
+                        "discriminator": "7506",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:50:45.462000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962423560683544656"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962423560683544656",
+                "type": 0,
+                "content": "Hello I\u2019m wondering if there is an easy way to transfer all data (eg not just sol but all spl tokens) from a user\u2019s address to a new address?",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "662353523890978825",
+                    "username": "abro",
+                    "avatar": null,
+                    "avatar_decoration": null,
+                    "discriminator": "7506",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:47:37.832000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "962419736329732096",
+                "type": 19,
+                "content": "Let me try. Thanks!",
+                "channel_id": "517163444747894795",
+                "author": {
+                    "id": "410095697233313793",
+                    "username": "StealthGecko",
+                    "avatar": "b5e149cc3d304bcfbe03f9b168a1d4b5",
+                    "avatar_decoration": null,
+                    "discriminator": "6638",
+                    "public_flags": 64
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "182296047052259338",
+                        "username": "Shishka",
+                        "avatar": "547b7d22305da89c2bfbcb4fde9794cd",
+                        "avatar_decoration": null,
+                        "discriminator": "0001",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2022-04-09T18:32:26.035000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "517163444747894795",
+                    "guild_id": "428295358100013066",
+                    "message_id": "962416644712460388"
+                },
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "8d4f5c78cde199ec7fb9aeaf8f3af6c6"
+}

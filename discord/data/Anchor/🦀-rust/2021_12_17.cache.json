@@ -1,0 +1,1560 @@
+{
+    "total_results": 49,
+    "messages": [
+        [
+            {
+                "id": "921449611753816084",
+                "type": 0,
+                "content": "When I declare a type inside a macro, it's not recognized (`Type not found`):\n```rust\nmacro_rules! impl_set {\n    ( $Set:ident, $Item:ty ) => {\n        #[derive(Debug, Clone, AnchorDeserialize, AnchorSerialize)]\n        pub struct $Set {\n            data: Vec<$Item>,\n        }\n        // etc.\n    }\n}\n```\nand when I pull it out, everything is alright. I thought that the the macro-by-example substitution runs before the proc macros. It would make more sense that the other way around \ud83e\udd14",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T17:11:47.148000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921444755332800543",
+                "type": 0,
+                "content": "Oh, I see. Thanks.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:52:29.287000+00:00",
+                "edited_timestamp": "2021-12-17T16:52:35.539000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921444448376852560",
+                "type": 19,
+                "content": "Ok, you need to instead do #[derive(AnchorDeserialize, AnchorSerialize, Clone)], not #[account] over the Validator struct (it's not an account type all by itself)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:51:16.103000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921444171552804915"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921444171552804915",
+                "type": 19,
+                "content": "Embedded:\n```rust\n#[account]\n#[derive(Debug)]\npub struct ValidatorsSet {\n    data: Vec<Validator>,\n}\n```\nand this account is itself embedded.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:50:10.103000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921443890257625098"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921443890257625098",
+                "type": 19,
+                "content": "Is that an account type all by itself, or are you embedding it in some other account?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:49:03.037000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921442695803723847"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921442695803723847",
+                "type": 0,
+                "content": "<@!134416332509675520> I once again get the same error, but this time, it's about a \"normal\" type:\n```rust\n#[account]\n#[derive(Debug)]\npub struct Validator {\n    address: Pubkey,\n}\n```\nError:\n`IdlError: Type not found: {\"type\":{\"defined\":\"Validator\"}}`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:44:18.257000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921442694998409239",
+                "type": 0,
+                "content": "So what should the solution be if I want to change the ID dinamically based on environment variables at compile time?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:44:18.065000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921439177663455272",
+                "type": 0,
+                "content": "You can see this if you use `cargo expand` inside `programs/your-prog-name/`",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:30:19.467000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921439108432273478",
+                "type": 0,
+                "content": "In this case the `declare_id!` macro happens to try to look at its input and see if it looks like a literal string. This input *doesn't* look like that (it's the raw `include_str!(\"...\")`, which hasn't run yet), so declare_id just leaves it alone and doesn't do anything with it.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:30:02.961000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921438850214166590",
+                "type": 19,
+                "content": "The basic reason why this doesn't work is that when you say `declare_id!(include_str!(\"...\"))`, you'd think the `include_str!` part would run first, like how function arguments get evaluated before their passed into a function... but that's not how macros work unfortunately; they get passed the raw, unevaluated text (or tokens, whatever) of their input.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "456226577798135808",
+                        "username": "Deleted User",
+                        "avatar": null,
+                        "discriminator": "0000",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T16:29:01.397000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921409520671019088"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921409520671019088",
+                "type": 0,
+                "content": "Can someone tell me why declare_id!(\"ABC...\") works when passing a string, but when using declare_id!(include_str!(\"filename.txt\")) it doesn't because it cannot convert &str to Pubkey?\n\nOr any solution for changing the declare_id! value at compile time ?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T14:32:28.689000+00:00",
+                "edited_timestamp": "2021-12-17T14:32:45.434000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921409494674731089",
+                "type": 0,
+                "content": "Posting it here as it is most related to compile time rust and would love some opinions",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "456226577798135808",
+                    "username": "Deleted User",
+                    "avatar": null,
+                    "discriminator": "0000",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T14:32:22.491000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921392091630813274",
+                "type": 0,
+                "content": "That should probably work yeah",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:23:13.282000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921391990803943426",
+                "type": 19,
+                "content": "Got it. What about tuple structs?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:22:49.243000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921391359653453894"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921391637664509973",
+                "type": 0,
+                "content": "We're all just volunteers here",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:21:25.048000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921391585579630612",
+                "type": 0,
+                "content": "But yeah, y'all can definitely make PRs!",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:21:12.630000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921391359653453894",
+                "type": 19,
+                "content": "I'm guessing this would be pretty tough. For example, the IDL isn't just for typescript clients (e.g. python uses it too). So it has to be a lowest-common denominator description of how to interact with an account\u2014maybe there's a way to support this kind of generics stuff but it's not super obvious to me how (not saying it's impossible though!)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:20:18.765000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921389216502517760"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921390693228884009",
+                "type": 0,
+                "content": "I work with <@!841586430136156190>, and our company let us contribute to open-source projects when needed, so if we can help with that\u2026 Same with the handling of tuple structs.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "841586430136156190",
+                        "username": "abhimanyusinghgaur",
+                        "avatar": null,
+                        "discriminator": "7389",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:17:39.877000+00:00",
+                "edited_timestamp": "2021-12-17T13:17:49.938000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921389216502517760",
+                "type": 0,
+                "content": "I guess that I could write a macro, yes. That's less elegant, but if that's the only way\u2026 That's kinda weird, tho: both Rust and TS have generic code, so I'm sure there is a technical way to handle this kind of types.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:11:47.798000+00:00",
+                "edited_timestamp": "2021-12-17T13:11:59.319000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921388903385165875",
+                "type": 0,
+                "content": "Yeah.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:10:33.145000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921388834036523008",
+                "type": 0,
+                "content": "You mean: monomorphize by hand?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:10:16.611000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921388744970493992",
+                "type": 0,
+                "content": "Heh \ud83d\ude1b",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:09:55.376000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921388707213361183",
+                "type": 19,
+                "content": "Only `Pubkey` to be fair \ud83d\ude06",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:09:46.374000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921388109994811412"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921388109994811412",
+                "type": 19,
+                "content": "I assume they just monomorphize (how many different instantiations do you actually use for K here?)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:07:23.986000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921387811427459143"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921387811427459143",
+                "type": 0,
+                "content": "The K does not matter, it's only a typesystem thing, but I understand your point. What are my other options? I'm sure that some people use already generic collections with Anchor (like `Vec`)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:06:12.802000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921387204046106694",
+                "type": 0,
+                "content": "E.g. there's no way `await program.account.map.fetch(someMapAccount)` can know how to deserialize the account data (it doesn't know which K and T to pick)",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:03:47.991000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386786171801650",
+                "type": 0,
+                "content": "I don't think that will work with the way anchor's IDL stuff expects to work",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:02:08.362000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386639870287893",
+                "type": 19,
+                "content": "Hmm, let me think about whether I would expect that kind of use of generics to work",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:01:33.481000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921386529849499648"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386529849499648",
+                "type": 0,
+                "content": "So, is there something to know when dealing with generic type? Our type is as following:\n```rust\n#[account]\n#[derive(Debug)]\npub struct Map<T, K>\nwhere\n    K: Debug + Clone + AnchorSerialize + AnchorDeserialize + Ord,\n    T: Debug + Clone + AnchorSerialize + AnchorDeserialize + HasKey<K>,\n{\n    data: Vec<T>,\n    marker: PhantomData<K>,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:01:07.250000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386440997347388",
+                "type": 0,
+                "content": "Haha, yeah, I hear you",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:00:46.066000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386286969913424",
+                "type": 0,
+                "content": "I'm used to work with examples and documentations, not by flooding help channels, but sure, I also can do that \ud83d\ude1b",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T13:00:09.343000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921386068811603969",
+                "type": 19,
+                "content": "I think you'll have an easier time debugging this kind of thing by asking targeted questions here in the discord, for what it's worth, but you can take a look at, say, jet protocol for some inspiration",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T12:59:17.330000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921385554023706664"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921385702854369311",
+                "type": 0,
+                "content": "The projects listed here are closed source afaik https://project-serum.github.io/anchor/getting-started/projects.html",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://project-serum.github.io/anchor/getting-started/projects.html",
+                        "title": "Projects | \u2693 Anchor",
+                        "color": 4108156
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T12:57:50.079000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921385554023706664",
+                "type": 19,
+                "content": "Right now I'm getting this error message: `Type not found: {\"type\":{\"defined\":\"T\"}}` and I suspect that it's linked to a generic account.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T12:57:14.595000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921376846652772363"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921377733223788554",
+                "type": 0,
+                "content": "Is there a U128 crate out somewhere? Benchmarks show that rust u128 has poor performance. Someone mentioned U128 on twitter as well.\n\nhttps://github.com/solana-labs/solana/issues/19549",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "679936424971468859",
+                    "username": "0xHaddock",
+                    "avatar": "2988978494e386a5debdd6b7699954ec",
+                    "discriminator": "9993",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "article",
+                        "url": "https://github.com/solana-labs/solana/issues/19549",
+                        "title": "built-in u128 has abysmal compute budget use on divison and is infe...",
+                        "description": "use uint::construct_uint; construct_uint! { pub struct U128(2); } //[...] fn compare_compute_budget_consumption() { let x = 17234u64; //some arbitrary number let y = 3273u64; //some arbitrary numbe...",
+                        "color": 1975079,
+                        "provider": {
+                            "name": "GitHub"
+                        },
+                        "thumbnail": {
+                            "url": "https://opengraph.githubassets.com/d9857949b932938d3955c616958589bd0e8f1f2fce4cec86ee3ddb05393dbae1/solana-labs/solana/issues/19549",
+                            "proxy_url": "https://images-ext-2.discordapp.net/external/gvBrP99s8zF4cIBDbGCvEvgkphygj6XtYridqVqrHQI/https/opengraph.githubassets.com/d9857949b932938d3955c616958589bd0e8f1f2fce4cec86ee3ddb05393dbae1/solana-labs/solana/issues/19549",
+                            "width": 1200,
+                            "height": 600
+                        }
+                    }
+                ],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T12:26:09.971000+00:00",
+                "edited_timestamp": "2021-12-17T12:28:17.735000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921376846652772363",
+                "type": 19,
+                "content": "Not sure what you mean (they're are a lot of them)\u2014can you say more about the specific issue you're having?",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "134416332509675520",
+                    "username": "cqfd",
+                    "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                    "discriminator": "6977",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "368075764010319872",
+                        "username": "F\u00e9lix",
+                        "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                        "discriminator": "5351",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T12:22:38.596000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921347623850504232"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921347623850504232",
+                "type": 0,
+                "content": "Is there any real-world anchor example? I keep hitting errors, and without some doc or an example, it's hard to move forward.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-17T10:26:31.337000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921159550491561988",
+                "type": 19,
+                "content": "The check could only be performed when the account is initialized",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [
+                    {
+                        "id": "134416332509675520",
+                        "username": "cqfd",
+                        "avatar": "1843b8189caf8a8252ae7c78becad4ba",
+                        "discriminator": "6977",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:59:11.154000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921033500663107644"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921159090380607578",
+                "type": 0,
+                "content": "It's not mandatory to name the fields in Rust",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:57:21.455000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921159015029948486",
+                "type": 0,
+                "content": "It's a tuple struct with one variant to be precise",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:57:03.490000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921158844346937384",
+                "type": 19,
+                "content": "https://doc.rust-lang.org/rust-by-example/generics/new_types.html",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [
+                    {
+                        "type": "link",
+                        "url": "https://doc.rust-lang.org/rust-by-example/generics/new_types.html",
+                        "title": "New Type Idiom - Rust By Example",
+                        "description": "Rust by Example (RBE) is a collection of runnable examples that illustrate various Rust concepts and standard libraries.",
+                        "color": 16777215,
+                        "reference_id": "921158844346937384"
+                    }
+                ],
+                "mentions": [
+                    {
+                        "id": "915682383905316864",
+                        "username": "man0s",
+                        "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                        "discriminator": "8230",
+                        "public_flags": 0
+                    }
+                ],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:56:22.796000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "message_reference": {
+                    "channel_id": "889584618372734977",
+                    "guild_id": "889577356681945098",
+                    "message_id": "921148908929974282"
+                },
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921149116095021206",
+                "type": 0,
+                "content": "This looks like a mix of struct and fn declaration",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:17:43.400000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921148908929974282",
+                "type": 0,
+                "content": "I'm not exactly expert in Rust, so it might be basic but what does this declaration do actually? I am used to seeing things like:\n```rust\n#[account]\n#[derive(.........)]\npub struct MyStruct {\n    pub a_field: u64,\n}\n```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:16:54.008000+00:00",
+                "edited_timestamp": "2021-12-16T21:17:00.662000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921146214660050974",
+                "type": 0,
+                "content": "If I add `AnchorSerialize`, for example, it conflicts with the implementation done by this attribute.",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:06:11.644000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921145978197794886",
+                "type": 0,
+                "content": "It's done by the `account` attribute",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:05:15.267000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921145239429869670",
+                "type": 0,
+                "content": "I believe you need these: `#[derive(AnchorSerialize, AnchorDeserialize, Clone)]` to declare that this is going to be serialized",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "915682383905316864",
+                    "username": "man0s",
+                    "avatar": "5db087ee6a952e5be7da6b90f06b8585",
+                    "discriminator": "8230",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T21:02:19.131000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921143924049985566",
+                "type": 0,
+                "content": "One of our accounts data is defined as\n```rust\n#[account]\n#[derive(Copy, Default, Eq, Ord, PartialEq, PartialOrd)]\npub struct Lamports(pub u64);\n```\nand the tests fail with\n`IdlError: Type not found: {\"name\":\"lamports\",\"type\":{\"defined\":\"Lamports\"}}`\nDid I forgot something?\n(edit: nevermind, it got discussed in <#899315988087054397> )",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "368075764010319872",
+                    "username": "F\u00e9lix",
+                    "avatar": "c27b4df41546fb32c6d15c555592dcff",
+                    "discriminator": "5351",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T20:57:05.520000+00:00",
+                "edited_timestamp": "2021-12-17T08:51:24.222000+00:00",
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921132637886754916",
+                "type": 0,
+                "content": "ah wait, installed rust analyzer and now I'm bossing \ud83d\ude42",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "793009052879028254",
+                    "username": "Jack Robson",
+                    "avatar": "50ab165013a7566d3c7faaf272f7b660",
+                    "discriminator": "9682",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T20:12:14.689000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ],
+        [
+            {
+                "id": "921131636307922976",
+                "type": 0,
+                "content": "How do I ensure the user passes a token account with the correct mint?\n```    #[account(mut)]\n    pub user_token_account_address: Account<'info, TokenAccount>,\n    #[account(mut)]\n    pub program_token_account_address: Account<'info, TokenAccount>,```",
+                "channel_id": "889584618372734977",
+                "author": {
+                    "id": "793009052879028254",
+                    "username": "Jack Robson",
+                    "avatar": "50ab165013a7566d3c7faaf272f7b660",
+                    "discriminator": "9682",
+                    "public_flags": 0
+                },
+                "attachments": [],
+                "embeds": [],
+                "mentions": [],
+                "mention_roles": [],
+                "pinned": false,
+                "mention_everyone": false,
+                "tts": false,
+                "timestamp": "2021-12-16T20:08:15.894000+00:00",
+                "edited_timestamp": null,
+                "flags": 0,
+                "components": [],
+                "hit": true
+            }
+        ]
+    ],
+    "analytics_id": "ed1d58e1e648aca2e0fc473334dc341e"
+}

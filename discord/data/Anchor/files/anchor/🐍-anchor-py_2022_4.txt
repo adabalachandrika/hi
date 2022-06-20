@@ -1,0 +1,31 @@
+well you don't need to pass the ANCHOR_WALLET variable explicitly, check your `Anchor.toml` file, there is a wallet filed like this `wallet = "~/.config/solana/id.json"`
+Hi had a question on the JS client vs the Pyhton client, when calling the js code, we need to pass in a anchor wallet path like `ANCHOR_WALLET=/Users/.config/solana/id.json node client.js`   whereas in python we just run `python client.py` 
+Where does python get the ANCHOR_WALLET path param as its not passed explicitly when running the script.
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+we have a service that ships with docker and it seemed odd that rust would be a requirement here
+in order to use `anchor.py` do we have a requirement that rust must be installed in the environment?
+I decoded the base64 string and I get a binary. If I try to convert this binary to an UTF-8 string I get `UnicodeDecodeError: 'utf-8' codec can't decode byte 0xe5 in position 1: invalid continuation byte` so I presume this binary is encrypted/encoded somehow but I cannot a find way to decode it into a human readable string format. Any help please?
+Hi, I got an `AccountNotification` object with the `result.value.data[0]`. This `data[0]` is some sort of binary data encoded using base64 where it looks like `SuXWvMvcFpkAAAAAAAA...AAAEBCDwAAAAAAAAAAAAAAAABAQg8AAAAAAAAAAAAAAAAAAAA=` My question is, how can I decode it into a human readable format?
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+Thanks, it works! 👍
+anchorpy uses ANCHOR_WALLET if it's set, and uses `~/.config/solana/id.json` otherwise
+and `data` should be the bytes you have after decoding the base64 string
+so you'll want to construct the `Program` object then do `program.accounts["MyAccount"].coder.accounts.decode(data)`
+thanks <@!856894333180706876> !
+Yes, I have access to it as a json file. I guess I should do something with it? Can you give me some hints?
+The idl question was for the other guy lol
+ah your comment makes a ton of sense
+ah yes I do have the IDL
+Do you have the idl for the program whose data you’re fetching?
+Replied on GitHub, but for anyone reading here: we don’t need rust installed. Just don’t use an old pip version
+I was able to work around but it still seems odd that we require rust for anchor.py? https://github.com/kevinheavey/anchorpy/issues/63
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
